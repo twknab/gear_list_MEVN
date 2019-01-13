@@ -3,10 +3,11 @@ This is the configuration file for the general app settings for the server-side 
 */
 
 // Import our dependencies
-let express = require("express"),
+const express = require("express"),
   bodyParser = require("body-parser"),
   path = require("path"),
-  morgan = require("morgan");
+  morgan = require("morgan"),
+  cors = require("cors");
 
 module.exports = app => {
   // Setup our express and nodejs application:
@@ -16,6 +17,9 @@ module.exports = app => {
 
     // run morgan to help with routing console logging
     .use(morgan("dev"))
+
+    // run cors
+    .use(cors())
 
     // run bodyParser to parse form data
     .use(bodyParser.json());

@@ -1,8 +1,6 @@
-let express = require("express"),
+const express = require("express"),
   app = express(),
-  bodyParser = require("body-parser"),
-  path = require("path"),
-  port = 8000;
+  PORT = 8000;
 
 // App Config
 require("./config/app")(app);
@@ -10,12 +8,10 @@ require("./config/app")(app);
 // Database Config
 require("./config/db");
 
-// Setup Routes
-require("./config/routes")(app);
+// Server-Side Routing Config
+require("./config/routes")(app); // server routes go in this file
 
-// Setup Server
-app.listen(port, function() {
-  console.log("Server listening on port:", port);
+// Run Server on Port
+app.listen(PORT, () => {
+  console.log("Server listening on port:", PORT);
 });
-
-console.log("...server message...");

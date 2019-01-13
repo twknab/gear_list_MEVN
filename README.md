@@ -1,9 +1,20 @@
 # Gear List
 
+This is a gear list application, designed to help you in outdoor adventures to better prepare and not forget those important (sometimes live-saving) items at home.
+
+In regards to technology, this is a MEVN application and uses:
+
+1. (M)ongoDB for the database.
+2. (E)xpress.js and (N)ode.js for back-end server functionality.
+3. (V)ue.js for the front-end framework and client-side routing. 
+
+[Vue Router](https://github.com/vuejs/vue-router) is used to handle SPA routing, and [Axios](https://github.com/axios/axios) is used for AJAX requests to the backend.
+
+This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
+
 ## To Do
 
 - Setup Session (express-session? passportJS?)
-- Re-structure project to use single package.json and for Vue.js to live in `~/client` folder
 
 ## Features
 
