@@ -1,29 +1,17 @@
-# gear-list
+# Gear List
 
-## Project setup
-```
-npm install
-```
+## To Do
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- Setup Session (express-session? passportJS?)
+- Re-structure project to use single package.json and for Vue.js to live in `~/client` folder
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Features
 
-### Run your tests
-```
-npm run test
-```
+- Login and Registration
+- Gear List Creation
+- Gear Item Creation
 
-### Lints and fixes files
-```
-npm run lint
-```
+### Wishlist Features
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Add a friend
+- Sharing of Gear List (Add a Friend)

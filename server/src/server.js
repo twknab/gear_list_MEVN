@@ -11,7 +11,11 @@ require("./config/app")(app);
 require("./config/db");
 
 // Setup Routes
+require("./config/routes")(app);
 
 // Setup Server
+app.listen(port, function() {
+  console.log("Server listening on port:", port);
+});
 
 console.log("...server message...");
