@@ -21,8 +21,15 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - Login and Registration
 - Gear List Creation
 - Gear Item Creation
+- Validation on All Forms
 
-### Wishlist Features
+## Models
+
+- User
+- Gear List
+- Gear Item
+
+### Wishlist Features (may require addt'l creation of models)
 
 - Add a friend
 - Sharing of Gear List (Add a Friend)
