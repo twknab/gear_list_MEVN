@@ -3,7 +3,7 @@
     <mu-appbar style="width: 100%;" color="primary">
       <mu-button icon slot="right" @click="openBottomSheet">
         <mu-icon value="menu"></mu-icon>
-      </mu-button>🎒 gearlist
+      </mu-button>🎒 GearList
     </mu-appbar>
     <mu-container>
       <mu-bottom-sheet :open.sync="open">

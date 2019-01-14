@@ -17,7 +17,7 @@ theme.add(
   "gearListTheme",
   {
     primary: colors.purple,
-    secondary: "#ff4081",
+    secondary: colors.purple900,
     success: "#4caf50",
     warning: "#fdd835",
     info: colors.deepPurple,
@@ -25,7 +25,7 @@ theme.add(
     track: "#bdbdbd",
     text: {
       primary: "rgba(0, 0, 0, 0.87)",
-      secondary: "gba(0, 0, 0, 0.54)",
+      secondary: "#000",
       alternate: "#fff",
       disabled: "rgba(0, 0, 0, 0.38)",
       hint: "rgba(0, 0, 0, 0.38)" // 提示文字颜色
