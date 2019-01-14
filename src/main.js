@@ -20,7 +20,7 @@ theme.add(
     secondary: colors.purple900,
     success: "#4caf50",
     warning: "#fdd835",
-    info: colors.deepPurple,
+    info: colors.blue,
     error: "#f44336",
     track: "#bdbdbd",
     text: {

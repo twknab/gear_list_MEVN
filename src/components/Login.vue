@@ -16,7 +16,7 @@
             ></mu-text-field>
           </mu-form-item>
           <mu-form-item>
-            <mu-button color="primary" @click="submit" large>
+            <mu-button round color="primary" @click="submit" large>
               <mu-icon value="exit_to_app"></mu-icon>
               <span class="button-icon">login</span>
             </mu-button>
@@ -52,6 +52,11 @@ export default {
         isAgree: false
       }
     };
+  },
+  methods: {
+    submit() {
+      console.log("Submitting login!");
+    }
   }
 };
 </script>
