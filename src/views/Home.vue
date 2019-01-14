@@ -1,18 +1,40 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <mu-container>
+      <mu-row gutter>
+        <mu-col span="12" sm="12" md="6" lg="6" xl="6">
+          <div class="grid-cell">
+            <img
+              alt="Welcome to GearList"
+              src="https://loremflickr.com/250/250/nature"
+              class="welcome-image"
+            >
+            <Welcome msg="Welcome to Your Vue.js App"/>
+          </div>
+        </mu-col>
+        <mu-col span="12" sm="12" md="6" lg="6" xl="6">
+          <div class="grid-cell">
+            <Login/>
+            <Register/>
+          </div>
+        </mu-col>
+      </mu-row>
+    </mu-container>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import Welcome from "@/components/Welcome.vue";
+import Register from "@/components/Register.vue";
+import Login from "@/components/Login.vue";
 
 export default {
   name: "home",
   components: {
-    HelloWorld
+    Welcome,
+    Register,
+    Login
   }
 };
 </script>

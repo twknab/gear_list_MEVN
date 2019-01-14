@@ -1,0 +1,16 @@
+/* .material-icons {
+  font-size: 42px !important;
+} */
+
+.mu-appbar-title {
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  color: #fff;
+  text-shadow: 1px 1px 0px #911a11;
+  text-transform: lowercase;
+  font-family: 'Vibur', 'Roboto', arial !important;
+}
+
+.form-background {
+  /* background-color: #eceff1 !important; */
+}

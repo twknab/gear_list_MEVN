@@ -6,7 +6,7 @@ In regards to technology, this is a MEVN application and uses:
 
 1. (M)ongoDB for the database.
 2. (E)xpress.js and (N)ode.js for back-end server functionality.
-3. (V)ue.js for the front-end framework and client-side routing. 
+3. (V)ue.js for the front-end framework and client-side routing.
 
 [Vue Router](https://github.com/vuejs/vue-router) is used to handle SPA routing, and [Axios](https://github.com/axios/axios) is used for AJAX requests to the backend.
 
