@@ -18,6 +18,7 @@
           <div class="grid-cell">
             <!-- Login Component -->
             <Login/>
+
             <!-- Registration / Sign-Up Button -->
             <mu-container>
               <mu-flex>

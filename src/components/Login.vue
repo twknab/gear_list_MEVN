@@ -4,8 +4,8 @@
       <mu-container>
         <h1>Login</h1>
         <mu-form ref="form" :model="validateForm">
-          <mu-form-item label="Email" prop="email" type="email" color="primary" :rules="emailRules">
-            <mu-text-field v-model="validateForm.email" prop="username" color="primary"></mu-text-field>
+          <mu-form-item label="Email" prop="email" type="email" :rules="emailRules">
+            <mu-text-field v-model="validateForm.email" prop="email" color="primary"></mu-text-field>
           </mu-form-item>
           <mu-form-item label="Password" prop="password" :rules="passwordRules">
             <mu-text-field
@@ -16,7 +16,7 @@
             ></mu-text-field>
           </mu-form-item>
           <mu-form-item>
-            <mu-button round color="primary" @click="submit" large>
+            <mu-button round color="purpleA400" @click="submit" large>
               <mu-icon value="exit_to_app"></mu-icon>
               <span class="button-icon">login</span>
             </mu-button>
@@ -33,17 +33,17 @@ export default {
   data() {
     return {
       emailRules: [
-        { validate: val => !!val, message: "Email must be filled in" },
+        { validate: val => !!val, message: "Email is required" },
         {
           validate: val => val.length >= 5,
-          message: "Email length greater than 5"
+          message: "Email must be 5+ characters"
         }
       ],
       passwordRules: [
-        { validate: val => !!val, message: "Password must be filled in" },
+        { validate: val => !!val, message: "Password is required" },
         {
           validate: val => val.length >= 3 && val.length <= 10,
-          message: "Password length must be greater than 3 and less than 10"
+          message: "Password must be 4-9 characters"
         }
       ],
       validateForm: {

@@ -17,3 +17,62 @@ img {
 .text-center {
   text-align: center;
 }
+
+.mu-form-item__focus {
+  color: #ba68c8 !important;
+}
+
+.mu-form-item:focus {
+  color: #ba68c8 !important;
+}
+
+.mu-form-item {
+  color: rgba(255, 255, 255, 0.678) !important;
+}
+
+.mu-form-item-label {
+  font-size: 22px !important;
+  font-weight: 100;
+}
+
+.mu-text-field-input {
+  color: #fff !important;
+  /* text-shadow: 2px 2px 2px #e040fb; */
+  font-size: 28px !important;
+  margin: 15px 15px 15px 0px !important;
+}
+
+.mu-input-line {
+  height: 7px !important;
+  background-color: #f3e5f534 !important;
+}
+
+.mu-input-focus-line {
+  height: 7px !important;
+}
+
+.mu-form-item__error .mu-form-item-help {
+  color: #ffd740 !important;
+  /* font-weight: 800; */
+  font-size: 16px !important;
+  bottom: -20px;
+  margin-top: 10px !important;
+  letter-spacing: 0.5px;
+  line-height: 1.3em;
+}
+
+.mu-input__error {
+  color: #ffd740 !important;
+}
+
+.mu-form-item__has-label {
+  margin-bottom: 60px !important;
+}
+
+.mu-checkbox-label {
+  color: rgba(255, 255, 255, 0.678) !important;
+}
+
+.mu-checkbox {
+  color: rgba(255, 255, 255, 0.678) !important;
+}

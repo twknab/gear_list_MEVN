@@ -21,23 +21,23 @@ theme.add(
     success: "#4caf50",
     warning: "#fdd835",
     info: colors.blue,
-    error: "#f44336",
+    error: colors.amberA200,
     track: "#bdbdbd",
     text: {
-      primary: "rgba(0, 0, 0, 0.87)",
-      secondary: "#000",
+      primary: "#fff",
+      secondary: "#fafafa",
       alternate: "#fff",
-      disabled: "rgba(0, 0, 0, 0.38)",
-      hint: "rgba(0, 0, 0, 0.38)" // 提示文字颜色
+      disabled: "#e1e1e1",
+      hint: "#e1e1e1" // 提示文字颜色
     },
-    divider: "rgba(0, 0, 0, 0.12)",
+    divider: "#e1e1e1",
     background: {
-      paper: "#fff",
+      paper: "#212121",
       chip: "#e0e0e0",
-      default: "#fafafa"
+      default: "#212121"
     }
   },
-  "dark"
+  "light"
 );
 
 theme.use("gearListTheme");

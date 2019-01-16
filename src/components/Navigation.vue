@@ -7,7 +7,7 @@ The other solution I believe is most correct, is to use vg-if tags, and using $r
 */
 <template>
   <div>
-    <mu-appbar style="width: 100%;" color="primary">
+    <mu-appbar style="width: 100%;" color="purpleA700">
       <mu-button icon slot="right" @click="openBottomSheet">
         <mu-icon value="menu"></mu-icon>
       </mu-button>🎒 GearList

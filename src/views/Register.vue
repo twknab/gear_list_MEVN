@@ -21,10 +21,10 @@
               color="primary"
               :rules="firstNameRules"
             >
-              <mu-text-field v-model="validateForm.firstName" prop="username" color="primary"></mu-text-field>
+              <mu-text-field v-model="validateForm.firstName" prop="firstName" color="primary"></mu-text-field>
             </mu-form-item>
             <mu-form-item label="Last Name" prop="lastName" color="primary" :rules="lastNameRules">
-              <mu-text-field v-model="validateForm.lastName" prop="username" color="primary"></mu-text-field>
+              <mu-text-field v-model="validateForm.lastName" prop="lastName" color="primary"></mu-text-field>
             </mu-form-item>
             <mu-form-item
               label="Email"
@@ -33,7 +33,7 @@
               :rules="emailRules"
               type="email"
             >
-              <mu-text-field v-model="validateForm.email" prop="username" color="primary"></mu-text-field>
+              <mu-text-field v-model="validateForm.email" prop="email" color="primary"></mu-text-field>
             </mu-form-item>
             <mu-form-item label="Password" prop="password" :rules="passwordRules">
               <mu-text-field
@@ -70,35 +70,38 @@ export default {
     return {
       openFullscreen: false,
       firstNameRules: [
-        { validate: val => !!val, message: "First name must be filled in" },
+        { validate: val => !!val, message: "First name is required" },
         {
           validate: val => val.length >= 3,
-          message: "First name length greater than 3"
+          message: "First name must be 3+ characters"
         }
       ],
       lastNameRules: [
-        { validate: val => !!val, message: "Last name must be filled in" },
+        { validate: val => !!val, message: "Last name is required" },
         {
           validate: val => val.length >= 3,
-          message: "Last name length greater than 3"
+          message: "Last name must be 3+ characters"
         }
       ],
       emailRules: [
-        { validate: val => !!val, message: "Email must be filled in" },
+        { validate: val => !!val, message: "Email is required" },
         {
           validate: val => val.length >= 5,
-          message: "Email length greater than 5"
+          message: "Email must be 5+ characters"
         }
       ],
       passwordRules: [
-        { validate: val => !!val, message: "Password must be filled in" },
+        { validate: val => !!val, message: "Password is required" },
         {
           validate: val => val.length >= 3 && val.length <= 10,
-          message: "Password length must be greater than 3 and less than 10"
+          message: "Password must be 4-9 characters"
         }
       ],
       argeeRules: [
-        { validate: val => !!val, message: "Must agree with user agreement" }
+        {
+          validate: val => !!val,
+          message: "Acceptance of TOS & Privacy Policy required"
+        }
       ],
       validateForm: {
         firstName: "",
