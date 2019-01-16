@@ -28,7 +28,7 @@ theme.add(
       secondary: "#fafafa",
       alternate: "#fff",
       disabled: "#e1e1e1",
-      hint: "#e1e1e1" // 提示文字颜色
+      hint: "#e1e1e1"
     },
     divider: "#e1e1e1",
     background: {

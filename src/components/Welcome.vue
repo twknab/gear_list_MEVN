@@ -1,7 +1,13 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>{{ things }}</h2>
+    <mu-container>
+      <mu-col span="12">
+        <img alt="Welcome to GearList" src="../assets/tent.png" class="welcome-image image-center">
+        <!-- <h1 class="text-center">{{ msg }}</h1> -->
+        <!-- <h2>{{ things }}</h2> -->
+      </mu-col>
+    </mu-container>
+    <!-- Welcome Image -->
   </div>
 </template>
 

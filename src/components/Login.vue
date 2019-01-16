@@ -20,6 +20,10 @@
               <mu-icon value="exit_to_app"></mu-icon>
               <span class="button-icon">login</span>
             </mu-button>
+            <mu-button round color="secondary" @click="goToRegister" large>
+              <mu-icon value="thumb_up"></mu-icon>
+              <span class="button-icon">Or sign up!</span>
+            </mu-button>
           </mu-form-item>
         </mu-form>
       </mu-container>
@@ -56,6 +60,10 @@ export default {
   methods: {
     submit() {
       console.log("Submitting login!");
+    },
+    goToRegister() {
+      console.log("running");
+      this.$router.push({ name: "register" });
     }
   }
 };

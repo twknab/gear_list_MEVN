@@ -2,12 +2,21 @@
   font-size: 32px !important;
   font-weight: 800 !important;
   color: #fff;
-  text-shadow: 1px 1px 0px #911a11;
+  text-shadow: 1px 1px 0px #4a148c;
+}
+
+h1 {
+  font-size: 2.2em !important;
+}
+
+p {
+  font-size: 16px !important;
 }
 
 img {
   max-width: 100%;
   height: auto;
+  margin-top: 50px;
 }
 
 .button-icon {
@@ -18,17 +27,24 @@ img {
   text-align: center;
 }
 
+.image-center {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 .mu-form-item__focus {
-  color: #ba68c8 !important;
+  color: #d500f9 !important;
 }
 
 .mu-form-item:focus {
-  color: #ba68c8 !important;
+  color: #d500f9 !important;
 }
 
 .mu-form-item {
   color: rgba(255, 255, 255, 0.678) !important;
 }
+
 
 .mu-form-item-label {
   font-size: 22px !important;
@@ -53,7 +69,6 @@ img {
 
 .mu-form-item__error .mu-form-item-help {
   color: #ffd740 !important;
-  /* font-weight: 800; */
   font-size: 16px !important;
   bottom: -20px;
   margin-top: 10px !important;
@@ -61,12 +76,17 @@ img {
   line-height: 1.3em;
 }
 
+.TOS .mu-form-item-help {
+  bottom: -3px !important;
+}
+
 .mu-input__error {
   color: #ffd740 !important;
 }
 
+.mu-form-item,
 .mu-form-item__has-label {
-  margin-bottom: 60px !important;
+  margin-bottom: 35px !important;
 }
 
 .mu-checkbox-label {
@@ -75,4 +95,8 @@ img {
 
 .mu-checkbox {
   color: rgba(255, 255, 255, 0.678) !important;
+}
+
+* {
+  font-family: 'Lato';
 }

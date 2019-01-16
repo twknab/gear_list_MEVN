@@ -4,32 +4,15 @@
       <mu-row gutter>
         <mu-col span="12" sm="12" md="6" lg="6" xl="6">
           <div class="grid-cell">
-            <!-- Welcome Image -->
-            <img
-              alt="Welcome to GearList"
-              src="https://loremflickr.com/250/250/nature"
-              class="welcome-image"
-            >
             <!-- Welcome Component -->
-            <Welcome msg="Welcome to Your Vue.js App"/>
+            <Welcome msg="Pack Better for Your Trips!"/>
           </div>
         </mu-col>
         <mu-col span="12" sm="12" md="6" lg="6" xl="6">
           <div class="grid-cell">
             <!-- Login Component -->
             <Login/>
-
-            <!-- Registration / Sign-Up Button -->
-            <mu-container>
-              <mu-flex>
-                <span class="button-icon">
-                  <mu-button round color="secondary" @click="goToRegister" large>
-                    <mu-icon value="thumb_up"></mu-icon>
-                    <span class="button-icon">Or sign up!</span>
-                  </mu-button>
-                </span>
-              </mu-flex>
-            </mu-container>
+            <!-- Registration / Sign-Up Button lives in Login Component -->
           </div>
         </mu-col>
       </mu-row>

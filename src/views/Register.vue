@@ -43,19 +43,19 @@
                 color="primary"
               ></mu-text-field>
             </mu-form-item>
-            <mu-form-item prop="isAgree" :rules="argeeRules">
+            <mu-form-item prop="isAgree" :rules="argeeRules" class="TOS">
               <mu-checkbox label="Accept TOS & Privacy Policy" v-model="validateForm.isAgree"></mu-checkbox>
             </mu-form-item>
             <mu-form-item>
-              <mu-button round color="secondary" @click="submit" large>
+              <mu-button round color="purpleA700" @click="submit" large>
                 <mu-icon value="check"></mu-icon>
                 <span class="button-icon">Sign Up</span>
               </mu-button>
+              <mu-button round flat color="purple50" @click="goHome">
+                <mu-icon value="close"></mu-icon>
+                <span class="button-icon">Nevermind</span>
+              </mu-button>
             </mu-form-item>
-            <mu-button round flat color="primary" @click="goHome">
-              <mu-icon value="close"></mu-icon>
-              <span class="button-icon">Nevermind</span>
-            </mu-button>
           </mu-form>
         </mu-container>
       </mu-container>
