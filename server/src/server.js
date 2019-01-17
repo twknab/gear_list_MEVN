@@ -13,5 +13,5 @@ require("./config/routes")(app); // server routes go in this file
 
 // Run Server on Port
 app.listen(PORT, () => {
-  console.log("Server listening on port:", PORT);
+  console.log("🛸  Server running on port:", PORT);
 });

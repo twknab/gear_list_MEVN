@@ -62,7 +62,6 @@ export default {
       console.log("Submitting login!");
     },
     goToRegister() {
-      console.log("running");
       this.$router.push({ name: "register" });
     }
   }

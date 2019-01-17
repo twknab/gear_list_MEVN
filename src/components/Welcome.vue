@@ -3,8 +3,6 @@
     <mu-container>
       <mu-col span="12">
         <img alt="Welcome to GearList" src="../assets/tent.png" class="welcome-image image-center">
-        <!-- <h1 class="text-center">{{ msg }}</h1> -->
-        <!-- <h2>{{ things }}</h2> -->
       </mu-col>
     </mu-container>
     <!-- Welcome Image -->
@@ -25,10 +23,8 @@ export default {
   },
   methods: {
     test() {
-      console.log("Test running...");
       MainService.getThings()
         .then(response => {
-          console.log(response.data);
           this.things = response.data;
         })
         .catch(error => {

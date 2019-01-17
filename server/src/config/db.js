@@ -5,6 +5,8 @@ let mongoose = require("mongoose"),
   modelsPath = path.join(__dirname, "./../models"), // provide access to models folder
   databaseName = "gearListDB";
 
+mongoose.set("useCreateIndex", true);
+
 // Iterate through models folder and load each JS file:
 fs.readdirSync(modelsPath).forEach(file => {
   if (file.indexOf(".js") > 0) {
@@ -21,14 +23,14 @@ mongoose.connect(
 // Mongoose/Mongo/Node connection events:
 mongoose.connection
   .on("connected", function() {
-    console.log("Mongoose now connected to MongoDB using DB:", databaseName);
+    console.log("⛓  Mongoose now connected to MongoDB using DB:", databaseName);
   })
   .on("disconnected", function() {
     console.log("Mongoose disconected from:", databaseName);
   })
   .on("error", function(err) {
     console.log(
-      "Mongoose has encountered an error connecting to MongoDB.",
+      "🔌  Mongoose has encountered an error connecting to MongoDB.",
       err
     );
   });
@@ -37,7 +39,7 @@ mongoose.connection
 process.on("SIGINT", function() {
   mongoose.connection.close(function() {
     console.log(
-      "Mongoose connection to MongoDB closing due to lost Node connection."
+      "🔌  Mongoose connection to MongoDB closing due to lost Node connection."
     );
     process.exit(0);
   });
