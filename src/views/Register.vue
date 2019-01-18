@@ -6,7 +6,7 @@
         <mu-container>
           <p
             class="text-center margin-top"
-          >Sign up with an account from another service, or create one below!</p>
+          >Use an account from another service, or create one below!</p>
           <div class="passport-icons">
             <mu-flex justify-content="center" align-items="center">
               <mu-button color="red" class="round-left">Google</mu-button>
@@ -16,6 +16,14 @@
           </div>
           <!-- Registration Form -->
           <mu-form ref="newUserRegistration" :model="newUser">
+            <!-- Backend Errors Display -->
+            <div v-if="Object.keys(errors).length >= 1" class="server-errors">
+              <h2>Whoops, there's a few issues...</h2>
+              <ul>
+                <li v-for="(error, key, index) in errors" :key="index">- {{ error.message }}</li>
+              </ul>
+            </div>
+            <!-- First Name -->
             <mu-form-item
               label="First Name"
               prop="firstName"
@@ -24,9 +32,11 @@
             >
               <mu-text-field v-model="newUser.firstName" prop="firstName" color="primary"></mu-text-field>
             </mu-form-item>
+            <!-- Last Name -->
             <mu-form-item label="Last Name" prop="lastName" color="primary" :rules="lastNameRules">
               <mu-text-field v-model="newUser.lastName" prop="lastName" color="primary"></mu-text-field>
             </mu-form-item>
+            <!-- Email -->
             <mu-form-item
               label="Email"
               prop="email"
@@ -36,6 +46,7 @@
             >
               <mu-text-field v-model="newUser.email" prop="email" color="primary"></mu-text-field>
             </mu-form-item>
+            <!-- Password -->
             <mu-form-item label="Password" prop="password" :rules="passwordRules">
               <mu-text-field
                 type="password"
@@ -44,9 +55,11 @@
                 color="primary"
               ></mu-text-field>
             </mu-form-item>
+            <!-- TOS Is Agree -->
             <mu-form-item prop="isAgree" :rules="agreeRules" class="TOS">
               <mu-checkbox label="Accept TOS & Privacy Policy" v-model="newUser.isAgree"></mu-checkbox>
             </mu-form-item>
+            <!-- Submit Button / Cancel -->
             <mu-form-item>
               <mu-button round color="purpleA700" @click="submit" large>
                 <mu-icon value="check"></mu-icon>
@@ -70,7 +83,7 @@ export default {
   name: "Register",
   data() {
     return {
-      openFullscreen: false,
+      errors: {},
       firstNameRules: [
         { validate: val => !!val, message: "First name is required" },
         {
@@ -114,26 +127,27 @@ export default {
       }
     };
   },
-  created() {
-    console.log(this.newUser.isAgree);
-  },
+  created() {},
   methods: {
     submit() {
       console.log("...submitting registration...");
       this.$refs.newUserRegistration.validate().then(result => {
         if (result) {
-          console.log(this.newUser);
-          console.log("Form validated: ", result);
           // Register new user:
           UserService.registerNewUser(this.newUser)
             .then(response => {
-              console.log(`👍  ${response.data}`);
+              console.log(`👍`);
+              // response.data contains your user object
+              // send user upstream for dashboard component (or get when dashboard is loaded using session)
+
+              // update navigation component
+
+              // Redirect to dashboard view
+              this.$router.push({ name: "dashboard" });
             })
             .catch(error => {
-              console.log(`❌  ${error.response}`);
+              this.errors = error.response.data;
             });
-        } else {
-          console.log("Form did not validate");
         }
       });
     },

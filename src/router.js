@@ -33,6 +33,12 @@ export default new Router({
       name: "register",
       component: () =>
         import(/* webpackChunkName: "register" */ "./views/Register.vue")
+    },
+    {
+      path: "/dashboard",
+      name: "dashboard",
+      component: () =>
+        import(/* webpackChunkName: "register" */ "./views/Dashboard.vue")
     }
   ]
 });

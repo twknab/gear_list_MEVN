@@ -120,3 +120,17 @@ img {
 .margin-top {
   margin-top: 30px;
 }
+
+.server-errors {
+  text-align: center;
+}
+
+.server-errors li {
+  list-style: none;
+  font-size: 16px;
+  color: #ffd740;
+}
+
+.server-errors h2 {
+  color: #ffd740;
+}

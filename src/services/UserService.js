@@ -12,5 +12,8 @@ const api = axios.create({
 export default {
   registerNewUser(newUser) {
     return api.post("/user", newUser);
+  },
+  loginExistingUser(existingUser) {
+    return api.post("/user/login", existingUser);
   }
 };
