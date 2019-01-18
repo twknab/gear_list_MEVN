@@ -1,5 +1,6 @@
 const mongoose = require("mongoose"),
-  // bcrypt = require("bcrypt"),
+  bcrypt = require("bcrypt"),
+  saltRounds = 10,
   Schema = mongoose.Schema,
   uniqueValidator = require("mongoose-unique-validator");
 
@@ -60,7 +61,7 @@ const UserSchema = new Schema(
   }
 );
 
-UserSchema.pre("validate", next => {
+UserSchema.pre("validate", function(next) {
   // Privacy policy and TOS required
   if (this.isAgree === false) {
     this.invalidate("isAgree", "TOS & Privacy Policy acceptance required.");
@@ -69,9 +70,25 @@ UserSchema.pre("validate", next => {
   next();
 });
 
-// UserSchema.post("save", function(error, doc, next) {
-//  next()
-// });
+UserSchema.pre("save", function(next) {
+  // Hash password with bcrypt
+  UserSchema.methods.encryptPass(this.password, hashed => {
+    this.password = hashed;
+    next();
+  });
+});
+
+UserSchema.methods.encryptPass = function(userPassword, callback) {
+  bcrypt.hash(userPassword, saltRounds).then(function(hash) {
+    callback(hash);
+  });
+};
+
+UserSchema.methods.decryptPass = function(userPassword, hash, callback) {
+  bcrypt.compare(userPassword, hash).then(function(res) {
+    callback(res);
+  });
+};
 
 UserSchema.plugin(uniqueValidator, {
   message: "Email address must be unique."

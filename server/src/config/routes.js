@@ -10,4 +10,5 @@ module.exports = function(app) {
   app.get("/", MainController.index);
   // Create a new user
   app.post("/user", UserController.createUser);
+  app.post("/user/login", UserController.loginUser);
 };
