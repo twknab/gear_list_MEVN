@@ -5,6 +5,8 @@ let mongoose = require("mongoose"),
   modelsPath = path.join(__dirname, "./../models"), // provide access to models folder
   databaseName = "gearListDB";
 
+// Sets userCreateIndex as global option for mongo when defining indexes. This is used to remove a deprecation warning
+// See: https://mongoosejs.com/docs/deprecations.html#-ensureindex-
 mongoose.set("useCreateIndex", true);
 
 // Iterate through models folder and load each JS file:
@@ -44,5 +46,3 @@ process.on("SIGINT", function() {
     process.exit(0);
   });
 });
-
-module.exports = function(app) {};

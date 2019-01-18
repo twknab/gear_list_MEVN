@@ -1,6 +1,7 @@
 const mongoose = require("mongoose"),
-  bcrypt = require("bcrypt"),
-  Schema = mongoose.Schema;
+  // bcrypt = require("bcrypt"),
+  Schema = mongoose.Schema,
+  uniqueValidator = require("mongoose-unique-validator");
 
 // Setup a schema:
 const UserSchema = new Schema(
@@ -27,7 +28,7 @@ const UserSchema = new Schema(
       trim: true,
       // index: true,
       lowercase: true,
-      unique: [true, "Email address must be unique."],
+      unique: true,
       dropDups: true
     },
     password: {
@@ -66,6 +67,14 @@ UserSchema.pre("validate", next => {
   }
 
   next();
+});
+
+// UserSchema.post("save", function(error, doc, next) {
+//  next()
+// });
+
+UserSchema.plugin(uniqueValidator, {
+  message: "Email address must be unique."
 });
 
 const User = mongoose.model("User", UserSchema);

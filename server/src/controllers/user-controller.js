@@ -3,7 +3,7 @@ const mongoose = require("mongoose"),
 
 module.exports = {
   createUser: (req, res) => {
-    console.log("🏃‍  Attemping to Create New User...");
+    console.log("🤞  Attemping to Create New User...");
     console.log("$$$$$$$$");
     console.log(req.body);
     console.log("$$$$$$$$");
