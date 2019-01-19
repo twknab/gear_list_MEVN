@@ -1,6 +1,6 @@
 const mongoose = require("mongoose"),
   bcrypt = require("bcrypt"),
-  saltRounds = 10,
+  saltRounds = 12,
   Schema = mongoose.Schema,
   uniqueValidator = require("mongoose-unique-validator");
 
@@ -61,6 +61,7 @@ const UserSchema = new Schema(
   }
 );
 
+// These functions run prior to document validation
 UserSchema.pre("validate", function(next) {
   // Privacy policy and TOS required
   if (this.isAgree === false) {
@@ -70,29 +71,58 @@ UserSchema.pre("validate", function(next) {
   next();
 });
 
+// These functions run prior to document save()
 UserSchema.pre("save", function(next) {
   // Hash password with bcrypt
-  UserSchema.methods.encryptPass(this.password, hashed => {
-    this.password = hashed;
-    next();
+  UserSchema.methods.encryptPass(this.password, (hashed, error) => {
+    if (hashed) {
+      this.password = hashed;
+      next();
+    } else if (error) {
+      next(error);
+    }
   });
 });
 
+// Encrypt a password given a user password, and callback function
 UserSchema.methods.encryptPass = function(userPassword, callback) {
-  bcrypt.hash(userPassword, saltRounds).then(function(hash) {
-    callback(hash);
-  });
+  bcrypt
+    .hash(userPassword, saltRounds)
+    .then(function(hash) {
+      callback(hash);
+    })
+    .catch(function(error) {
+      error.errors = {
+        invalid: { message: "Something's wrong here, contact the admin." }
+      };
+      callback(false, error);
+    });
 };
 
+// Decrypt a password given a user password, hash and a callback function
 UserSchema.methods.decryptPass = function(userPassword, hash, callback) {
-  bcrypt.compare(userPassword, hash).then(function(res) {
-    callback(res);
-  });
+  bcrypt
+    .compare(userPassword, hash)
+    .then(function(res) {
+      callback(res);
+    })
+    .catch(function(err) {
+      let error = {};
+      error.success = err;
+      error.errors = {
+        invalid: {
+          message: "Invalid email or password."
+        }
+      };
+      callback(false, error);
+    });
 };
 
+// Invoke the mongoose unique validator
 UserSchema.plugin(uniqueValidator, {
   message: "Email address must be unique."
 });
 
+// Invoke our model using our schema and export
 const User = mongoose.model("User", UserSchema);
 module.exports = User;
