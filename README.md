@@ -14,7 +14,6 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 ## To Do
 
-- Decrypt and validate user-submitted login password.
 - Setup Session (express-session? passportJS?)?
 - Get data via session-id to display user info on dashboard.
 
