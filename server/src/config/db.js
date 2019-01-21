@@ -28,11 +28,11 @@ mongoose.connection
     console.log("⛓  Mongoose now connected to MongoDB using DB:", databaseName);
   })
   .on("disconnected", function() {
-    console.log("Mongoose disconected from:", databaseName);
+    console.log("\n⚠️  Mongoose disconected from:", databaseName);
   })
   .on("error", function(err) {
     console.log(
-      "🔌  Mongoose has encountered an error connecting to MongoDB.",
+      "❌  Mongoose has encountered an error connecting to MongoDB.",
       err
     );
   });
@@ -41,7 +41,7 @@ mongoose.connection
 process.on("SIGINT", function() {
   mongoose.connection.close(function() {
     console.log(
-      "🔌  Mongoose connection to MongoDB closing due to lost Node connection."
+      "😴  Mongoose connection to MongoDB closing due to lost Node connection."
     );
     process.exit(0);
   });
