@@ -42,13 +42,13 @@ export default new Router({
     },
     {
       path: "/gear/item",
-      name: "addNewGearItem",
+      name: "addGearItem",
       component: () =>
         import(/* webpackChunkName: "addNewGearItem" */ "./views/AddGearItem.vue")
     },
     {
       path: "/gear/list",
-      name: "addNewGearList",
+      name: "addGearList",
       component: () =>
         import(/* webpackChunkName: "addNewGearList" */ "./views/AddGearList.vue")
     },

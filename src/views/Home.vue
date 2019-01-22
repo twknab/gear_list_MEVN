@@ -36,7 +36,6 @@ export default {
   },
   methods: {
     goToRegister() {
-      console.log("running");
       this.$router.push({ name: "register" });
     }
   }

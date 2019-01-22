@@ -16,9 +16,7 @@ export default {
     return {
       loggedInUser: {},
       open: false,
-      nav: {
-        thing2: "another thing"
-      }
+      nav: {}
     };
   },
   methods: {
