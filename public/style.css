@@ -142,3 +142,17 @@ img {
 .dashboard-gear-list .mu-item-sub-title {
   color: #9e9e9e !important;
 }
+
+.mu-pagination-item.mu-button.is-current {
+  background-color: #aa00ff !important;
+}
+
+.mu-pagination-item.mu-button {
+  color: #fff;
+  background-color: #616161 !important;
+}
+
+.mu-pagination__raised .mu-pagination-btn.mu-button {
+  color: #fff;
+  background-color: #616161 !important;
+}

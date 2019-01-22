@@ -23,15 +23,16 @@
 <script>
 // @ is an alias to /src
 import Welcome from "@/components/Welcome.vue";
-// import Register from "@/views/Register.vue";
 import Login from "@/components/Login.vue";
 
 export default {
   name: "home",
   components: {
     Welcome,
-    // Register,
     Login
+  },
+  created() {
+    this.$emit("updateNavigation");
   },
   methods: {
     goToRegister() {

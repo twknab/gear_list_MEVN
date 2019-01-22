@@ -14,25 +14,20 @@ The other solution I believe is most correct, is to use vg-if tags, and using $r
     </mu-appbar>
     <mu-container>
       <mu-bottom-sheet :open.sync="open">
+        <!-- <pre style="color: black;">{{navigationItems}}</pre> -->
         <mu-list @item-click="closeBottomSheet">
           <mu-sub-header>Where To Boss?</mu-sub-header>
-          <mu-list-item button @click="goHome">
+
+          <mu-list-item
+            button
+            v-for="(navItem, key, index) in navigationItems"
+            :key="index"
+            @click="$router.push({ name: navItem.route })"
+          >
             <mu-list-item-action>
-              <mu-icon value="face" color="purpleA700"></mu-icon>
+              <mu-icon :value="navItem.icon" :color="navItem.color"></mu-icon>
             </mu-list-item-action>
-            <mu-list-item-title>Login / Sign Up</mu-list-item-title>
-          </mu-list-item>
-          <mu-list-item button @click="goToAbout">
-            <mu-list-item-action>
-              <mu-icon value="code" color="purpleA400"></mu-icon>
-            </mu-list-item-action>
-            <mu-list-item-title>About GearList</mu-list-item-title>
-          </mu-list-item>
-          <mu-list-item button @click="goToContact">
-            <mu-list-item-action>
-              <mu-icon value="chat" color="purpleA200"></mu-icon>
-            </mu-list-item-action>
-            <mu-list-item-title>Reach Out</mu-list-item-title>
+            <mu-list-item-title>{{navItem.title}}</mu-list-item-title>
           </mu-list-item>
         </mu-list>
       </mu-bottom-sheet>
@@ -43,6 +38,33 @@ The other solution I believe is most correct, is to use vg-if tags, and using $r
 <script>
 export default {
   name: "Navigation",
+  props: {
+    navigationItems: {
+      type: Object,
+      default: () => {
+        return {
+          dashboard: {
+            icon: "face",
+            color: "purpleA700",
+            title: "Login / Sign Up",
+            route: "home"
+          },
+          addGearItem: {
+            icon: "code",
+            color: "purpleA400",
+            title: "About Gear List",
+            route: "about"
+          },
+          addGearList: {
+            icon: "chat",
+            color: "purpleA200",
+            title: "Reach Out",
+            route: "contact"
+          }
+        };
+      }
+    }
+  },
   data() {
     return {
       open: false

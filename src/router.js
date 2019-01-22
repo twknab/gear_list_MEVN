@@ -38,7 +38,25 @@ export default new Router({
       path: "/dashboard",
       name: "dashboard",
       component: () =>
-        import(/* webpackChunkName: "register" */ "./views/Dashboard.vue")
+        import(/* webpackChunkName: "dashboard" */ "./views/Dashboard.vue")
+    },
+    {
+      path: "/gear/item",
+      name: "addNewGearItem",
+      component: () =>
+        import(/* webpackChunkName: "addNewGearItem" */ "./views/AddGearItem.vue")
+    },
+    {
+      path: "/gear/list",
+      name: "addNewGearList",
+      component: () =>
+        import(/* webpackChunkName: "addNewGearList" */ "./views/AddGearList.vue")
+    },
+    {
+      path: "/logout",
+      name: "logout",
+      component: () =>
+        import(/* webpackChunkName: "logout" */ "./components/Logout.vue")
     }
   ]
 });

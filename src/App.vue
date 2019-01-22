@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navigation/>
-    <router-view/>
+    <Navigation :navigationItems="nav"/>
+    <router-view @updateNavigation="updateNav"/>
   </div>
 </template>
 
@@ -15,13 +15,17 @@ export default {
   data() {
     return {
       loggedInUser: {},
-      open: false
+      open: false,
+      nav: {
+        thing2: "another thing"
+      }
     };
   },
   methods: {
-    // updateNavigation() {
-    //   console.log("Updating navigation...");
-    // }
+    updateNav(navItems) {
+      console.log("Updating navigation...");
+      this.nav = navItems;
+    }
   }
 };
 </script>
