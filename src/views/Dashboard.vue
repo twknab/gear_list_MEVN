@@ -7,8 +7,6 @@
         </mu-col>
         <mu-col span="12" sm="12" md="12" lg="12" xl="12">
           <div class="grid-cell">
-            <!-- <h2>View Gear Lists</h2> -->
-            <!-- <br> -->
             <mu-button round color="purpleA400" @click="$router.push({name: 'addGearList'})" large>
               <mu-icon value="library_add"></mu-icon>
               <span class="button-icon">New Gear List</span>

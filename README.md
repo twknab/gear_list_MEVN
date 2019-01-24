@@ -12,6 +12,14 @@ In regards to technology, this is a MEVN application and uses:
 
 This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
+## Setup & Install
+
+- `npm install` from project root directory to get front-end packages.
+- `npm install` from `~/server` to get server-side packages.
+- Update `~/src/services/UserService` baseURL to reflect your localhost or local network IP.
+- (1) Make sure `mongod` is running. (2) from `~/` run `npm run serve` and (3) from `~/server` run `npm start`.
+- Load https://localhost:8080 to see the application running locally.
+
 ## To Do
 
 - Setup Session (express-session? passportJS?)?
