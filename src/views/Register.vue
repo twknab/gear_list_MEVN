@@ -17,7 +17,7 @@
           <h1>Create a New Account</h1>
           <p>Register and create a new account with GearList below. Your information is not shared with anyone.</p>
           <!-- Registration Form -->
-          <mu-form ref="newUserRegistration" :model="newUser">
+          <mu-form ref="newUserRegistration" :model="newUser" class="margin-top">
             <!-- Backend Errors Display -->
             <div v-if="Object.keys(errors).length >= 1" class="server-errors">
               <h2>Whoops, there's a few issues...</h2>
@@ -62,16 +62,20 @@
               <mu-checkbox label="Accept TOS & Privacy Policy" v-model="newUser.isAgree"></mu-checkbox>
             </mu-form-item>
             <!-- Submit Button / Cancel -->
-            <mu-form-item>
-              <mu-button round full-width color="purpleA700" @click="submit" large>
-                <mu-icon value="check"></mu-icon>
-                <span class="button-icon">Sign Up</span>
-              </mu-button>
-              <mu-button large flat color="purple50" @click="goHome" class="flat-full-width">
-                <mu-icon value="close"></mu-icon>
-                <span class="button-icon">Nevermind</span>
-              </mu-button>
-            </mu-form-item>
+            <mu-button round full-width color="purpleA700" @click="submit" large>
+              <mu-icon value="check"></mu-icon>
+              <span class="button-icon">Sign Up</span>
+            </mu-button>
+            <mu-button
+              large
+              flat
+              color="purple50"
+              @click="goHome"
+              class="flat-full-width margin-top-md"
+            >
+              <mu-icon value="close"></mu-icon>
+              <span class="button-icon">Nevermind</span>
+            </mu-button>
           </mu-form>
         </mu-container>
       </mu-container>
