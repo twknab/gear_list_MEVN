@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mu-container class="margin-top">
+    <mu-container class="margin-top margin-bottom">
       <h1>Gear Lists</h1>
       <!-- Gear Lists Component -->
       <GearLists/>

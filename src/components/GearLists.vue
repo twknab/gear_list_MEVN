@@ -34,13 +34,15 @@
             </mu-list-item>
           </mu-list>
           <div v-else>
-            <h3>Add a Gear List to Get Started!</h3>
+            <mu-flex justify-content="center" class="margin-top margin-bottom">
+              <h2>Add a Gear List to Get Started! 👍</h2>
+            </mu-flex>
           </div>
         </div>
       </mu-col>
       <mu-col span="12" sm="12" md="12" lg="6" xl="6">
         <mu-flex justify-content="center" v-if="Object.keys(userGearLists).length">
-          <mu-button flat full-width color="purpleA700" class="margin-bottom-md">
+          <mu-button flat full-width color="purpleA400" class="margin-bottom-md">
             <mu-icon left value="expand_more"></mu-icon>See All Lists
           </mu-button>
         </mu-flex>

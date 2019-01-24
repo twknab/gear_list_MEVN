@@ -20,7 +20,9 @@
           </mu-list-item>
         </mu-list>
         <div v-else>
-          <h3>Add a Gear Item!</h3>
+          <mu-flex justify-content="center" class="margin-top margin-bottom">
+            <h2>Then Add some Gear Items! 😁</h2>
+          </mu-flex>
         </div>
       </mu-col>
     </mu-row>
