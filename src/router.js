@@ -58,5 +58,8 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "logout" */ "./components/Logout.vue")
     }
-  ]
+  ],
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  }
 });

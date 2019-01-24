@@ -121,6 +121,22 @@ img {
   margin-top: 30px;
 }
 
+.margin-bottom {
+  margin-bottom: 30px;
+}
+
+.margin-top-md {
+  margin-top: 15px;
+}
+
+.margin-bottom-xl {
+  margin-bottom: 50px;
+}
+
+.margin-bottom-md {
+  margin-bottom: 15px;
+}
+
 .server-errors {
   text-align: center;
 }
@@ -135,11 +151,11 @@ img {
   color: #ffd740;
 }
 
-.dashboard-gear-list .mu-item-title {
+.dashboard-list .mu-item-title {
   color: white !important;
 }
 
-.dashboard-gear-list .mu-item-sub-title {
+.dashboard-list .mu-item-sub-title {
   color: #9e9e9e !important;
 }
 
@@ -156,3 +172,19 @@ img {
   color: #fff;
   background-color: #616161 !important;
 }
+
+.flat-full-width {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Reduces margin on small mobile */
+@media only screen and (max-width: 375px) {
+  .mu-text-field-input {
+    margin: 5px 5px 10px 0px !important;
+  }
+}
+
+/* Add some media queries to reduce button width (not full width) for larger displays */

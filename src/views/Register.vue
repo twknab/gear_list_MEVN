@@ -4,7 +4,7 @@
       <mu-container>
         <!-- Registration Full Screen Dialogue -->
         <mu-container>
-          <p
+          <!-- <p
             class="text-center margin-top"
           >Use an account from another service, or create one below!</p>
           <div class="passport-icons">
@@ -13,7 +13,9 @@
               <mu-button color="blue">LinkedIn</mu-button>
               <mu-button color="indigo" class="round-right">Facebook</mu-button>
             </mu-flex>
-          </div>
+          </div>-->
+          <h1>Create a New Account</h1>
+          <p>Register and create a new account with GearList below. Your information is not shared with anyone.</p>
           <!-- Registration Form -->
           <mu-form ref="newUserRegistration" :model="newUser">
             <!-- Backend Errors Display -->
@@ -61,11 +63,11 @@
             </mu-form-item>
             <!-- Submit Button / Cancel -->
             <mu-form-item>
-              <mu-button round color="purpleA700" @click="submit" large>
+              <mu-button round full-width color="purpleA700" @click="submit" large>
                 <mu-icon value="check"></mu-icon>
                 <span class="button-icon">Sign Up</span>
               </mu-button>
-              <mu-button large flat color="purple50" @click="goHome">
+              <mu-button large flat color="purple50" @click="goHome" class="flat-full-width">
                 <mu-icon value="close"></mu-icon>
                 <span class="button-icon">Nevermind</span>
               </mu-button>
@@ -136,6 +138,7 @@ export default {
           // Register new user:
           UserService.registerNewUser(this.newUser)
             .then(response => {
+              console.log(response.status);
               console.log(`👍`);
               // response.data contains your user object
               // send user upstream for dashboard component (or get when dashboard is loaded using session)

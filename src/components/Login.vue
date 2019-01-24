@@ -27,14 +27,16 @@
           </mu-form-item>
           <!-- Submit Button -->
           <mu-form-item>
-            <mu-button round color="purpleA400" @click="submit" large>
+            <mu-button full-width round color="purpleA400" @click="submit" large>
               <mu-icon value="exit_to_app"></mu-icon>
               <span class="button-icon">login</span>
             </mu-button>
-            <mu-button round color="secondary" @click="goToRegister" large>
-              <mu-icon value="thumb_up"></mu-icon>
-              <span class="button-icon">Or sign up!</span>
-            </mu-button>
+            <div class="margin-top-md flat-full-width">
+              <mu-button flat color="white" @click="goToRegister" large>
+                <mu-icon value="thumb_up"></mu-icon>
+                <span class="button-icon">Or sign up!</span>
+              </mu-button>
+            </div>
           </mu-form-item>
         </mu-form>
       </mu-container>
