@@ -7,8 +7,8 @@
         </mu-col>
         <mu-col span="12" sm="12" md="12" lg="12" xl="12">
           <div class="grid-cell">
-            <h2>View Gear Lists</h2>
-            <br>
+            <!-- <h2>View Gear Lists</h2> -->
+            <!-- <br> -->
             <mu-button round color="purpleA400" @click="$router.push({name: 'addGearList'})" large>
               <mu-icon value="library_add"></mu-icon>
               <span class="button-icon">New Gear List</span>
@@ -68,12 +68,12 @@
             ></mu-pagination>
           </mu-flex>
         </mu-col>
-        <mu-col span="4" sm="6" md="8" lg="9" xl="11">
+        <mu-col span="12" sm="12" md="12" lg="6" xl="6">
           <div class="grid-cell">
             <h2>View Gear Items</h2>
           </div>
         </mu-col>
-        <mu-col span="8" sm="6" md="4" lg="3" xl="1">
+        <mu-col span="12" sm="12" md="12" lg="6" xl="6">
           <div class="grid-cell">
             <h2>Add Gear Item</h2>
           </div>

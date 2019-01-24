@@ -104,17 +104,25 @@ UserSchema.methods.decryptPass = function(userPassword, hash, callback) {
   bcrypt
     .compare(userPassword, hash)
     .then(function(res) {
-      callback(res);
+      if (res) {
+        callback(res, false);
+      } else {
+        let error = { errors: {} };
+        error.success = res;
+        error.errors = {
+          invalid: {
+            message: "Invalid email or password."
+          }
+        };
+        callback(false, error);
+      }
     })
     .catch(function(err) {
-      let error = {};
-      error.success = err;
-      error.errors = {
-        invalid: {
-          message: "Invalid email or password."
-        }
+      err = { success: err };
+      err.errors = {
+        invalid: { message: "Something's wrong here, contact the admin." }
       };
-      callback(false, error);
+      callback(false, err);
     });
 };
 

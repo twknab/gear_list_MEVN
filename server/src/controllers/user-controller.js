@@ -13,14 +13,12 @@ module.exports = {
       .catch(error => {
         console.log("😬  Error Creating New User:");
         console.log(error);
-        for (var i in error.errors) {
-          console.log(`- ${error.errors[i].message}`);
-        }
         return res.status(403).json(error.errors);
       });
   },
   loginUser: (req, res) => {
     console.log("🤞  Logging in Existing User...");
+    console.log(req.body);
     User.findOne({ email: req.body.email })
       .then(foundUser => {
         // User was found
@@ -34,9 +32,12 @@ module.exports = {
           function(success, error) {
             if (success) {
               // Password validated return user
+              console.log("🤝  User credentials validated.");
               return res.status(200).json(foundUser);
             } else {
               // Password failed and send error
+              console.log("❌  Error validating user.");
+              console.log(error);
               return res.status(401).json(error.errors);
             }
           }
@@ -48,6 +49,7 @@ module.exports = {
         error.errors.invalid = {
           message: "Invalid email or password."
         };
+        console.log(error);
         return res.status(401).json(error.errors);
       });
   }
