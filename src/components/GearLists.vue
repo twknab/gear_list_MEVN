@@ -38,21 +38,26 @@
           </div>
         </div>
       </mu-col>
-      <mu-col span="12" sm="12" md="12" lg="12" xl="12">
+      <mu-col span="12" sm="12" md="12" lg="6" xl="6">
         <mu-flex justify-content="center" v-if="Object.keys(userGearLists).length">
-          <mu-button flat full-width color="purpleA700">
-            <mu-icon left value="expand_more"></mu-icon>View More
+          <mu-button flat full-width color="purpleA700" class="margin-bottom-md">
+            <mu-icon left value="expand_more"></mu-icon>See All Lists
           </mu-button>
         </mu-flex>
       </mu-col>
+      <AddGearListButton/>
     </mu-row>
   </div>
 </template>
 
 <script>
 import userGearLists from "@/dummy_data/gearListDummyData.js";
+import AddGearListButton from "@/components/AddGearListButton.vue";
 export default {
   name: "GearLists",
+  components: {
+    AddGearListButton
+  },
   data() {
     return {
       current: 1,

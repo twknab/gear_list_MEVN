@@ -117,24 +117,29 @@ img {
   border-bottom-right-radius: 25px !important;
 }
 
-.margin-top {
-  margin-top: 30px;
-}
-
-.margin-bottom {
-  margin-bottom: 30px;
-}
-
 .margin-top-md {
-  margin-top: 15px;
+  margin-top: 15px !important;
 }
 
-.margin-bottom-xl {
-  margin-bottom: 50px;
+.margin-top {
+  margin-top: 30px !important;
+}
+
+
+.margin-top-xl {
+  margin-top: 50px !important;
 }
 
 .margin-bottom-md {
-  margin-bottom: 15px;
+  margin-bottom: 15px !important;
+}
+
+.margin-bottom {
+  margin-bottom: 30px !important;
+}
+
+.margin-bottom-xl {
+  margin-bottom: 50px !important;
 }
 
 .server-errors {
@@ -178,6 +183,12 @@ img {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+
+.mu-item-wrapper.hover {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  /* rgb(0,0,0,.1) */
+
 }
 
 /* Reduces margin on small mobile */

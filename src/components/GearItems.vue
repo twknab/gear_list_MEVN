@@ -25,24 +25,26 @@
       </mu-col>
     </mu-row>
     <mu-row gutter>
-      <mu-col span="12" sm="12" md="12" lg="12" xl="12">
+      <mu-col span="12" sm="12" md="12" lg="6" xl="6">
         <mu-flex justify-content="center" v-if="Object.keys(userGearItems).length">
-          <mu-button flat full-width color="purpleA700">
-            <mu-icon left value="expand_more"></mu-icon>View More
+          <mu-button flat color="purpleA700" class="margin-bottom-md">
+            <mu-icon left value="expand_more"></mu-icon>See All Items
           </mu-button>
         </mu-flex>
       </mu-col>
-      <div class="margin-top-md">
-        <!-- New Gear Item Button -->
-      </div>
+      <AddGearItemButton/>
     </mu-row>
   </div>
 </template>
 
 <script>
 import userGearItems from "@/dummy_data/gearItemsDummyData.js";
+import AddGearItemButton from "@/components/AddGearItemButton.vue";
 export default {
   name: "GearItems",
+  components: {
+    AddGearItemButton
+  },
   data() {
     return {
       userGearItems

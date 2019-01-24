@@ -22,7 +22,8 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 ## To Do
 
-- Setup Session (express-session? passportJS?)?
+- Per your late night divergence, try trimming down your button components to just the buttons, and inserting them into your responsive columns that way. It may work better with less craze..
+- Setup Session (express-session)?
 - Get data via session-id to display user info on dashboard.
 
 ## Features

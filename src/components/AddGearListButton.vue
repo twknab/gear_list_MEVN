@@ -1,22 +1,16 @@
 <template>
-  <div>
-    <mu-row gutter>
-      <mu-col span="12" sm="12" md="12" lg="12" xl="12">
-        <div>
-          <mu-button
-            round
-            full-width
-            color="purpleA400"
-            @click="$router.push({name: 'addGearList'})"
-            large
-          >
-            <mu-icon value="library_add"></mu-icon>
-            <span class="button-icon">New Gear List</span>
-          </mu-button>
-        </div>
-      </mu-col>
-    </mu-row>
-  </div>
+  <mu-col span="12" sm="12" md="12" lg="4" xl="4">
+    <mu-button
+      full-width
+      large
+      round
+      color="purpleA400"
+      @click="$router.push({name: 'addGearList'})"
+    >
+      <mu-icon value="library_add"></mu-icon>
+      <span class="button-icon">New Gear List</span>
+    </mu-button>
+  </mu-col>
 </template>
 
 <script>
