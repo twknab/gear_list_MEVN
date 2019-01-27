@@ -4,6 +4,10 @@ node_modules
 .dev-resources
 src/dummy_data
 
+# Hide any development credentials
+server/src/config/credentials/*.js
+
+
 # local env files
 .env.local
 .env.*.local
