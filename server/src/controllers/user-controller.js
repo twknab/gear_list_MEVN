@@ -22,9 +22,7 @@ module.exports = {
     User.findOne({ email: req.body.email })
       .then(foundUser => {
         // User was found
-        // set session
-        console.log("👍  User Successfully Found.");
-        console.log(foundUser);
+        console.log(`👍  User Successfully Found: ${foundUser.email}`);
         // Validate Password
         User.schema.methods.decryptPass(
           req.body.password,
@@ -33,6 +31,12 @@ module.exports = {
             if (success) {
               // Password validated return user
               console.log("🤝  User credentials validated.");
+              // Save session
+              req.session.userId = foundUser.id;
+              console.log("session set:");
+              console.log(req.session);
+              console.log(req.session.userId);
+              // Send back found User
               return res.status(200).json(foundUser);
             } else {
               // Password failed and send error

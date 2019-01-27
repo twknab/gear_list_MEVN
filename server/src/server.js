@@ -1,9 +1,10 @@
 const express = require("express"),
   app = express(),
-  PORT = 8000;
+  PORT = 8000,
+  credentials = require("./config/credentials/credentials");
 
 // App Config
-require("./config/app")(app);
+require("./config/app")(app, credentials);
 
 // Database Config
 require("./config/db");
