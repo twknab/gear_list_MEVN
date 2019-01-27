@@ -1,13 +1,12 @@
 # Customize this Folder
 
-- Create new file `credentials.js` in a JSON format.
+- Create new file `credentials.js` as a JS module.
 - For example:
 
 ```javascript
 modules.exports = {
-  sessionSecret = "sessionSecretStringOrHashGoesHere"
+  sessionSecret: "sessionSecretStringOrHashGoesHere"
 };
-
 ```
 
 - Import this file into your `app.js` (e.g, `import credentials from "~/server/src/config/credentials/credentials.js";`)
