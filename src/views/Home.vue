@@ -11,7 +11,7 @@
         <mu-col span="12" sm="12" md="6" lg="6" xl="6">
           <div class="grid-cell">
             <!-- Login Component -->
-            <Login/>
+            <Login @updateGlobalUser="updateGlobalUser"/>
             <!-- Registration / Sign-Up Button lives in Login Component -->
           </div>
         </mu-col>
@@ -35,8 +35,9 @@ export default {
     this.$emit("updateNavigation");
   },
   methods: {
-    goToRegister() {
-      this.$router.push({ name: "register" });
+    updateGlobalUser(user) {
+      console.log("updating global user...");
+      this.$emit("updateUser", user);
     }
   }
 };

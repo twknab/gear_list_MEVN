@@ -1,19 +1,19 @@
 /*
 This is the configuration file for the general app settings for the server-side of GearList.
 */
-
 // Import our dependencies
 const express = require("express"),
   bodyParser = require("body-parser"),
   path = require("path"),
   morgan = require("morgan"),
   session = require("express-session"),
+  creds = require("./credentials/credentials"),
   cors = require("cors");
 
-module.exports = (app, credentials) => {
+module.exports = app => {
   // Setup our session and cookie info
   const sess = {
-    secret: credentials.sessionSecret,
+    secret: creds.sessionSecret,
     resave: false,
     saveUninitialized: true,
     name: "gearListCookie",

@@ -7,7 +7,11 @@ module.exports = {
       .then(newUser => {
         // set session
         console.log("👍  New User Successfully Created.");
-        console.log(newUser);
+        // Save User ID to session:
+        req.session.userId = newUser._id;
+        // Delete password salt from object before sending back:
+        delete newUser.password;
+        // Send back new User
         return res.status(201).json(newUser);
       })
       .catch(error => {
@@ -16,7 +20,7 @@ module.exports = {
         return res.status(403).json(error.errors);
       });
   },
-  loginUser: (req, res) => {
+  loginUser: function(req, res) {
     console.log("🤞  Logging in Existing User...");
     console.log(req.body);
     User.findOne({ email: req.body.email })
@@ -31,11 +35,8 @@ module.exports = {
             if (success) {
               // Password validated return user
               console.log("🤝  User credentials validated.");
-              // Save session
-              req.session.userId = foundUser.id;
-              console.log("session set:");
-              console.log(req.session);
-              console.log(req.session.userId);
+              // Save User ID to session
+              req.session.userId = foundUser._id;
               // Send back found User
               return res.status(200).json(foundUser);
             } else {
@@ -50,11 +51,32 @@ module.exports = {
       .catch(error => {
         // User was not found
         console.log("😬  Error Finding User:");
+        console.log(error);
+        error = {
+          errors: {
+            success: error
+          }
+        };
         error.errors.invalid = {
           message: "Invalid email or password."
         };
         console.log(error);
         return res.status(401).json(error.errors);
       });
+  },
+  getLoggedInById: (req, res) => {
+    console.log("RUNNING");
+    console.log(req.session);
+    // User.findOne({ _id: req.session.userId })
+    //   .then(user => {
+    //     console.log("user found.");
+    //     console.log(user);
+    //     return res.status(200).json(user);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //     return res.status(403).json(error.errors);
+    //   });
+    return res.json({ firstName: "Timothy", lastName: "Knab" });
   }
 };

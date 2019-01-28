@@ -15,5 +15,8 @@ export default {
   },
   loginExistingUser(existingUser) {
     return api.post("/user/login", existingUser);
+  },
+  getLoggedInUser() {
+    return api.get("/user");
   }
 };

@@ -10,6 +10,8 @@ module.exports = function(app) {
   app.get("/", MainController.index);
   // Create a new user
   app.post("/user", UserController.createUser);
+  // Get existing user:
+  app.get("/user", UserController.getLoggedInById);
   // Login a user
   app.post("/user/login", UserController.loginUser);
 };

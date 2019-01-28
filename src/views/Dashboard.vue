@@ -1,6 +1,7 @@
 <template>
   <div>
     <mu-container class="margin-top margin-bottom">
+      <pre style="color: white;">{{user}}</pre>
       <h1>Gear Lists</h1>
       <!-- Gear Lists Component -->
       <GearLists/>
@@ -20,6 +21,12 @@ import GearLists from "@/components/GearLists.vue";
 import GearItems from "@/components/GearItems.vue";
 export default {
   name: "Dashboard",
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
+  },
   components: {
     GearLists,
     GearItems
@@ -31,10 +38,14 @@ export default {
   },
   created() {
     this.updatePrimaryNav(this.navItems);
+    this.getLoggedInUser();
   },
   methods: {
     updatePrimaryNav(navItems) {
       this.$emit("updateNavigation", navItems);
+    },
+    getLoggedInUser() {
+      this.$emit("getGlobalUser");
     }
   }
 };

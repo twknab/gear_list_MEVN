@@ -85,11 +85,6 @@ export default {
           UserService.loginExistingUser(this.existingUser)
             .then(response => {
               console.log(`👍`);
-              console.log(response.data);
-              // Send user upstream for dashboard component (or just get from session when dashboard is loaded...)
-              // response.data contains your user object
-
-              // Update navigation component
 
               // Redirect to dashboard view
               this.$router.push({ name: "dashboard" });

@@ -1,7 +1,7 @@
 # Customize this Folder
 
 - Create new file `credentials.js` as a JS module.
-- For example:
+- Set a hash/string for `sessionSecret`, (see example below) and save.
 
 ```javascript
 modules.exports = {
