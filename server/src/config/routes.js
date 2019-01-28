@@ -14,4 +14,5 @@ module.exports = function(app) {
   app.get("/user", UserController.getLoggedInById);
   // Login a user
   app.post("/user/login", UserController.loginUser);
+  app.get("/user/logout", UserController.logout);
 };

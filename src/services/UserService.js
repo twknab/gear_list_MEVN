@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "http://192.168.1.7:8000",
-  withCredentials: false,
+  withCredentials: true,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json"
@@ -18,5 +18,8 @@ export default {
   },
   getLoggedInUser() {
     return api.get("/user");
+  },
+  logoffUser() {
+    return api.get("/user/logout");
   }
 };

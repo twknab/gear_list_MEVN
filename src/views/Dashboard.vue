@@ -36,7 +36,7 @@ export default {
       navItems
     };
   },
-  created() {
+  beforeMount() {
     this.updatePrimaryNav(this.navItems);
     this.getLoggedInUser();
   },

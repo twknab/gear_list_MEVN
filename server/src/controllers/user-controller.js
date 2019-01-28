@@ -53,9 +53,7 @@ module.exports = {
         console.log("😬  Error Finding User:");
         console.log(error);
         error = {
-          errors: {
-            success: error
-          }
+          errors: {}
         };
         error.errors.invalid = {
           message: "Invalid email or password."
@@ -65,18 +63,23 @@ module.exports = {
       });
   },
   getLoggedInById: (req, res) => {
-    console.log("RUNNING");
-    console.log(req.session);
-    // User.findOne({ _id: req.session.userId })
-    //   .then(user => {
-    //     console.log("user found.");
-    //     console.log(user);
-    //     return res.status(200).json(user);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //     return res.status(403).json(error.errors);
-    //   });
-    return res.json({ firstName: "Timothy", lastName: "Knab" });
+    User.findOne({ _id: req.session.userId })
+      .then(user => {
+        return res.status(200).json(user);
+      })
+      .catch(error => {
+        console.log(error);
+        return res.status(403).json(error.errors);
+      });
+  },
+  logout: (req, res) => {
+    req.session.destroy(function(err) {
+      if (err) {
+        console.log(err);
+        return res.status(403).json(err);
+      } else {
+        return res.status(200).json({ success: "User has been logged out." });
+      }
+    });
   }
 };

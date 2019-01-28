@@ -24,6 +24,11 @@ module.exports = app => {
     }
   };
 
+  const corsOptions = {
+    origin: "http://localhost:8080",
+    credentials: true
+  };
+
   // Setup our express and nodejs application:
   app
     // gives server access to src folder where Vue.js application lives
@@ -36,7 +41,7 @@ module.exports = app => {
     .use(session(sess))
 
     // run cors
-    .use(cors())
+    .use(cors(corsOptions))
 
     // run bodyParser to parse form data
     .use(bodyParser.json());
