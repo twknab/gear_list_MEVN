@@ -5,7 +5,13 @@
       <mu-flex justify-content="end">
         <p>
           {{timeGreeting}}, {{ user.firstName }}.
-          <mu-button small flat color="primary" @click="$router.push({name: 'logout'})">Logout</mu-button>
+          <mu-button
+            small
+            flat
+            color="primary"
+            @click="$router.push({name: 'logout'})"
+            class="margin-left-sm"
+          >Logout</mu-button>
         </p>
       </mu-flex>
       <h1>Gear Lists</h1>
