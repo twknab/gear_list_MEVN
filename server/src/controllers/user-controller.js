@@ -9,10 +9,9 @@ module.exports = {
         console.log("👍  New User Successfully Created.");
         // Save User ID to session:
         req.session.userId = newUser._id;
-        // Delete password salt from object before sending back:
-        delete newUser.password;
-        // Send back new User
-        return res.status(201).json(newUser);
+        // Send back success
+        // Note: No need to send back the user here since when we login to the dashboard we'll retrieve them
+        return res.status(201).json({ success: "success" });
       })
       .catch(error => {
         console.log("😬  Error Creating New User:");
@@ -22,7 +21,6 @@ module.exports = {
   },
   loginUser: function(req, res) {
     console.log("🤞  Logging in Existing User...");
-    console.log(req.body);
     User.findOne({ email: req.body.email })
       .then(foundUser => {
         // User was found
@@ -32,13 +30,14 @@ module.exports = {
           req.body.password,
           foundUser.password,
           function(success, error) {
+            // Developer note: Some of the work here could be moved into the Model to better follow skinny controller/fat model design patterns
             if (success) {
               // Password validated return user
               console.log("🤝  User credentials validated.");
               // Save User ID to session
               req.session.userId = foundUser._id;
-              // Send back found User
-              return res.status(200).json(foundUser);
+              // Send back success
+              return res.status(200).json({ success: "success." });
             } else {
               // Password failed and send error
               console.log("❌  Error validating user.");
@@ -65,6 +64,7 @@ module.exports = {
   getLoggedInById: (req, res) => {
     User.findOne({ _id: req.session.userId })
       .then(user => {
+        user = user.hidePasswordSalt();
         return res.status(200).json(user);
       })
       .catch(error => {

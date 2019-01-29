@@ -126,6 +126,15 @@ UserSchema.methods.decryptPass = function(userPassword, hash, callback) {
     });
 };
 
+UserSchema.methods.hidePasswordSalt = function() {
+  let self = this;
+  self = self.toObject();
+  if (self.password) {
+    delete self.password;
+  }
+  return self;
+};
+
 // Invoke the mongoose unique validator
 UserSchema.plugin(uniqueValidator, {
   message: "Email address must be unique."
