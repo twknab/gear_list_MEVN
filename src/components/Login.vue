@@ -1,50 +1,48 @@
 <template>
   <div>
-    <div class="form-background">
-      <mu-container>
-        <mu-row gutter>
-          <mu-col span="12">
-            <h1>Login</h1>
-          </mu-col>
-        </mu-row>
-        <mu-row span="12">
-          <!-- Login Form -->
-          <mu-form ref="existingUserLogin" :model="existingUser">
-            <!-- Backend Errors Display -->
-            <div v-if="Object.keys(errors).length >= 1" class="server-errors">
-              <h2>Whoops, there's a few issues...</h2>
-              <ul>
-                <li v-for="(error, key, index) in errors" :key="index">- {{ error.message }}</li>
-              </ul>
-            </div>
-            <!-- Email -->
-            <mu-form-item label="Email" prop="email" type="email" :rules="emailRules">
-              <mu-text-field v-model="existingUser.email" prop="email" color="primary"></mu-text-field>
-            </mu-form-item>
-            <!-- Password -->
-            <mu-form-item label="Password" prop="password" :rules="passwordRules">
-              <mu-text-field
-                type="password"
-                v-model="existingUser.password"
-                prop="password"
-                color="primary"
-              ></mu-text-field>
-            </mu-form-item>
-            <!-- Submit Button -->
-            <mu-button full-width round color="purpleA400" @click="submit" large>
-              <mu-icon value="exit_to_app"></mu-icon>
-              <span class="button-icon">login</span>
+    <mu-container>
+      <mu-row gutter>
+        <mu-col span="12">
+          <h1>Login</h1>
+        </mu-col>
+      </mu-row>
+      <mu-row span="12">
+        <!-- Login Form -->
+        <mu-form ref="existingUserLogin" :model="existingUser">
+          <!-- Backend Errors Display -->
+          <div v-if="Object.keys(errors).length >= 1" class="server-errors">
+            <h2>Whoops, there's a few issues...</h2>
+            <ul>
+              <li v-for="(error, key, index) in errors" :key="index">{{ error.message }}</li>
+            </ul>
+          </div>
+          <!-- Email -->
+          <mu-form-item label="Email" prop="email" type="email" :rules="emailRules">
+            <mu-text-field v-model="existingUser.email" prop="email" color="primary"></mu-text-field>
+          </mu-form-item>
+          <!-- Password -->
+          <mu-form-item label="Password" prop="password" :rules="passwordRules">
+            <mu-text-field
+              type="password"
+              v-model="existingUser.password"
+              prop="password"
+              color="primary"
+            ></mu-text-field>
+          </mu-form-item>
+          <!-- Submit Button -->
+          <mu-button full-width round color="purpleA400" @click="submit" large>
+            <mu-icon value="exit_to_app"></mu-icon>
+            <span class="button-icon">login</span>
+          </mu-button>
+          <div class="margin-top-md">
+            <mu-button class="flat-full-width" flat color="white" @click="goToRegister" large>
+              <mu-icon value="thumb_up"></mu-icon>
+              <span class="button-icon">Or sign up!</span>
             </mu-button>
-            <div class="margin-top-md">
-              <mu-button class="flat-full-width" flat color="white" @click="goToRegister" large>
-                <mu-icon value="thumb_up"></mu-icon>
-                <span class="button-icon">Or sign up!</span>
-              </mu-button>
-            </div>
-          </mu-form>
-        </mu-row>
-      </mu-container>
-    </div>
+          </div>
+        </mu-form>
+      </mu-row>
+    </mu-container>
   </div>
 </template>
 

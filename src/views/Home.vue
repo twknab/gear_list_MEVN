@@ -2,13 +2,13 @@
   <div class="home">
     <mu-container>
       <mu-row gutter>
-        <mu-col span="12" sm="12" md="6" lg="6" xl="6">
+        <mu-col span="12" sm="12" md="12" lg="12" xl="6">
           <div class="grid-cell">
             <!-- Welcome Component -->
             <Welcome msg="Pack Better for Your Trips!"/>
           </div>
         </mu-col>
-        <mu-col span="12" sm="12" md="6" lg="6" xl="6">
+        <mu-col span="12" sm="12" md="12" lg="12" xl="6">
           <div class="grid-cell">
             <!-- Login Component -->
             <Login @updateGlobalUser="updateGlobalUser"/>

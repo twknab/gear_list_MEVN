@@ -1,10 +1,10 @@
 <template>
   <div>
     <mu-container class="margin-top margin-bottom">
-      <pre style="color: white;">{{user}}</pre>
+      <!-- <pre style="color: white;">{{user}}</pre> -->
       <mu-flex justify-content="end">
         <p>
-          {{timeGreeting}}, {{ user.firstName }}.
+          {{ timeGreeting }}, {{ user.firstName }}.
           <mu-button
             small
             flat
@@ -52,9 +52,9 @@ export default {
     timeGreeting: function() {
       const currentHour = new Date().getHours();
       let greeting = "";
-      if (0 >= currentHour && currentHour <= 11) {
+      if (0 <= currentHour && currentHour <= 11) {
         greeting = "Good morning";
-      } else if (12 >= currentHour && currentHour <= 4) {
+      } else if (12 >= currentHour && currentHour <= 16) {
         greeting = "Good afternoon";
       } else {
         greeting = "Good evening";

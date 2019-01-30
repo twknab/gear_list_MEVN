@@ -22,7 +22,7 @@
             <div v-if="Object.keys(errors).length >= 1" class="server-errors">
               <h2>Whoops, there's a few issues...</h2>
               <ul>
-                <li v-for="(error, key, index) in errors" :key="index">- {{ error.message }}</li>
+                <li v-for="(error, key, index) in errors" :key="index">{{ error.message }}</li>
               </ul>
             </div>
             <!-- First Name -->

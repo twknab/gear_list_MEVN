@@ -50,6 +50,12 @@ const UserSchema = new Schema(
         ref: "GearList"
       }
     ],
+    gearItems: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "GearItem"
+      }
+    ],
     welcomeMsgStatus: {
       // if true, welcome msg will display
       type: Boolean,
@@ -63,6 +69,7 @@ const UserSchema = new Schema(
 
 // These functions run prior to document validation
 UserSchema.pre("validate", function(next) {
+  console.log("User PRE validate running...");
   // Privacy policy and TOS required
   if (this.isAgree === false) {
     this.invalidate("isAgree", "TOS & Privacy Policy acceptance required.");
@@ -73,6 +80,8 @@ UserSchema.pre("validate", function(next) {
 
 // These functions run prior to document save()
 UserSchema.pre("save", function(next) {
+  console.log("User PRE save running...");
+  console.log(this);
   // Hash password with bcrypt
   UserSchema.methods.encryptPass(this.password, (hashed, error) => {
     if (hashed) {
