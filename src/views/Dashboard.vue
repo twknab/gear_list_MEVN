@@ -18,7 +18,7 @@
       <!-- Gear Lists Component -->
       <GearLists/>
       <!-- Gear Items -->
-      <div class="margin-top">
+      <div class="margin-top-xl">
         <h1>Gear Items</h1>
         <!-- Gear Items Component -->
         <GearItems/>
@@ -62,7 +62,7 @@ export default {
       return greeting;
     }
   },
-  beforeMount() {
+  created() {
     this.updatePrimaryNav(this.navItems);
     this.getLoggedInUser();
   },

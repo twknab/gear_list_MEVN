@@ -18,4 +18,6 @@ module.exports = function(app) {
   app.get("/user/logout", UserController.logout);
   // Create a new gear item
   app.post("/gear-item", GearItemController.createGearItem);
+  // Get all user's gear item
+  app.get("/gear-item", GearItemController.getUserGearItems);
 };

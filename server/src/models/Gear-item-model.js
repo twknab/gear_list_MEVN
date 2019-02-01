@@ -13,7 +13,7 @@ const GearItemSchema = new Schema(
     },
     weight: {
       type: Number,
-      maxlength: [1600, "Weight cannot exceed 1600 ozs (100 lbs)."],
+      maxlength: [16000, "Weight cannot exceed 16000 ozs (1000 lbs)."],
       required: [true, "Weight is required."],
       trim: true
     }
@@ -25,7 +25,7 @@ const GearItemSchema = new Schema(
 
 // These functions run prior to document validation
 GearItemSchema.pre("validate", function(next) {
-  console.log("Do something before validatioj here..");
+  console.log("Do something before validation here..");
   next();
 });
 

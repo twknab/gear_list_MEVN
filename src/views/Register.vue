@@ -93,15 +93,15 @@ export default {
       firstNameRules: [
         { validate: val => !!val, message: "First name is required" },
         {
-          validate: val => val.length >= 3 && val.length <= 30,
-          message: "First name must be 3-30 characters"
+          validate: val => val.length >= 2 && val.length <= 30,
+          message: "First name must be 2-30 characters"
         }
       ],
       lastNameRules: [
         { validate: val => !!val, message: "Last name is required" },
         {
-          validate: val => val.length >= 3 && val.length <= 30,
-          message: "Last name must be 3-30 characters"
+          validate: val => val.length >= 2 && val.length <= 30,
+          message: "Last name must be 2-30 characters"
         }
       ],
       emailRules: [

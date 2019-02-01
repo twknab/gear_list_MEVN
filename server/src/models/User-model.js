@@ -9,15 +9,15 @@ const UserSchema = new Schema(
   {
     firstName: {
       type: String,
-      minlength: [3, "First name must be 3-30 characters."],
-      maxlength: [30, "First name must be 3-30 characters."],
+      minlength: [2, "First name must be 2-30 characters."],
+      maxlength: [30, "First name must be 2-30 characters."],
       required: [true, "First Name is required."],
       trim: true
     },
     lastName: {
       type: String,
-      minlength: [3, "Last name must be 3-30 characters."],
-      maxlength: [30, "Last name must be 3-30 characters."],
+      minlength: [2, "Last name must be 2-30 characters."],
+      maxlength: [30, "Last name must be 2-30 characters."],
       required: [true, "Last Name is required."],
       trim: true
     },
@@ -113,6 +113,9 @@ UserSchema.methods.decryptPass = function(userPassword, hash, callback) {
   bcrypt
     .compare(userPassword, hash)
     .then(function(res) {
+      console.log("PASS: ", userPassword);
+      console.log("HASH: ", hash);
+      console.log("DECRYPTION RESULT: ", res);
       if (res) {
         callback(res, false);
       } else {

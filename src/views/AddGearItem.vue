@@ -65,8 +65,8 @@ export default {
       weightRules: [
         { validate: val => !!val, message: "Weight is required" },
         {
-          validate: val => Number(val) >= 0 && Number(val) <= 1600,
-          message: "Weight must be 0-1600 ounces"
+          validate: val => Number(val) >= 0 && Number(val) <= 16000,
+          message: "Weight must be 0-16000 ounces"
         }
       ],
       newGearItem: {
@@ -78,9 +78,11 @@ export default {
   methods: {
     submit() {
       console.log("Submitting new gear item!");
+      console.log(this.newGearItem);
       this.$refs.addNewGearItem.validate().then(result => {
         if (result) {
           // Attempt to login existing user:
+          console.log(this.newGearItem);
           GearItemService.createNewGearItem(this.newGearItem)
             .then(response => {
               console.log(`👍`);

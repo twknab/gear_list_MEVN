@@ -21,14 +21,14 @@
         </mu-list>
         <div v-else>
           <mu-flex justify-content="center" class="margin-top margin-bottom">
-            <h2>Then Add some Gear Items! 😁</h2>
+            <h2>Add some Gear Items! 😁</h2>
           </mu-flex>
         </div>
       </mu-col>
     </mu-row>
     <mu-row gutter>
       <mu-col span="12" sm="12" md="12" lg="6" xl="6">
-        <mu-flex justify-content="center" v-if="Object.keys(userGearItems).length">
+        <mu-flex justify-content="center" v-if="Object.keys(userGearItems).length > 3">
           <mu-button flat color="purpleA700" class="margin-bottom-md">
             <mu-icon left value="expand_more"></mu-icon>See All Items
           </mu-button>
@@ -40,8 +40,9 @@
 </template>
 
 <script>
-import userGearItems from "@/dummy_data/gearItemsDummyData.js";
+// import userGearItems from "@/dummy_data/gearItemsDummyData.js";
 import AddGearItemButton from "@/components/AddGearItemButton.vue";
+import GearItemService from "@/services/GearItemService.js";
 export default {
   name: "GearItems",
   components: {
@@ -49,12 +50,24 @@ export default {
   },
   data() {
     return {
-      userGearItems
+      errors: {},
+      userGearItems: {}
     };
   },
+  beforeMount() {
+    this.getAllUserGearItems();
+  },
   methods: {
-    // name() {
-    // }
+    getAllUserGearItems() {
+      GearItemService.getAllGearItemsForUser()
+        .then(response => {
+          this.userGearItems = response.data.gearItems;
+        })
+        .catch(err => {
+          console.log(err);
+          this.errors = err;
+        });
+    }
   }
 };
 </script>

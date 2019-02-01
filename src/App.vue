@@ -22,11 +22,10 @@ export default {
   },
   methods: {
     updateNav(navItems) {
-      console.log("Updating navigation...");
       this.nav = navItems;
     },
     getGlobalUser() {
-      console.log("Getting global logged in user...");
+      console.log("Getting logged in user...");
       UserService.getLoggedInUser()
         .then(response => {
           console.log(response.data);

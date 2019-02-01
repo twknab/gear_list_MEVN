@@ -12,5 +12,8 @@ const api = axios.create({
 export default {
   createNewGearItem(newGearItem) {
     return api.post("/gear-item", newGearItem);
+  },
+  getAllGearItemsForUser(newGearItem) {
+    return api.get("/gear-item", newGearItem);
   }
 };

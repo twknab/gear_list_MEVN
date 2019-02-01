@@ -18,19 +18,17 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - `npm install` from `~/server` to get server-side packages.
 - Update `~/src/services/UserService` baseURL to reflect your localhost or local network IP.
 - (1) Make sure `mongod` is running. (2) from `~/` run `npm run serve` and (3) from `~/server` run `npm start`.
-- Load https://localhost:8080 to see the application running locally.
+- Load [localhost:8080](https://localhost:8080) to see the application running locally.
 
 ## To Do
 
-- Per your late night divergence, try trimming down your button components to just the buttons, and inserting them into your responsive columns that way. It may work better with less craze..
-- Setup Session (express-session)?
-- Get data via session-id to display user info on dashboard.
+- Add Gear List model
 
 ## Features
 
-- User Login and Registration (Password Hashing/Decryption)
+- ✅ User Login and Registration (Password Hashing/Decryption)
+- ✅ Gear Item Creation
 - Gear List Creation
-- Gear Item Creation
 - Add a Gear Item to a Gear List
 - Remove a Gear Item from a Gear List
 - Edit Gear Item (Name, Description, Weight)

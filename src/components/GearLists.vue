@@ -41,7 +41,7 @@
         </div>
       </mu-col>
       <mu-col span="12" sm="12" md="12" lg="6" xl="6">
-        <mu-flex justify-content="center" v-if="Object.keys(userGearLists).length">
+        <mu-flex justify-content="center" v-if="Object.keys(userGearLists).length > 3">
           <mu-button flat full-width color="purpleA400" class="margin-bottom-md">
             <mu-icon left value="expand_more"></mu-icon>See All Lists
           </mu-button>
