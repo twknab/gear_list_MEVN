@@ -81,7 +81,6 @@ UserSchema.pre("validate", function(next) {
 // These functions run prior to document save()
 UserSchema.pre("save", function(next) {
   console.log("User PRE save running...");
-  console.log(this);
   // Hash password with bcrypt
   UserSchema.methods.encryptPass(this.password, (hashed, error) => {
     if (hashed) {
@@ -113,9 +112,6 @@ UserSchema.methods.decryptPass = function(userPassword, hash, callback) {
   bcrypt
     .compare(userPassword, hash)
     .then(function(res) {
-      console.log("PASS: ", userPassword);
-      console.log("HASH: ", hash);
-      console.log("DECRYPTION RESULT: ", res);
       if (res) {
         callback(res, false);
       } else {
