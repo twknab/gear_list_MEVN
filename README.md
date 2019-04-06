@@ -28,7 +28,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 - ✅ User Login and Registration (Password Hashing/Decryption)
 - ✅ Gear Item Creation
-- Gear List Creation
+- ✅ Gear List Creation
 - Add a Gear Item to a Gear List
 - Remove a Gear Item from a Gear List
 - Edit Gear Item (Name, Description, Weight)
@@ -50,6 +50,10 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - User
 - Gear List
 - Gear Item
+
+### Note About Gear Items/Gear List Deletion
+
+If we add a friends feature, it's important that Friends cannot delete one another's gear items or gear lists if being shared. A friend should be able to delete a gear item, or delete a shared list from their view. But this should not delete the owner's (creator's) list or gear item.
 
 ### Wishlist Features (may require addt'l creation of models)
 

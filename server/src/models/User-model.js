@@ -45,17 +45,25 @@ const UserSchema = new Schema(
     },
     gearLists: [
       {
-        // holds gear lists belonging to User
+        // holds gear lists User owns
         type: Schema.Types.ObjectId,
         ref: "GearList"
       }
     ],
     gearItems: [
       {
+        // holds gear items User owns
         type: Schema.Types.ObjectId,
         ref: "GearItem"
       }
     ],
+    // sharedLists: [
+    //   {
+    //     // holds lists shared by friends
+    //     type: Schema.Types.ObjectId,
+    //     ref: "SharedList"
+    //   }
+    // ],
     welcomeMsgStatus: {
       // if true, welcome msg will display
       type: Boolean,

@@ -68,8 +68,8 @@ export default {
       console.log("Submitting new gear list!");
       this.$refs.addNewGearList.validate().then(result => {
         if (result) {
-          // Attempt to login existing user:
-          GearListService.createNewGearItem(this.newGearItem)
+          // Attempt to create new gear list:
+          GearListService.createNewGearList(this.newGearList)
             .then(response => {
               console.log(`👍`);
               console.log(response.data);

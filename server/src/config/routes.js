@@ -3,7 +3,8 @@
 // Load Controllers:
 const MainController = require("./../controllers/main-controller"),
   UserController = require("./../controllers/user-controller"),
-  GearItemController = require("./../controllers/gear-item-controller");
+  GearItemController = require("./../controllers/gear-item-controller"),
+  GearListController = require("./../controllers/gear-list-controller");
 
 // Server-Side Routes:
 module.exports = function(app) {
@@ -18,6 +19,10 @@ module.exports = function(app) {
   app.get("/user/logout", UserController.logout);
   // Create a new gear item
   app.post("/gear-item", GearItemController.createGearItem);
-  // Get all user's gear item
+  // Get all user's gear items
   app.get("/gear-item", GearItemController.getUserGearItems);
+  // Create a new gear list
+  app.post("/gear-list", GearListController.createGearList);
+  // Get all user's gear lists
+  app.get("/gear-list", GearListController.getUserGearLists);
 };

@@ -13,7 +13,7 @@ export default {
   createNewGearList(newGearList) {
     return api.post("/gear-list", newGearList);
   },
-  getAllGearListsForUser(newGearList) {
-    return api.get("/gear-list", newGearList);
+  getAllGearListsForUser() {
+    return api.get("/gear-list");
   }
 };

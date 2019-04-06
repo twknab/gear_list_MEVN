@@ -62,6 +62,7 @@
 <script>
 import userGearLists from "@/dummy_data/gearListDummyData.js";
 import AddGearListButton from "@/components/AddGearListButton.vue";
+import GearListService from "@/services/GearListService.js";
 export default {
   name: "GearLists",
   components: {
@@ -74,10 +75,10 @@ export default {
       userGearLists
     };
   },
+  beforeMount() {
+    this.getAllUserGearLists();
+  },
   methods: {
-    newGearList() {
-      console.log("New gear list...");
-    },
     editGearList(index) {
       console.log(index);
       console.log("Editing gear list...");
@@ -89,6 +90,16 @@ export default {
     deleteGearList(index) {
       console.log(index);
       console.log("Deleting gear list...");
+    },
+    getAllUserGearLists() {
+      GearListService.getAllGearListsForUser()
+        .then(response => {
+          this.userGearLists = response.data.gearLists;
+        })
+        .catch(err => {
+          console.log(err);
+          this.errors = err;
+        });
     }
   }
 };
