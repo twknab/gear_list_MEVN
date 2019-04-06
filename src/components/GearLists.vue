@@ -2,7 +2,7 @@
   <div>
     <mu-row gutter>
       <mu-col span="12" sm="12" md="12" lg="12" xl="12">
-        <div>
+        <div class="margin-bottom">
           <mu-list
             textline="three-line"
             class="dashboard-list"
@@ -40,14 +40,14 @@
           </div>
         </div>
       </mu-col>
+      <AddGearListButton/>
       <mu-col span="12" sm="12" md="12" lg="6" xl="6">
         <mu-flex justify-content="center" v-if="Object.keys(userGearLists).length > 3">
-          <mu-button flat full-width color="purpleA400" class="margin-bottom-md">
+          <mu-button full-width large round color="grey800">
             <mu-icon left value="expand_more"></mu-icon>See All Lists
           </mu-button>
         </mu-flex>
       </mu-col>
-      <AddGearListButton/>
     </mu-row>
   </div>
 </template>

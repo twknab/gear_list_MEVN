@@ -78,11 +78,9 @@ export default {
   methods: {
     submit() {
       console.log("Submitting new gear item!");
-      console.log(this.newGearItem);
       this.$refs.addNewGearItem.validate().then(result => {
         if (result) {
           // Attempt to login existing user:
-          console.log(this.newGearItem);
           GearItemService.createNewGearItem(this.newGearItem)
             .then(response => {
               console.log(`👍`);

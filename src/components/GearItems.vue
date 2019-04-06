@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mu-row gutter>
+    <mu-row gutter class="margin-bottom">
       <mu-col span="12">
         <mu-list
           textline="three-line"
@@ -14,7 +14,12 @@
             </mu-list-item-content>
             <mu-list-item-action>
               <mu-button icon to="/gear/items/gearItem.id">
-                <mu-icon color="purpleA700" value="attach_file" size="36"></mu-icon>
+                <mu-icon color="purpleA400" value="attach_file" size="36"></mu-icon>
+              </mu-button>
+            </mu-list-item-action>
+            <mu-list-item-action>
+              <mu-button icon to="/gear/items/gearItem.id">
+                <mu-icon color="purpleA700" value="delete" size="36"></mu-icon>
               </mu-button>
             </mu-list-item-action>
           </mu-list-item>
@@ -27,14 +32,14 @@
       </mu-col>
     </mu-row>
     <mu-row gutter>
+      <AddGearItemButton/>
       <mu-col span="12" sm="12" md="12" lg="6" xl="6">
         <mu-flex justify-content="center" v-if="Object.keys(userGearItems).length > 3">
-          <mu-button flat color="purpleA700" class="margin-bottom-md">
+          <mu-button full-width large round color="grey800">
             <mu-icon left value="expand_more"></mu-icon>See All Items
           </mu-button>
         </mu-flex>
       </mu-col>
-      <AddGearItemButton/>
     </mu-row>
   </div>
 </template>
