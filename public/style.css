@@ -146,6 +146,10 @@ img {
   margin-left: 5px !important;
 }
 
+.margin-left-md {
+  margin-left: 15px !important;
+}
+
 .server-errors {
   text-align: center;
 }

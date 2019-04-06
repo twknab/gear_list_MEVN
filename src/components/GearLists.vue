@@ -35,7 +35,14 @@
           </mu-list>
           <div v-else>
             <mu-flex justify-content="center" class="margin-top margin-bottom">
-              <h2>Add a Gear List to Get Started! 👍</h2>
+              <h2>Add a Gear List to Get Started!</h2>
+              <mu-icon
+                color="purpleA700"
+                value="nature_people"
+                size="56"
+                justify-content="end"
+                class="margin-left-md"
+              ></mu-icon>
             </mu-flex>
           </div>
         </div>

@@ -26,7 +26,14 @@
         </mu-list>
         <div v-else>
           <mu-flex justify-content="center" class="margin-top margin-bottom">
-            <h2>Add some Gear Items! 😁</h2>
+            <h2>Add some Gear Items!</h2>
+            <mu-icon
+              color="purpleA700"
+              value="terrain"
+              size="56"
+              justify-content="end"
+              class="margin-left-md"
+            ></mu-icon>
           </mu-flex>
         </div>
       </mu-col>
