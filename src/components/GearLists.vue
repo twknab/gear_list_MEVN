@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mu-row gutter>
+    <mu-row gutter class="margin-bottom">
       <mu-col span="12" sm="12" md="12" lg="12" xl="12">
         <div class="margin-bottom">
           <mu-list
@@ -35,10 +35,10 @@
           </mu-list>
           <div v-else>
             <mu-flex justify-content="center" class="margin-top margin-bottom">
-              <h2>Add a Gear List to Get Started!</h2>
+              <h2>Create a new Gear List!</h2>
               <mu-icon
                 color="purpleA700"
-                value="nature_people"
+                value="star"
                 size="56"
                 justify-content="end"
                 class="margin-left-md"
