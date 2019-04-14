@@ -31,10 +31,13 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Gear List Creation
 - Add a Gear Item to a Gear List
 - Remove a Gear Item from a Gear List
+- View a Gear List and All Items
 - Edit Gear Item (Name, Description, Weight)
 - Edit Gear List (Name, Attributes)
 - Delete a Gear Item
 - Delete a Gear List (but not any Items within)
+- View All Gear Items
+- View All Gear Lists
 - Front & Backend Validation on All Forms
 
 ## Technologies
