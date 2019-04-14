@@ -13,12 +13,12 @@
               <mu-list-item-sub-title>Weight: {{gearItem.weight}} oz</mu-list-item-sub-title>
             </mu-list-item-content>
             <mu-list-item-action>
-              <mu-button icon to="/gear/items/gearItem.id">
+              <mu-button icon v-bind:to="'/gear-list/add' + gearItem._id">
                 <mu-icon color="purpleA400" value="attach_file" size="36"></mu-icon>
               </mu-button>
             </mu-list-item-action>
             <mu-list-item-action>
-              <mu-button icon to="/gear/items/gearItem.id">
+              <mu-button icon v-bind:to="'/gear-item/delete/' + gearItem._id">
                 <mu-icon color="purpleA700" value="delete" size="36"></mu-icon>
               </mu-button>
             </mu-list-item-action>
