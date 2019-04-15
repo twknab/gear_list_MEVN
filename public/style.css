@@ -54,7 +54,6 @@ img {
 
 .mu-text-field-input {
   color: #fff !important;
-  /* text-shadow: 2px 2px 2px #e040fb; */
   font-size: 28px !important;
   margin: 15px 15px 15px 0px !important;
   line-height: 1em;
@@ -89,14 +88,6 @@ img {
 .mu-form-item,
 .mu-form-item__has-label {
   margin-bottom: 35px !important;
-}
-
-.mu-checkbox-label {
-  color: rgba(255, 255, 255, 0.678) !important;
-}
-
-.mu-checkbox {
-  color: rgba(255, 255, 255, 0.678) !important;
 }
 
 * {
@@ -197,6 +188,25 @@ img {
   background-color: rgba(0, 0, 0, 0.3) !important;
   /* rgb(0,0,0,.1) */
 
+}
+
+/* Add padding to filterable multi-select drop down */
+.mu-select.mu-input-content.is-multi.is-filterable {
+  padding-bottom: 15px;
+  padding-top: 10px;
+}
+
+.add-to-gear-list-drop-down .mu-checkbox {
+  color: #aa00ff
+}
+
+.mu-select-no-data {
+  visibility: hidden;
+}
+
+.mu-select-no-data::before {
+  content: 'No results found.' !important;
+  visibility: visible;
 }
 
 /* Reduces margin on small mobile */

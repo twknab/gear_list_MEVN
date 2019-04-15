@@ -166,4 +166,11 @@ export default {
 </script>
 
 <style>
+.mu-checkbox-label {
+  color: rgba(255, 255, 255, 0.678) !important;
+}
+
+.mu-checkbox {
+  color: rgba(255, 255, 255, 0.678) !important;
+}
 </style>

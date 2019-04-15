@@ -12,11 +12,8 @@
               <mu-list-item-title>{{gearItem.title}}</mu-list-item-title>
               <mu-list-item-sub-title>Weight: {{gearItem.weight}} oz</mu-list-item-sub-title>
             </mu-list-item-content>
-            <mu-list-item-action>
-              <mu-button icon v-bind:to="'/gear-list/add' + gearItem._id">
-                <mu-icon color="purpleA400" value="attach_file" size="36"></mu-icon>
-              </mu-button>
-            </mu-list-item-action>
+            <!-- Paperclip Attach Gear Item to Gear List Button -->
+            <AttachGearItemToGearList :gearItem="gearItem" :gearLists="gearLists"/>
             <mu-list-item-action>
               <mu-button icon v-bind:to="'/gear-item/delete/' + gearItem._id">
                 <mu-icon color="purpleA700" value="delete" size="36"></mu-icon>
@@ -54,11 +51,18 @@
 <script>
 // import userGearItems from "@/dummy_data/gearItemsDummyData.js";
 import AddGearItemButton from "@/components/AddGearItemButton.vue";
+import AttachGearItemToGearList from "@/components/AttachGearItemToGearList.vue";
 import GearItemService from "@/services/GearItemService.js";
 export default {
   name: "GearItems",
+  props: {
+    gearLists: {
+      type: Object
+    }
+  },
   components: {
-    AddGearItemButton
+    AddGearItemButton,
+    AttachGearItemToGearList
   },
   data() {
     return {

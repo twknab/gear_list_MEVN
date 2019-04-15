@@ -6,7 +6,7 @@
       round
       color="purpleA700"
       @click="$router.push({name: 'addGearItem'})"
-      class="margin-bottom-xl"
+      class="margin-bottom-md"
     >
       <mu-icon value="add"></mu-icon>
       <span class="button-icon">Add Gear Item</span>

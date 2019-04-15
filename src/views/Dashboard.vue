@@ -16,12 +16,12 @@
       </mu-flex>
       <h1>Gear Lists</h1>
       <!-- Gear Lists Component -->
-      <GearLists/>
+      <GearLists @updateAllGearLists="updateGearListsForUser"/>
       <!-- Gear Items -->
       <div class="margin-top-xl">
         <h1>Gear Items</h1>
         <!-- Gear Items Component -->
-        <GearItems/>
+        <GearItems :gearLists="gearLists"/>
       </div>
     </mu-container>
   </div>
@@ -45,7 +45,8 @@ export default {
   },
   data() {
     return {
-      navItems
+      navItems,
+      gearLists: {}
     };
   },
   computed: {
@@ -72,6 +73,9 @@ export default {
     },
     getLoggedInUser() {
       this.$emit("getGlobalUser");
+    },
+    updateGearListsForUser(gearLists) {
+      this.gearLists = gearLists;
     }
   }
 };

@@ -95,6 +95,7 @@ export default {
       GearListService.getAllGearListsForUser()
         .then(response => {
           this.userGearLists = response.data.gearLists;
+          this.$emit("updateAllGearLists", this.userGearLists);
         })
         .catch(err => {
           console.log(err);
