@@ -10,9 +10,8 @@
       v-bind:title="'Add ' + gearItem.title +  ' to a Gear List'"
       width="600"
       max-width="80%"
-      overlay="true"
       overlay-color="#000"
-      lock-scroll="false"
+      :lock-scroll="false"
       :esc-press-close="false"
       :overlay-close="false"
       :open.sync="openAlert"
@@ -32,11 +31,12 @@
             :key="key"
             :label="gearList.title"
             :value="gearList._id"
+            v-model="gearListSelections"
           ></mu-option>
         </mu-select>
       </mu-col>
       <mu-button slot="actions" flat color="grey800" @click="closeAlertDialog">Nevermind</mu-button>
-      <mu-button slot="actions" flat color="primary" @click="closeAlertDialog">Add Item</mu-button>
+      <mu-button slot="actions" flat color="primary" @click="addItemToGearList">Add Item</mu-button>
     </mu-dialog>
   </div>
 </template>
@@ -49,76 +49,16 @@ export default {
       type: Object
     },
     gearLists: {
-      type: Object
+      type: Array
     }
   },
   data() {
     return {
       openAlert: false,
-      citys: [
-        "Alabama",
-        "Alaska",
-        "American Samoa",
-        "Arizona",
-        "Arkansas",
-        "California",
-        "Colorado",
-        "Connecticut",
-        "Delaware",
-        "District of Columbia",
-        "Federated States of Micronesia",
-        "Florida",
-        "Georgia",
-        "Guam",
-        "Hawaii",
-        "Idaho",
-        "Illinois",
-        "Indiana",
-        "Iowa",
-        "Kansas",
-        "Kentucky",
-        "Louisiana",
-        "Maine",
-        "Marshall Islands",
-        "Maryland",
-        "Massachusetts",
-        "Michigan",
-        "Minnesota",
-        "Mississippi",
-        "Missouri",
-        "Montana",
-        "Nebraska",
-        "Nevada",
-        "New Hampshire",
-        "New Jersey",
-        "New Mexico",
-        "New York",
-        "North Carolina",
-        "North Dakota",
-        "Northern Mariana Islands",
-        "Ohio",
-        "Oklahoma",
-        "Oregon",
-        "Palau",
-        "Pennsylvania",
-        "Puerto Rico",
-        "Rhode Island",
-        "South Carolina",
-        "South Dakota",
-        "Tennessee",
-        "Texas",
-        "Utah",
-        "Vermont",
-        "Virgin Island",
-        "Virginia",
-        "Washington",
-        "West Virginia",
-        "Wisconsin",
-        "Wyoming"
-      ],
       filterable: {
         value: []
-      }
+      },
+      gearListSelections: {}
     };
   },
   methods: {
@@ -127,16 +67,16 @@ export default {
     },
     closeAlertDialog() {
       this.openAlert = false;
+    },
+    addItemToGearList() {
+      this.openAlert = false;
+      console.log(this.gearListSelections);
     }
   }
 };
 </script>
 
 <style>
-/* .mu-checkbox-label {
-  color: rgba(255, 255, 255, 0.678) !important;
-} */
-
 .mu-checkbox {
   color: #d500f9 !important;
 }
@@ -162,7 +102,11 @@ export default {
   background-color: #aa00ff;
 }
 .mu-chip:hover {
-  background-color: #d500f9;
+  background-color: #d500f9 !important;
+}
+
+.mu-chip:active {
+  background-color: #aa00ff;
 }
 
 .mu-input__focus {

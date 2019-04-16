@@ -57,7 +57,7 @@ export default {
   name: "GearItems",
   props: {
     gearLists: {
-      type: Object
+      type: Array
     }
   },
   components: {
