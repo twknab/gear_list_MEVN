@@ -22,7 +22,7 @@
           filterable
           multiple
           chips
-          v-model="filterable.value"
+          v-model="gearListSelections.values"
           full-width
           class="add-to-gear-list-drop-down"
         >
@@ -31,7 +31,6 @@
             :key="key"
             :label="gearList.title"
             :value="gearList._id"
-            v-model="gearListSelections"
           ></mu-option>
         </mu-select>
       </mu-col>
@@ -49,17 +48,22 @@ export default {
       type: Object
     },
     gearLists: {
-      type: Array
+      type: Object
     }
   },
   data() {
     return {
       openAlert: false,
-      filterable: {
-        value: []
-      },
-      gearListSelections: {}
+      gearListSelections: {
+        values: []
+      }
     };
+  },
+  beforeMount() {
+    // console.log("THIS IS THE GEAR LISTS");
+    // console.log(this.gearLists);
+    // console.log(typeof this.gearLists);
+    // console.log("$$$$$$");
   },
   methods: {
     openAlertDialog() {
@@ -70,7 +74,7 @@ export default {
     },
     addItemToGearList() {
       this.openAlert = false;
-      console.log(this.gearListSelections);
+      console.log(this.gearListSelections.values);
     }
   }
 };

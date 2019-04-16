@@ -60,7 +60,6 @@
 </template>
 
 <script>
-import userGearLists from "@/dummy_data/gearListDummyData.js";
 import AddGearListButton from "@/components/AddGearListButton.vue";
 import GearListService from "@/services/GearListService.js";
 export default {
@@ -72,7 +71,7 @@ export default {
     return {
       current: 1,
       open: false,
-      userGearLists
+      userGearLists: {}
     };
   },
   beforeMount() {
