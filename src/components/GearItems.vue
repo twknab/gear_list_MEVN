@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{typeof(gearLists)}}
     <mu-row gutter class="margin-bottom">
       <mu-col span="12">
         <mu-list
@@ -58,7 +57,7 @@ export default {
   name: "GearItems",
   props: {
     gearLists: {
-      type: Object
+      type: Array
     }
   },
   components: {

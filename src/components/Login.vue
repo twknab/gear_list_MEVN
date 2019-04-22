@@ -76,12 +76,11 @@ export default {
   },
   methods: {
     submit() {
-      console.log("Submitting login!");
       this.$refs.existingUserLogin.validate().then(result => {
         if (result) {
           // Attempt to login existing user:
           UserService.loginExistingUser(this.existingUser)
-            .then(response => {
+            .then(() => {
               console.log(`👍`);
 
               // Redirect to dashboard view

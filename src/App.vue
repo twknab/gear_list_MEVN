@@ -28,7 +28,6 @@ export default {
       console.log("Getting logged in user...");
       UserService.getLoggedInUser()
         .then(response => {
-          console.log(response.data);
           this.loggedInUser = response.data;
         })
         .catch(err => {
