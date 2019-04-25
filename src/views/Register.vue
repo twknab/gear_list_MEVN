@@ -141,14 +141,7 @@ export default {
         if (result) {
           // Register new user:
           UserService.registerNewUser(this.newUser)
-            .then(response => {
-              console.log(response.status);
-              console.log(`👍`);
-              // response.data contains your user object
-              // send user upstream for dashboard component (or get when dashboard is loaded using session)
-
-              // update navigation component
-
+            .then(() => {
               // Redirect to dashboard view
               this.$router.push({ name: "dashboard" });
             })

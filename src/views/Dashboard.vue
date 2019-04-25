@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       navItems,
-      gearLists: {}
+      gearLists: []
     };
   },
   computed: {
@@ -75,7 +75,7 @@ export default {
       this.$emit("getGlobalUser");
     },
     updateGearListsForUser(gearLists) {
-      this.gearLists = gearLists;
+      this.gearLists = Object.values(gearLists);
     }
   }
 };

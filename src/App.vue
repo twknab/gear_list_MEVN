@@ -25,13 +25,12 @@ export default {
       this.nav = navItems;
     },
     getGlobalUser() {
-      console.log("Getting logged in user...");
       UserService.getLoggedInUser()
         .then(response => {
           this.loggedInUser = response.data;
         })
-        .catch(err => {
-          console.log(err);
+        .catch(() => {
+          // console.log(err);
           this.$router.push({ name: "home" });
         });
     }

@@ -81,8 +81,6 @@ export default {
           // Attempt to login existing user:
           UserService.loginExistingUser(this.existingUser)
             .then(() => {
-              console.log(`👍`);
-
               // Redirect to dashboard view
               this.$router.push({ name: "dashboard" });
             })
