@@ -25,4 +25,6 @@ module.exports = function(app) {
   app.post("/gear-list", GearListController.createGearList);
   // Get all user's gear lists
   app.get("/gear-list", GearListController.getUserGearLists);
+  // Add gear item to gear lists
+  app.post("/gear-list/add-item", GearListController.addItemToGearLists);
 };

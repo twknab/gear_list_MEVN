@@ -30,7 +30,6 @@ export default {
           this.loggedInUser = response.data;
         })
         .catch(() => {
-          // console.log(err);
           this.$router.push({ name: "home" });
         });
     }

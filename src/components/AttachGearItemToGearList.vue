@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import GearListService from "@/services/GearListService.js";
 export default {
   name: "AttachGearItemToGearList",
   props: {
@@ -94,21 +95,21 @@ export default {
     },
     addItemToGearList() {
       console.log(this.gearListSelections.values);
+      console.log(this.gearItem._id);
       this.$refs.attachGearItemForm.validate().then(result => {
         if (result) {
-          console.log("PASSED VALIDATION");
-          // Attempt to login existing user:
-          // UserService.loginExistingUser(this.existingUser)
-          //   .then(response => {
-          //     console.log(`👍`);
-
-          //     // Redirect to dashboard view
-          //     this.$router.push({ name: "dashboard" });
-          //   })
-          //   .catch(error => {
-          //     this.errors = error.response.data;
-          //   });
           this.openAlert = false;
+          GearListService.addItemToList({
+            gearItem: this.gearItem._id,
+            gearLists: this.gearListSelections.values
+          })
+            .then(() => {
+              this.$router.push({ name: "dashboard" });
+            })
+            .catch(error => {
+              console.log(error);
+              // this.errors = error.response.data;
+            });
         }
       });
       // send data to service to write to db
