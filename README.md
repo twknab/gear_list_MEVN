@@ -29,7 +29,9 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ User Login and Registration (Password Hashing/Decryption)
 - ✅ Gear Item Creation
 - ✅ Gear List Creation
-- Add a Gear Item to a Gear List
+- Add a Gear Item to a Gear List (_in progress_)
+  - See `AddGearItem.vue`, `AddGearList.vue` TODOS.
+  - See `gear-list-controller.js`
 - Remove a Gear Item from a Gear List
 - View a Gear List and All Items
 - Edit Gear Item (Name, Description, Weight)

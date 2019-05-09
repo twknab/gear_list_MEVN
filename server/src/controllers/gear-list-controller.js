@@ -76,11 +76,13 @@ module.exports = {
 
     /*
     /*  TODO:
-    /*  - Add Gear Item to Each Gear List
-    /*  - Ensure Validation
-    /*  - Bubble Up Updated At for User(?)
+    /*  - Add item to each gear list
+    /*  - Ensure Validation (no empty submissions etc)
+    /*  - Save gear list
+    /*  - Redirect to Dashboard with Confirmation Message
     */
 
+    // DELETE THIS BELOW BUT USE IT AS A MODEL TO WRITE YOUR NEW LOGIC
     // User.findOne({
     //   _id: req.session.userId
     // })

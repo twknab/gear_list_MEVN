@@ -59,7 +59,8 @@ export default {
         }
       ],
       newGearList: {
-        title: ""
+        title: "",
+        gearListOwner: ""
       }
     };
   },
@@ -68,6 +69,11 @@ export default {
       console.log("Submitting new gear list!");
       this.$refs.addNewGearList.validate().then(result => {
         if (result) {
+          /*
+          TODO:
+          - Pass User Object (or even just _id) down from Dashboard component
+          - Ensure this _id is attached to `gearListOwner` before sending to model
+          */
           // Attempt to create new gear list:
           GearListService.createNewGearList(this.newGearList)
             .then(response => {

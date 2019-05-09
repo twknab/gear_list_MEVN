@@ -71,7 +71,8 @@ export default {
       ],
       newGearItem: {
         title: "",
-        weight: ""
+        weight: "",
+        gearItemOwner: ""
       }
     };
   },
@@ -81,6 +82,11 @@ export default {
       this.$refs.addNewGearItem.validate().then(result => {
         if (result) {
           // Attempt to create new gear item:
+          /*
+          TODO:
+          - Pass User Object (or even just _id) down from Dashboard component
+          - Ensure this _id is attached to `gearItemOwner` before sending to model
+          */
           GearItemService.createNewGearItem(this.newGearItem)
             .then(response => {
               console.log(`👍`);

@@ -16,6 +16,10 @@ const GearItemSchema = new Schema(
       maxlength: [16000, "Weight cannot exceed 16000 ozs (1000 lbs)."],
       required: [true, "Weight is required."],
       trim: true
+    },
+    gearItemOwner: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
     }
   },
   {
