@@ -47,6 +47,12 @@
 import GearListService from "@/services/GearListService.js";
 export default {
   name: "AddGearList",
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       errors: {},
@@ -60,7 +66,7 @@ export default {
       ],
       newGearList: {
         title: "",
-        gearListOwner: ""
+        gearListOwner: this.user._id
       }
     };
   },
@@ -87,7 +93,14 @@ export default {
             });
         }
       });
+    },
+    getLoggedInUser() {
+      this.$emit("getGlobalUser");
     }
+  },
+  created: function() {
+    this.getLoggedInUser();
+    console.log(this.user);
   }
 };
 </script>

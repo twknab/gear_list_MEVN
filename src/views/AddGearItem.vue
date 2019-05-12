@@ -51,6 +51,12 @@
 import GearItemService from "@/services/GearItemService.js";
 export default {
   name: "AddGearItem",
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       errors: {},
@@ -72,7 +78,7 @@ export default {
       newGearItem: {
         title: "",
         weight: "",
-        gearItemOwner: ""
+        gearItemOwner: this.user._id
       }
     };
   },
@@ -99,7 +105,13 @@ export default {
             });
         }
       });
+    },
+    getLoggedInUser() {
+      this.$emit("getGlobalUser");
     }
+  },
+  created: function() {
+    this.getLoggedInUser();
   }
 };
 </script>
