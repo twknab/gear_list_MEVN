@@ -100,8 +100,8 @@ export default {
         if (result) {
           this.openAlert = false;
           GearListService.addItemToList({
-            gearItem: this.gearItem._id,
-            gearLists: this.gearListSelections.values
+            gearItemId: this.gearItem._id,
+            gearListsIds: this.gearListSelections.values
           })
             .then(() => {
               this.$router.push({ name: "dashboard" });

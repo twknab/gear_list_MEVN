@@ -1,5 +1,6 @@
 const GearList = require("mongoose").model("GearList"),
-  User = require("mongoose").model("User");
+  User = require("mongoose").model("User"),
+  GearItem = require("mongoose").model("GearItem");
 
 module.exports = {
   createGearList: (req, res) => {
@@ -27,8 +28,7 @@ module.exports = {
             error = {
               errors: {
                 invalid: {
-                  message:
-                    "Error creating new Gear List (gear-list-controller.createGearList), contact the admin."
+                  message: "Error creating new Gear List, contact the admin."
                 }
               }
             };
@@ -61,8 +61,7 @@ module.exports = {
         error = {
           errors: {
             invalid: {
-              message:
-                "Error getting User's gear lists (gear-list-controller.getUserGearLists), contact the admin."
+              message: "Error getting User's gear lists, contact the admin."
             }
           }
         };
@@ -76,11 +75,58 @@ module.exports = {
 
     /*
     /*  TODO:
-    /*  - Add item to each gear list
-    /*  - Ensure Validation (no empty submissions etc)
-    /*  - Save gear list
-    /*  - Redirect to Dashboard with Confirmation Message
+    /*  - Get Gear Item
+    /*  - For Each Gear List in Array:
+    /*    - Add Gear Item to List
+    /*    - Save Each Gear List
     */
+
+    GearItem.findOne({
+      _id: req.body.gearItemId
+    })
+      .then(gearItem => {
+        console.log(gearItem);
+        req.body.gearListsIds.forEach(gearListId => {
+          console.log("ITEM: ", gearListId);
+          GearList.findOneAndUpdate(
+            { _id: gearListId },
+            {
+              $push: {
+                items: gearItem._id
+              }
+              // TODO: Ensure DUPLICATES DO NOT GET PUSHED
+              // QUESTION: CHECK IF OWNER??? (Yes probably: consider just checking if req.session.userId etc === gearListOwnerId)
+            },
+            { $new: true }
+          )
+            .then(gearList => {
+              console.log(gearList);
+            })
+            .catch(error => {
+              console.log(error);
+              error = {
+                errors: {
+                  invalid: {
+                    message: "Error getting gear list, contact the admin."
+                  }
+                }
+              };
+              return res.status(500).json(error.errors);
+            });
+        });
+        return res.status(500);
+      })
+      .catch(error => {
+        console.log(error);
+        error = {
+          errors: {
+            invalid: {
+              message: "Error getting gear item, contact the admin."
+            }
+          }
+        };
+        return res.status(500).json(error.errors);
+      });
 
     // DELETE THIS BELOW BUT USE IT AS A MODEL TO WRITE YOUR NEW LOGIC
     // User.findOne({
