@@ -108,7 +108,7 @@ export default {
             })
             .catch(error => {
               console.log(error);
-              // this.errors = error.response.data;
+              this.errors = error.response.data;
             });
         }
       });

@@ -91,10 +91,9 @@ module.exports = {
           GearList.findOneAndUpdate(
             { _id: gearListId },
             {
-              $push: {
+              $addToSet: {
                 items: gearItem._id
               }
-              // TODO: Ensure DUPLICATES DO NOT GET PUSHED
               // QUESTION: CHECK IF OWNER??? (Yes probably: consider just checking if req.session.userId etc === gearListOwnerId)
             },
             { $new: true }
@@ -127,32 +126,5 @@ module.exports = {
         };
         return res.status(500).json(error.errors);
       });
-
-    // DELETE THIS BELOW BUT USE IT AS A MODEL TO WRITE YOUR NEW LOGIC
-    // User.findOne({
-    //   _id: req.session.userId
-    // })
-    //   .populate({
-    //     path: "gearLists",
-    //     options: {
-    //       sort: "-createdAt"
-    //     }
-    //   })
-    //   .exec()
-    //   .then(userAndGearLists => {
-    //     return res.status(201).json(userAndGearLists);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //     error = {
-    //       errors: {
-    //         invalid: {
-    //           message:
-    //             "Error getting User's gear lists (gear-list-controller.getUserGearLists), contact the admin."
-    //         }
-    //       }
-    //     };
-    //     return res.status(500).json(error.errors);
-    //   });
   }
 };
