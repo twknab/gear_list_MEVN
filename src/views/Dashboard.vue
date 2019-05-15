@@ -20,8 +20,32 @@
       <!-- Gear Items -->
       <div class="margin-top-xl">
         <h1>Gear Items</h1>
+        <mu-dialog
+          width="600"
+          max-width="80%"
+          :esc-press-close="true"
+          :overlay-close="false"
+          :open.sync="showSuccessAlert"
+        >
+          <mu-alert
+            color="success"
+            @delete="showSuccessAlert = false"
+            delete
+            v-if="showSuccessAlert"
+            transition="mu-scale-transition"
+          >
+            <mu-icon left value="check_circle"></mu-icon>
+            {{ successMessage }}
+          </mu-alert>
+          <mu-button
+            slot="actions"
+            flat
+            color="primary"
+            @click="showSuccessAlert = false"
+          >Sounds Good!</mu-button>
+        </mu-dialog>
         <!-- Gear Items Component -->
-        <GearItems :gearLists="gearLists"/>
+        <GearItems :gearLists="gearLists" @updateDashboardSuccessMessage="updateSuccessMessage"/>
       </div>
     </mu-container>
   </div>
@@ -46,7 +70,9 @@ export default {
   data() {
     return {
       navItems,
-      gearLists: []
+      gearLists: [],
+      showSuccessAlert: false,
+      successMessage: ""
     };
   },
   computed: {
@@ -76,6 +102,10 @@ export default {
     },
     updateGearListsForUser(gearLists) {
       this.gearLists = Object.values(gearLists);
+    },
+    updateSuccessMessage(message) {
+      this.successMessage = message;
+      this.showSuccessAlert = true;
     }
   }
 };

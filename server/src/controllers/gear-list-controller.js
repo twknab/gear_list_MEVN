@@ -100,6 +100,9 @@ module.exports = {
           )
             .then(gearList => {
               console.log(gearList);
+              return res.status(201).json({
+                successMessage: "Successfully added item to list(s)!"
+              });
             })
             .catch(error => {
               console.log(error);

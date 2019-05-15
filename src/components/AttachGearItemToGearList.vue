@@ -74,7 +74,6 @@ export default {
       addGearListSelectionsRule: [
         {
           validate: () => {
-            console.log(this.gearListSelections.values);
             if (this.gearListSelections.values < 1) {
               return false;
             } else {
@@ -94,8 +93,6 @@ export default {
       this.openAlert = false;
     },
     addItemToGearList() {
-      console.log(this.gearListSelections.values);
-      console.log(this.gearItem._id);
       this.$refs.attachGearItemForm.validate().then(result => {
         if (result) {
           this.openAlert = false;
@@ -104,17 +101,18 @@ export default {
             gearListsIds: this.gearListSelections.values
           })
             .then(() => {
+              this.$emit(
+                "successMessage",
+                `Successfully added ${this.gearItem.title} to your list(s)!`
+              );
               this.$router.push({ name: "dashboard" });
             })
-            .catch(error => {
-              console.log(error);
-              this.errors = error.response.data;
+            .catch(err => {
+              console.log(err);
+              this.errors = err;
             });
         }
       });
-      // send data to service to write to db
-      // return errors if any validation issues
-      // reload dashboard
     },
     validateSelections() {
       console.log("Validating...");

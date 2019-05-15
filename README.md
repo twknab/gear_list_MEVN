@@ -29,9 +29,8 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ User Login and Registration (Password Hashing/Decryption)
 - ✅ Gear Item Creation
 - ✅ Gear List Creation
-- Add a Gear Item to a Gear List (_in progress_)
-  - See `server/src/controllers/gear-list-controller.js` TODOS.
-- Remove a Gear Item from a Gear List
+- ✅ Add a Gear Item to a Gear List
+- Remove a Gear Item from a Gear List (_in progress_)
 - View a Gear List and All Items
 - Edit Gear Item (Name, Description, Weight)
 - Edit Gear List (Name, Attributes)
@@ -40,6 +39,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - View All Gear Items
 - View All Gear Lists
 - Front & Backend Validation on All Forms
+- Deploy
 
 ## Technologies
 

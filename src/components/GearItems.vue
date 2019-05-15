@@ -13,7 +13,11 @@
               <mu-list-item-sub-title>Weight: {{gearItem.weight}} oz</mu-list-item-sub-title>
             </mu-list-item-content>
             <!-- Paperclip Attach Gear Item to Gear List Button -->
-            <AttachGearItemToGearList :gearItem="gearItem" :gearLists="gearLists"/>
+            <AttachGearItemToGearList
+              :gearItem="gearItem"
+              :gearLists="gearLists"
+              @successMessage="updateSuccessMessage"
+            />
             <mu-list-item-action>
               <mu-button icon v-bind:to="'/gear-item/delete/' + gearItem._id">
                 <mu-icon color="purpleA700" value="delete" size="36"></mu-icon>
@@ -83,6 +87,9 @@ export default {
           console.log(err);
           this.errors = err;
         });
+    },
+    updateSuccessMessage(messageText) {
+      this.$emit("updateDashboardSuccessMessage", messageText);
     }
   }
 };

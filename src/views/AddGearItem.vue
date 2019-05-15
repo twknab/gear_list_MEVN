@@ -84,14 +84,11 @@ export default {
   },
   methods: {
     submit() {
-      console.log("Submitting new gear item!");
       this.$refs.addNewGearItem.validate().then(result => {
         if (result) {
           // Attempt to create new gear item:
           GearItemService.createNewGearItem(this.newGearItem)
-            .then(response => {
-              console.log(`👍`);
-              console.log(response.data);
+            .then(() => {
               // Redirect to dashboard view
               this.$router.push({ name: "dashboard" });
             })
