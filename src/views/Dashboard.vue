@@ -20,6 +20,7 @@
       <!-- Gear Items -->
       <div class="margin-top-xl">
         <h1>Gear Items</h1>
+        <!-- TODO: CLEAN UP ERROR PRESENTATION - JUST NOTIFICATION POP-UP? -->
         <mu-dialog
           width="600"
           max-width="80%"
