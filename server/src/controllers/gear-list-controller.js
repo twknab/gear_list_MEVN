@@ -85,23 +85,24 @@ module.exports = {
       _id: req.body.gearItemId
     })
       .then(gearItem => {
-        console.log(gearItem);
         req.body.gearListsIds.forEach(gearListId => {
-          console.log("ITEM: ", gearListId);
           GearList.findOneAndUpdate(
             { _id: gearListId },
             {
               $addToSet: {
                 items: gearItem._id
               }
-              // QUESTION: CHECK IF OWNER??? (Yes probably: consider just checking if req.session.userId etc === gearListOwnerId)
+              // TODO:
+              // VALIDATION: CHECK IF OWNER??? (Yes probably: consider just checking if req.session.userId etc === gearListOwnerId)
+              // VALIDATION: SEND ERROR IF ITEM ALREADY ON A LIST
             },
             { $new: true }
           )
-            .then(gearList => {
-              console.log(gearList);
+            .then(() => {
               return res.status(201).json({
-                successMessage: "Successfully added item to list(s)!"
+                successMessage: `Successfully added ${
+                  gearItem.title
+                } to your list(s)!`
               });
             })
             .catch(error => {

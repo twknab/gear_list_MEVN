@@ -1,7 +1,6 @@
 <template>
   <div>
     <mu-container class="margin-top margin-bottom">
-      <!-- <pre style="color: white;">{{user}}</pre> -->
       <mu-flex justify-content="end">
         <p>
           {{ timeGreeting }}, {{ user.firstName }}.
@@ -20,13 +19,15 @@
       <!-- Gear Items -->
       <div class="margin-top-xl">
         <h1>Gear Items</h1>
-        <!-- TODO: CLEAN UP ERROR PRESENTATION - JUST NOTIFICATION POP-UP? -->
         <mu-dialog
           width="600"
           max-width="80%"
+          class="notification-dialogue"
           :esc-press-close="true"
-          :overlay-close="false"
+          :overlay-close="true"
           :open.sync="showSuccessAlert"
+          :overlay="true"
+          :overlay-opacity=".8"
         >
           <mu-alert
             color="success"
@@ -35,15 +36,9 @@
             v-if="showSuccessAlert"
             transition="mu-scale-transition"
           >
-            <mu-icon left value="check_circle"></mu-icon>
+            <mu-icon left size="32" value="check_circle"></mu-icon>
             {{ successMessage }}
           </mu-alert>
-          <mu-button
-            slot="actions"
-            flat
-            color="primary"
-            @click="showSuccessAlert = false"
-          >Sounds Good!</mu-button>
         </mu-dialog>
         <!-- Gear Items Component -->
         <GearItems :gearLists="gearLists" @updateDashboardSuccessMessage="updateSuccessMessage"/>
@@ -113,4 +108,17 @@ export default {
 </script>
 
 <style>
+.notification-dialogue > div {
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+.mu-alert {
+  border: 10px solid #59cd59;
+  font-weight: bolder;
+}
+.mu-alert-delete-icon {
+  height: 22px !important;
+  width: 22px !important;
+}
 </style>

@@ -100,11 +100,8 @@ export default {
             gearItemId: this.gearItem._id,
             gearListsIds: this.gearListSelections.values
           })
-            .then(() => {
-              this.$emit(
-                "successMessage",
-                `Successfully added ${this.gearItem.title} to your list(s)!`
-              );
+            .then(message => {
+              this.$emit("successMessage", message.data.successMessage);
               this.$router.push({ name: "dashboard" });
             })
             .catch(err => {
