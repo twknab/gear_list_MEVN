@@ -35,6 +35,7 @@
             delete
             v-if="showSuccessAlert"
             transition="mu-scale-transition"
+            class="success-alert"
           >
             <mu-icon left size="32" value="check_circle"></mu-icon>
             {{ successMessage }}
@@ -113,9 +114,10 @@ export default {
   box-shadow: none !important;
   -webkit-box-shadow: none !important;
 }
-.mu-alert {
-  border: 10px solid #59cd59;
+.success-alert {
+  border: 10px solid #59cd59 !important;
   font-weight: bolder;
+  color: white !important;
 }
 .mu-alert-delete-icon {
   height: 22px !important;

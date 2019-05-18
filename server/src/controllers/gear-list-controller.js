@@ -69,23 +69,45 @@ module.exports = {
       });
   },
   addItemToGearLists: (req, res) => {
-    console.log("🤞  Adding Item to User's Gear List(s)...");
-    console.log("---- BODY REC'VD ----");
-    console.log(req.body);
-
-    /*
-    /*  TODO:
-    /*  - Get Gear Item
-    /*  - For Each Gear List in Array:
-    /*    - Add Gear Item to List
-    /*    - Save Each Gear List
-    */
-
+    let error = { errors: {} };
     GearItem.findOne({
       _id: req.body.gearItemId
     })
       .then(gearItem => {
         req.body.gearListsIds.forEach(gearListId => {
+          GearList.findById(gearListId)
+            .then(gearList => {
+              gearList.items.forEach(itemId => {
+                console.log(itemId);
+                if (String(itemId) == String(gearItem._id)) {
+                  error.errors[gearList._id] = {
+                    message: `Gear Item already in attached list: ${
+                      gearList.title
+                    }`
+                  };
+                }
+              });
+              if (gearList.gearListOwner != req.session.userId) {
+                error.errors.nowOwner = {
+                  message:
+                    "Only the Gear List owner can add items to this list."
+                };
+              }
+              // if any errors:
+              if (Object.keys(error.errors).length > 0) {
+                console.log(error.errors);
+                return res.status(500).json(error.errors);
+                // throw "noope";
+              }
+            })
+            .catch(error => {
+              error.errors = {
+                invalid: {
+                  message: "Error getting gear list, contact the admin."
+                }
+              };
+              return res.status(500).json(error.errors);
+            });
           GearList.findOneAndUpdate(
             { _id: gearListId },
             {
@@ -106,12 +128,9 @@ module.exports = {
               });
             })
             .catch(error => {
-              console.log(error);
-              error = {
-                errors: {
-                  invalid: {
-                    message: "Error getting gear list, contact the admin."
-                  }
+              error.errors = {
+                invalid: {
+                  message: "Error getting gear list, contact the admin."
                 }
               };
               return res.status(500).json(error.errors);
@@ -120,7 +139,6 @@ module.exports = {
         return res.status(500);
       })
       .catch(error => {
-        console.log(error);
         error = {
           errors: {
             invalid: {

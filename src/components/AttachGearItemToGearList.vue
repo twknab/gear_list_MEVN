@@ -21,10 +21,10 @@
           <mu-form-item prop="selections" :rules="addGearListSelectionsRule">
             <!-- Backend Errors Display -->
             <div v-if="Object.keys(errors).length >= 1" class="server-errors">
-              <h2>Whoops, there's a few issues...</h2>
-              <ul>
-                <li v-for="(error, key, index) in errors" :key="index">{{ error.message }}</li>
-              </ul>
+              <mu-alert color="error" v-for="(error, key, index) in errors" :key="index">
+                <mu-icon left value="warning"></mu-icon>
+                {{ error.message }}
+              </mu-alert>
             </div>
             <mu-select
               filterable
@@ -95,18 +95,18 @@ export default {
     addItemToGearList() {
       this.$refs.attachGearItemForm.validate().then(result => {
         if (result) {
-          this.openAlert = false;
           GearListService.addItemToList({
             gearItemId: this.gearItem._id,
             gearListsIds: this.gearListSelections.values
           })
             .then(message => {
               this.$emit("successMessage", message.data.successMessage);
+              this.openAlert = false;
               this.$router.push({ name: "dashboard" });
             })
             .catch(err => {
-              console.log(err);
-              this.errors = err;
+              console.log("ERR", err);
+              this.errors = err.response.data;
             });
         }
       });
@@ -166,5 +166,14 @@ export default {
 
 .mu-dialog-actions {
   margin-bottom: 10px;
+}
+
+.server-errors {
+  width: 100% !important;
+}
+.mu-alert {
+  /* margin-top: 10px !important; */
+  margin-bottom: 10px !important;
+  color: rgb(189, 159, 48) !important;
 }
 </style>
