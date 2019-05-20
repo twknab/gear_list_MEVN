@@ -61,7 +61,12 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 
 ### Wishlist Features (may require addt'l creation of models)
 
+- Public Share Link
 - Add a friend
 - Sharing of Gear List (Add a Friend)
-- Passport.js
 - Password Reset
+
+### Known Bugs
+
+- User session seems to time out. What's going on?
+  - If no valid session, can re-direct to dashboard?

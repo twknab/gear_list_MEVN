@@ -88,11 +88,13 @@ module.exports = {
               };
             }
             // Loop through all items in gear list to add to - check if any items already exist in list
-            gearList.items.forEach(itemId => {
-              if (String(itemId) == String(gearItem._id)) {
-                gearListsAlreadyContainingItem.push(gearList.title);
-              }
-            });
+            if (gearList.items.length) {
+              gearList.items.forEach(itemId => {
+                if (String(itemId) == String(gearItem._id)) {
+                  gearListsAlreadyContainingItem.push(gearList.title);
+                }
+              });
+            }
             // If any errors found send them
             if (gearListsAlreadyContainingItem.length) {
               let alreadyAdded = "";
