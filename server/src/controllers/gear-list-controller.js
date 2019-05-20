@@ -69,80 +69,113 @@ module.exports = {
       });
   },
   addItemToGearLists: (req, res) => {
-    let error = { errors: {} };
+    // PROBABLY BETTER TO MODULARIZE THIS TO A MODEL
+    let error = { errors: {} },
+      gearListsAlreadyContainingItem = [],
+      gearListSuccessfulAttach = [];
+    // Find gear item
     GearItem.findOne({
       _id: req.body.gearItemId
     })
       .then(gearItem => {
+        // Loop through each gear gear list provided by user and look them up
         req.body.gearListsIds.forEach(gearListId => {
-          GearList.findById(gearListId)
-            .then(gearList => {
-              gearList.items.forEach(itemId => {
-                console.log(itemId);
-                if (String(itemId) == String(gearItem._id)) {
-                  error.errors[gearList._id] = {
-                    message: `Gear Item already in attached list: ${
-                      gearList.title
-                    }`
-                  };
-                }
-              });
-              if (gearList.gearListOwner != req.session.userId) {
-                error.errors.nowOwner = {
-                  message:
-                    "Only the Gear List owner can add items to this list."
-                };
-              }
-              // if any errors:
-              if (Object.keys(error.errors).length > 0) {
-                console.log(error.errors);
-                return res.status(500).json(error.errors);
-                // throw "noope";
-              }
-            })
-            .catch(error => {
-              error.errors = {
-                invalid: {
-                  message: "Error getting gear list, contact the admin."
-                }
+          GearList.findById(gearListId).then(gearList => {
+            // Validate if user is gear list owner before updating
+            if (gearList.gearListOwner != req.session.userId) {
+              error.errors.notOwner = {
+                message: "Only the Gear List Owner can add Items to this List."
               };
-              return res.status(500).json(error.errors);
-            });
-          GearList.findOneAndUpdate(
-            { _id: gearListId },
-            {
-              $addToSet: {
-                items: gearItem._id
+            }
+            // Loop through all items in gear list to add to - check if any items already exist in list
+            gearList.items.forEach(itemId => {
+              if (String(itemId) == String(gearItem._id)) {
+                gearListsAlreadyContainingItem.push(gearList.title);
               }
-              // TODO:
-              // VALIDATION: CHECK IF OWNER??? (Yes probably: consider just checking if req.session.userId etc === gearListOwnerId)
-              // VALIDATION: SEND ERROR IF ITEM ALREADY ON A LIST
-            },
-            { $new: true }
-          )
-            .then(() => {
+            });
+            // If any errors found send them
+            if (gearListsAlreadyContainingItem.length) {
+              let alreadyAdded = "";
+              for (let i = 0; i < gearListsAlreadyContainingItem.length; i++) {
+                if (i === gearListsAlreadyContainingItem.length - 1) {
+                  alreadyAdded += gearListsAlreadyContainingItem[i] + ".";
+                  error.errors.alreadyExists = {
+                    message: `Gear Item already attached to: ${alreadyAdded}`
+                  };
+                } else {
+                  alreadyAdded += gearListsAlreadyContainingItem[i] + ", ";
+                }
+              }
+            }
+            // TODO: WHY AREN'T ALL ERRORS SENDING?
+            // WHY `UnhandledPromiseRejection`?
+            if (Object.keys(error.errors).length > 0) {
+              console.log("ERRORS: ", error.errors);
+              return res.status(500).json(error.errors);
+            } else {
+              // If succcessful, add gear item to list, add list name to success array
+              gearList.items.push(gearItem._id);
+              gearList.save();
+              // CATCH BLOCK GO HERE???
+              gearListSuccessfulAttach.push(gearList.title);
+              let gearListsSuccessfullyAdded = "";
+              for (let i = 0; i < gearListSuccessfulAttach.length; i++) {
+                if (i === gearListSuccessfulAttach.length - 1) {
+                  gearListsSuccessfullyAdded += gearListSuccessfulAttach[i];
+                } else {
+                  gearListsSuccessfullyAdded +=
+                    gearListSuccessfulAttach[i] + ", ";
+                }
+              }
+              // TODO: WHY IS SUCCESS MESSAGE NOT FULLY SENDING?
+              // WHY `UnhandledPromiseRejection`?
+              console.log("SUCCESSFULLY ADDED: ", gearListsSuccessfullyAdded);
               return res.status(201).json({
                 successMessage: `Successfully added ${
                   gearItem.title
-                } to your list(s)!`
+                } to ${gearListsSuccessfullyAdded}!`
               });
-            })
-            .catch(error => {
-              error.errors = {
-                invalid: {
-                  message: "Error getting gear list, contact the admin."
-                }
-              };
-              return res.status(500).json(error.errors);
-            });
+            }
+            // -------------------------------
+            // PROBABLY CAN BE DELETED
+            // THIS IS OLD CODE
+            // -------------------------------
+            // GearList.findOneAndUpdate(
+            //   { _id: gearListId },
+            //   {
+            //     $addToSet: {
+            //       items: gearItem._id
+            //     }
+            //   },
+            //   { $new: true }
+            // )
+            //   .then(gearList => {
+            //     successfulLists.push(gearList.title);
+            //   })
+            //   .catch(error => {
+            //     error.errors = {
+            //       invalid: {
+            //         message: "Error getting gear list, contact the admin."
+            //       }
+            //     };
+            //     return res.status(500).json(error.errors);
+            //   });
+          });
+          // .catch(error => {
+          //   error.errors = {
+          //     dbInvalid: {
+          //       message: "Error finding gear list, contact the admin."
+          //     }
+          //   };
+          //   return res.status(500).json(error.errors);
+          // });
         });
-        return res.status(500);
       })
       .catch(error => {
         error = {
           errors: {
-            invalid: {
-              message: "Error getting gear item, contact the admin."
+            dbInvalid: {
+              message: "Error finding gear item, contact the admin."
             }
           }
         };

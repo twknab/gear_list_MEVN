@@ -105,7 +105,7 @@ export default {
               this.$router.push({ name: "dashboard" });
             })
             .catch(err => {
-              console.log("ERR", err);
+              console.log("THIS IS ERROR: ", err);
               this.errors = err.response.data;
             });
         }
