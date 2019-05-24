@@ -2,13 +2,13 @@
   <div class="home">
     <mu-container>
       <mu-row gutter>
-        <mu-col span="12" sm="12" md="12" lg="12" xl="6">
+        <mu-col span="12" sm="12" md="12" lg="12" xl="6" class="margin-top-xl">
           <div class="grid-cell">
             <!-- Welcome Component -->
-            <Welcome msg="Pack Better for Your Trips!"/>
+            <WelcomeImage/>
           </div>
         </mu-col>
-        <mu-col span="12" sm="12" md="12" lg="12" xl="6">
+        <mu-col span="12" sm="12" md="12" lg="12" xl="6" class="margin-top">
           <div class="grid-cell">
             <!-- Login Component -->
             <Login @updateGlobalUser="updateGlobalUser"/>
@@ -22,13 +22,13 @@
 
 <script>
 // @ is an alias to /src
-import Welcome from "@/components/Welcome.vue";
+import WelcomeImage from "@/components/WelcomeImage.vue";
 import Login from "@/components/Login.vue";
 
 export default {
   name: "home",
   components: {
-    Welcome,
+    WelcomeImage,
     Login
   },
   created() {

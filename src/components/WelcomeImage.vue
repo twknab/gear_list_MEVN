@@ -2,39 +2,21 @@
   <div class="hello">
     <mu-container>
       <mu-col span="12">
+        <!-- Welcome Image -->
         <img alt="Welcome to GearList" src="../assets/tent.png" class="welcome-image image-center">
       </mu-col>
     </mu-container>
-    <!-- Welcome Image -->
   </div>
 </template>
 
 <script>
 import MainService from "@/services/MainService.js";
 export default {
-  name: "Welcome",
-  props: {
-    msg: String
-  },
+  name: "WelcomeImage",
   data() {
-    return {
-      things: null
-    };
+    return {};
   },
-  methods: {
-    test() {
-      MainService.getThings()
-        .then(response => {
-          this.things = response.data;
-        })
-        .catch(error => {
-          console.log(error.response);
-        });
-    }
-  },
-  created() {
-    this.test();
-  }
+  methods: {}
 };
 </script>
 
