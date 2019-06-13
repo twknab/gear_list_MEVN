@@ -69,7 +69,7 @@ module.exports = {
       });
   },
   addItemToGearLists: (req, res) => {
-    // PROBABLY BETTER TO MODULARIZE THIS TO A MODEL
+    // PROBABLY BETTER TO MODULARIZE PUT THIS INTO MODEL
     let error = { errors: {} },
       gearListsAlreadyContainingItem = [],
       gearListSuccessfulAttach = [];
@@ -88,6 +88,11 @@ module.exports = {
               };
             }
             // Loop through all items in gear list to add to - check if any items already exist in list
+
+            //////////////////////////////////////////////////////////////////////////
+            //////////////////////////// ERROR ZONE--BUGS ////////////////////////////
+            //////////////////////////////////////////////////////////////////////////
+
             if (gearList.items.length) {
               gearList.items.forEach(itemId => {
                 if (String(itemId) == String(gearItem._id)) {
@@ -97,20 +102,28 @@ module.exports = {
             }
             // If any errors found send them
             if (gearListsAlreadyContainingItem.length) {
+              // What's happening here is that the looping does not finish before the res.status.json success sends, (and actually ends up sending 2x)
+              // To resolve the promise issue, you need to ensure that the status is only sent back 1x
+              // And that the looping finishes to gather the entire sentence before sending it back
               let alreadyAdded = "";
+              let i = 0;
+              while (i < gearListsAlreadyContainingItem.length) {
+                console.log("RUNNING " + i);
+                i++;
+              }
+              console.log(gearListsAlreadyContainingItem);
               for (let i = 0; i < gearListsAlreadyContainingItem.length; i++) {
                 if (i === gearListsAlreadyContainingItem.length - 1) {
                   alreadyAdded += gearListsAlreadyContainingItem[i] + ".";
                   error.errors.alreadyExists = {
-                    message: `Gear Item already attached to: ${alreadyAdded}`
+                    message: "Gear Item already attached to: " + alreadyAdded
                   };
                 } else {
                   alreadyAdded += gearListsAlreadyContainingItem[i] + ", ";
                 }
               }
             }
-            // TODO: WHY AREN'T ALL ERRORS SENDING?
-            // WHY `UnhandledPromiseRejection`?
+
             if (Object.keys(error.errors).length > 0) {
               console.log("ERRORS: ", error.errors);
               return res.status(500).json(error.errors);
@@ -138,39 +151,11 @@ module.exports = {
                 } to ${gearListsSuccessfullyAdded}!`
               });
             }
-            // -------------------------------
-            // PROBABLY CAN BE DELETED
-            // THIS IS OLD CODE
-            // -------------------------------
-            // GearList.findOneAndUpdate(
-            //   { _id: gearListId },
-            //   {
-            //     $addToSet: {
-            //       items: gearItem._id
-            //     }
-            //   },
-            //   { $new: true }
-            // )
-            //   .then(gearList => {
-            //     successfulLists.push(gearList.title);
-            //   })
-            //   .catch(error => {
-            //     error.errors = {
-            //       invalid: {
-            //         message: "Error getting gear list, contact the admin."
-            //       }
-            //     };
-            //     return res.status(500).json(error.errors);
-            //   });
+
+            //////////////////////////////////////////////////////////////////////////
+            ////////////////////////// END RROR ZONE--BUGS ///////////////////////////
+            //////////////////////////////////////////////////////////////////////////
           });
-          // .catch(error => {
-          //   error.errors = {
-          //     dbInvalid: {
-          //       message: "Error finding gear list, contact the admin."
-          //     }
-          //   };
-          //   return res.status(500).json(error.errors);
-          // });
         });
       })
       .catch(error => {

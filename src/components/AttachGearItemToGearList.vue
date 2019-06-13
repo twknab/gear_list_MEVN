@@ -100,12 +100,13 @@ export default {
             gearListsIds: this.gearListSelections.values
           })
             .then(message => {
+              console.log(message.data.successMessage);
               this.$emit("successMessage", message.data.successMessage);
               this.openAlert = false;
               this.$router.push({ name: "dashboard" });
             })
             .catch(err => {
-              console.log("THIS IS ERROR: ", err);
+              console.log("THIS IS ERROR: ", err.response.data);
               this.errors = err.response.data;
             });
         }
