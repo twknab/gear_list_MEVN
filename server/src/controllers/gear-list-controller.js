@@ -92,6 +92,14 @@ module.exports = {
             //////////////////////////////////////////////////////////////////////////
             //////////////////////////// ERROR ZONE--BUGS ////////////////////////////
             //////////////////////////////////////////////////////////////////////////
+            /*
+            
+            What's happening is that the for loops are not completing before the next
+            line of code runs. Thus after the first iteration on each for loop, the
+            res.send.json runs, thus the error "headers already sent", and also why you're
+            only getting 1 error message displayed in your string.
+
+            */
 
             if (gearList.items.length) {
               gearList.items.forEach(itemId => {
