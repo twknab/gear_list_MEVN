@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import MainService from "@/services/MainService.js";
 export default {
   name: "WelcomeImage",
   data() {
