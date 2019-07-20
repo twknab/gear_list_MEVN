@@ -69,97 +69,81 @@ module.exports = {
       });
   },
   addItemToGearLists: (req, res) => {
-    // PROBABLY BETTER TO MODULARIZE PUT THIS INTO MODEL
-    let error = { errors: {} },
-      gearListsAlreadyContainingItem = [],
-      gearListSuccessfulAttach = [];
-    // Find gear item
-    GearItem.findOne({
-      _id: req.body.gearItemId
-    })
-      .then(gearItem => {
-        // Loop through each gear gear list provided by user and look them up
-        req.body.gearListsIds.forEach(gearListId => {
-          GearList.findById(gearListId).then(gearList => {
-            // Validate if user is gear list owner before updating
-            if (gearList.gearListOwner != req.session.userId) {
-              error.errors.notOwner = {
-                message: "Only the Gear List Owner can add Items to this List."
-              };
-            }
-            // Loop through all items in gear list to add to - check if any items already exist in list
+    console.log("🤞  Adding items to Gear Lists...");
+    GearList.schema.methods.validateAddItems(
+      req.body.gearListsIds,
+      req.body.gearItemId,
+      addItemsCallback
+    );
 
-            //////////////////////////////////////////////////////////////////////////
-            //////////////////////////// ERROR ZONE--BUGS ////////////////////////////
-            //////////////////////////////////////////////////////////////////////////
-            /*
-            
-            What's happening is that the for loops are not completing before the next
-            line of code runs. Thus after the first iteration on each for loop, the
-            res.send.json runs, thus the error "headers already sent", and also why you're
-            only getting 1 error message displayed in your string.
+    function addItemsCallback(result) {
+      console.log("2. RETURNED FROM MODEL", result);
+    }
 
-            TODO: MOVE ALL THIS CRAPOLA INTO THE MODEL FOR VALIDATION
-            THIS CONTROLLER IS GETTING TOO GUNKY -- TIME TO CLEAN UP CHAMP
+    // if (addItemsToListsValidation.success) {
+    //   console.log("SUCCESS");
+    //   return res.status(201).json({
+    //     successMessage: `Success adding to list(s)!`
+    //   });
+    // }
+    // return res.status(400).json(addItemsToListsValidation.errors);
 
-            */
+    // console.log("THIS IS ALREADY ADDED, ", alreadyAdded);
+    // // Find gear item
+    // GearItem.findOne({
+    //   _id: req.body.gearItemId
+    // })
+    //   .then(gearItem => {
+    //     // Grab all gear lists submitted
+    //     GearList.find({
+    //       _id: {
+    //         $in: req.body.gearListIds
+    //       }
+    //     })
+    //       .then(gearLists => {
+    //         // validate owner?
+    //         // do resolve stuff
+    //       })
+    //       .catch(err => {
+    //         // do error stuff
+    //       });
+    //     req.body.gearListsIds.forEach(gearListId => {
+    //       GearList.findById(gearListId).then(gearList => {
+    //         // If succcessful, add gear item to list, add list name to success array
+    //         gearList.items.push(gearItem._id);
+    //         gearList.save();
+    //         // CATCH BLOCK GO HERE???
+    //         gearListSuccessfulAttach.push(gearList.title);
+    //         let gearListsSuccessfullyAdded = "";
+    //         for (let i = 0; i < gearListSuccessfulAttach.length; i++) {
+    //           if (i === gearListSuccessfulAttach.length - 1) {
+    //             gearListsSuccessfullyAdded += gearListSuccessfulAttach[i];
+    //           } else {
+    //             gearListsSuccessfullyAdded +=
+    //               gearListSuccessfulAttach[i] + ", ";
+    //           }
+    //         }
+    //         return res.status(201).json({
+    //           successMessage: `Successfully added ${
+    //             gearItem.title
+    //           } to ${gearListsSuccessfullyAdded}!`
+    //         });
 
-            let alreadyAdded = `Item already attached to:`;
-            if (gearList.items.length) {
-              for (let i = 0; i < gearList.items.length; i++) {
-                if (String(gearList.items[i]._id) == String(gearItem._id)) {
-                  alreadyAdded += ` 
-                    - ${gearList.title}`;
-                }
-              }
-            }
-
-            console.log(alreadyAdded);
-
-            // If any errors found send them
-            if (Object.keys(error.errors).length > 0) {
-              console.log("ERRORS: ", error.errors);
-              return res.status(500).json(error.errors);
-            } else {
-              // If succcessful, add gear item to list, add list name to success array
-              gearList.items.push(gearItem._id);
-              gearList.save();
-              // CATCH BLOCK GO HERE???
-              gearListSuccessfulAttach.push(gearList.title);
-              let gearListsSuccessfullyAdded = "";
-              for (let i = 0; i < gearListSuccessfulAttach.length; i++) {
-                if (i === gearListSuccessfulAttach.length - 1) {
-                  gearListsSuccessfullyAdded += gearListSuccessfulAttach[i];
-                } else {
-                  gearListsSuccessfullyAdded +=
-                    gearListSuccessfulAttach[i] + ", ";
-                }
-              }
-              // TODO: WHY IS SUCCESS MESSAGE NOT FULLY SENDING?
-              // WHY `UnhandledPromiseRejection`?
-              console.log("SUCCESSFULLY ADDED: ", gearListsSuccessfullyAdded);
-              return res.status(201).json({
-                successMessage: `Successfully added ${
-                  gearItem.title
-                } to ${gearListsSuccessfullyAdded}!`
-              });
-            }
-
-            //////////////////////////////////////////////////////////////////////////
-            ////////////////////////// END RROR ZONE--BUGS ///////////////////////////
-            //////////////////////////////////////////////////////////////////////////
-          });
-        });
-      })
-      .catch(error => {
-        error = {
-          errors: {
-            dbInvalid: {
-              message: "Error finding gear item, contact the admin."
-            }
-          }
-        };
-        return res.status(500).json(error.errors);
-      });
+    //         //////////////////////////////////////////////////////////////////////////
+    //         ////////////////////////// END RROR ZONE--BUGS ///////////////////////////
+    //         //////////////////////////////////////////////////////////////////////////
+    //       });
+    //     });
+    //   })
+    //   .catch(error => {
+    //     error = {
+    //       errors: {
+    //         dbInvalid: {
+    //           message: "Error finding gear item, contact the admin."
+    //         }
+    //       }
+    //     };
+    //     return res.status(500).json(error.errors);
+    //   });
   }
 };
