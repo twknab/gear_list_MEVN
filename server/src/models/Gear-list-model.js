@@ -52,11 +52,19 @@ GearListSchema.methods.validateAddItems = function(listIds, itemId, callback) {
         $in: mongooseObjectIds
       }
     })
+      .populate({
+        path: "items"
+      })
+      .exec()
       .then(lists => {
         lists.forEach(list => {
           let foundMatchingItem = false;
+          // console.log("DIS LIST", list);
           list.items.forEach(item => {
-            if (item._id === itemId) {
+            console.log("asessing item...");
+            // console.log(item);
+            if (item._id == itemId) {
+              console.log("Dup found");
               foundMatchingItem = true;
               listsHaveItems.push(
                 `${item.title} is already added to: ${list.title}`
@@ -64,11 +72,19 @@ GearListSchema.methods.validateAddItems = function(listIds, itemId, callback) {
             }
           });
           if (!foundMatchingItem) {
-            list.items.push(itemId);
-            list.save();
+            GearList.findByIdAndUpdate(
+              { _id: list._id },
+              { $addToSet: { items: itemId } }
+            )
+              .then(list => {
+                console.log(list);
+              })
+              .catch(err => {
+                console.log(err);
+              });
             resolve({ success: true });
           }
-          reject({ success: false, lists: listsHaveItems });
+          reject({ success: false, errors: listsHaveItems });
         });
       })
       .catch(err => {
@@ -83,7 +99,7 @@ GearListSchema.methods.validateAddItems = function(listIds, itemId, callback) {
       // return message;
     })
     .catch(function(err) {
-      console.log("THIS IS THE ERR FROM PROMISE", err);
+      console.log("1. `THIS IS THE ERR FROM PROMISE", err);
       callback(err);
     });
 };
