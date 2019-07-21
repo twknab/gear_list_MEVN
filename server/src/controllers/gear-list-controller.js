@@ -77,13 +77,11 @@ module.exports = {
     );
 
     function addItemsCallback(result) {
-      console.log("2. RETURNED FROM MODEL", result);
       if (result.success) {
-        return res.status(201).json({
-          successMessage: `Success adding to list(s)!`
-        });
+        result.successMessage = `Successfully added item to list!`;
+        return res.status(201).json(result);
       }
-      console.log("RES BEFORE REUTNR", result);
+      // error
       return res.json(result);
     }
   }

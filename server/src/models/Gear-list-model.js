@@ -41,7 +41,8 @@ GearListSchema.pre("save", function(next) {
 });
 
 GearListSchema.methods.validateAddItems = function(listIds, itemId, callback) {
-  let listsHaveItems = [];
+  let listsAlreadyContainingItem = [];
+  let listsItemAddedSuccess = [];
   let validateAndAddToLists = new Promise(function(resolve, reject) {
     // converts the list IDs (strings) to Mongoose "ObjectIDs" (objects)
     const mongooseObjectIds = listIds.map(id => {
@@ -59,14 +60,12 @@ GearListSchema.methods.validateAddItems = function(listIds, itemId, callback) {
       .then(lists => {
         lists.forEach(list => {
           let foundMatchingItem = false;
-          // console.log("DIS LIST", list);
           list.items.forEach(item => {
             console.log("asessing item...");
-            // console.log(item);
             if (item._id == itemId) {
               console.log("Dup found");
               foundMatchingItem = true;
-              listsHaveItems.push(
+              listsAlreadyContainingItem.push(
                 `${item.title} is already added to: ${list.title}`
               );
             }
@@ -77,14 +76,22 @@ GearListSchema.methods.validateAddItems = function(listIds, itemId, callback) {
               { $addToSet: { items: itemId } }
             )
               .then(list => {
-                console.log(list);
+                console.log("ADDED SOMETHING");
+                listsItemAddedSuccess.push(
+                  `Item successfully added to ${list.title}`
+                );
+                console.log("SUCCESS: ", listsItemAddedSuccess);
               })
               .catch(err => {
                 console.log(err);
               });
-            resolve({ success: true });
+            resolve({ success: true, listSuccesses: listsItemAddedSuccess });
           }
-          reject({ success: false, errors: listsHaveItems });
+          reject({
+            success: false,
+            errors: listsAlreadyContainingItem,
+            listSuccesses: listsItemAddedSuccess
+          });
         });
       })
       .catch(err => {

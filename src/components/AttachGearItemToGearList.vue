@@ -20,11 +20,21 @@
         <mu-col span="12" lg="12" sm="12">
           <mu-form-item prop="selections" :rules="addGearListSelectionsRule">
             <!-- Backend Errors Display -->
-            <div v-if="Object.keys(errors).length >= 1" class="server-errors">
-              <mu-alert color="error" v-for="(error, key, index) in errors" :key="index">
+            <div v-if="errors.length >= 1" class="server-errors">
+              <mu-alert color="error" v-for="(error, index) in errors" :key="index">
                 <mu-icon left value="warning"></mu-icon>
-                {{ error.message }}
+                {{ error }}
               </mu-alert>
+              <div v-if="successfulListAdds.length >= 1" class="success-alert">
+                <mu-alert
+                  color="success"
+                  v-for="(success, index) in successfulListAdds"
+                  :key="index"
+                >
+                  <mu-icon left value="check_circle"></mu-icon>
+                  {{ success }}
+                </mu-alert>
+              </div>
             </div>
             <mu-select
               filterable
@@ -71,6 +81,7 @@ export default {
         values: []
       },
       errors: {},
+      successfulListAdds: {},
       addGearListSelectionsRule: [
         {
           validate: () => {
@@ -100,14 +111,21 @@ export default {
             gearListsIds: this.gearListSelections.values
           })
             .then(message => {
-              console.log("SUCCSS: ", message);
-              this.$emit("successMessage", message.data.successMessage);
-              this.openAlert = false;
-              this.$router.push({ name: "dashboard" });
+              if (message.data.success) {
+                this.$emit("successMessage", message.data.successMessage);
+                this.openAlert = false;
+                this.$router.push({ name: "dashboard" });
+              } else {
+                console.log(message.data);
+                if (message.data.listSuccesses) {
+                  this.successfulListAdds = message.data.listSuccesses;
+                }
+                this.errors = message.data.errors;
+              }
             })
             .catch(err => {
-              console.log("xTHIS IS ADD TO LIST ERROR: ", err);
-              this.errors = err.response.data;
+              console.log("THIS IS THE ERR", err);
+              this.errors = err.data.errors;
             });
         }
       });
