@@ -92,7 +92,6 @@ GearListSchema.methods.addItemsValidation = function(
   resolve
 ) {
   let listsItemAddedFailures = [];
-  let listsItemAddedSuccesses = [];
   lists.forEach(list => {
     let foundMatchingItem = false;
     list.items.forEach(item => {
@@ -109,11 +108,7 @@ GearListSchema.methods.addItemsValidation = function(
         { $addToSet: { items: itemId } }
       )
         .then(list => {
-          listsItemAddedSuccesses.push(list.title);
-          console.log(
-            "Successfully added item to list..here's it now: ",
-            listsItemAddedSuccesses
-          );
+          console.log("Successfully added item to list.. ", list.title);
         })
         .catch(err => {
           console.log(err);
@@ -126,13 +121,11 @@ GearListSchema.methods.addItemsValidation = function(
   });
   if (listsItemAddedFailures.length < 1) {
     resolve({
-      success: true,
-      listSuccesses: listsItemAddedSuccesses
+      success: true
     });
   } else {
     reject({
       success: false,
-      listSuccesses: listsItemAddedSuccesses,
       errors: listsItemAddedFailures
     });
   }

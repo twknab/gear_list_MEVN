@@ -29,16 +29,6 @@
                 <mu-icon left value="warning"></mu-icon>
                 {{ error }}
               </mu-alert>
-              <div v-if="successfulListAdds.length >= 1" class="success-alert">
-                <mu-alert
-                  color="success"
-                  v-for="(success, index) in successfulListAdds"
-                  :key="index"
-                >
-                  <mu-icon left value="check_circle"></mu-icon>
-                  {{ success }}
-                </mu-alert>
-              </div>
             </div>
             <mu-select
               filterable
@@ -93,7 +83,6 @@ export default {
         values: []
       },
       errors: {},
-      successfulListAdds: {},
       addGearListSelectionsRule: [
         {
           validate: () => {
@@ -125,18 +114,12 @@ export default {
             .then(message => {
               if (message.data.success) {
                 this.$emit("successMessage", message.data.successMessage);
-                this.openAlert = false;
-                this.$router.push({ name: "dashboard" });
+                this.closeAlertGotoDashboard();
               } else {
                 console.log("Unfortunately, not everything was successful...");
                 console.log("Here's what came back: ", message.data);
-                if (message.data.listSuccesses) {
-                  this.successfulListAdds = message.data.listSuccesses;
-                }
-                if (message.data.errors) {
-                  console.log("Duplicates found", message.data.errors);
-                  this.errors = message.data.errors;
-                }
+                this.$emit("failedListAdditions", message.data.errors);
+                this.closeAlertGotoDashboard();
               }
             })
             .catch(err => {
@@ -145,6 +128,10 @@ export default {
             });
         }
       });
+    },
+    closeAlertGotoDashboard() {
+      this.openAlert = false;
+      this.$router.push({ name: "dashboard" });
     },
     validateSelections() {
       console.log("Validating...");

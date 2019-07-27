@@ -5,7 +5,7 @@
       large
       round
       color="purpleA400"
-      @click="$router.push({name: 'addGearList'})"
+      @click="$router.push({ name: 'addGearList' })"
       class="margin-bottom-md"
     >
       <mu-icon value="library_add"></mu-icon>
@@ -20,5 +20,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

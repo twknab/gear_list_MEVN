@@ -7,16 +7,24 @@
           class="dashboard-list"
           v-if="Object.keys(this.userGearItems).length > 0"
         >
-          <mu-list-item avatar button v-for="(gearItem, key, index) in userGearItems" :key="index">
+          <mu-list-item
+            avatar
+            button
+            v-for="(gearItem, key, index) in userGearItems"
+            :key="index"
+          >
             <mu-list-item-content>
-              <mu-list-item-title>{{gearItem.title}}</mu-list-item-title>
-              <mu-list-item-sub-title>Weight: {{gearItem.weight}} oz</mu-list-item-sub-title>
+              <mu-list-item-title>{{ gearItem.title }}</mu-list-item-title>
+              <mu-list-item-sub-title
+                >Weight: {{ gearItem.weight }} oz</mu-list-item-sub-title
+              >
             </mu-list-item-content>
             <!-- Paperclip Attach Gear Item to Gear List Button -->
             <AttachGearItemToGearList
               :gearItem="gearItem"
               :gearLists="gearLists"
               @successMessage="updateSuccessMessage"
+              @failedListAdditions="updateFailedItemAdd"
             />
             <mu-list-item-action>
               <mu-button icon v-bind:to="'/gear-item/delete/' + gearItem._id">
@@ -40,9 +48,12 @@
       </mu-col>
     </mu-row>
     <mu-row gutter>
-      <AddGearItemButton/>
+      <AddGearItemButton />
       <mu-col span="12" sm="12" md="12" lg="6" xl="6">
-        <mu-flex justify-content="center" v-if="Object.keys(userGearItems).length > 3">
+        <mu-flex
+          justify-content="center"
+          v-if="Object.keys(userGearItems).length > 3"
+        >
           <mu-button full-width large round color="grey800">
             <mu-icon left value="expand_more"></mu-icon>See All Items
           </mu-button>
@@ -90,10 +101,12 @@ export default {
     },
     updateSuccessMessage(messageText) {
       this.$emit("updateDashboardSuccessMessage", messageText);
+    },
+    updateFailedItemAdd(failedLists) {
+      this.$emit("updateFailedLists", failedLists);
     }
   }
 };
 </script>
 
-<style>
-</style>
+<style></style>
