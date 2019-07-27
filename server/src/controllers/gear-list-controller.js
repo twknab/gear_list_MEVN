@@ -1,6 +1,6 @@
 const GearList = require("mongoose").model("GearList"),
-  User = require("mongoose").model("User"),
-  GearItem = require("mongoose").model("GearItem");
+  User = require("mongoose").model("User");
+// GearItem = require("mongoose").model("GearItem");
 
 module.exports = {
   createGearList: (req, res) => {
@@ -70,7 +70,7 @@ module.exports = {
   },
   addItemToGearLists: (req, res) => {
     console.log("🤞  Adding items to Gear Lists...");
-    GearList.schema.methods.validateAddItems(
+    GearList.schema.methods.addToGearLists(
       req.body.gearListsIds,
       req.body.gearItemId,
       addItemsCallback
@@ -78,7 +78,7 @@ module.exports = {
 
     function addItemsCallback(result) {
       if (result.success) {
-        result.successMessage = `Successfully added item to list!`;
+        result.successMessage = `Successfully added item to all lists!`;
         return res.status(201).json(result);
       }
       // error

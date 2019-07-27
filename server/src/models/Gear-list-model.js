@@ -40,9 +40,8 @@ GearListSchema.pre("save", function(next) {
   next();
 });
 
-GearListSchema.methods.validateAddItems = function(listIds, itemId, callback) {
-  let listsAlreadyContainingItem = [];
-  let listsItemAddedSuccess = [];
+GearListSchema.methods.addToGearLists = function(listIds, itemId, callback) {
+  const self = this;
   let validateAndAddToLists = new Promise(function(resolve, reject) {
     // converts the list IDs (strings) to Mongoose "ObjectIDs" (objects)
     const mongooseObjectIds = listIds.map(id => {
@@ -58,57 +57,85 @@ GearListSchema.methods.validateAddItems = function(listIds, itemId, callback) {
       })
       .exec()
       .then(lists => {
-        lists.forEach(list => {
-          let foundMatchingItem = false;
-          list.items.forEach(item => {
-            console.log("asessing item...");
-            if (item._id == itemId) {
-              console.log("Dup found");
-              foundMatchingItem = true;
-              listsAlreadyContainingItem.push(
-                `${item.title} is already added to: ${list.title}`
-              );
-            }
-          });
-          if (!foundMatchingItem) {
-            GearList.findByIdAndUpdate(
-              { _id: list._id },
-              { $addToSet: { items: itemId } }
-            )
-              .then(list => {
-                console.log("ADDED SOMETHING");
-                listsItemAddedSuccess.push(
-                  `Item successfully added to ${list.title}`
-                );
-                console.log("SUCCESS: ", listsItemAddedSuccess);
-              })
-              .catch(err => {
-                console.log(err);
-              });
-            resolve({ success: true, listSuccesses: listsItemAddedSuccess });
-          }
-          reject({
-            success: false,
-            errors: listsAlreadyContainingItem,
-            listSuccesses: listsItemAddedSuccess
-          });
-        });
+        self.addItemsValidation(lists, itemId, reject, resolve);
       })
       .catch(err => {
-        reject({ success: false, errors: err });
+        console.error("Something went wrong with retrieving gear lists.");
+        console.log("Here's the error", err);
+        reject({
+          success: false,
+          errors:
+            "Something went wrong trying to grab gear lists - contact admin."
+        });
       });
   });
 
   validateAndAddToLists
-    .then(function(message) {
-      console.log("1. THIS IS THE RETURN FROM PROMISE", message);
-      callback(message);
-      // return message;
+    .then(function(successData) {
+      console.log("1. Success data returned from promise: ", successData);
+      callback(successData);
     })
-    .catch(function(err) {
-      console.log("1. `THIS IS THE ERR FROM PROMISE", err);
-      callback(err);
+    .catch(function(failureData) {
+      console.log("1. Failure data returned from promise", failureData);
+      callback(failureData);
     });
+};
+
+/*
+/ Validates item being added to lists to ensure no duplicates.
+Returns successesful list adds, as well as duplicates detected.
+*/
+GearListSchema.methods.addItemsValidation = function(
+  lists,
+  itemId,
+  reject,
+  resolve
+) {
+  let listsItemAddedFailures = [];
+  let listsItemAddedSuccesses = [];
+  lists.forEach(list => {
+    let foundMatchingItem = false;
+    list.items.forEach(item => {
+      console.log("asessing item...");
+      if (item._id == itemId) {
+        console.log("Dup found");
+        foundMatchingItem = true;
+        listsItemAddedFailures.push(list.title);
+      }
+    });
+    if (!foundMatchingItem) {
+      GearList.findByIdAndUpdate(
+        { _id: list._id },
+        { $addToSet: { items: itemId } }
+      )
+        .then(list => {
+          listsItemAddedSuccesses.push(list.title);
+          console.log(
+            "Successfully added item to list..here's it now: ",
+            listsItemAddedSuccesses
+          );
+        })
+        .catch(err => {
+          console.log(err);
+          reject({
+            success: false,
+            errors: ["Something went wrong adding to list - contact admin."]
+          });
+        });
+    }
+  });
+  if (listsItemAddedFailures.length < 1) {
+    resolve({
+      success: true,
+      listSuccesses: listsItemAddedSuccesses
+    });
+  } else {
+    reject({
+      success: false,
+      listSuccesses: listsItemAddedSuccesses,
+      errors: listsItemAddedFailures
+    });
+  }
 };
 
 // Invoke our model using our schema and export

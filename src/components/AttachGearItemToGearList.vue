@@ -7,7 +7,7 @@
     </mu-list-item-action>
     <mu-form ref="attachGearItemForm" :model="gearListSelections">
       <mu-dialog
-        v-bind:title="'Add ' + gearItem.title +  ' to a Gear List'"
+        v-bind:title="'Add ' + gearItem.title + ' to a Gear List'"
         width="600"
         max-width="80%"
         overlay-color="#000"
@@ -21,7 +21,11 @@
           <mu-form-item prop="selections" :rules="addGearListSelectionsRule">
             <!-- Backend Errors Display -->
             <div v-if="errors.length >= 1" class="server-errors">
-              <mu-alert color="error" v-for="(error, index) in errors" :key="index">
+              <mu-alert
+                color="error"
+                v-for="(error, index) in errors"
+                :key="index"
+              >
                 <mu-icon left value="warning"></mu-icon>
                 {{ error }}
               </mu-alert>
@@ -55,8 +59,16 @@
             </mu-select>
           </mu-form-item>
         </mu-col>
-        <mu-button slot="actions" flat color="grey800" @click="closeAlertDialog">Nevermind</mu-button>
-        <mu-button slot="actions" flat color="primary" @click="addItemToGearList">Add Item</mu-button>
+        <mu-button slot="actions" flat color="grey800" @click="closeAlertDialog"
+          >Nevermind</mu-button
+        >
+        <mu-button
+          slot="actions"
+          flat
+          color="primary"
+          @click="addItemToGearList"
+          >Add Item</mu-button
+        >
       </mu-dialog>
     </mu-form>
   </div>
@@ -116,15 +128,19 @@ export default {
                 this.openAlert = false;
                 this.$router.push({ name: "dashboard" });
               } else {
-                console.log(message.data);
+                console.log("Unfortunately, not everything was successful...");
+                console.log("Here's what came back: ", message.data);
                 if (message.data.listSuccesses) {
                   this.successfulListAdds = message.data.listSuccesses;
                 }
-                this.errors = message.data.errors;
+                if (message.data.errors) {
+                  console.log("Duplicates found", message.data.errors);
+                  this.errors = message.data.errors;
+                }
               }
             })
             .catch(err => {
-              console.log("THIS IS THE ERR", err);
+              console.log("Catch failed", err);
               this.errors = err.data.errors;
             });
         }

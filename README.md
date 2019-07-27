@@ -29,7 +29,12 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ User Login and Registration (Password Hashing/Decryption)
 - ✅ Gear Item Creation
 - ✅ Gear List Creation
-- ⚠️ Add a Gear Item to a Gear List (SEE TODO ON `server/src/controllers/gear-list-controller.js`) (_almost done_)
+- ⚠️ Add a Gear Item to a Gear List (_almost done_)
+  - TODO:
+    - Remove the successful list add property.
+    - Remove errors from front end above the selector.
+    - Rember, the chips are used to show what's added and removed.
+    - Instead of the front end error boxes: display the error instead of the green pop up dismissable error, and instead display a warning message that only THESE were NOT succesful (the others are assumed successful and will appear as chips when examining that item).
 - Remove a Gear Item from a Gear List (_what's next_)
 - View a Gear List and All Items
 - Edit Gear Item (Name, Description, Weight)
