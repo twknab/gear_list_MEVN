@@ -36,7 +36,7 @@
             delete
             v-if="showSuccessAlert"
             transition="mu-scale-transition"
-            class="custom-alert success-alert"
+            class="custom-alert success-alert alert-text"
           >
             <mu-icon left size="32" value="check_circle"></mu-icon>
             {{ successMessage }}
@@ -53,23 +53,40 @@
           :overlay-opacity="0.8"
         >
           <mu-alert
-            color="warning"
-            @delete="showFailureAlert = false"
-            delete
+            color="rgb(255, 200, 58)"
             v-if="showFailureAlert"
             transition="mu-scale-transition"
-            class="custom-alert failure-alert"
+            class="custom-alert failure-alert alert-text"
           >
-            <mu-icon left size="32" value="warning"></mu-icon>Item was already
-            added to these lists:
-            <ul>
-              <li
+            <mu-icon left size="32" value="warning"></mu-icon>Item has been
+            already added to these lists:
+            <mu-list dense="true">
+              <mu-list-item
+                :button="false"
+                :ripple="false"
                 v-for="(listTitle, key, index) in failedListAdditions"
                 v-bind:key="index"
+                class="duplicate-lists"
               >
-                {{ listTitle }}
-              </li>
-            </ul>
+                <mu-list-item-action class="duplicate-lists">
+                  <mu-icon value="error_outline"></mu-icon>
+                </mu-list-item-action>
+                <mu-list-item-title class="duplicate-lists-title">
+                  <em>{{ listTitle }}</em>
+                </mu-list-item-title>
+              </mu-list-item>
+            </mu-list>
+            <mu-icon
+              value="check_circle"
+              color="rgb(206, 150, 67)"
+              class="duplicate-check-mark"
+            ></mu-icon
+            >If you had other lists, those were added though!
+            <div class="dismiss-button">
+              <mu-button color="grey800" @click="showFailureAlert = false"
+                >Dismiss</mu-button
+              >
+            </div>
           </mu-alert>
         </mu-dialog>
         <!-- Gear Items Component -->
@@ -158,6 +175,9 @@ export default {
 }
 .custom-alert {
   font-weight: bolder;
+  flex-flow: wrap;
+}
+.alert-text {
   color: white !important;
 }
 .success-alert {
@@ -169,5 +189,24 @@ export default {
 .mu-alert-delete-icon {
   height: 22px !important;
   width: 22px !important;
+}
+.mu-warning-color {
+  background-color: rgb(255, 200, 58);
+}
+.duplicate-list-alert {
+  line-height: 1.5em;
+  font-weight: lighter;
+}
+.dismiss-button {
+  margin: 15px 15px 0px auto;
+}
+.duplicate-lists {
+  color: rgb(206, 150, 67) !important;
+}
+.duplicate-lists-title {
+  color: white !important;
+}
+.duplicate-check-mark {
+  margin-right: 10px;
 }
 </style>
