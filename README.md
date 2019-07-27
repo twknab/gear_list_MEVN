@@ -31,7 +31,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Gear List Creation
 - ⚠️ Add a Gear Item to a Gear List (_almost done_)
   - TODO:
-    - Change the warning alert to a dialogue, since it doens't seem like the alerts handle lists very well
+    - Change the warning alert to a dialogue, since it doens't seem like the alerts handle lists very well. Make the dialogue look like an alert.
     - Populate lists that items belong to, so chips are already present (this one might be tricky)
 - Remove a Gear Item from a Gear List (_what's next_)
 - View a Gear List and All Items
