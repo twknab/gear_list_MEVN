@@ -58,30 +58,24 @@
             transition="mu-scale-transition"
             class="custom-alert failure-alert"
           >
-            <mu-icon left size="32" value="warning"></mu-icon>Item has been
-            already added to these lists:
+            <mu-icon left size="32" value="warning"></mu-icon>Whoops, something
+            went wrong:
             <mu-list dense="true">
               <mu-list-item
                 :button="false"
                 :ripple="false"
-                v-for="(listTitle, key, index) in failedListAdditions"
+                v-for="(errorMessage, key, index) in failureMessages"
                 v-bind:key="index"
-                class="duplicate-lists"
+                class="failure-alert-text"
               >
-                <mu-list-item-action class="duplicate-lists">
+                <mu-list-item-action class="failure-alert-text">
                   <mu-icon value="error_outline"></mu-icon>
                 </mu-list-item-action>
-                <mu-list-item-title class="duplicate-lists-title">
-                  <em>{{ listTitle }}</em>
+                <mu-list-item-title class="failure-alert-text-title">
+                  <em>{{ errorMessage }}</em>
                 </mu-list-item-title>
               </mu-list-item>
             </mu-list>
-            <mu-icon
-              value="check_circle"
-              color="rgb(206, 150, 67)"
-              class="duplicate-check-mark"
-            ></mu-icon
-            >If you selected other lists, your item was added!
             <div class="dismiss-button">
               <mu-button
                 color="rgba(79, 78, 78, 0.55)"
@@ -95,7 +89,7 @@
         <GearItems
           :gearLists="gearLists"
           @updateDashboardSuccessMessage="updateSuccessMessage"
-          @updateFailedLists="updateFailureListAdditions"
+          @updateDashboardFailureMessage="updateFailureMessages"
         />
       </div>
     </mu-container>
@@ -125,7 +119,7 @@ export default {
       showSuccessAlert: false,
       showFailureAlert: false,
       successMessage: "",
-      failedListAdditions: []
+      failureMessages: []
     };
   },
   computed: {
@@ -160,9 +154,8 @@ export default {
       this.successMessage = message;
       this.showSuccessAlert = true;
     },
-    updateFailureListAdditions(failedLists) {
-      console.log("Here's failure msg for dashboard: ", failedLists);
-      this.failedListAdditions = failedLists;
+    updateFailureMessages(messages) {
+      this.failureMessages = messages;
       this.showFailureAlert = true;
     }
   }
@@ -187,6 +180,15 @@ export default {
   border: 10px solid #ffa000 !important;
   color: #bb8b00 !important;
 }
+.failure-alert-text {
+  color: #bb8b00 !important;
+}
+.failure-alert-text-title {
+  color: #bb8b00 !important;
+}
+.failure-check-mark {
+  margin-right: 10px;
+}
 .mu-alert-delete-icon {
   height: 22px !important;
   width: 22px !important;
@@ -194,20 +196,7 @@ export default {
 .mu-warning-color {
   background-color: rgb(255, 218, 122);
 }
-.duplicate-list-alert {
-  line-height: 1.5em;
-  font-weight: lighter;
-}
 .dismiss-button {
   margin: 15px 15px 0px auto;
-}
-.duplicate-lists {
-  color: #bb8b00 !important;
-}
-.duplicate-lists-title {
-  color: #bb8b00 !important;
-}
-.duplicate-check-mark {
-  margin-right: 10px;
 }
 </style>

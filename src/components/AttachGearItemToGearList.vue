@@ -7,7 +7,7 @@
     </mu-list-item-action>
     <mu-form ref="attachGearItemForm" :model="gearListSelections">
       <mu-dialog
-        v-bind:title="`Modify '${gearItem.title}' Attachments`"
+        v-bind:title="`${gearItem.title}`"
         width="600"
         max-width="80%"
         overlay-color="#000"
@@ -19,17 +19,6 @@
       >
         <mu-col span="12" lg="12" sm="12">
           <mu-form-item prop="selections" :rules="addGearListSelectionsRule">
-            <!-- Backend Errors Display -->
-            <div v-if="errors.length >= 1" class="server-errors">
-              <mu-alert
-                color="error"
-                v-for="(error, index) in errors"
-                :key="index"
-              >
-                <mu-icon left value="warning"></mu-icon>
-                {{ error }}
-              </mu-alert>
-            </div>
             <mu-select
               filterable
               multiple
@@ -117,13 +106,12 @@ export default {
               } else {
                 console.log("Unfortunately, not everything was successful...");
                 console.log("Here's what came back: ", message.data);
-                this.$emit("failedListAdditions", message.data.errors);
+                this.$emit("failureMessage", message.data.errors);
                 this.closeAlertGotoDashboard();
               }
             })
             .catch(err => {
-              console.log("Catch failed", err);
-              this.errors = err.data.errors;
+              console.log(err);
             });
         })
         .catch(err => {
@@ -133,9 +121,6 @@ export default {
     closeAlertGotoDashboard() {
       this.openAlert = false;
       this.$router.push({ name: "dashboard" });
-    },
-    validateSelections() {
-      console.log("Validating...");
     }
   }
 };

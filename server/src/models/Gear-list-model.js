@@ -1,5 +1,6 @@
 const mongoose = require("mongoose"),
-  Schema = mongoose.Schema;
+  Schema = mongoose.Schema,
+  FILE_BUG = "Kindly file a bug report.";
 
 // Setup a schema:
 const GearListSchema = new Schema(
@@ -77,7 +78,10 @@ GearListSchema.methods.attachToLists = function(
           console.log(err);
           callback({
             success: false,
-            errors: ["Something went wrong removing item from list..."]
+            errors: [
+              "Something went wrong removing item from list...",
+              FILE_BUG
+            ]
           });
         });
     });
@@ -96,7 +100,7 @@ GearListSchema.methods.attachToLists = function(
           console.log(err);
           callback({
             success: false,
-            errors: ["Something went wrong adding item to list..."]
+            errors: ["Something went wrong adding item to list...", FILE_BUG]
           });
         });
     });

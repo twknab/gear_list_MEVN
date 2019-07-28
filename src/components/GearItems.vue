@@ -24,7 +24,7 @@
               :gearItem="gearItem"
               :gearLists="gearLists"
               @successMessage="updateSuccessMessage"
-              @failedListAdditions="updateFailedItemAdd"
+              @failureMessage="updateFailureMessage"
             />
             <mu-list-item-action>
               <mu-button icon v-bind:to="'/gear-item/delete/' + gearItem._id">
@@ -47,16 +47,18 @@
         </div>
       </mu-col>
     </mu-row>
-    <mu-row gutter>
-      <AddGearItemButton />
+    <mu-row v-if="isJustAFewItems" gutter>
+      <mu-col span="12" sm="12" md="12" lg="12" xl="12">
+        <AddGearItemButton />
+      </mu-col>
+    </mu-row>
+    <mu-row v-else gutter>
       <mu-col span="12" sm="12" md="12" lg="6" xl="6">
-        <mu-flex
-          justify-content="center"
-          v-if="Object.keys(userGearItems).length > 3"
-        >
-          <mu-button full-width large round color="grey800">
-            <mu-icon left value="expand_more"></mu-icon>See All Items
-          </mu-button>
+        <AddGearItemButton />
+      </mu-col>
+      <mu-col span="12" sm="12" md="12" lg="6" xl="6">
+        <mu-flex justify-content="center">
+          <SeeMoreButton :buttonText="'See All Items'" />
         </mu-flex>
       </mu-col>
     </mu-row>
@@ -65,9 +67,10 @@
 
 <script>
 // import userGearItems from "@/dummy_data/gearItemsDummyData.js";
-import AddGearItemButton from "@/components/AddGearItemButton.vue";
 import AttachGearItemToGearList from "@/components/AttachGearItemToGearList.vue";
 import GearItemService from "@/services/GearItemService.js";
+import AddGearItemButton from "@/components/buttons/AddGearItemButton";
+import SeeMoreButton from "@/components/buttons/SeeMoreButton";
 export default {
   name: "GearItems",
   props: {
@@ -76,13 +79,15 @@ export default {
     }
   },
   components: {
+    AttachGearItemToGearList,
     AddGearItemButton,
-    AttachGearItemToGearList
+    SeeMoreButton
   },
   data() {
     return {
       errors: {},
-      userGearItems: {}
+      userGearItems: {},
+      isJustAFewItems: true
     };
   },
   beforeMount() {
@@ -93,6 +98,7 @@ export default {
       GearItemService.getAllGearItemsForUser()
         .then(response => {
           this.userGearItems = response.data.gearItems;
+          this.isJustAFewItems = Object.keys(this.userGearItems).length <= 3;
         })
         .catch(err => {
           console.log(err);
@@ -102,8 +108,8 @@ export default {
     updateSuccessMessage(messageText) {
       this.$emit("updateDashboardSuccessMessage", messageText);
     },
-    updateFailedItemAdd(failedLists) {
-      this.$emit("updateFailedLists", failedLists);
+    updateFailureMessage(messages) {
+      this.$emit("updateDashboardFailureMessage", messages);
     }
   }
 };

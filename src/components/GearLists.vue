@@ -55,15 +55,19 @@
           </div>
         </div>
       </mu-col>
-      <AddGearListButton />
+    </mu-row>
+    <mu-row v-if="isJustAFewLists" gutter>
+      <mu-col span="12" sm="12" md="12" lg="12" xl="12">
+        <AddGearListButton />
+      </mu-col>
+    </mu-row>
+    <mu-row v-else gutter>
       <mu-col span="12" sm="12" md="12" lg="6" xl="6">
-        <mu-flex
-          justify-content="center"
-          v-if="Object.keys(userGearLists).length > 3"
-        >
-          <mu-button full-width large round color="grey800">
-            <mu-icon left value="expand_more"></mu-icon>See All Lists
-          </mu-button>
+        <AddGearListButton />
+      </mu-col>
+      <mu-col span="12" sm="12" md="12" lg="6" xl="6">
+        <mu-flex justify-content="center">
+          <SeeMoreButton :buttonText="'See All Lists'" />
         </mu-flex>
       </mu-col>
     </mu-row>
@@ -71,18 +75,21 @@
 </template>
 
 <script>
-import AddGearListButton from "@/components/AddGearListButton.vue";
 import GearListService from "@/services/GearListService.js";
+import AddGearListButton from "@/components/buttons/AddGearListButton";
+import SeeMoreButton from "@/components/buttons/SeeMoreButton";
 export default {
   name: "GearLists",
   components: {
-    AddGearListButton
+    AddGearListButton,
+    SeeMoreButton
   },
   data() {
     return {
       current: 1,
       open: false,
-      userGearLists: {}
+      userGearLists: {},
+      isJustAFewLists: true
     };
   },
   beforeMount() {
@@ -105,6 +112,7 @@ export default {
       GearListService.getAllGearListsForUser()
         .then(response => {
           this.userGearLists = response.data.gearLists;
+          this.isJustAFewLists = Object.keys(this.userGearLists).length <= 3;
           this.$emit("updateAllGearLists", this.userGearLists);
         })
         .catch(err => {
