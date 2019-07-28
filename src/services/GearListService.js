@@ -16,7 +16,10 @@ export default {
   getAllGearListsForUser() {
     return api.get("/gear-list");
   },
-  addItemToList(gearItemAndGearLists) {
-    return api.post("/gear-list/add-item", gearItemAndGearLists);
+  attachItemToLists(gearItemAndGearLists) {
+    return api.post("/gear-list/attach", gearItemAndGearLists);
+  },
+  findListsWithItem(gearItemId) {
+    return api.get(`/gear-list/find-item?gearItemId=${gearItemId}`);
   }
 };

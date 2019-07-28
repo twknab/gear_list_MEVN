@@ -31,7 +31,13 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Gear List Creation
 - ⚠️ Add a Gear Item to a Gear List (_almost done_)
   - TODO:
-    - Populate lists that items belong to, so chips are already present (this one might be tricky)
+    - Modify add list logic to remove "duplicate" list warnings.
+    - Instead, assess the list provided for any differences to existing list.
+    - Add those not present
+    - Compare lists that were sent to those retreived from item:
+      - any that don't exist in item's lists but do appear in submitted lists: add them
+      - any that don't exist in submitted lists, but do in item's list: remove them
+      - send success or failure message
 - Remove a Gear Item from a Gear List (_what's next_)
 - View a Gear List and All Items
 - Edit Gear Item (Name, Description, Weight)

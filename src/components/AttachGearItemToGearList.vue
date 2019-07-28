@@ -7,7 +7,7 @@
     </mu-list-item-action>
     <mu-form ref="attachGearItemForm" :model="gearListSelections">
       <mu-dialog
-        v-bind:title="'Add ' + gearItem.title + ' to a Gear List'"
+        v-bind:title="`Modify '${gearItem.title}' Attachments`"
         width="600"
         max-width="80%"
         overlay-color="#000"
@@ -56,8 +56,8 @@
           slot="actions"
           flat
           color="primary"
-          @click="addItemToGearList"
-          >Add Item</mu-button
+          @click="attachItemToGearLists"
+          >Update</mu-button
         >
       </mu-dialog>
     </mu-form>
@@ -82,34 +82,33 @@ export default {
       gearListSelections: {
         values: []
       },
-      errors: {},
-      addGearListSelectionsRule: [
-        {
-          validate: () => {
-            if (this.gearListSelections.values < 1) {
-              return false;
-            } else {
-              return true;
-            }
-          },
-          message: "Gear List selection is required."
-        }
-      ]
+      errors: {}
     };
   },
   methods: {
     openAlertDialog() {
       this.openAlert = true;
+      this.getItemLists();
     },
     closeAlertDialog() {
       this.openAlert = false;
     },
-    addItemToGearList() {
-      this.$refs.attachGearItemForm.validate().then(result => {
-        if (result) {
-          GearListService.addItemToList({
+    getItemLists() {
+      GearListService.findListsWithItem(this.gearItem._id)
+        .then(result => {
+          this.gearListSelections.values = result.data.map(list => list._id);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    attachItemToGearLists() {
+      GearListService.findListsWithItem(this.gearItem._id)
+        .then(itemSavedLists => {
+          GearListService.attachItemToLists({
             gearItemId: this.gearItem._id,
-            gearListsIds: this.gearListSelections.values
+            itemSavedListsIds: itemSavedLists.data.map(list => list._id),
+            itemSelectedListIds: this.gearListSelections.values
           })
             .then(message => {
               if (message.data.success) {
@@ -126,8 +125,10 @@ export default {
               console.log("Catch failed", err);
               this.errors = err.data.errors;
             });
-        }
-      });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     closeAlertGotoDashboard() {
       this.openAlert = false;

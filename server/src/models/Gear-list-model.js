@@ -28,107 +28,81 @@ const GearListSchema = new Schema(
   }
 );
 
-// These functions run prior to document validation
+//////////////////////////
+//
+//  UNCOMMENT FOR PRE VALIDATE & SAVE METHODS
+//
+//////////////////////////
+
 // GearListSchema.pre("validate", function(next) {
 //   console.log("Do something before validation here..");
 //   next();
 // });
 
-// These functions run prior to document save()
-GearListSchema.pre("save", function(next) {
-  console.log("Saving...");
-  next();
-});
+// GearListSchema.pre("save", function(next) {
+//   console.log("Saving...");
+//   next();
+// });
 
-GearListSchema.methods.addToGearLists = function(listIds, itemId, callback) {
-  const self = this;
-  let validateAndAddToLists = new Promise(function(resolve, reject) {
-    // converts the list IDs (strings) to Mongoose "ObjectIDs" (objects)
-    const mongooseObjectIds = listIds.map(id => {
-      return mongoose.Types.ObjectId(`${id}`);
-    });
-    GearList.find({
-      _id: {
-        $in: mongooseObjectIds
-      }
-    })
-      .populate({
-        path: "items"
-      })
-      .exec()
-      .then(lists => {
-        self.addItemsValidation(lists, itemId, reject, resolve);
-      })
-      .catch(err => {
-        console.error("Something went wrong with retrieving gear lists.");
-        console.log("Here's the error", err);
-        reject({
-          success: false,
-          errors:
-            "Something went wrong trying to grab gear lists - contact admin."
-        });
-      });
-  });
-
-  validateAndAddToLists
-    .then(function(successData) {
-      console.log("1. Success data returned from promise: ", successData);
-      callback(successData);
-    })
-    .catch(function(failureData) {
-      console.log("1. Failure data returned from promise", failureData);
-      callback(failureData);
-    });
-};
-
-/*
-/ Validates item being added to lists to ensure no duplicates.
-Returns successesful list adds, as well as duplicates detected.
-*/
-GearListSchema.methods.addItemsValidation = function(
-  lists,
+GearListSchema.methods.attachToLists = function(
   itemId,
-  reject,
-  resolve
+  savedListIds,
+  selectedListIds,
+  callback
 ) {
-  let listsItemAddedFailures = [];
-  lists.forEach(list => {
-    let foundMatchingItem = false;
-    list.items.forEach(item => {
-      console.log("asessing item...");
-      if (item._id == itemId) {
-        console.log("Dup found");
-        foundMatchingItem = true;
-        listsItemAddedFailures.push(list.title);
-      }
-    });
-    if (!foundMatchingItem) {
-      GearList.findByIdAndUpdate(
-        { _id: list._id },
-        { $addToSet: { items: itemId } }
-      )
-        .then(list => {
-          console.log("Successfully added item to list.. ", list.title);
-        })
-        .catch(err => {
-          console.log(err);
-          reject({
-            success: false,
-            errors: ["Something went wrong adding to list - contact admin."]
-          });
-        });
+  const listsAddItem = [];
+  const listsRemoveItem = [];
+
+  // Find any lists that were removed during selection
+  savedListIds.forEach(savedListId => {
+    if (!selectedListIds.includes(savedListId)) {
+      listsRemoveItem.push(savedListId);
     }
   });
-  if (listsItemAddedFailures.length < 1) {
-    resolve({
-      success: true
-    });
-  } else {
-    reject({
-      success: false,
-      errors: listsItemAddedFailures
+
+  // Find any lists that were added during selection
+  selectedListIds.forEach(selectedListId => {
+    if (!savedListIds.includes(selectedListId)) {
+      listsAddItem.push(selectedListId);
+    }
+  });
+
+  // Remove item from any lists:
+  if (listsRemoveItem.length > 0) {
+    listsRemoveItem.forEach(listId => {
+      GearList.findOneAndUpdate({ _id: listId }, { $pull: { items: itemId } })
+        .then()
+        .catch(err => {
+          console.log("Error removing item from list...");
+          console.log(err);
+          callback({
+            success: false,
+            errors: ["Something went wrong removing item from list..."]
+          });
+        });
     });
   }
+
+  // Add item to any lists:
+  if (listsAddItem.length > 0) {
+    listsAddItem.forEach(listId => {
+      GearList.findOneAndUpdate(
+        { _id: listId },
+        { $addToSet: { items: itemId } }
+      )
+        .then()
+        .catch(err => {
+          console.log("Error adding item from list...");
+          console.log(err);
+          callback({
+            success: false,
+            errors: ["Something went wrong adding item to list..."]
+          });
+        });
+    });
+  }
+
+  callback({ success: true });
 };
 
 // Invoke our model using our schema and export

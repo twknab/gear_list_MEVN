@@ -68,21 +68,33 @@ module.exports = {
         return res.status(500).json(error.errors);
       });
   },
-  addItemToGearLists: (req, res) => {
+  attachItem: (req, res) => {
     console.log("🤞  Adding items to Gear Lists...");
-    GearList.schema.methods.addToGearLists(
-      req.body.gearListsIds,
+    GearList.schema.methods.attachToLists(
       req.body.gearItemId,
-      addItemsCallback
+      req.body.itemSavedListsIds,
+      req.body.itemSelectedListIds,
+      attachCallback
     );
 
-    function addItemsCallback(result) {
+    function attachCallback(result) {
       if (result.success) {
-        result.successMessage = `Successfully added item to all lists!`;
+        result.successMessage = `Successfully updated all Gear Item attachments!`;
         return res.status(201).json(result);
       }
       // error
       return res.json(result);
     }
+  },
+  getGearListsBelongingToItem: (req, res) => {
+    console.log("🤞  Getting Gear Lists belonging to Gear Item...");
+    GearList.find({ items: { $all: [req.query.gearItemId] } })
+      .then(lists => {
+        res.status(200).json(lists);
+      })
+      .catch(err => {
+        console.log("Error getting lists for this gear item: ", err);
+        res.status(500).json(err);
+      });
   }
 };
