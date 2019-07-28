@@ -36,7 +36,7 @@
             delete
             v-if="showSuccessAlert"
             transition="mu-scale-transition"
-            class="custom-alert success-alert alert-text"
+            class="custom-alert success-alert"
           >
             <mu-icon left size="32" value="check_circle"></mu-icon>
             {{ successMessage }}
@@ -56,7 +56,7 @@
             color="rgb(255, 200, 58)"
             v-if="showFailureAlert"
             transition="mu-scale-transition"
-            class="custom-alert failure-alert alert-text"
+            class="custom-alert failure-alert"
           >
             <mu-icon left size="32" value="warning"></mu-icon>Item has been
             already added to these lists:
@@ -81,10 +81,12 @@
               color="rgb(206, 150, 67)"
               class="duplicate-check-mark"
             ></mu-icon
-            >If you had other lists, those were added though!
+            >If you selected other lists, your item was added!
             <div class="dismiss-button">
-              <mu-button color="grey800" @click="showFailureAlert = false"
-                >Dismiss</mu-button
+              <mu-button
+                color="rgba(79, 78, 78, 0.55)"
+                @click="showFailureAlert = false"
+                >OK, got it</mu-button
               >
             </div>
           </mu-alert>
@@ -177,21 +179,20 @@ export default {
   font-weight: bolder;
   flex-flow: wrap;
 }
-.alert-text {
-  color: white !important;
-}
 .success-alert {
   border: 10px solid #59cd59 !important;
+  color: white !important;
 }
 .failure-alert {
-  border: 10px solid orange !important;
+  border: 10px solid #ffa000 !important;
+  color: #bb8b00 !important;
 }
 .mu-alert-delete-icon {
   height: 22px !important;
   width: 22px !important;
 }
 .mu-warning-color {
-  background-color: rgb(255, 200, 58);
+  background-color: rgb(255, 218, 122);
 }
 .duplicate-list-alert {
   line-height: 1.5em;
@@ -201,10 +202,10 @@ export default {
   margin: 15px 15px 0px auto;
 }
 .duplicate-lists {
-  color: rgb(206, 150, 67) !important;
+  color: #bb8b00 !important;
 }
 .duplicate-lists-title {
-  color: white !important;
+  color: #bb8b00 !important;
 }
 .duplicate-check-mark {
   margin-right: 10px;

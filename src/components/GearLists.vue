@@ -16,8 +16,10 @@
               @click="viewGearList(index)"
             >
               <mu-list-item-content>
-                <mu-list-item-title>{{gearList.title}}</mu-list-item-title>
-                <mu-list-item-sub-title>{{gearList.date}}</mu-list-item-sub-title>
+                <mu-list-item-title>{{ gearList.title }}</mu-list-item-title>
+                <mu-list-item-sub-title>{{
+                  gearList.date
+                }}</mu-list-item-sub-title>
               </mu-list-item-content>
               <mu-list-item-action>
                 <mu-menu cover placement="bottom-end" :open-on-hover="true">
@@ -25,9 +27,15 @@
                     <mu-icon value="more_vert" size="36"></mu-icon>
                   </mu-button>
                   <mu-list slot="content">
-                    <mu-list-item button @click="viewGearList(index)">View</mu-list-item>
-                    <mu-list-item button @click="editGearList(index)">Edit</mu-list-item>
-                    <mu-list-item button @click="deleteGearList(index)">Delete</mu-list-item>
+                    <mu-list-item button @click="viewGearList(index)"
+                      >View</mu-list-item
+                    >
+                    <mu-list-item button @click="editGearList(index)"
+                      >Edit</mu-list-item
+                    >
+                    <mu-list-item button @click="deleteGearList(index)"
+                      >Delete</mu-list-item
+                    >
                   </mu-list>
                 </mu-menu>
               </mu-list-item-action>
@@ -47,9 +55,12 @@
           </div>
         </div>
       </mu-col>
-      <AddGearListButton/>
+      <AddGearListButton />
       <mu-col span="12" sm="12" md="12" lg="6" xl="6">
-        <mu-flex justify-content="center" v-if="Object.keys(userGearLists).length > 3">
+        <mu-flex
+          justify-content="center"
+          v-if="Object.keys(userGearLists).length > 3"
+        >
           <mu-button full-width large round color="grey800">
             <mu-icon left value="expand_more"></mu-icon>See All Lists
           </mu-button>
@@ -105,5 +116,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
