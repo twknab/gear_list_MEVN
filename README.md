@@ -30,8 +30,14 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Gear Item Creation
 - ✅ Gear List Creation
 - ✅ Add/Remove a Gear Item to a Gear List via Attach
-- Remove a Gear Item from a Gear List (_what's next_)
-- View a Gear List and All Items
+- ⚠️ Remove a Gear Item from a Gear List
+  - ✅ Via Gear Item Attach Icon
+  - ⚠️ Via Gear List View
+- ⚠️ View a Gear List and All Items
+  - (_where I am now - task above depends upon this first_)
+  - Think about how you want the items and competion to display
+    - new array inside items to hold "completed" lists?
+    - then show completion bubble (checked or unchecked) depending if this item contains this list in its completed array?
 - Edit Gear Item (Name, Description, Weight)
 - Edit Gear List (Name, Attributes)
 - ✅ Delete a Gear Item

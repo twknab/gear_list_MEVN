@@ -17,9 +17,9 @@
             >
               <mu-list-item-content>
                 <mu-list-item-title>{{ gearList.title }}</mu-list-item-title>
-                <mu-list-item-sub-title>{{
-                  gearList.date
-                }}</mu-list-item-sub-title>
+                <mu-list-item-sub-title>
+                  {{ gearList.date }}
+                </mu-list-item-sub-title>
               </mu-list-item-content>
               <mu-list-item-action>
                 <mu-menu cover placement="bottom-end" :open-on-hover="true">
@@ -27,7 +27,7 @@
                     <mu-icon value="more_vert" size="36"></mu-icon>
                   </mu-button>
                   <mu-list slot="content">
-                    <mu-list-item button @click="viewGearList(index)"
+                    <mu-list-item button @click="viewGearList(gearList._id)"
                       >View</mu-list-item
                     >
                     <mu-list-item button @click="editGearList(index)"
@@ -100,9 +100,10 @@ export default {
       console.log(index);
       console.log("Editing gear list...");
     },
-    viewGearList(index) {
-      console.log(index);
-      console.log("Viewing gear list...");
+    viewGearList(gearListId) {
+      console.log(gearListId);
+      // redirect to gear list view page passing in gearListId as a parameter
+      this.$router.push({ name: "viewGearList", params: { id: gearListId } });
     },
     deleteGearList(index) {
       console.log(index);

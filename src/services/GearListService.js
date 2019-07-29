@@ -21,5 +21,8 @@ export default {
   },
   findListsWithItem(gearItemId) {
     return api.get(`/gear-list/find-item?gearItemId=${gearItemId}`);
+  },
+  getListAndItems(gearListId) {
+    return api.get(`/gear-list/find-list?gearListId=${gearListId}`);
   }
 };

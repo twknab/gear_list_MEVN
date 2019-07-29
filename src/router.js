@@ -53,6 +53,12 @@ export default new Router({
         import(/* webpackChunkName: "addNewGearList" */ "./views/AddGearList.vue")
     },
     {
+      path: "/gear/list/:id",
+      name: "viewGearList",
+      component: () =>
+        import(/* webpackChunkName: "viewGearList" */ "./views/ViewGearList.vue")
+    },
+    {
       path: "/logout",
       name: "logout",
       component: () =>

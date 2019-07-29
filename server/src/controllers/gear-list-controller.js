@@ -96,5 +96,26 @@ module.exports = {
         console.log("Error getting lists for this gear item: ", err);
         res.status(500).json(err);
       });
+  },
+  getGearListAndAllItems: (req, res) => {
+    console.log("🤞  Getting Gear Lists belonging to Gear Item...");
+    GearList.find({ _id: req.query.gearListId })
+      .populate({
+        path: "items",
+        populate: {
+          path: "listsComplete"
+        },
+        options: {
+          sort: "-updatedAt"
+        }
+      })
+      .exec()
+      .then(listsAndItems => {
+        res.status(200).json(listsAndItems);
+      })
+      .catch(err => {
+        console.log("Error getting lists for this gear item: ", err);
+        res.status(500).json(err);
+      });
   }
 };
