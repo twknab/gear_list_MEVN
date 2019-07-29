@@ -27,7 +27,7 @@
               @failureMessage="updateFailureMessage"
             />
             <mu-list-item-action>
-              <mu-button icon v-bind:to="'/gear-item/delete/' + gearItem._id">
+              <mu-button icon @click="deleteItem(gearItem._id)">
                 <mu-icon color="purpleA700" value="delete" size="36"></mu-icon>
               </mu-button>
             </mu-list-item-action>
@@ -87,7 +87,8 @@ export default {
     return {
       errors: {},
       userGearItems: {},
-      isJustAFewItems: true
+      isJustAFewItems: true,
+      FILE_BUG: "Kindly file a bug report."
     };
   },
   beforeMount() {
@@ -103,6 +104,17 @@ export default {
         .catch(err => {
           console.log(err);
           this.errors = err;
+        });
+    },
+    deleteItem(itemId) {
+      GearItemService.deleteGearItem(itemId)
+        .then(response => {
+          this.updateSuccessMessage(response.data.successMessage);
+          this.getAllUserGearItems();
+        })
+        .catch(err => {
+          console.log(err);
+          this.updateFailureMessage(["Problem deleting item.", this.FILE_BUG]);
         });
     },
     updateSuccessMessage(messageText) {

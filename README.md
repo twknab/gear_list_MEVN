@@ -29,20 +29,12 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ User Login and Registration (Password Hashing/Decryption)
 - ✅ Gear Item Creation
 - ✅ Gear List Creation
-- ⚠️ Add a Gear Item to a Gear List (_almost done_)
-  - TODO:
-    - Modify add list logic to remove "duplicate" list warnings.
-    - Instead, assess the list provided for any differences to existing list.
-    - Add those not present
-    - Compare lists that were sent to those retreived from item:
-      - any that don't exist in item's lists but do appear in submitted lists: add them
-      - any that don't exist in submitted lists, but do in item's list: remove them
-      - send success or failure message
+- ✅ Add/Remove a Gear Item to a Gear List via Attach
 - Remove a Gear Item from a Gear List (_what's next_)
 - View a Gear List and All Items
 - Edit Gear Item (Name, Description, Weight)
 - Edit Gear List (Name, Attributes)
-- Delete a Gear Item
+- ✅ Delete a Gear Item
 - Delete a Gear List (but not any Items within)
 - View All Gear Items
 - View All Gear Lists

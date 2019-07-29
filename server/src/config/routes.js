@@ -30,4 +30,6 @@ module.exports = function(app) {
     "/gear-list/find-item",
     GearListController.getGearListsBelongingToItem
   );
+  // Delete gear item
+  app.get("/gear-item/delete", GearItemController.deleteGearItem);
 };

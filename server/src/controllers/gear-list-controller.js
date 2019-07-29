@@ -69,7 +69,7 @@ module.exports = {
       });
   },
   attachItem: (req, res) => {
-    console.log("🤞  Adding items to Gear Lists...");
+    console.log("📎 Adding items to Gear Lists...");
     GearList.schema.methods.attachToLists(
       req.body.gearItemId,
       req.body.itemSavedListsIds,

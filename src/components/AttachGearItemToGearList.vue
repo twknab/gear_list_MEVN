@@ -38,16 +38,8 @@
             </mu-select>
           </mu-form-item>
         </mu-col>
-        <mu-button slot="actions" flat color="grey800" @click="closeAlertDialog"
-          >Nevermind</mu-button
-        >
-        <mu-button
-          slot="actions"
-          flat
-          color="primary"
-          @click="attachItemToGearLists"
-          >Update</mu-button
-        >
+        <mu-button slot="actions" flat color="grey800" @click="closeAlertDialog">Nevermind</mu-button>
+        <mu-button slot="actions" flat color="primary" @click="attachItemToGearLists">Update</mu-button>
       </mu-dialog>
     </mu-form>
   </div>
@@ -99,14 +91,12 @@ export default {
             itemSavedListsIds: itemSavedLists.data.map(list => list._id),
             itemSelectedListIds: this.gearListSelections.values
           })
-            .then(message => {
-              if (message.data.success) {
-                this.$emit("successMessage", message.data.successMessage);
+            .then(response => {
+              if (response.data.success) {
+                this.$emit("successMessage", response.data.successMessage);
                 this.closeAlertGotoDashboard();
               } else {
-                console.log("Unfortunately, not everything was successful...");
-                console.log("Here's what came back: ", message.data);
-                this.$emit("failureMessage", message.data.errors);
+                this.$emit("failureMessage", response.data.errors);
                 this.closeAlertGotoDashboard();
               }
             })

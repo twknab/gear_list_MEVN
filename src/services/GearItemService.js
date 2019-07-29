@@ -15,5 +15,8 @@ export default {
   },
   getAllGearItemsForUser() {
     return api.get("/gear-item");
+  },
+  deleteGearItem(gearItemId) {
+    return api.get(`/gear-item/delete?gearItemId=${gearItemId}`);
   }
 };
