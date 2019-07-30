@@ -150,6 +150,10 @@ img {
   margin-left: 15px !important;
 }
 
+.margin-all-md {
+  margin: 15px !important;
+}
+
 .server-errors {
   text-align: center;
 }
@@ -162,6 +166,11 @@ img {
 
 .server-errors h2 {
   color: #ffd740;
+}
+
+.confirm-delete {
+  background-color: #ff1919 !important;
+  height: 100% !important;
 }
 
 .dashboard-list .mu-item-title {

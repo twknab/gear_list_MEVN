@@ -27,7 +27,7 @@
               @failureMessage="updateFailureMessage"
             />
             <mu-list-item-action>
-              <mu-button icon @click="deleteItem(gearItem._id)">
+              <mu-button icon @click="confirmDeleteItem(gearItem._id)">
                 <mu-icon color="purpleA700" value="delete" size="36"></mu-icon>
               </mu-button>
             </mu-list-item-action>
@@ -76,6 +76,9 @@ export default {
   props: {
     gearLists: {
       type: Array
+    },
+    deleteConfirmation: {
+      type: Object
     }
   },
   components: {
@@ -90,6 +93,13 @@ export default {
       isJustAFewItems: true,
       FILE_BUG: "Kindly file a bug report."
     };
+  },
+  watch: {
+    deleteConfirmation: function(confirmation) {
+      if ((confirmation.success = true)) {
+        this.actuallyForeverDeleteGearItem(confirmation.id);
+      }
+    }
   },
   beforeMount() {
     this.getAllUserGearItems();
@@ -106,7 +116,15 @@ export default {
           this.errors = err;
         });
     },
-    deleteItem(itemId) {
+    confirmDeleteItem(itemId) {
+      // trigger dialogue, run below if confirmed
+      this.$emit(
+        "updateDashboardDeleteConfirmation",
+        "Are you sure you want to delete this item? It will be forever deleted and removed from all lists to which it belongs.",
+        itemId
+      );
+    },
+    actuallyForeverDeleteGearItem(itemId) {
       GearItemService.deleteGearItem(itemId)
         .then(response => {
           this.updateSuccessMessage(response.data.successMessage);

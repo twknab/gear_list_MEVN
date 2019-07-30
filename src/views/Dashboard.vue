@@ -20,6 +20,7 @@
       <!-- Gear Items -->
       <div class="margin-top-xl">
         <h1>Gear Items</h1>
+        <!-- Success Notification -->
         <mu-dialog
           width="600"
           max-width="80%"
@@ -42,6 +43,7 @@
             {{ successMessage }}
           </mu-alert>
         </mu-dialog>
+        <!-- Warning Notification -->
         <mu-dialog
           width="600"
           max-width="80%"
@@ -85,11 +87,52 @@
             </div>
           </mu-alert>
         </mu-dialog>
+        <!-- Confirm deletion dialogue -->
+        <mu-dialog
+          title="Totally Sure to Delete?"
+          width="600"
+          max-width="80%"
+          :esc-press-close="true"
+          :overlay-close="true"
+          :open.sync="openDeleteDialogue"
+          :overlay="true"
+          :overlay-opacity="0.8"
+        >
+          {{ deleteMessage }}
+          <mu-row gutter>
+            <mu-col span="12" sm="12" md="12" lg="12" xl="12">
+              <mu-button
+                color="rgba(79, 78, 78, 0.55)"
+                full-width="true"
+                class="margin-top"
+                @click="cancelDelete"
+              >
+                <mu-icon value="close"></mu-icon>
+                <span class="button-icon">Nevermind</span>
+              </mu-button>
+            </mu-col>
+          </mu-row>
+          <mu-row gutter>
+            <mu-col span="12" sm="12" md="12" lg="12" xl="12">
+              <mu-button
+                full-width
+                color="error"
+                class="margin-top-md margin-bottom-md confirm-delete"
+                @click="confirmDelete"
+              >
+                <mu-icon value="delete_outline"></mu-icon>
+                <span class="button-icon">Yes, delete forever!</span>
+              </mu-button>
+            </mu-col>
+          </mu-row>
+        </mu-dialog>
         <!-- Gear Items Component -->
         <GearItems
           :gearLists="gearLists"
+          :deleteConfirmation="deleteConfirmation"
           @updateDashboardSuccessMessage="updateSuccessMessage"
           @updateDashboardFailureMessage="updateFailureMessages"
+          @updateDashboardDeleteConfirmation="updateConfimDeleteMessage"
         />
       </div>
     </mu-container>
@@ -119,7 +162,11 @@ export default {
       showSuccessAlert: false,
       showFailureAlert: false,
       successMessage: "",
-      failureMessages: []
+      failureMessages: [],
+      deleteMessage: "",
+      openDeleteDialogue: false,
+      deleteThisId: null,
+      deleteConfirmation: { success: false, id: null }
     };
   },
   computed: {
@@ -157,6 +204,20 @@ export default {
     updateFailureMessages(messages) {
       this.failureMessages = messages;
       this.showFailureAlert = true;
+    },
+    updateConfimDeleteMessage(message, id) {
+      this.deleteMessage = message;
+      this.deleteThisId = id;
+      this.openDeleteDialogue = true;
+    },
+    confirmDelete() {
+      // Actually delete the thing
+      this.deleteConfirmation = { success: true, id: this.deleteThisId };
+      this.openDeleteDialogue = false;
+    },
+    cancelDelete() {
+      this.openDeleteDialogue = false;
+      this.deleteThisId = null;
     }
   }
 };
