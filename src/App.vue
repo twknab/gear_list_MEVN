@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <Navigation :navigationItems="nav"/>
-    <router-view @updateNavigation="updateNav" @getGlobalUser="getGlobalUser" :user="loggedInUser"/>
+    <Navigation :navigationItems="nav" />
+    <router-view
+      @updateNavigation="updateNav"
+      @getGlobalUser="getGlobalUser"
+      :user="loggedInUser"
+    />
   </div>
 </template>
 
@@ -37,6 +41,4 @@ export default {
 };
 </script>
 
-
-<style>
-</style>
+<style></style>
