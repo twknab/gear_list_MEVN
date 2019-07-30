@@ -40,7 +40,7 @@
             class="custom-alert success-alert"
           >
             <mu-icon left size="32" value="check_circle"></mu-icon>
-            {{ successMessage }}
+            <h2>{{ successMessage }}</h2>
           </mu-alert>
         </mu-dialog>
         <!-- Warning Notification -->
@@ -60,8 +60,10 @@
             transition="mu-scale-transition"
             class="custom-alert failure-alert"
           >
-            <mu-icon left size="32" value="warning"></mu-icon>Whoops, something
-            went wrong:
+            <mu-icon left size="32" value="warning"></mu-icon>
+            <h2>
+              Whoops, something went wrong:
+            </h2>
             <mu-list dense="true">
               <mu-list-item
                 :button="false"
