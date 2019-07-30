@@ -274,9 +274,9 @@ export default {
 }
 .error-dialogue > div:nth-child(1) {
   border-radius: 15px;
-  border: 10px solid #d31c1c;
+  border: 10px solid #2e2e2e;
 }
 .error-dialogue .mu-dialog-body {
-  background-color: #9e0000;
+  background-color: #1a1a1a;
 }
 </style>
