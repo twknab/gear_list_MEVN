@@ -170,7 +170,7 @@ img {
 
 .confirm-delete {
   background-color: #ff1919 !important;
-  height: 100% !important;
+  /* height: 100% !important; */
 }
 
 .dashboard-list .mu-item-title {

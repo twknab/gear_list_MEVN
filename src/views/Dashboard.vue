@@ -89,22 +89,26 @@
         </mu-dialog>
         <!-- Confirm deletion dialogue -->
         <mu-dialog
-          title="Totally Sure to Delete?"
-          width="600"
-          max-width="80%"
+          width="700"
+          max-width="100%"
+          class="error-dialogue"
           :esc-press-close="true"
           :overlay-close="true"
           :open.sync="openDeleteDialogue"
           :overlay="true"
           :overlay-opacity="0.8"
         >
-          {{ deleteMessage }}
+          <mu-icon value="delete_forever" size="32" left></mu-icon>
+          <h2 class="delete-dialogue-title">Totally Sure to Delete?</h2>
+          <p>{{ deleteMessage }}</p>
           <mu-row gutter>
             <mu-col span="12" sm="12" md="12" lg="12" xl="12">
               <mu-button
                 color="rgba(79, 78, 78, 0.55)"
                 full-width="true"
                 class="margin-top"
+                large
+                round
                 @click="cancelDelete"
               >
                 <mu-icon value="close"></mu-icon>
@@ -115,7 +119,9 @@
           <mu-row gutter>
             <mu-col span="12" sm="12" md="12" lg="12" xl="12">
               <mu-button
+                large
                 full-width
+                round
                 color="error"
                 class="margin-top-md margin-bottom-md confirm-delete"
                 @click="confirmDelete"
@@ -259,5 +265,18 @@ export default {
 }
 .dismiss-button {
   margin: 15px 15px 0px auto;
+}
+.delete-dialogue-title {
+  display: inline-block;
+  bottom: 6px;
+  position: relative;
+  margin-left: 15px;
+}
+.error-dialogue .mu-dialog.mu-scale {
+  border-radius: 15px;
+  border: 10px solid #d31c1c;
+}
+.error-dialogue .mu-dialog-body {
+  background-color: #9e0000;
 }
 </style>
