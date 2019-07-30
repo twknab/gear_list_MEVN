@@ -272,7 +272,7 @@ export default {
   position: relative;
   margin-left: 15px;
 }
-.error-dialogue .mu-dialog.mu-scale {
+.error-dialogue > div:nth-child(1) {
   border-radius: 15px;
   border: 10px solid #d31c1c;
 }
