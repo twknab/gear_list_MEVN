@@ -173,6 +173,11 @@ img {
   /* height: 100% !important; */
 }
 
+.confirm-delete:hover {
+  background-color: #ff5252 !important;
+  /* height: 100% !important; */
+}
+
 .dashboard-list .mu-item-title {
   color: white !important;
 }
