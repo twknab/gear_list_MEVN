@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import navItems from "@/components/navigation/dashboardNavItems.js";
 import GearListService from "@/services/GearListService.js";
 export default {
   name: "ViewGearList",
@@ -23,12 +22,12 @@ export default {
     };
   },
   created() {
-    this.updatePrimaryNav(this.navItems);
+    this.updatePrimaryNav();
     this.getGeatListAndItems(this.$route.params.id);
   },
   methods: {
-    updatePrimaryNav(navItems) {
-      this.$emit("updateNav", navItems);
+    updatePrimaryNav() {
+      this.$emit("updateNav");
     },
     getGeatListAndItems(listId) {
       GearListService.getListAndItems(listId)

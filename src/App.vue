@@ -11,6 +11,7 @@
 
 <script>
 import Navigation from "@/components/Navigation.vue";
+import dashboardNavigation from "@/components/navigation/dashboardNavItems";
 import UserService from "@/services/UserService.js";
 export default {
   name: "App",
@@ -26,6 +27,9 @@ export default {
   },
   methods: {
     updateNav(navItems) {
+      if (!navItems) {
+        this.nav = dashboardNavigation;
+      }
       this.nav = navItems;
     },
     getGlobalUser() {
