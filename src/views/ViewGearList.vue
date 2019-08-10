@@ -3,8 +3,8 @@
     <mu-container>
       <mu-row gutter>
         <mu-col span="12">
-          <h1>View Gear List</h1>
-          {{ listId }}
+          <h1>{{ list.title }}</h1>
+          {{ list._id }}
         </mu-col>
       </mu-row>
     </mu-container>
@@ -12,24 +12,30 @@
 </template>
 
 <script>
+import navItems from "@/components/navigation/dashboardNavItems.js";
 import GearListService from "@/services/GearListService.js";
 export default {
   name: "ViewGearList",
   data() {
     return {
       errors: {},
-      listId: this.$route.params.id
+      list: {}
     };
   },
   created() {
-    this.getGeatListAndItems(this.listId);
+    this.updatePrimaryNav(this.navItems);
+    this.getGeatListAndItems(this.$route.params.id);
   },
   methods: {
+    updatePrimaryNav(navItems) {
+      this.$emit("updateNav", navItems);
+    },
     getGeatListAndItems(listId) {
       GearListService.getListAndItems(listId)
         .then(listAndItems => {
           // Update DOM
-          console.log("Here's the gear list and items: ", listAndItems);
+          console.log("Here's the gear list and items: ", listAndItems.data);
+          this.list = listAndItems.data;
         })
         .catch(err => {
           console.log("Something's gone wrong: ", err);

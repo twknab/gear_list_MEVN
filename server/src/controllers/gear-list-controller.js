@@ -99,7 +99,7 @@ module.exports = {
   },
   getGearListAndAllItems: (req, res) => {
     console.log("🤞  Getting Gear Lists belonging to Gear Item...");
-    GearList.find({ _id: req.query.gearListId })
+    GearList.findOne({ _id: req.query.gearListId })
       .populate({
         path: "items",
         populate: {

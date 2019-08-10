@@ -13,7 +13,7 @@
               button
               v-for="(gearList, key, index) in userGearLists"
               :key="index"
-              @click="viewGearList(index)"
+              @click="viewGearList(gearList._id)"
             >
               <mu-list-item-content>
                 <mu-list-item-title>{{ gearList.title }}</mu-list-item-title>
@@ -101,7 +101,6 @@ export default {
       console.log("Editing gear list...");
     },
     viewGearList(gearListId) {
-      console.log(gearListId);
       // redirect to gear list view page passing in gearListId as a parameter
       this.$router.push({ name: "viewGearList", params: { id: gearListId } });
     },
