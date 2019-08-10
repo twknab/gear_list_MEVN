@@ -4,7 +4,17 @@
       <mu-row gutter>
         <mu-col span="12">
           <h1>{{ list.title }}</h1>
-          {{ list._id }}
+        </mu-col>
+      </mu-row>
+      <mu-row gutter>
+        <mu-col span="12">
+          <mu-flex :key="item" v-for="item in list.items">
+            <mu-checkbox
+              :value="item"
+              v-model="checkedItems"
+              :label="item.title"
+            ></mu-checkbox>
+          </mu-flex>
         </mu-col>
       </mu-row>
     </mu-container>
@@ -18,7 +28,8 @@ export default {
   data() {
     return {
       errors: {},
-      list: {}
+      list: {},
+      checkedItems: []
     };
   },
   created() {
