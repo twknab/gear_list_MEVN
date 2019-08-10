@@ -29,9 +29,10 @@ export default {
       GearListService.getListAndItems(listId)
         .then(listAndItems => {
           // Update DOM
+          console.log("Here's the gear list and items: ", listAndItems);
         })
         .catch(err => {
-          // Show Errors
+          console.log("Something's gone wrong: ", err);
         });
     }
   }

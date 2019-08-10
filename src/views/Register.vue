@@ -15,14 +15,23 @@
             </mu-flex>
           </div>-->
           <h1>Create a New Account</h1>
-          <p>Register and create a new account with GearList below. Your information is not shared with anyone.</p>
+          <p>
+            Register and create a new account with GearList below. Your
+            information is not shared with anyone.
+          </p>
           <!-- Registration Form -->
-          <mu-form ref="newUserRegistration" :model="newUser" class="margin-top">
+          <mu-form
+            ref="newUserRegistration"
+            :model="newUser"
+            class="margin-top"
+          >
             <!-- Backend Errors Display -->
             <div v-if="Object.keys(errors).length >= 1" class="server-errors">
               <h2>Whoops, there's a few issues...</h2>
               <ul>
-                <li v-for="(error, key, index) in errors" :key="index">{{ error.message }}</li>
+                <li v-for="(error, key, index) in errors" :key="index">
+                  {{ error.message }}
+                </li>
               </ul>
             </div>
             <!-- First Name -->
@@ -32,11 +41,24 @@
               color="primary"
               :rules="firstNameRules"
             >
-              <mu-text-field v-model="newUser.firstName" prop="firstName" color="primary"></mu-text-field>
+              <mu-text-field
+                v-model="newUser.firstName"
+                prop="firstName"
+                color="primary"
+              ></mu-text-field>
             </mu-form-item>
             <!-- Last Name -->
-            <mu-form-item label="Last Name" prop="lastName" color="primary" :rules="lastNameRules">
-              <mu-text-field v-model="newUser.lastName" prop="lastName" color="primary"></mu-text-field>
+            <mu-form-item
+              label="Last Name"
+              prop="lastName"
+              color="primary"
+              :rules="lastNameRules"
+            >
+              <mu-text-field
+                v-model="newUser.lastName"
+                prop="lastName"
+                color="primary"
+              ></mu-text-field>
             </mu-form-item>
             <!-- Email -->
             <mu-form-item
@@ -46,10 +68,18 @@
               :rules="emailRules"
               type="email"
             >
-              <mu-text-field v-model="newUser.email" prop="email" color="primary"></mu-text-field>
+              <mu-text-field
+                v-model="newUser.email"
+                prop="email"
+                color="primary"
+              ></mu-text-field>
             </mu-form-item>
             <!-- Password -->
-            <mu-form-item label="Password" prop="password" :rules="passwordRules">
+            <mu-form-item
+              label="Password"
+              prop="password"
+              :rules="passwordRules"
+            >
               <mu-text-field
                 type="password"
                 v-model="newUser.password"
@@ -59,10 +89,19 @@
             </mu-form-item>
             <!-- TOS Is Agree -->
             <mu-form-item prop="isAgree" :rules="agreeRules" class="TOS">
-              <mu-checkbox label="Accept TOS & Privacy Policy" v-model="newUser.isAgree"></mu-checkbox>
+              <mu-checkbox
+                label="Accept TOS & Privacy Policy"
+                v-model="newUser.isAgree"
+              ></mu-checkbox>
             </mu-form-item>
             <!-- Submit Button / Cancel -->
-            <mu-button round full-width color="purpleA700" @click="submit" large>
+            <mu-button
+              round
+              full-width
+              color="purpleA700"
+              @click="submit"
+              large
+            >
               <mu-icon value="check"></mu-icon>
               <span class="button-icon">Sign Up</span>
             </mu-button>

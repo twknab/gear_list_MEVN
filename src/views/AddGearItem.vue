@@ -13,16 +13,36 @@
           <div v-if="Object.keys(errors).length >= 1" class="server-errors">
             <h2>Whoops, there's a few issues...</h2>
             <ul>
-              <li v-for="(error, key, index) in errors" :key="index">{{ error.message }}</li>
+              <li v-for="(error, key, index) in errors" :key="index">
+                {{ error.message }}
+              </li>
             </ul>
           </div>
           <!-- Gear Item Title -->
-          <mu-form-item label="Title" prop="title" type="text" :rules="titleRules">
-            <mu-text-field v-model="newGearItem.title" prop="title" color="primary"></mu-text-field>
+          <mu-form-item
+            label="Title"
+            prop="title"
+            type="text"
+            :rules="titleRules"
+          >
+            <mu-text-field
+              v-model="newGearItem.title"
+              prop="title"
+              color="primary"
+            ></mu-text-field>
           </mu-form-item>
           <!-- Weight -->
-          <mu-form-item label="Weight (in Ounces)" prop="weight" :rules="weightRules">
-            <mu-text-field type="number" v-model="newGearItem.weight" prop="weight" color="primary"></mu-text-field>
+          <mu-form-item
+            label="Weight (in Ounces)"
+            prop="weight"
+            :rules="weightRules"
+          >
+            <mu-text-field
+              type="number"
+              v-model="newGearItem.weight"
+              prop="weight"
+              color="primary"
+            ></mu-text-field>
           </mu-form-item>
           <!-- Submit Button -->
           <mu-button full-width round color="purpleA400" @click="submit" large>
@@ -108,5 +128,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -5,13 +5,13 @@
         <mu-col span="12" sm="12" md="12" lg="12" xl="6" class="margin-top-xl">
           <div class="grid-cell">
             <!-- Welcome Component -->
-            <WelcomeImage/>
+            <WelcomeImage />
           </div>
         </mu-col>
         <mu-col span="12" sm="12" md="12" lg="12" xl="6" class="margin-top">
           <div class="grid-cell">
             <!-- Login Component -->
-            <Login @updateGlobalUser="updateGlobalUser"/>
+            <Login @updateGlobalUser="updateGlobalUser" />
             <!-- Registration / Sign-Up Button lives in Login Component -->
           </div>
         </mu-col>

@@ -96,7 +96,7 @@ export default {
   },
   watch: {
     deleteConfirmation: function(confirmation) {
-      if ((confirmation.success = true)) {
+      if (confirmation.success) {
         this.actuallyForeverDeleteGearItem(confirmation.id);
       }
     }

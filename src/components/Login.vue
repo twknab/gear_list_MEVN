@@ -13,12 +13,23 @@
           <div v-if="Object.keys(errors).length >= 1" class="server-errors">
             <h2>Whoops, there's a few issues...</h2>
             <ul>
-              <li v-for="(error, key, index) in errors" :key="index">{{ error.message }}</li>
+              <li v-for="(error, key, index) in errors" :key="index">
+                {{ error.message }}
+              </li>
             </ul>
           </div>
           <!-- Email -->
-          <mu-form-item label="Email" prop="email" type="email" :rules="emailRules">
-            <mu-text-field v-model="existingUser.email" prop="email" color="primary"></mu-text-field>
+          <mu-form-item
+            label="Email"
+            prop="email"
+            type="email"
+            :rules="emailRules"
+          >
+            <mu-text-field
+              v-model="existingUser.email"
+              prop="email"
+              color="primary"
+            ></mu-text-field>
           </mu-form-item>
           <!-- Password -->
           <mu-form-item label="Password" prop="password" :rules="passwordRules">
@@ -35,7 +46,13 @@
             <span class="button-icon">login</span>
           </mu-button>
           <div class="margin-top-md">
-            <mu-button class="flat-full-width" flat color="white" @click="goToRegister" large>
+            <mu-button
+              class="flat-full-width"
+              flat
+              color="white"
+              @click="goToRegister"
+              large
+            >
               <mu-icon value="thumb_up"></mu-icon>
               <span class="button-icon">Or sign up!</span>
             </mu-button>
@@ -97,5 +114,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

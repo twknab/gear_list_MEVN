@@ -38,8 +38,16 @@
             </mu-select>
           </mu-form-item>
         </mu-col>
-        <mu-button slot="actions" flat color="grey800" @click="closeAlertDialog">Nevermind</mu-button>
-        <mu-button slot="actions" flat color="primary" @click="attachItemToGearLists">Update</mu-button>
+        <mu-button slot="actions" flat color="grey800" @click="closeAlertDialog"
+          >Nevermind</mu-button
+        >
+        <mu-button
+          slot="actions"
+          flat
+          color="primary"
+          @click="attachItemToGearLists"
+          >Update</mu-button
+        >
       </mu-dialog>
     </mu-form>
   </div>

@@ -2,8 +2,8 @@
   <div>
     <mu-appbar style="width: 100%;" color="purpleA700">
       <mu-button icon slot="right" @click="openBottomSheet">
-        <mu-icon value="menu"></mu-icon>
-      </mu-button>🎒 GearList
+        <mu-icon value="menu"></mu-icon> </mu-button
+      >🎒 GearList
     </mu-appbar>
     <mu-container>
       <mu-bottom-sheet :open.sync="open">
@@ -20,7 +20,7 @@
             <mu-list-item-action>
               <mu-icon :value="navItem.icon" :color="navItem.color"></mu-icon>
             </mu-list-item-action>
-            <mu-list-item-title>{{navItem.title}}</mu-list-item-title>
+            <mu-list-item-title>{{ navItem.title }}</mu-list-item-title>
           </mu-list-item>
         </mu-list>
       </mu-bottom-sheet>
@@ -57,5 +57,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
