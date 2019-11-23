@@ -11,9 +11,10 @@
           <div v-if="Object.keys(this.list.items).length > 0">
             <mu-flex :key="item" v-for="item in list.items">
               <mu-checkbox
-                :value="item"
-                v-model="checkedItems"
+                :value="item._id"
+                v-model="completedItems"
                 :label="item.title"
+                @change="updateCompleteStatus(item._id)"
               ></mu-checkbox>
             </mu-flex>
           </div>
@@ -43,18 +44,18 @@ export default {
     return {
       errors: {},
       list: {},
-      checkedItems: []
+      completedItems: []
     };
   },
   created() {
     this.updatePrimaryNav();
-    this.getGeatListAndItems(this.$route.params.id);
+    this.getGearListAndItems(this.$route.params.id);
   },
   methods: {
     updatePrimaryNav() {
       this.$emit("updateNav");
     },
-    getGeatListAndItems(listId) {
+    getGearListAndItems(listId) {
       GearListService.getListAndItems(listId)
         .then(listAndItems => {
           // Update DOM
@@ -64,6 +65,19 @@ export default {
         .catch(err => {
           console.log("Something's gone wrong: ", err);
         });
+    },
+    updateCompleteStatus(itemId) {
+      console.log("MARKING COMPLETE");
+      console.log(this.completedItems);
+      console.log(itemId);
+      GearListService.changeCompleteStatus(itemId, this.list._id)
+        .then(() => {
+          this.getGearListAndItems(this.$route.params.id);
+        })
+        .catch(err => {
+          console.log("Marking complete failed: ", err);
+        });
+      // create service method that makes mutation in controller
     }
   }
 };

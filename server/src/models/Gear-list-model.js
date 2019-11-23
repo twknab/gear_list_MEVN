@@ -1,5 +1,4 @@
 const mongoose = require("mongoose"),
-  GearItemComplete = require("mongoose").model("GearItemComplete"),
   Schema = mongoose.Schema,
   FILE_BUG = "Kindly file a bug report.";
 
@@ -24,7 +23,13 @@ const GearListSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
       require: true
-    }
+    },
+    gearItemsComplete: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "GearItem"
+      }
+    ]
   },
   {
     timestamps: true
@@ -74,11 +79,7 @@ GearListSchema.methods.attachToLists = function(
   if (listsRemoveItem.length > 0) {
     listsRemoveItem.forEach(listId => {
       GearList.findOneAndUpdate({ _id: listId }, { $pull: { items: itemId } })
-        .then(() => {
-          // FIND GEARITEMCOMPLETE
-          // REMOVE GEAR LIST
-          // TODO: make sure that when removing items from lists, that you also clean up the gearItemComplete object that its associated with
-        })
+        .then()
         .catch(err => {
           console.log("Error removing item from list...");
           console.log(err);

@@ -24,5 +24,10 @@ export default {
   },
   getListAndItems(gearListId) {
     return api.get(`/gear-list/find-list?gearListId=${gearListId}`);
+  },
+  changeCompleteStatus(gearItemId, gearListId) {
+    return api.get(
+      `/gear-item/complete?gearItemId=${gearItemId}&gearListId=${gearListId}`
+    );
   }
 };

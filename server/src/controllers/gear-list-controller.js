@@ -97,13 +97,10 @@ module.exports = {
       });
   },
   getGearListAndAllItems: (req, res) => {
-    console.log("🤞  Getting Gear Lists belonging to Gear Item...");
+    console.log("🤞 Getting Gear List Items...");
     GearList.findOne({ _id: req.query.gearListId })
       .populate({
         path: "items",
-        populate: {
-          path: "listsComplete"
-        },
         options: {
           sort: "-updatedAt"
         }

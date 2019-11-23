@@ -35,10 +35,9 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
   - 👹 Via Gear List View
 - ✅ View a Gear List and All Items
   - (_where I am now - task above depends upon this first_)
-- Mark items as completed
+- Mark items as completed/incomplete
   - _IN PROGRESS_
-  - TODO: make sure that when removing items from lists, that you also clean up the gearItemComplete object that its associated with (in server/src/models/Gear-list-model.js)
-  - TODO: make sure when adding a new item to a list, that the list gets updated
+  - TODO: server/src/controllers/gear-item-controller.js SEE TODO
 - Edit Gear Item (Name, Description, Weight)
 - Edit Gear List (Name, Attributes)
 - ✅ Delete a Gear Item

@@ -1,7 +1,6 @@
 const GearItem = require("mongoose").model("GearItem"),
   GearList = require("mongoose").model("GearList"),
-  User = require("mongoose").model("User"),
-  GearItemComplete = require("mongoose").model("GearItemComplete");
+  User = require("mongoose").model("User");
 
 module.exports = {
   createGearItem: (req, res) => {
@@ -20,29 +19,8 @@ module.exports = {
             new: true
           }
         )
-          .then(foundUser => {
-            console.log(`Gear Item added to User: ${foundUser}`);
-            let gearItemCompleteData = {
-              item: newGearItem._id,
-              itemCompleteOwner: foundUser._id
-            };
-            GearItemComplete.create(gearItemCompleteData)
-              .then(() => {
-                // Note: No need to send back the gear item here since when we load the dashboard/gear item list, we'll retrieve them all
-                return res.status(201).json({ success: "success" });
-              })
-              .catch(error => {
-                console.log(error);
-                error = {
-                  errors: {
-                    invalid: {
-                      message:
-                        "Error creating new Gear Item Complete (gear-item-controller.createGearItem), contact the admin."
-                    }
-                  }
-                };
-                return res.status(403).json(error.errors);
-              });
+          .then(() => {
+            return res.status(201).json({ success: "success" });
           })
           .catch(error => {
             console.log(error);
@@ -119,6 +97,36 @@ module.exports = {
       })
       .catch(err => {
         console.log(err);
+      });
+  },
+  changeCompleteStatus: (req, res) => {
+    console.log("✅ Marking as complete or incomplete...");
+    // Update Gear List gearItemsComplete array
+    // TODO: WHAT ABOUT REMOVAL OF ITEM??
+    GearList.findByIdAndUpdate(
+      req.body.gearListId,
+      {
+        $push: { gearItemsComplete: req.body.gearItemId }
+      },
+      {
+        upsert: true,
+        new: true
+      }
+    )
+      .then(() => {
+        console.log(`Gear item marked complete.`);
+        return res.status(201).json({ success: "success" });
+      })
+      .catch(error => {
+        console.log(error);
+        error = {
+          errors: {
+            invalid: {
+              message: "Error marking item complete."
+            }
+          }
+        };
+        return res.status(403).json(error.errors);
       });
   }
 };

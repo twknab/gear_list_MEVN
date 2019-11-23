@@ -34,4 +34,6 @@ module.exports = function(app) {
   app.get("/gear-list/find-list", GearListController.getGearListAndAllItems);
   // Delete gear item
   app.get("/gear-item/delete", GearItemController.deleteGearItem);
+  // Mark item as complete or incomplete
+  app.get("/gear-item/complete", GearItemController.changeCompleteStatus);
 };
