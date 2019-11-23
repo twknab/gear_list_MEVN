@@ -1,6 +1,7 @@
 const GearItem = require("mongoose").model("GearItem"),
   GearList = require("mongoose").model("GearList"),
-  User = require("mongoose").model("User");
+  User = require("mongoose").model("User"),
+  GearItemComplete = require("mongoose").model("GearItemComplete");
 
 module.exports = {
   createGearItem: (req, res) => {
@@ -21,8 +22,27 @@ module.exports = {
         )
           .then(foundUser => {
             console.log(`Gear Item added to User: ${foundUser}`);
-            // Note: No need to send back the gear item here since when we load the dashboard/gear item list, we'll retrieve them all
-            return res.status(201).json({ success: "success" });
+            let gearItemCompleteData = {
+              item: newGearItem._id,
+              itemCompleteOwner: foundUser._id
+            };
+            GearItemComplete.create(gearItemCompleteData)
+              .then(() => {
+                // Note: No need to send back the gear item here since when we load the dashboard/gear item list, we'll retrieve them all
+                return res.status(201).json({ success: "success" });
+              })
+              .catch(error => {
+                console.log(error);
+                error = {
+                  errors: {
+                    invalid: {
+                      message:
+                        "Error creating new Gear Item Complete (gear-item-controller.createGearItem), contact the admin."
+                    }
+                  }
+                };
+                return res.status(403).json(error.errors);
+              });
           })
           .catch(error => {
             console.log(error);

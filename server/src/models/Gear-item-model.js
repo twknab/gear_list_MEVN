@@ -19,15 +19,9 @@ const GearItemSchema = new Schema(
     },
     gearItemOwner: {
       type: Schema.Types.ObjectId,
-      ref: "User"
-    },
-    listsComplete: [
-      {
-        // holds lists this item is complete for
-        type: Schema.Types.ObjectId,
-        ref: "GearList"
-      }
-    ]
+      ref: "User",
+      required: true
+    }
   },
   {
     timestamps: true

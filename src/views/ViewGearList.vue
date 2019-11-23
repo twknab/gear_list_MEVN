@@ -8,13 +8,27 @@
       </mu-row>
       <mu-row gutter>
         <mu-col span="12">
-          <mu-flex :key="item" v-for="item in list.items">
-            <mu-checkbox
-              :value="item"
-              v-model="checkedItems"
-              :label="item.title"
-            ></mu-checkbox>
-          </mu-flex>
+          <div v-if="Object.keys(this.list.items).length > 0">
+            <mu-flex :key="item" v-for="item in list.items">
+              <mu-checkbox
+                :value="item"
+                v-model="checkedItems"
+                :label="item.title"
+              ></mu-checkbox>
+            </mu-flex>
+          </div>
+          <div v-else>
+            <mu-flex justify-content="center" class="margin-top">
+              <h3>Add some Gear Items, this list is empty!</h3>
+              <mu-icon
+                color="purpleA700"
+                value="offline_bolt"
+                size="36"
+                justify-content="end"
+                class="margin-left-sm empty-list"
+              ></mu-icon>
+            </mu-flex>
+          </div>
         </mu-col>
       </mu-row>
     </mu-container>
@@ -55,4 +69,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.mu-checkbox-label {
+  color: #fff;
+}
+.empty-list {
+  position: relative;
+  top: 10px;
+}
+</style>

@@ -1,6 +1,5 @@
 const GearList = require("mongoose").model("GearList"),
   User = require("mongoose").model("User");
-// GearItem = require("mongoose").model("GearItem");
 
 module.exports = {
   createGearList: (req, res) => {

@@ -38,7 +38,11 @@
             </mu-select>
           </mu-form-item>
         </mu-col>
-        <mu-button slot="actions" flat color="grey800" @click="closeAlertDialog"
+        <mu-button
+          slot="actions"
+          flat
+          color="rgb(181, 181, 181)"
+          @click="closeAlertDialog"
           >Nevermind</mu-button
         >
         <mu-button
@@ -125,11 +129,18 @@ export default {
 </script>
 
 <style>
-.mu-checkbox {
-  color: #d500f9 !important;
+.mu-checkbox-icon {
+  color: #d500f9;
+}
+.mu-item {
+  color: #aa00ff;
 }
 .mu-option.is-selected .mu-item {
-  color: #aa00ff;
+  color: #fff;
+}
+
+.mu-popover {
+  background: #2b2b2b;
 }
 
 .mu-dialog {
@@ -178,7 +189,6 @@ export default {
   width: 100% !important;
 }
 .mu-alert {
-  /* margin-top: 10px !important; */
   margin-bottom: 10px !important;
   color: rgb(189, 159, 48) !important;
 }

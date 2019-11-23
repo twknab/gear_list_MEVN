@@ -61,9 +61,7 @@
             class="custom-alert failure-alert"
           >
             <mu-icon left size="32" value="warning"></mu-icon>
-            <h2>
-              Whoops, something went wrong:
-            </h2>
+            <h2>Whoops, something went wrong:</h2>
             <mu-list dense="true">
               <mu-list-item
                 :button="false"

@@ -30,14 +30,15 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Gear Item Creation
 - ✅ Gear List Creation
 - ✅ Add/Remove a Gear Item to a Gear List via Attach
-- ⚠️ Remove a Gear Item from a Gear List
+- 👹 Remove a Gear Item from a Gear List
   - ✅ Via Gear Item Attach Icon
-  - ⚠️ Via Gear List View
-- ⚠️ View a Gear List and All Items
+  - 👹 Via Gear List View
+- ✅ View a Gear List and All Items
   - (_where I am now - task above depends upon this first_)
-  - Think about how you want the items and competion to display
-    - new array inside items to hold "completed" lists?
-    - then show completion bubble (checked or unchecked) depending if this item contains this list in its completed array?
+- Mark items as completed
+  - _IN PROGRESS_
+  - TODO: make sure that when removing items from lists, that you also clean up the gearItemComplete object that its associated with (in server/src/models/Gear-list-model.js)
+  - TODO: make sure when adding a new item to a list, that the list gets updated
 - Edit Gear Item (Name, Description, Weight)
 - Edit Gear List (Name, Attributes)
 - ✅ Delete a Gear Item
@@ -78,3 +79,8 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 
 - User session seems to time out. What's going on?
   - If no valid session, can re-direct to dashboard?
+
+#### TODO:
+
+- Make dialog stylings match
+- Add padding and margin for better mobile look and feel
