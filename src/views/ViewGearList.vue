@@ -12,7 +12,7 @@
             <mu-flex :key="item" v-for="item in list.items">
               <mu-checkbox
                 :value="item._id"
-                v-model="completedItems"
+                v-model="item.completedGearItems"
                 :label="item.title"
                 @change="updateCompleteStatus(item._id)"
               ></mu-checkbox>
@@ -43,8 +43,7 @@ export default {
   data() {
     return {
       errors: {},
-      list: {},
-      completedItems: []
+      list: {}
     };
   },
   created() {
@@ -67,11 +66,13 @@ export default {
         });
     },
     updateCompleteStatus(itemId) {
-      console.log("MARKING COMPLETE");
-      console.log(this.completedItems);
+      console.log(" S T A R T I N G == C O M P L E T E ======>>");
+      console.log("This is the list before mutation: ", this.list);
       console.log(itemId);
       GearListService.changeCompleteStatus(itemId, this.list._id)
         .then(() => {
+          console.log("finished from backend");
+          console.log("refreshing list");
           this.getGearListAndItems(this.$route.params.id);
         })
         .catch(err => {

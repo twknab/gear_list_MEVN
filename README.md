@@ -41,6 +41,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - Edit Gear Item (Name, Description, Weight)
 - Edit Gear List (Name, Attributes)
 - ✅ Delete a Gear Item
+  // TODO: Make sure that deletion cascades!!
 - ✅ Confirmation on Gear Item Deletion
 - Delete a Gear List (but not any Items within)
 - Confirmation on Gear List Deletion

@@ -24,7 +24,7 @@ const GearListSchema = new Schema(
       ref: "User",
       require: true
     },
-    gearItemsComplete: [
+    completedGearItems: [
       {
         type: Schema.Types.ObjectId,
         ref: "GearItem"

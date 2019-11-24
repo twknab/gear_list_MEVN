@@ -1,6 +1,7 @@
-const GearItem = require("mongoose").model("GearItem"),
-  GearList = require("mongoose").model("GearList"),
-  User = require("mongoose").model("User");
+const mongoose = require("mongoose"),
+  GearItem = mongoose.model("GearItem"),
+  GearList = mongoose.model("GearList"),
+  User = mongoose.model("User");
 
 module.exports = {
   createGearItem: (req, res) => {
@@ -101,24 +102,73 @@ module.exports = {
   },
   changeCompleteStatus: (req, res) => {
     console.log("✅ Marking as complete or incomplete...");
-    // Update Gear List gearItemsComplete array
-    // TODO: WHAT ABOUT REMOVAL OF ITEM??
-    GearList.findByIdAndUpdate(
-      req.body.gearListId,
-      {
-        $push: { gearItemsComplete: req.body.gearItemId }
-      },
-      {
-        upsert: true,
-        new: true
-      }
-    )
-      .then(() => {
-        console.log(`Gear item marked complete.`);
-        return res.status(201).json({ success: "success" });
+    console.log(req.query);
+
+    GearList.findById(req.query.gearListId)
+      .then(gearList => {
+        const gearItemId = req.query.gearItemId;
+        const gearListId = req.query.gearListId;
+        console.log("MONGOOSE ID OBJ", mongoose.Types.ObjectId(gearItemId));
+        let isItemInList = gearList.completedGearItems.some(function(item) {
+          return item.equals(gearItemId);
+        });
+        console.log("DOES IT CONTAIN?", isItemInList);
+        if (isItemInList === true) {
+          // remove mark item complete
+          console.log("REMOVING");
+          gearList.completedGearItems.pull({ _id: gearItemId });
+          console.log("PULLED");
+          gearList
+            .save()
+            .then(msg => {
+              console.log(msg);
+              console.log("success");
+            })
+            .catch(err => {
+              console.log("err");
+              console.log(err);
+            });
+          // gearList
+          //   .update(
+          //     { _id: gearListId },
+          //     {
+          //       $pull: { completedGearItems: gearItemId }
+          //     }
+          //   )
+          //   .then(list => {
+          //     console.log("Update success: ", list);
+          //     return res.status(200);
+          //   })
+          //   .catch(err => {
+          //     console.log("Something went wrong updating the Gear List");
+          //     console.log(err);
+          //     return res.status(500);
+          //   });
+          console.log("MARKED INCOMPLETE");
+        } else {
+          // add mark item complete
+          // Update Gear List completedGearItems array
+          GearList.findByIdAndUpdate(gearListId, {
+            $addToSet: { completedGearItems: gearItemId }
+          })
+            .then(() => {
+              console.log(`MARKED COMPLETE`);
+              return res.status(201).json({ success: "success" });
+            })
+            .catch(error => {
+              console.log(error);
+              error = {
+                errors: {
+                  invalid: {
+                    message: "Error marking item complete."
+                  }
+                }
+              };
+              return res.status(403).json(error.errors);
+            });
+        }
       })
       .catch(error => {
-        console.log(error);
         error = {
           errors: {
             invalid: {
