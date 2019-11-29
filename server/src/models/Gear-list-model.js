@@ -23,13 +23,7 @@ const GearListSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
       require: true
-    },
-    completedGearItems: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "GearItem"
-      }
-    ]
+    }
   },
   {
     timestamps: true

@@ -101,74 +101,21 @@ module.exports = {
       });
   },
   changeCompleteStatus: (req, res) => {
-    console.log("✅ Marking as complete or incomplete...");
-    console.log(req.query);
+    const gearItemId = req.query.gearItemId;
+    const gearCompletedStatus = req.query.gearCompletedStatus;
 
-    GearList.findById(req.query.gearListId)
-      .then(gearList => {
-        const gearItemId = req.query.gearItemId;
-        const gearListId = req.query.gearListId;
-        console.log("MONGOOSE ID OBJ", mongoose.Types.ObjectId(gearItemId));
-        let isItemInList = gearList.completedGearItems.some(function(item) {
-          return item.equals(gearItemId);
-        });
-        console.log("DOES IT CONTAIN?", isItemInList);
-        if (isItemInList === true) {
-          // remove mark item complete
-          console.log("REMOVING");
-          gearList.completedGearItems.pull({ _id: gearItemId });
-          console.log("PULLED");
-          gearList
-            .save()
-            .then(msg => {
-              console.log(msg);
-              console.log("success");
-            })
-            .catch(err => {
-              console.log("err");
-              console.log(err);
-            });
-          // gearList
-          //   .update(
-          //     { _id: gearListId },
-          //     {
-          //       $pull: { completedGearItems: gearItemId }
-          //     }
-          //   )
-          //   .then(list => {
-          //     console.log("Update success: ", list);
-          //     return res.status(200);
-          //   })
-          //   .catch(err => {
-          //     console.log("Something went wrong updating the Gear List");
-          //     console.log(err);
-          //     return res.status(500);
-          //   });
-          console.log("MARKED INCOMPLETE");
-        } else {
-          // add mark item complete
-          // Update Gear List completedGearItems array
-          GearList.findByIdAndUpdate(gearListId, {
-            $addToSet: { completedGearItems: gearItemId }
-          })
-            .then(() => {
-              console.log(`MARKED COMPLETE`);
-              return res.status(201).json({ success: "success" });
-            })
-            .catch(error => {
-              console.log(error);
-              error = {
-                errors: {
-                  invalid: {
-                    message: "Error marking item complete."
-                  }
-                }
-              };
-              return res.status(403).json(error.errors);
-            });
-        }
+    GearItem.findOneAndUpdate(
+      { _id: gearItemId },
+      {
+        completed: gearCompletedStatus
+      }
+    )
+      .then(() => {
+        console.log("MARKED COMPLETE");
+        return res.status(201).json({ success: "success" });
       })
       .catch(error => {
+        console.log(error);
         error = {
           errors: {
             invalid: {

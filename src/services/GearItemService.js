@@ -18,5 +18,10 @@ export default {
   },
   deleteGearItem(gearItemId) {
     return api.get(`/gear-item/delete?gearItemId=${gearItemId}`);
+  },
+  changeCompleteStatus(gearItemId, completedStatus) {
+    return api.get(
+      `/gear-item/complete?gearItemId=${gearItemId}&gearCompletedStatus=${completedStatus}`
+    );
   }
 };

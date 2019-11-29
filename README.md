@@ -34,14 +34,14 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
   - ✅ Via Gear Item Attach Icon
   - 👹 Via Gear List View
 - ✅ View a Gear List and All Items
-  - (_where I am now - task above depends upon this first_)
-- Mark items as completed/incomplete
+  ✅ Mark items as completed/incomplete
   - _IN PROGRESS_
   - TODO: server/src/controllers/gear-item-controller.js SEE TODO
 - Edit Gear Item (Name, Description, Weight)
 - Edit Gear List (Name, Attributes)
-- ✅ Delete a Gear Item
-  // TODO: Make sure that deletion cascades!!
+- 👹 Delete a Gear Item
+  - _TODO_: FIX BUG WHERE DELETING ITEM DOES NOT DLETE FROM LIST
+    // TODO: Make sure that deletion cascades!!
 - ✅ Confirmation on Gear Item Deletion
 - Delete a Gear List (but not any Items within)
 - Confirmation on Gear List Deletion
@@ -83,4 +83,5 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 #### TODO:
 
 - Make dialog stylings match
-- Add padding and margin for better mobile look and feel
+- Navigation flakes out at times -- does this need to be fetched again every time?
+- Make clicking header logo redirect to dashboard if logged in, otherwise goto login page

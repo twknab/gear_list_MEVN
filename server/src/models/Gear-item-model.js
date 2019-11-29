@@ -21,6 +21,11 @@ const GearItemSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true
+    },
+    completed: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   },
   {
