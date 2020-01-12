@@ -30,7 +30,7 @@
                     <mu-list-item button @click="viewGearList(gearList._id)"
                       >View</mu-list-item
                     >
-                    <mu-list-item button @click="editGearList(index)"
+                    <mu-list-item button @click="editGearList(gearList._id)"
                       >Edit</mu-list-item
                     >
                     <mu-list-item button @click="deleteGearList(index)"
@@ -96,9 +96,8 @@ export default {
     this.getAllUserGearLists();
   },
   methods: {
-    editGearList(index) {
-      console.log(index);
-      console.log("Editing gear list...");
+    editGearList(gearListId) {
+      this.$router.push({ name: "editGearList", params: { id: gearListId } });
     },
     viewGearList(gearListId) {
       // redirect to gear list view page passing in gearListId as a parameter

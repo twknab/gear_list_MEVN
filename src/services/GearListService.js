@@ -24,5 +24,8 @@ export default {
   },
   getListAndItems(gearListId) {
     return api.get(`/gear-list/find-list?gearListId=${gearListId}`);
+  },
+  updateGearList(gearList) {
+    return api.post("/gear-list/update", gearList);
   }
 };

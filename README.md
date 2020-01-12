@@ -30,24 +30,17 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Gear Item Creation
 - ✅ Gear List Creation
 - ✅ Add/Remove a Gear Item to a Gear List via Attach
-- 👹 Remove a Gear Item from a Gear List
-  - ✅ Via Gear Item Attach Icon
-  - 👹 Via Gear List View
+- ✅ Remove a Gear Item from a Gear List Via Gear Item Attach Icon
 - ✅ View a Gear List and All Items
   ✅ Mark items as completed/incomplete
-  - _IN PROGRESS_
-  - TODO: server/src/controllers/gear-item-controller.js SEE TODO
-- Edit Gear Item (Name, Description, Weight)
-- Edit Gear List (Name, Attributes)
-- 👹 Delete a Gear Item
-  - _TODO_: FIX BUG WHERE DELETING ITEM DOES NOT DLETE FROM LIST
-    // TODO: Make sure that deletion cascades!!
+- ✅ Edit Gear List (Name)
+- ✅ Delete a Gear Item
 - ✅ Confirmation on Gear Item Deletion
 - Delete a Gear List (but not any Items within)
 - Confirmation on Gear List Deletion
 - View All Gear Items
 - View All Gear Lists
-- Front & Backend Validation on All Forms
+- ✅ Front & Backend Validation on All Forms
 - Deploy
 
 ## Technologies
@@ -70,6 +63,8 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 
 ### Wishlist Features (may require addt'l creation of models)
 
+- Remove a Gear Item from a Gear List Via Gear List View
+- Edit Gear Item (Name, Description, Weight)
 - Public Share Link
 - Add a friend
 - Sharing of Gear List (Add a Friend)

@@ -6,7 +6,6 @@ module.exports = {
     console.log("🤞  Attemping to Create New Gear List...");
     GearList.create(req.body)
       .then(newGearList => {
-        console.log("👍  New Gear List Successfully Created.");
         // Add Gear List to User:
         User.findByIdAndUpdate(
           req.session.userId,
@@ -19,7 +18,6 @@ module.exports = {
           }
         )
           .then(foundUser => {
-            console.log(`Gear List added to User: ${foundUser}`);
             return res.status(201).json({ success: "success" });
           })
           .catch(error => {
@@ -41,7 +39,6 @@ module.exports = {
       });
   },
   getUserGearLists: (req, res) => {
-    console.log("🤞  Getting logged in User's Gear Lists...");
     User.findOne({
       _id: req.session.userId
     })
@@ -67,8 +64,29 @@ module.exports = {
         return res.status(500).json(error.errors);
       });
   },
+  updateGearList: (req, res) => {
+    GearList.findOneAndUpdate(
+      {
+        _id: req.body._id
+      },
+      { title: req.body.title }
+    )
+      .then(() => {
+        return res.status(201).json({ success: "success" });
+      })
+      .catch(error => {
+        console.log(error);
+        error = {
+          errors: {
+            invalid: {
+              message: "Error updating User's gear list, contact the admin."
+            }
+          }
+        };
+        return res.status(500).json(error.errors);
+      });
+  },
   attachItem: (req, res) => {
-    console.log("📎 Adding items to Gear Lists...");
     GearList.schema.methods.attachToLists(
       req.body.gearItemId,
       req.body.itemSavedListsIds,
@@ -86,7 +104,6 @@ module.exports = {
     }
   },
   getGearListsBelongingToItem: (req, res) => {
-    console.log("🤞  Getting Gear Lists belonging to Gear Item...");
     GearList.find({ items: { $all: [req.query.gearItemId] } })
       .then(lists => {
         res.status(200).json(lists);
@@ -97,7 +114,6 @@ module.exports = {
       });
   },
   getGearListAndAllItems: (req, res) => {
-    console.log("🤞 Getting Gear List Items...");
     GearList.findOne({ _id: req.query.gearListId })
       .populate({
         path: "items",

@@ -40,7 +40,7 @@
             class="custom-alert success-alert"
           >
             <mu-icon left size="32" value="check_circle"></mu-icon>
-            <h2>{{ successMessage }}</h2>
+            <p>{{ successMessage }}</p>
           </mu-alert>
         </mu-dialog>
         <!-- Warning Notification -->
@@ -236,7 +236,6 @@ export default {
   -webkit-box-shadow: none !important;
 }
 .custom-alert {
-  font-weight: bolder;
   flex-flow: wrap;
 }
 .success-alert {

@@ -32,6 +32,8 @@ module.exports = function(app) {
   );
   // Get geat list and all items
   app.get("/gear-list/find-list", GearListController.getGearListAndAllItems);
+  // Update gear list
+  app.post("/gear-list/update", GearListController.updateGearList);
   // Delete gear item
   app.get("/gear-item/delete", GearItemController.deleteGearItem);
   // Mark item as complete or incomplete

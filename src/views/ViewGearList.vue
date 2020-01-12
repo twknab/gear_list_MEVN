@@ -58,8 +58,6 @@ export default {
     getGearListAndItems(listId) {
       GearListService.getListAndItems(listId)
         .then(listAndItems => {
-          // Update DOM
-          console.log("Here's the gear list and items: ", listAndItems.data);
           this.list = listAndItems.data;
         })
         .catch(err => {

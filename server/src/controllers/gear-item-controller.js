@@ -5,10 +5,8 @@ const mongoose = require("mongoose"),
 
 module.exports = {
   createGearItem: (req, res) => {
-    console.log("🤞  Attemping to Create New Gear Item...");
     GearItem.create(req.body)
       .then(newGearItem => {
-        console.log("👍  New Gear Item Successfully Created.");
         // Add Gear Item to User:
         User.findByIdAndUpdate(
           req.session.userId,
@@ -43,7 +41,6 @@ module.exports = {
       });
   },
   getUserGearItems: (req, res) => {
-    console.log("🤞 Getting logged in User's Gear Items...");
     User.findOne({
       _id: req.session.userId
     })
@@ -71,7 +68,6 @@ module.exports = {
       });
   },
   deleteGearItem: (req, res) => {
-    console.log("🗑 Deleting Gear Item...");
     GearList.update(
       {},
       {
@@ -111,7 +107,6 @@ module.exports = {
       }
     )
       .then(() => {
-        console.log("MARKED COMPLETE");
         return res.status(201).json({ success: "success" });
       })
       .catch(error => {
