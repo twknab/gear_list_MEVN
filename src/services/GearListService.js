@@ -27,5 +27,8 @@ export default {
   },
   updateGearList(gearList) {
     return api.post("/gear-list/update", gearList);
+  },
+  deleteGearList(gearListId) {
+    return api.get(`/gear-list/delete?gearListId=${gearListId}`);
   }
 };

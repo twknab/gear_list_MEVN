@@ -109,7 +109,35 @@ GearListSchema.methods.attachToLists = function(
 
   callback({ success: true });
 };
+GearListSchema.methods.unmarkListItemsAsComplete = function(
+  gearListId,
+  callback
+) {
+  console.log("UNMARKING LIST ITEMS AS COMPLETE");
+  GearList.findOne({ _id: gearListId })
+    .populate({
+      path: "items",
+      options: {
+        sort: "-updatedAt"
+      }
+    })
+    .exec()
+    .then(listsAndItems => {
+      console.log("HERE's LIST AND ITEMS", listsAndItems);
+      let items = listsAndItems.items;
+      for (let i = 0; i < items.length; i++) {
+        console.log(items[i]._id);
+        GearItem.findOneAndUpdate({ _id: items[i]._id }, { completed: false });
+      }
+      callback();
+    })
+    .catch(err => {
+      console.log("Error unmarking items for this gear list: ", err);
+      callback(err);
+    });
+};
 
 // Invoke our model using our schema and export
 const GearList = mongoose.model("GearList", GearListSchema);
+const GearItem = mongoose.model("GearItem");
 module.exports = GearList;

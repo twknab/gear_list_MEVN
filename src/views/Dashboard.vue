@@ -16,7 +16,13 @@
       </mu-flex>
       <h1>Gear Lists</h1>
       <!-- Gear Lists Component -->
-      <GearLists @updateAllGearLists="updateGearListsForUser" />
+      <GearLists
+        :deleteListConfirmation="deleteListConfirmation"
+        @updateAllGearLists="updateGearListsForUser"
+        @updateDashboardSuccessMessage="updateSuccessMessage"
+        @updateDashboardFailureMessage="updateFailureMessages"
+        @updateDashboardDeleteConfirmation="updateConfimDeleteMessage"
+      />
       <!-- Gear Items -->
       <div class="margin-top-xl">
         <h1>Gear Items</h1>
@@ -62,7 +68,7 @@
           >
             <mu-icon left size="32" value="warning"></mu-icon>
             <h2>Whoops, something went wrong:</h2>
-            <mu-list dense="true">
+            <mu-list :dense="true">
               <mu-list-item
                 :button="false"
                 :ripple="false"
@@ -105,7 +111,7 @@
             <mu-col span="12" sm="12" md="12" lg="12" xl="12">
               <mu-button
                 color="rgba(79, 78, 78, 0.55)"
-                full-width="true"
+                :full-width="true"
                 class="margin-top"
                 large
                 round
@@ -135,7 +141,7 @@
         <!-- Gear Items Component -->
         <GearItems
           :gearLists="gearLists"
-          :deleteConfirmation="deleteConfirmation"
+          :deleteItemConfirmation="deleteItemConfirmation"
           @updateDashboardSuccessMessage="updateSuccessMessage"
           @updateDashboardFailureMessage="updateFailureMessages"
           @updateDashboardDeleteConfirmation="updateConfimDeleteMessage"
@@ -149,6 +155,7 @@
 import navItems from "@/components/navigation/dashboardNavItems.js";
 import GearLists from "@/components/GearLists.vue";
 import GearItems from "@/components/GearItems.vue";
+import ModelConstants from "@/constants/modelConstants";
 export default {
   name: "Dashboard",
   props: {
@@ -171,8 +178,10 @@ export default {
       failureMessages: [],
       deleteMessage: "",
       openDeleteDialogue: false,
-      deleteThisId: null,
-      deleteConfirmation: { success: false, id: null }
+      idToDelete: null,
+      whatToDelete: null,
+      deleteItemConfirmation: { success: false, id: null },
+      deleteListConfirmation: { success: false, id: null }
     };
   },
   computed: {
@@ -211,19 +220,24 @@ export default {
       this.failureMessages = messages;
       this.showFailureAlert = true;
     },
-    updateConfimDeleteMessage(message, id) {
+    updateConfimDeleteMessage(message, id, typeToDelete) {
       this.deleteMessage = message;
-      this.deleteThisId = id;
+      this.idToDelete = id;
+      this.whatToDelete = typeToDelete;
       this.openDeleteDialogue = true;
     },
     confirmDelete() {
       // Actually delete the thing
-      this.deleteConfirmation = { success: true, id: this.deleteThisId };
+      if (this.whatToDelete === ModelConstants.gearItem) {
+        this.deleteItemConfirmation = { success: true, id: this.idToDelete };
+      } else if (this.whatToDelete === ModelConstants.gearList) {
+        this.deleteListConfirmation = { success: true, id: this.idToDelete };
+      }
       this.openDeleteDialogue = false;
     },
     cancelDelete() {
       this.openDeleteDialogue = false;
-      this.deleteThisId = null;
+      this.idToDelete = null;
     }
   }
 };

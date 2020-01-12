@@ -71,13 +71,14 @@ import AttachGearItemToGearList from "@/components/AttachGearItemToGearList.vue"
 import GearItemService from "@/services/GearItemService.js";
 import AddGearItemButton from "@/components/buttons/AddGearItemButton";
 import SeeMoreButton from "@/components/buttons/SeeMoreButton";
+import ModelConstants from "@/constants/modelConstants";
 export default {
   name: "GearItems",
   props: {
     gearLists: {
       type: Array
     },
-    deleteConfirmation: {
+    deleteItemConfirmation: {
       type: Object
     }
   },
@@ -95,7 +96,7 @@ export default {
     };
   },
   watch: {
-    deleteConfirmation: function(confirmation) {
+    deleteItemConfirmation: function(confirmation) {
       if (confirmation.success) {
         this.actuallyForeverDeleteGearItem(confirmation.id);
       }
@@ -121,7 +122,8 @@ export default {
       this.$emit(
         "updateDashboardDeleteConfirmation",
         "Are you sure you want to delete this item? It will be forever deleted and removed from all lists to which it belongs.",
-        itemId
+        itemId,
+        ModelConstants.gearItem
       );
     },
     actuallyForeverDeleteGearItem(itemId) {

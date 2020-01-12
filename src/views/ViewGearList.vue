@@ -9,7 +9,7 @@
       <mu-row gutter>
         <mu-col span="12">
           <div v-if="Object.keys(this.list.items).length > 0">
-            <mu-flex :key="item" v-for="item in list.items">
+            <mu-flex :key="item._id" v-for="item in list.items">
               <mu-checkbox
                 :value="item._id"
                 v-model="item.completed"

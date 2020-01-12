@@ -17,7 +17,7 @@ module.exports = {
             new: true
           }
         )
-          .then(foundUser => {
+          .then(() => {
             return res.status(201).json({ success: "success" });
           })
           .catch(error => {
@@ -85,6 +85,31 @@ module.exports = {
         };
         return res.status(500).json(error.errors);
       });
+  },
+  deleteGearList: (req, res) => {
+    console.log("DELETING");
+    GearList.schema.methods.unmarkListItemsAsComplete(
+      req.query.gearListId,
+      (err = null) => {
+        if (err !== null) {
+          const errors = ["Could not unmark all items"];
+          return res.status(500).json(errors);
+        }
+        GearList.findOneAndDelete({
+          _id: req.query.gearListId
+        })
+          .then(() => {
+            return res
+              .status(201)
+              .json({ successMessage: "List successfully deleted!" });
+          })
+          .catch(error => {
+            console.log(error);
+            const errors = ["Could not delete list"];
+            return res.status(500).json(errors);
+          });
+      }
+    );
   },
   attachItem: (req, res) => {
     GearList.schema.methods.attachToLists(

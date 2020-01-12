@@ -19,6 +19,10 @@ module.exports = function(app) {
   app.post("/gear-item", GearItemController.createGearItem);
   // Get all user's gear items
   app.get("/gear-item", GearItemController.getUserGearItems);
+  // Delete gear item
+  app.get("/gear-item/delete", GearItemController.deleteGearItem);
+  // Mark item as complete or incomplete
+  app.get("/gear-item/complete", GearItemController.changeCompleteStatus);
   // Create a new gear list
   app.post("/gear-list", GearListController.createGearList);
   // Get all user's gear lists
@@ -34,8 +38,6 @@ module.exports = function(app) {
   app.get("/gear-list/find-list", GearListController.getGearListAndAllItems);
   // Update gear list
   app.post("/gear-list/update", GearListController.updateGearList);
-  // Delete gear item
-  app.get("/gear-item/delete", GearItemController.deleteGearItem);
-  // Mark item as complete or incomplete
-  app.get("/gear-item/complete", GearItemController.changeCompleteStatus);
+  // Delete gear list
+  app.get("/gear-list/delete", GearListController.deleteGearList);
 };

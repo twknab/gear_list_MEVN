@@ -74,6 +74,7 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 
 - User session seems to time out. What's going on?
   - If no valid session, can re-direct to dashboard?
+- Ticking an item complete seems to re-arrange list (can we prevent this re-arrangement?)
 
 #### TODO:
 

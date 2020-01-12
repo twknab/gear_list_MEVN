@@ -18,7 +18,7 @@
         transition="slide-bottom"
       >
         <mu-col span="12" lg="12" sm="12">
-          <mu-form-item prop="selections" :rules="addGearListSelectionsRule">
+          <mu-form-item prop="selections">
             <mu-select
               filterable
               multiple

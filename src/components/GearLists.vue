@@ -33,7 +33,9 @@
                     <mu-list-item button @click="editGearList(gearList._id)"
                       >Edit</mu-list-item
                     >
-                    <mu-list-item button @click="deleteGearList(index)"
+                    <mu-list-item
+                      button
+                      @click="confirmDeleteList(gearList._id)"
                       >Delete</mu-list-item
                     >
                   </mu-list>
@@ -78,8 +80,14 @@
 import GearListService from "@/services/GearListService.js";
 import AddGearListButton from "@/components/buttons/AddGearListButton";
 import SeeMoreButton from "@/components/buttons/SeeMoreButton";
+import ModelConstants from "@/constants/modelConstants";
 export default {
   name: "GearLists",
+  props: {
+    deleteListConfirmation: {
+      type: Object
+    }
+  },
   components: {
     AddGearListButton,
     SeeMoreButton
@@ -89,8 +97,16 @@ export default {
       current: 1,
       open: false,
       userGearLists: {},
-      isJustAFewLists: true
+      isJustAFewLists: true,
+      FILE_BUG: "Kindly file a bug report."
     };
+  },
+  watch: {
+    deleteListConfirmation: function(confirmation) {
+      if (confirmation.success) {
+        this.actuallyForeverDeleteGearList(confirmation.id);
+      }
+    }
   },
   beforeMount() {
     this.getAllUserGearLists();
@@ -103,10 +119,6 @@ export default {
       // redirect to gear list view page passing in gearListId as a parameter
       this.$router.push({ name: "viewGearList", params: { id: gearListId } });
     },
-    deleteGearList(index) {
-      console.log(index);
-      console.log("Deleting gear list...");
-    },
     getAllUserGearLists() {
       GearListService.getAllGearListsForUser()
         .then(response => {
@@ -118,6 +130,32 @@ export default {
           console.log(err);
           this.errors = err;
         });
+    },
+    confirmDeleteList(listId) {
+      // trigger dialogue, run below if confirmed
+      this.$emit(
+        "updateDashboardDeleteConfirmation",
+        "Are you sure you want to delete this list? It will be forever deleted and all containing items will be marked incomplete.",
+        listId,
+        ModelConstants.gearList
+      );
+    },
+    actuallyForeverDeleteGearList(gearListId) {
+      GearListService.deleteGearList(gearListId)
+        .then(response => {
+          this.updateSuccessMessage(response.data.successMessage);
+          this.getAllUserGearLists();
+        })
+        .catch(err => {
+          console.log(err);
+          this.updateFailureMessage(["Problem deleting list.", this.FILE_BUG]);
+        });
+    },
+    updateSuccessMessage(messageText) {
+      this.$emit("updateDashboardSuccessMessage", messageText);
+    },
+    updateFailureMessage(messages) {
+      this.$emit("updateDashboardFailureMessage", messages);
     }
   }
 };
