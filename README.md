@@ -12,7 +12,7 @@ In regards to technology, this is a MEVN application and uses:
 
 This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
-## Setup & Install
+## Dev Setup & Install
 
 - `npm install` from project root directory to get front-end packages.
 - `npm install` from `~/server` to get server-side packages.
@@ -36,12 +36,12 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Edit Gear List (Name)
 - ✅ Delete a Gear Item
 - ✅ Confirmation on Gear Item Deletion
-- Delete a Gear List (but not any Items within)
-- Confirmation on Gear List Deletion
-- View All Gear Items
-- View All Gear Lists
+- ✅ Delete a Gear List (but not any Items within)
+- ✅ Confirmation on Gear List Deletion
+- ⭕️ View All Gear Items (pagination)
+- ⭕️ View All Gear Lists (pagination)
 - ✅ Front & Backend Validation on All Forms
-- Deploy
+- ⭕️ Deploy
 
 ## Technologies
 
@@ -66,18 +66,16 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 - Remove a Gear Item from a Gear List Via Gear List View
 - Edit Gear Item (Name, Description, Weight)
 - Public Share Link
-- Add a friend
-- Sharing of Gear List (Add a Friend)
+- Sharing of Gear Lists (Add a Friend)
 - Password Reset
 
 ### Known Bugs
 
-- User session seems to time out. What's going on?
+- [LARGE] Deleting List, Items contained marked as complete do not get reset.
+ - Issue: Need to create new Model, something like "ItemComplete", and have it contain the LIST and ITEM _id's, and a "complete" field. That way each item can be re-used over and over again and have multiple states for different lists. Could easily then loop through all items when deleting a list, and ensureing to delete those records as well.
+- [LARGE] Make "Gear List" View prettier (this is the prime thing here), and include back button or nav back to Dashboard
+- [MEDIUM] User session seems to time out. What's going on?
   - If no valid session, can re-direct to dashboard?
-- Ticking an item complete seems to re-arrange list (can we prevent this re-arrangement?)
-
-#### TODO:
-
-- Make dialog stylings match
-- Navigation flakes out at times -- does this need to be fetched again every time?
-- Make clicking header logo redirect to dashboard if logged in, otherwise goto login page
+- [MEDIUM] Ticking an item complete seems to re-arrange list (can we prevent this re-arrangement?)
+- [MEDIUM] Navigation flakes out at times -- does this need to be fetched again every time?
+- [SMALL] Make clicking header logo redirect to dashboard if logged in, otherwise goto login page
