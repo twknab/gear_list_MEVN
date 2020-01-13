@@ -71,8 +71,17 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 
 ### Known Bugs
 
-- [LARGE] Deleting List, Items contained marked as complete do not get reset.
- - Issue: Need to create new Model, something like "ItemComplete", and have it contain the LIST and ITEM _id's, and a "complete" field. That way each item can be re-used over and over again and have multiple states for different lists. Could easily then loop through all items when deleting a list, and ensureing to delete those records as well.
+- [LARGE] Deleting List, Items contained marked as complete do not get reset. Items belonging to many lists are tied to a single list. This is not good.
+ - // TODO BUG FIX
+ - Status: Made model called gearListCompletion
+ - When we load a list, instantly each item is examined for one of these objects.
+   - if no object exists, create one
+   - if object exists, retrieve it and set "completed" adhoc status as same as record
+ - when ticking completed box:
+  - search for completion object and update it
+ - when deleting a list, delete all completion objects associated with it
+ - TODO: Update deletion of item to also delete any of these completion collections associated with it.
+  
 - [LARGE] Make "Gear List" View prettier (this is the prime thing here), and include back button or nav back to Dashboard
 - [MEDIUM] User session seems to time out. What's going on?
   - If no valid session, can re-direct to dashboard?

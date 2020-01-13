@@ -2,14 +2,14 @@ const mongoose = require("mongoose"),
   Schema = mongoose.Schema;
 
 // Setup a schema:
-const GearItemListAssociationSchema = new Schema(
+const GearItemCompletionSchema = new Schema(
   {
-    gearItem: {
+    gearItemId: {
       type: Schema.Types.ObjectId,
       ref: "gearItem",
       required: true
     },
-    gearList: {
+    gearListId: {
       type: Schema.Types.ObjectId,
       ref: "gearList",
       required: true
@@ -26,20 +26,20 @@ const GearItemListAssociationSchema = new Schema(
 );
 
 // // These functions run prior to document validation
-// GearItemListAssociationSchema.pre("validate", function(next) {
+// GearItemCompletionSchema.pre("validate", function(next) {
 //   console.log("Do something before validation here..");
 //   next();
 // });
 
 // // These functions run prior to document save()
-// GearItemListAssociationSchema.pre("save", function(next) {
+// GearItemCompletionSchema.pre("save", function(next) {
 //   console.log("Do something before save here...");
 //   next();
 // });
 
 // Invoke our model using our schema and export
-const GearItemListAssociation = mongoose.model(
-  "GearItemListAssociation",
-  GearItemListAssociationSchema
+const GearItemCompletion = mongoose.model(
+  "GearItemCompletion",
+  GearItemCompletionSchema
 );
-module.exports = GearItemListAssociation;
+module.exports = GearItemCompletion;

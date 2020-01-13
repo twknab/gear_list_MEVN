@@ -19,9 +19,9 @@ export default {
   deleteGearItem(gearItemId) {
     return api.get(`/gear-item/delete?gearItemId=${gearItemId}`);
   },
-  changeCompleteStatus(gearItemId, completedStatus) {
+  changeCompleteStatus(gearItemId, gearListId, completedStatus) {
     return api.get(
-      `/gear-item/complete?gearItemId=${gearItemId}&gearCompletedStatus=${completedStatus}`
+      `/gear-item/complete?gearItemId=${gearItemId}&gearListId=${gearListId}&gearCompletedStatus=${completedStatus}`
     );
   }
 };

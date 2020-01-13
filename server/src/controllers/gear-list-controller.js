@@ -1,4 +1,5 @@
 const GearList = require("mongoose").model("GearList"),
+  GearItemCompletion = require("mongoose").model("GearItemCompletion"),
   User = require("mongoose").model("User");
 
 module.exports = {
@@ -141,14 +142,55 @@ module.exports = {
   getGearListAndAllItems: (req, res) => {
     GearList.findOne({ _id: req.query.gearListId })
       .populate({
-        path: "items",
-        options: {
-          sort: "-updatedAt"
-        }
+        path: "items"
       })
       .exec()
-      .then(listsAndItems => {
-        res.status(200).json(listsAndItems);
+      .then(listAndItems => {
+        let items = listAndItems.items;
+        for (let i = 0; i < items.length; i++) {
+          console.log("ITEM: ", items[i]);
+          let completed = 0;
+          GearItemCompletion.findOne({ _id: items[i]._id })
+            .then(completionObject => {
+              if (completionObject === null) {
+                GearItemCompletion.create({
+                  gearListId: req.query.gearListId,
+                  gearItemId: items[i]._id
+                })
+                  .then(completionObject => {
+                    console.log("JUST CREATED NEW COMPLETION OBJECT");
+                    listAndItems.items[i].completed =
+                      completionObject.completed;
+                    completed++;
+                    console.log(completed);
+                    console.log(items.length);
+                  })
+                  .catch(error => {
+                    console.log("ERROR CREATING COMPLETION OBJECT");
+                    console.log(error);
+                    error = {
+                      errors: {
+                        invalid: {
+                          message: "Error marking item complete."
+                        }
+                      }
+                    };
+                    return res.status(403).json(error.errors);
+                  });
+              } else {
+                listAndItems.items[i].completed = completionObject.completed;
+                console.log("FOUND COMPLETION STATUS");
+              }
+              while (completed !== items.length) {
+                console.log("FINISHED LIST AND ITMES:", listAndItems);
+                return res.status(200).json(listAndItems);
+              }
+            })
+            .catch(err => {
+              console.log(err);
+              return res.status(500).json(err);
+            });
+        }
       })
       .catch(err => {
         console.log("Error getting lists for this gear item: ", err);

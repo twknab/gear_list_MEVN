@@ -14,7 +14,7 @@
                 :value="item._id"
                 v-model="item.completed"
                 :label="item.title"
-                @change="updateCompleteStatus(item)"
+                @change="updateCompleteStatus(item, list._id)"
               ></mu-checkbox>
             </mu-flex>
           </div>
@@ -64,9 +64,9 @@ export default {
           console.log("Something's gone wrong: ", err);
         });
     },
-    updateCompleteStatus(item) {
+    updateCompleteStatus(item, listId) {
       console.log(item);
-      GearItemService.changeCompleteStatus(item._id, item.completed)
+      GearItemService.changeCompleteStatus(item._id, listId, item.completed)
         .then(() => {
           // refresh gear items
           this.getGearListAndItems(this.$route.params.id);

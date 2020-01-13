@@ -1,6 +1,7 @@
 const mongoose = require("mongoose"),
   GearItem = mongoose.model("GearItem"),
   GearList = mongoose.model("GearList"),
+  GearItemCompletion = mongoose.model("GearItemCompletion"),
   User = mongoose.model("User");
 
 module.exports = {
@@ -98,16 +99,40 @@ module.exports = {
   },
   changeCompleteStatus: (req, res) => {
     const gearItemId = req.query.gearItemId;
+    const gearListId = req.query.gearListId;
     const gearCompletedStatus = req.query.gearCompletedStatus;
 
-    GearItem.findOneAndUpdate(
-      { _id: gearItemId },
-      {
-        completed: gearCompletedStatus
-      }
-    )
-      .then(() => {
-        return res.status(201).json({ success: "success" });
+    console.log("COMPLETED STATUS", gearCompletedStatus);
+
+    GearItemCompletion.findOne({
+      gearListId: gearListId,
+      gearItemId: gearItemId
+    })
+      .then(completionObject => {
+        console.log("HERE IS COMPLETION OBJECT:", completionObject);
+        GearItemCompletion.findOneAndUpdate(
+          {
+            gearListId: gearListId,
+            gearItemId: gearItemId
+          },
+          { completed: gearCompletedStatus }
+        )
+          .then(() => {
+            console.log("FOUND EXISTING COMPLETION OBJECT AND UPDATED");
+            return res.status(201).json({ success: "success" });
+          })
+          .catch(error => {
+            console.log("FAILED TO UPDATE COMPLETION OBJET");
+            console.log(error);
+            error = {
+              errors: {
+                invalid: {
+                  message: "Error marking item complete."
+                }
+              }
+            };
+            return res.status(403).json(error.errors);
+          });
       })
       .catch(error => {
         console.log(error);
@@ -120,5 +145,26 @@ module.exports = {
         };
         return res.status(403).json(error.errors);
       });
+
+    // GearItem.findOneAndUpdate(
+    //   { _id: gearItemId },
+    //   {
+    //     completed: gearCompletedStatus
+    //   }
+    // )
+    //   .then(() => {
+    //     return res.status(201).json({ success: "success" });
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //     error = {
+    //       errors: {
+    //         invalid: {
+    //           message: "Error marking item complete."
+    //         }
+    //       }
+    //     };
+    //     return res.status(403).json(error.errors);
+    //   });
   }
 };
