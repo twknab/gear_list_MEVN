@@ -146,51 +146,23 @@ module.exports = {
       })
       .exec()
       .then(listAndItems => {
-        let items = listAndItems.items;
-        for (let i = 0; i < items.length; i++) {
-          console.log("ITEM: ", items[i]);
-          let completed = 0;
-          GearItemCompletion.findOne({ _id: items[i]._id })
-            .then(completionObject => {
-              if (completionObject === null) {
-                GearItemCompletion.create({
-                  gearListId: req.query.gearListId,
-                  gearItemId: items[i]._id
-                })
-                  .then(completionObject => {
-                    console.log("JUST CREATED NEW COMPLETION OBJECT");
-                    listAndItems.items[i].completed =
-                      completionObject.completed;
-                    completed++;
-                    console.log(completed);
-                    console.log(items.length);
-                  })
-                  .catch(error => {
-                    console.log("ERROR CREATING COMPLETION OBJECT");
-                    console.log(error);
-                    error = {
-                      errors: {
-                        invalid: {
-                          message: "Error marking item complete."
-                        }
-                      }
-                    };
-                    return res.status(403).json(error.errors);
-                  });
-              } else {
-                listAndItems.items[i].completed = completionObject.completed;
-                console.log("FOUND COMPLETION STATUS");
-              }
-              while (completed !== items.length) {
-                console.log("FINISHED LIST AND ITMES:", listAndItems);
-                return res.status(200).json(listAndItems);
-              }
-            })
-            .catch(err => {
-              console.log(err);
-              return res.status(500).json(err);
-            });
-        }
+        console.log("got list and items.");
+        console.log("checking list items for completion...");
+        GearItemCompletion.schema.methods.checkListItemsForCompletion(
+          listAndItems,
+          req.query.gearListId,
+          listAndItemsMarkedWithCompletionStatus => {
+            if (!listAndItemsMarkedWithCompletionStatus) {
+              const errors = ["Error getting items with completion status"];
+              console.log(errors);
+              return res.status(500).json(errors);
+            } else {
+              return res
+                .status(200)
+                .json(listAndItemsMarkedWithCompletionStatus);
+            }
+          }
+        );
       })
       .catch(err => {
         console.log("Error getting lists for this gear item: ", err);
