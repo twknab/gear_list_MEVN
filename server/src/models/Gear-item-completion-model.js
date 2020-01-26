@@ -45,10 +45,11 @@ GearItemCompletionSchema.methods.checkListItemsForCompletion = function(
 ) {
   console.log("Model talking here ...checking gear item completions...");
   let items = listAndItems.items;
+  // collect item IDs only (so we can check if any of them are missing listItemCompletion data)
   let itemIds = items.map(item => item._id);
   console.log("=== GEAR ITEMS MAPPED ID ARRAY ====");
   console.log(itemIds);
-  // Find any gear item completions that exist
+  // Fetch all gearItemCompletion documents for the item IDs
   GearItemCompletion.find({ gearItemId: { $in: itemIds } })
     .then(gearItemCompletions => {
       console.log("=== COMPLETION RECORDS FOUND ====");
@@ -72,6 +73,11 @@ GearItemCompletionSchema.methods.checkListItemsForCompletion = function(
             console.log(err);
           });
       } else {
+        //=========================================
+        // TODO : COULDNT YOU JUST UPSERT HERE?
+        // E.G ADD NON EXISTING RECORDS AND SKIP IF EXISTING?
+        // ALL LOGIC BELOW IS TOO COMPLEX / EXPENSIVE
+        //==========================================
         // diff the records that exist vs the ones that don't
         let gearItemsAlreadyWithCompletionData = gearItemCompletions.map(
           completionData => completionData.gearItemId

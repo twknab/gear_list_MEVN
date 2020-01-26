@@ -56,8 +56,10 @@ export default {
       this.$emit("updateNav");
     },
     getGearListAndItems(listId) {
+      console.log("Getting items for list: ", listId);
       GearListService.getListAndItems(listId)
         .then(listAndItems => {
+          console.log("Here what was returned: ", listAndItems);
           this.list = listAndItems.data;
         })
         .catch(err => {
