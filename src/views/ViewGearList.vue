@@ -44,20 +44,20 @@ export default {
   data() {
     return {
       errors: {},
-      list: {}
+      list: { items: [] }
     };
   },
   created() {
     this.updatePrimaryNav();
-    this.getGearListAndItems(this.$route.params.id);
+    this.getGearListAndItemCompletions(this.$route.params.id);
   },
   methods: {
     updatePrimaryNav() {
       this.$emit("updateNav");
     },
-    getGearListAndItems(listId) {
+    getGearListAndItemCompletions(listId) {
       console.log("Getting items for list: ", listId);
-      GearListService.getListAndItems(listId)
+      GearListService.getListAndItemCompletions({ gearListId: listId })
         .then(listAndItems => {
           console.log("Here what was returned: ", listAndItems);
           this.list = listAndItems.data;
@@ -71,7 +71,7 @@ export default {
       GearItemService.changeCompleteStatus(item._id, listId, item.completed)
         .then(() => {
           // refresh gear items
-          this.getGearListAndItems(this.$route.params.id);
+          this.getGearListAndItemCompletions(this.$route.params.id);
         })
         .catch(err => {
           console.log("Marking complete failed: ", err);

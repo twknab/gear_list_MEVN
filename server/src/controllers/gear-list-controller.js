@@ -146,21 +146,31 @@ module.exports = {
       })
       .exec()
       .then(listAndItems => {
+        res.status(200).json(listAndItems);
+      })
+      .catch(err => {
+        console.log("Error getting list and items for this gear list.", err);
+        res.status(500).json(err);
+      });
+  },
+  getGearListAndAllItemCompletions: (req, res) => {
+    console.log("GETTING ITEM COMPLETIONS....");
+    console.log(req.body.gearListId);
+    GearList.findOne({ _id: req.body.gearListId })
+      .populate({
+        path: "items"
+      })
+      .exec()
+      .then(listAndItems => {
         console.log("got list and items.");
         console.log("checking list items for completion...");
-        GearItemCompletion.schema.methods.checkListItemsForCompletion(
+        GearItemCompletion.schema.methods.makeItemCompletionData(
           listAndItems,
-          req.query.gearListId,
-          listAndItemsMarkedWithCompletionStatus => {
-            if (!listAndItemsMarkedWithCompletionStatus) {
-              const errors = ["Error getting items with completion status"];
-              console.log(errors);
-              return res.status(500).json(errors);
-            } else {
-              return res
-                .status(200)
-                .json(listAndItemsMarkedWithCompletionStatus);
-            }
+          req.body.gearListId,
+          // callback function
+          result => {
+            console.log("Callback function running...");
+            console.log(result);
           }
         );
       })

@@ -36,6 +36,11 @@ module.exports = function(app) {
   );
   // Get geat list and all items
   app.get("/gear-list/find-list", GearListController.getGearListAndAllItems);
+  // Get all gear item completions and item information
+  app.post(
+    "/gear-list/find-list",
+    GearListController.getGearListAndAllItemCompletions
+  );
   // Update gear list
   app.post("/gear-list/update", GearListController.updateGearList);
   // Delete gear list

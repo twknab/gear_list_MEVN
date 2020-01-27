@@ -4,15 +4,15 @@ const mongoose = require("mongoose"),
 // Setup a schema:
 const GearItemCompletionSchema = new Schema(
   {
-    gearItemId: {
+    gearItem: {
       type: Schema.Types.ObjectId,
-      ref: "gearItem",
+      ref: "GearItem",
       unique: true,
       required: true
     },
-    gearListId: {
+    gearList: {
       type: Schema.Types.ObjectId,
-      ref: "gearList",
+      ref: "GearList",
       required: true
     },
     completed: {
@@ -38,127 +38,81 @@ const GearItemCompletionSchema = new Schema(
 //   next();
 // });
 
-GearItemCompletionSchema.methods.checkListItemsForCompletion = function(
+GearItemCompletionSchema.methods.makeItemCompletionData = function(
   listAndItems,
   gearListId,
   callback
 ) {
-  console.log("Model talking here ...checking gear item completions...");
+  console.log("Model talking here ...");
   let items = listAndItems.items;
-  // collect item IDs only (so we can check if any of them are missing listItemCompletion data)
+  // extract item ids and map to object which we'll use for updating
   let itemIds = items.map(item => item._id);
-  console.log("=== GEAR ITEMS MAPPED ID ARRAY ====");
-  console.log(itemIds);
-  // Fetch all gearItemCompletion documents for the item IDs
-  GearItemCompletion.find({ gearItemId: { $in: itemIds } })
-    .then(gearItemCompletions => {
-      console.log("=== COMPLETION RECORDS FOUND ====");
-      console.log(gearItemCompletions);
-      // If none exist, create them for each
-      if (gearItemCompletions.length === 0) {
-        console.log("NONE FOUND");
-        const gearItemCompletionData = itemIds.map(itemId => ({
-          gearItemId: mongoose.Types.ObjectId(itemId),
-          gearListId: mongoose.Types.ObjectId(gearListId)
-        }));
-        GearItemCompletion.insertMany(gearItemCompletionData)
-          .then(createdCompletionItems => {
-            console.log("=== MANY CREATED ====");
-            console.log(createdCompletionItems);
-            // TODO:
-            // map created completion to listAndItems.items completed
-            // And run callback
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      } else {
-        //=========================================
-        // TODO : COULDNT YOU JUST UPSERT HERE?
-        // E.G ADD NON EXISTING RECORDS AND SKIP IF EXISTING?
-        // ALL LOGIC BELOW IS TOO COMPLEX / EXPENSIVE
-        //==========================================
-        // diff the records that exist vs the ones that don't
-        let gearItemsAlreadyWithCompletionData = gearItemCompletions.map(
-          completionData => completionData.gearItemId
-        );
-        console.log("=== ITEMS ALREADY WITH COMPLETION DATA ====");
-        console.log(gearItemsAlreadyWithCompletionData);
-        let gearItemsNeedingCompletionData = [];
-        itemIds.forEach(itemId => {
-          gearItemsAlreadyWithCompletionData.forEach(completionDataItemId => {
-            if (String(completionDataItemId) != String(itemId)) {
-              gearItemsNeedingCompletionData.push(itemId);
-            }
-          });
+  // get GearItemCompletions for existing items:
+  GearItemCompletion.find({ gearItem: { $in: itemIds }, gearList: gearListId })
+    .then(itemCompletionData => {
+      console.log("here are completions found----");
+      console.log(itemCompletionData);
+      let itemsWithData = itemCompletionData.map(completionData =>
+        String(completionData.gearItem)
+      );
+      console.log("here are the IDs with existing data----");
+      console.log(itemsWithData);
+      let itemsNeedingUpdate = [];
+      itemIds.forEach(itemId => {
+        if (!itemsWithData.includes(String(itemId))) {
+          itemsNeedingUpdate.push(itemId);
+        }
+      });
+      console.log("here's the items needing completion data creation---");
+      console.log(itemsNeedingUpdate);
+      // prepare data for item completion data creation
+      const itemCompletionDataNeedingCreating = itemsNeedingUpdate.map(
+        itemMissingData => ({
+          gearItem: mongoose.Types.ObjectId(itemMissingData),
+          gearList: mongoose.Types.ObjectId(gearListId)
+        })
+      );
+      console.log("Here's the data we about to create...");
+      console.log(itemCompletionDataNeedingCreating);
+      // create data
+      GearItemCompletion.create(itemCompletionDataNeedingCreating)
+        .then(result => {
+          console.log("RESULT OF INSERT MANY=====");
+          console.log(result);
+          // TODO:
+          // SEE getCompletionDataAndItems
+          // Get all gearcompletion data and populate the tiem...send this back to frontend...then setup your completion logic...blegg
+        })
+        .catch(err => {
+          console.log("ERR WHEN ATTEMPING INSERT MANY...");
+          console.log(err);
         });
-        console.log("=== GEAR ITEMS YET NEEDING COMPLETION ===");
-        console.log(gearItemsNeedingCompletionData);
-        const gearItemCompletionData = gearItemsNeedingCompletionData.map(
-          itemId => ({
-            gearItemId: mongoose.Types.ObjectId(itemId),
-            gearListId: mongoose.Types.ObjectId(gearListId)
-          })
-        );
-        GearItemCompletion.insertMany(gearItemCompletionData)
-          .then(createdCompletionItems => {
-            console.log("=== MANY CREATED ====");
-            console.log(createdCompletionItems);
-            // TODO FINISH WHAT YOU STARTED HERE...NOW MAP COMPLETION DATA TO ITEMS AND SEND BACK
-            // TODO:
-            // map created completion to listAndItems.items completed
-          })
-          .catch(err => {
-            console.log("=== ERROR INSERTING DIFF ====");
-            console.log(err);
-          });
-      }
+    })
+    .catch(err => console.log("error fetching gear item completions", err));
+};
+
+GearItemCompletionSchema.methods.getCompletionDataAndItems = function(
+  itemIds,
+  gearListId,
+  callback
+) {
+  GearItemCompletion.find({
+    gearItem: { $in: itemIds },
+    gearList: gearListId
+  })
+    .populate("gearItem")
+    .exec()
+    .then(listItemCompletionDataAndItem => {
+      console.log("🎉🎉🎉🎉🎉");
+      console.log("Found all item completion data for this list..");
+      console.log(listItemCompletionDataAndItem);
+      callback(listItemCompletionDataAndItem);
     })
     .catch(err => {
+      console.log("AN ERROR OCCURRED....>>>");
       console.log(err);
+      callback(err);
     });
-  // WHAT I WANT TO DO PSUEDOCODE
-  // get all GearItemCompletion documents for _ids in items
-  // map those completed fields to item completed fields
-  // run callback function passing in items completed now mapped
-
-  // for (let i = 0; i < items.length; i++) {
-  //   console.log("ITEM: ", items[i]);
-  //   console.log("complete count:", completed);
-  //   GearItemCompletion.findOne({ _id: items[i]._id })
-  //     .then(completionObject => {
-  //       if (completionObject === null) {
-  //         GearItemCompletion.create({
-  //           gearListId: gearListId,
-  //           gearItemId: items[i]._id
-  //         })
-  //           .then(completionObject => {
-  //             console.log("JUST CREATED NEW COMPLETION OBJECT");
-  //             listAndItems.items[i].completed = completionObject.completed;
-  //             completed++;
-  //             console.log(completed);
-  //             console.log(items.length);
-  //           })
-  //           .catch(error => {
-  //             console.log("ERROR CREATING COMPLETION OBJECT");
-  //             console.log(error);
-  //             callback();
-  //           });
-  //       } else {
-  //         listAndItems.items[i].completed = completionObject.completed;
-  //         console.log("FOUND COMPLETION STATUS");
-  //       }
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //       callback();
-  //     });
-  //   console.log("done looping");
-  //   if (completed === items.length) {
-  //     console.log("FINISHED LIST AND ITMES:", listAndItems);
-  //     callback(listAndItems);
-  //   }
-  // }
 };
 
 // Invoke our model using our schema and export
