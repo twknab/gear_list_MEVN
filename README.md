@@ -38,10 +38,11 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Confirmation on Gear Item Deletion
 - ✅ Delete a Gear List (but not any Items within)
 - ✅ Confirmation on Gear List Deletion
-- ⭕️ View All Gear Items (pagination)
-- ⭕️ View All Gear Lists (pagination)
+- ⭕️ Edit Gear Item Name [SMALL]
+- ⭕️ View All Gear Items (pagination) [MEDIUM]
+- ⭕️ View All Gear Lists (pagination) [MEDIUM]
 - ✅ Front & Backend Validation on All Forms
-- ⭕️ Deploy
+- ⭕️ Deploy [LARGE]
 
 ## Technologies
 
@@ -71,20 +72,20 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 
 ### Known Bugs
 
-- [LARGE] Deleting List, Items contained marked as complete do not get reset. Items belonging to many lists are tied to a single list. This is not good.
+- ~[LARGE] Deleting List, Items contained marked as complete do not get reset. Items belonging to many lists are tied to a single list. This is not good.~
  - // TODO BUG FIX
- - Status: Made model called gearListCompletion
- - When we load a list, instantly each item is examined for one of these objects.
-   - if no object exists, create one
-   - if object exists, retrieve it and set "completed" adhoc status as same as record
- - when ticking completed box:
-  - search for completion object and update it
- - when deleting a list, delete all completion objects associated with it
- - TODO: Update deletion of item to also delete any of these completion collections associated with it.
+ - ~Status: Made model called gearListCompletion~
+ - ~When we load a list, instantly each item is examined for one of these objects.~
+   - ~if no object exists, create one~
+   - ~if object exists, retrieve it and set "completed" adhoc status as same as record~
+ - ~when ticking completed box:~
+  - ~search for completion object and update it~
+ - ~when deleting a list, delete all completion objects associated with it~
+ - ~TODO: Update deletion of item to also delete any of these completion collections associated with it.~
   
 - [LARGE] Make "Gear List" View prettier (this is the prime thing here), and include back button or nav back to Dashboard
 - [MEDIUM] User session seems to time out. What's going on?
   - If no valid session, can re-direct to dashboard?
-- [MEDIUM] Ticking an item complete seems to re-arrange list (can we prevent this re-arrangement?)
+- ~[MEDIUM] Ticking an item complete seems to re-arrange list (can we prevent this re-arrangement?)~
 - [MEDIUM] Navigation flakes out at times -- does this need to be fetched again every time?
-- [SMALL] Make clicking header logo redirect to dashboard if logged in, otherwise goto login page
+- ~[SMALL] Make clicking header logo redirect to dashboard if logged in, otherwise goto login page~
