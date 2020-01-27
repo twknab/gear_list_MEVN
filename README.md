@@ -32,7 +32,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Add/Remove a Gear Item to a Gear List via Attach
 - ✅ Remove a Gear Item from a Gear List Via Gear Item Attach Icon
 - ✅ View a Gear List and All Items
-  ✅ Mark items as completed/incomplete
+- ✅ Mark items as completed/incomplete
 - ✅ Edit Gear List (Name)
 - ✅ Delete a Gear Item
 - ✅ Confirmation on Gear Item Deletion
