@@ -3,18 +3,18 @@
     <mu-container>
       <mu-row gutter>
         <mu-col span="12">
-          <h1>{{ list.title }}</h1>
+          <h1>{{ listTitle }}</h1>
         </mu-col>
       </mu-row>
       <mu-row gutter>
         <mu-col span="12">
-          <div v-if="Object.keys(this.list.items).length > 0">
-            <mu-flex :key="item._id" v-for="item in list.items">
+          <div v-if="Object.keys(this.itemCompletionData).length > 0">
+            <mu-flex :key="itemData._id" v-for="itemData in itemCompletionData">
               <mu-checkbox
-                :value="item._id"
-                v-model="item.completed"
-                :label="item.title"
-                @change="updateCompleteStatus(item, list._id)"
+                :value="itemData.gearItem.title"
+                v-model="itemData.completed"
+                :label="itemData.gearItem.title"
+                @change="updateCompleteStatus(itemData.gearItem, this.listId)"
               ></mu-checkbox>
             </mu-flex>
           </div>
@@ -44,7 +44,9 @@ export default {
   data() {
     return {
       errors: {},
-      list: { items: [] }
+      listTitle: "",
+      listId: null,
+      itemCompletionData: [{ completed: false, gearItem: {} }]
     };
   },
   created() {
@@ -59,8 +61,13 @@ export default {
       console.log("Getting items for list: ", listId);
       GearListService.getListAndItemCompletions({ gearListId: listId })
         .then(listAndItems => {
-          console.log("Here what was returned: ", listAndItems);
-          this.list = listAndItems.data;
+          // TODO -- UPDATE LIST AND ITEMS TO NEW DATA MODEL
+          // MAKE SURE THIS CAN PROPERLY RENDER IN THE VIEW ABOVE
+          // MAY HAVE TO GO UP AND CLEAN UP THE FOR LIST
+          console.log("Here what was returned: ", listAndItems.data);
+          this.itemCompletionData = listAndItems.data.itemCompletions;
+          this.listTitle = listAndItems.data.listName;
+          this.listId = listAndItems.data.listId;
         })
         .catch(err => {
           console.log("Something's gone wrong: ", err);

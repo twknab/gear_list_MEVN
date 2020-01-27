@@ -38,33 +38,26 @@ const GearItemCompletionSchema = new Schema(
 //   next();
 // });
 
-GearItemCompletionSchema.methods.makeItemCompletionData = function(
+GearItemCompletionSchema.methods.getOrCreateItemCompletionData = function(
   listAndItems,
   gearListId,
   callback
 ) {
-  console.log("Model talking here ...");
   let items = listAndItems.items;
   // extract item ids and map to object which we'll use for updating
   let itemIds = items.map(item => item._id);
   // get GearItemCompletions for existing items:
   GearItemCompletion.find({ gearItem: { $in: itemIds }, gearList: gearListId })
     .then(itemCompletionData => {
-      console.log("here are completions found----");
-      console.log(itemCompletionData);
       let itemsWithData = itemCompletionData.map(completionData =>
         String(completionData.gearItem)
       );
-      console.log("here are the IDs with existing data----");
-      console.log(itemsWithData);
       let itemsNeedingUpdate = [];
       itemIds.forEach(itemId => {
         if (!itemsWithData.includes(String(itemId))) {
           itemsNeedingUpdate.push(itemId);
         }
       });
-      console.log("here's the items needing completion data creation---");
-      console.log(itemsNeedingUpdate);
       // prepare data for item completion data creation
       const itemCompletionDataNeedingCreating = itemsNeedingUpdate.map(
         itemMissingData => ({
@@ -72,23 +65,22 @@ GearItemCompletionSchema.methods.makeItemCompletionData = function(
           gearList: mongoose.Types.ObjectId(gearListId)
         })
       );
-      console.log("Here's the data we about to create...");
-      console.log(itemCompletionDataNeedingCreating);
       // create data
       GearItemCompletion.create(itemCompletionDataNeedingCreating)
         .then(result => {
-          console.log("RESULT OF INSERT MANY=====");
-          console.log(result);
-          // TODO:
-          // SEE getCompletionDataAndItems
-          // Get all gearcompletion data and populate the tiem...send this back to frontend...then setup your completion logic...blegg
+          GearItemCompletionSchema.methods.getCompletionDataAndItems(
+            itemIds,
+            gearListId,
+            callback
+          );
         })
-        .catch(err => {
-          console.log("ERR WHEN ATTEMPING INSERT MANY...");
-          console.log(err);
+        .catch(() => {
+          throw "Error creating item completion data";
         });
     })
-    .catch(err => console.log("error fetching gear item completions", err));
+    .catch(() => {
+      throw "Error retrieving item completion data";
+    });
 };
 
 GearItemCompletionSchema.methods.getCompletionDataAndItems = function(
@@ -103,15 +95,13 @@ GearItemCompletionSchema.methods.getCompletionDataAndItems = function(
     .populate("gearItem")
     .exec()
     .then(listItemCompletionDataAndItem => {
-      console.log("🎉🎉🎉🎉🎉");
-      console.log("Found all item completion data for this list..");
-      console.log(listItemCompletionDataAndItem);
-      callback(listItemCompletionDataAndItem);
+      callback({
+        success: true,
+        items: listItemCompletionDataAndItem
+      });
     })
     .catch(err => {
-      console.log("AN ERROR OCCURRED....>>>");
-      console.log(err);
-      callback(err);
+      callback({ success: false, error: err });
     });
 };
 

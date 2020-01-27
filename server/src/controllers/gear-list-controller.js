@@ -4,7 +4,6 @@ const GearList = require("mongoose").model("GearList"),
 
 module.exports = {
   createGearList: (req, res) => {
-    console.log("🤞  Attemping to Create New Gear List...");
     GearList.create(req.body)
       .then(newGearList => {
         // Add Gear List to User:
@@ -22,7 +21,6 @@ module.exports = {
             return res.status(201).json({ success: "success" });
           })
           .catch(error => {
-            console.log(error);
             error = {
               errors: {
                 invalid: {
@@ -34,8 +32,6 @@ module.exports = {
           });
       })
       .catch(error => {
-        console.log("😬  Error Creating New Gear List:");
-        console.log(error);
         return res.status(500).json(error.errors);
       });
   },
@@ -54,7 +50,6 @@ module.exports = {
         return res.status(201).json(userAndGearLists);
       })
       .catch(error => {
-        console.log(error);
         error = {
           errors: {
             invalid: {
@@ -76,7 +71,6 @@ module.exports = {
         return res.status(201).json({ success: "success" });
       })
       .catch(error => {
-        console.log(error);
         error = {
           errors: {
             invalid: {
@@ -88,7 +82,6 @@ module.exports = {
       });
   },
   deleteGearList: (req, res) => {
-    console.log("DELETING");
     GearList.schema.methods.unmarkListItemsAsComplete(
       req.query.gearListId,
       (err = null) => {
@@ -104,8 +97,7 @@ module.exports = {
               .status(201)
               .json({ successMessage: "List successfully deleted!" });
           })
-          .catch(error => {
-            console.log(error);
+          .catch(() => {
             const errors = ["Could not delete list"];
             return res.status(500).json(errors);
           });
@@ -135,7 +127,6 @@ module.exports = {
         res.status(200).json(lists);
       })
       .catch(err => {
-        console.log("Error getting lists for this gear item: ", err);
         res.status(500).json(err);
       });
   },
@@ -149,33 +140,34 @@ module.exports = {
         res.status(200).json(listAndItems);
       })
       .catch(err => {
-        console.log("Error getting list and items for this gear list.", err);
         res.status(500).json(err);
       });
   },
   getGearListAndAllItemCompletions: (req, res) => {
-    console.log("GETTING ITEM COMPLETIONS....");
-    console.log(req.body.gearListId);
     GearList.findOne({ _id: req.body.gearListId })
       .populate({
         path: "items"
       })
       .exec()
       .then(listAndItems => {
-        console.log("got list and items.");
-        console.log("checking list items for completion...");
-        GearItemCompletion.schema.methods.makeItemCompletionData(
+        GearItemCompletion.schema.methods.getOrCreateItemCompletionData(
           listAndItems,
           req.body.gearListId,
           // callback function
-          result => {
-            console.log("Callback function running...");
-            console.log(result);
+          resultData => {
+            if (resultData.success === false) {
+              res.status(500).json(resultData.error);
+            } else {
+              res.status(200).json({
+                itemCompletions: resultData.items,
+                listName: listAndItems.title,
+                listId: listAndItems._id
+              });
+            }
           }
         );
       })
       .catch(err => {
-        console.log("Error getting lists for this gear item: ", err);
         res.status(500).json(err);
       });
   }
