@@ -23,7 +23,6 @@ module.exports = {
             return res.status(201).json({ success: "success" });
           })
           .catch(error => {
-            console.log(error);
             error = {
               errors: {
                 invalid: {
@@ -36,8 +35,6 @@ module.exports = {
           });
       })
       .catch(error => {
-        console.log("😬  Error Creating New Gear Item:");
-        console.log(error);
         return res.status(500).json(error.errors);
       });
   },
@@ -56,7 +53,6 @@ module.exports = {
         return res.status(201).json(userAndGearItems);
       })
       .catch(error => {
-        console.log(error);
         error = {
           errors: {
             invalid: {
@@ -83,18 +79,26 @@ module.exports = {
           _id: req.query.gearItemId
         })
           .then(() => {
-            return res
-              .status(201)
-              .json({ successMessage: "Item successfully deleted!" });
+            GearItemCompletion.deleteMany({
+              gearItem: req.query.gearItemId
+            })
+              .then(() => {
+                return res
+                  .status(201)
+                  .json({ successMessage: "Item successfully deleted!" });
+              })
+              .catch(() => {
+                const errors = ["Could not delete item"];
+                return res.status(500).json(errors);
+              });
           })
-          .catch(error => {
-            console.log(error);
+          .catch(() => {
             const errors = ["Could not delete item"];
             return res.status(500).json(errors);
           });
       })
       .catch(err => {
-        console.log(err);
+        throw err;
       });
   },
   changeCompleteStatus: (req, res) => {
@@ -104,67 +108,29 @@ module.exports = {
 
     console.log("COMPLETED STATUS", gearCompletedStatus);
 
-    GearItemCompletion.findOne({
-      gearListId: gearListId,
-      gearItemId: gearItemId
-    })
-      .then(completionObject => {
-        console.log("HERE IS COMPLETION OBJECT:", completionObject);
-        GearItemCompletion.findOneAndUpdate(
-          {
-            gearListId: gearListId,
-            gearItemId: gearItemId
-          },
-          { completed: gearCompletedStatus }
-        )
-          .then(() => {
-            console.log("FOUND EXISTING COMPLETION OBJECT AND UPDATED");
-            return res.status(201).json({ success: "success" });
-          })
-          .catch(error => {
-            console.log("FAILED TO UPDATE COMPLETION OBJET");
-            console.log(error);
-            error = {
-              errors: {
-                invalid: {
-                  message: "Error marking item complete."
-                }
-              }
-            };
-            return res.status(403).json(error.errors);
-          });
+    GearItemCompletion.findOneAndUpdate(
+      {
+        gearList: gearListId,
+        gearItem: gearItemId
+      },
+      {
+        completed: gearCompletedStatus
+      }
+    )
+      .then(updatedCompletionData => {
+        console.log("HERE IS COMPLETION OBJECT:", updatedCompletionData);
+        res.status(200).json(updatedCompletionData);
       })
       .catch(error => {
         console.log(error);
         error = {
           errors: {
             invalid: {
-              message: "Error marking item complete."
+              message: "Error updating item's completion status."
             }
           }
         };
         return res.status(403).json(error.errors);
       });
-
-    // GearItem.findOneAndUpdate(
-    //   { _id: gearItemId },
-    //   {
-    //     completed: gearCompletedStatus
-    //   }
-    // )
-    //   .then(() => {
-    //     return res.status(201).json({ success: "success" });
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //     error = {
-    //       errors: {
-    //         invalid: {
-    //           message: "Error marking item complete."
-    //         }
-    //       }
-    //     };
-    //     return res.status(403).json(error.errors);
-    //   });
   }
 };

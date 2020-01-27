@@ -3,7 +3,9 @@
     <mu-appbar style="width: 100%;" color="purpleA700">
       <mu-button icon slot="right" @click="openBottomSheet">
         <mu-icon value="menu"></mu-icon> </mu-button
-      >🎒 GearList
+      ><a class="logo-link" @click="$router.push({ name: 'dashboard' })"
+        >🎒 GearList</a
+      >
     </mu-appbar>
     <mu-container>
       <mu-bottom-sheet :open.sync="open">
@@ -57,4 +59,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.logo-link {
+  color: unset !important;
+}
+</style>

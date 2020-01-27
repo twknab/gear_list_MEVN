@@ -14,7 +14,13 @@
                 :value="itemData.gearItem.title"
                 v-model="itemData.completed"
                 :label="itemData.gearItem.title"
-                @change="updateCompleteStatus(itemData.gearItem, this.listId)"
+                @change="
+                  updateCompleteStatus(
+                    itemData.gearItem,
+                    listId,
+                    itemData.completed
+                  )
+                "
               ></mu-checkbox>
             </mu-flex>
           </div>
@@ -58,30 +64,31 @@ export default {
       this.$emit("updateNav");
     },
     getGearListAndItemCompletions(listId) {
-      console.log("Getting items for list: ", listId);
       GearListService.getListAndItemCompletions({ gearListId: listId })
         .then(listAndItems => {
-          // TODO -- UPDATE LIST AND ITEMS TO NEW DATA MODEL
-          // MAKE SURE THIS CAN PROPERLY RENDER IN THE VIEW ABOVE
-          // MAY HAVE TO GO UP AND CLEAN UP THE FOR LIST
-          console.log("Here what was returned: ", listAndItems.data);
+          console.log("$$$");
+          console.log(listAndItems.data.listId);
           this.itemCompletionData = listAndItems.data.itemCompletions;
           this.listTitle = listAndItems.data.listName;
           this.listId = listAndItems.data.listId;
+          console.log(this.listId);
         })
         .catch(err => {
-          console.log("Something's gone wrong: ", err);
+          console.log("Fetching item completion data failed: ", err);
         });
     },
-    updateCompleteStatus(item, listId) {
-      console.log(item);
-      GearItemService.changeCompleteStatus(item._id, listId, item.completed)
-        .then(() => {
+    updateCompleteStatus(item, listId, complete) {
+      GearItemService.changeCompleteStatus(item._id, listId, complete)
+        .then(completionUpdateData => {
+          console.log("This is the completion datas");
+
+          console.log(completionUpdateData);
+
           // refresh gear items
           this.getGearListAndItemCompletions(this.$route.params.id);
         })
         .catch(err => {
-          console.log("Marking complete failed: ", err);
+          console.log("Marking complete failed...", err);
         });
     }
   }

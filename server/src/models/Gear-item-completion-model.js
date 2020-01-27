@@ -7,12 +7,12 @@ const GearItemCompletionSchema = new Schema(
     gearItem: {
       type: Schema.Types.ObjectId,
       ref: "GearItem",
-      unique: true,
       required: true
     },
     gearList: {
       type: Schema.Types.ObjectId,
       ref: "GearList",
+      unique: true,
       required: true
     },
     completed: {
@@ -26,55 +26,46 @@ const GearItemCompletionSchema = new Schema(
   }
 );
 
-// // These functions run prior to document validation
-// GearItemCompletionSchema.pre("validate", function(next) {
-//   console.log("Do something before validation here..");
-//   next();
-// });
-
-// // These functions run prior to document save()
-// GearItemCompletionSchema.pre("save", function(next) {
-//   console.log("Do something before save here...");
-//   next();
-// });
-
 GearItemCompletionSchema.methods.getOrCreateItemCompletionData = function(
   listAndItems,
   gearListId,
   callback
 ) {
+  // map list items id to eval for completion
   let items = listAndItems.items;
-  // extract item ids and map to object which we'll use for updating
   let itemIds = items.map(item => item._id);
-  // get GearItemCompletions for existing items:
+  // get gear completion data for existing items:
   GearItemCompletion.find({ gearItem: { $in: itemIds }, gearList: gearListId })
     .then(itemCompletionData => {
+      // map item ids with completion data into array
       let itemsWithData = itemCompletionData.map(completionData =>
         String(completionData.gearItem)
       );
+      // loop through list items, check if needs completion data
       let itemsNeedingUpdate = [];
       itemIds.forEach(itemId => {
         if (!itemsWithData.includes(String(itemId))) {
           itemsNeedingUpdate.push(itemId);
         }
       });
-      // prepare data for item completion data creation
+      // prepare new items for item completion data creation
       const itemCompletionDataNeedingCreating = itemsNeedingUpdate.map(
         itemMissingData => ({
           gearItem: mongoose.Types.ObjectId(itemMissingData),
           gearList: mongoose.Types.ObjectId(gearListId)
         })
       );
-      // create data
+      // create item completion data
       GearItemCompletion.create(itemCompletionDataNeedingCreating)
-        .then(result => {
+        .then(() => {
           GearItemCompletionSchema.methods.getCompletionDataAndItems(
             itemIds,
             gearListId,
             callback
           );
         })
-        .catch(() => {
+        .catch(err => {
+          console.log(err);
           throw "Error creating item completion data";
         });
     })
