@@ -83,14 +83,11 @@ export default {
   },
   methods: {
     submit() {
-      console.log("Submitting new gear list!");
       this.$refs.addNewGearList.validate().then(result => {
         if (result) {
           // Attempt to create new gear list:
           GearListService.createNewGearList(this.newGearList)
             .then(response => {
-              console.log(`👍`);
-              console.log(response.data);
               // Redirect to dashboard view
               this.$router.push({ name: "dashboard" });
             })
@@ -106,7 +103,6 @@ export default {
   },
   created: function() {
     this.getLoggedInUser();
-    console.log(this.user);
   }
 };
 </script>

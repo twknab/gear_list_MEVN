@@ -36,7 +36,6 @@ export default {
   },
   methods: {
     updateGlobalUser(user) {
-      console.log("updating global user...");
       this.$emit("updateUser", user);
     }
   }

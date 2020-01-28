@@ -113,7 +113,6 @@ GearListSchema.methods.unmarkListItemsAsComplete = function(
   gearListId,
   callback
 ) {
-  console.log("UNMARKING LIST ITEMS AS COMPLETE");
   GearList.findOne({ _id: gearListId })
     .populate({
       path: "items",
@@ -123,10 +122,8 @@ GearListSchema.methods.unmarkListItemsAsComplete = function(
     })
     .exec()
     .then(listsAndItems => {
-      console.log("HERE's LIST AND ITEMS", listsAndItems);
       let items = listsAndItems.items;
       for (let i = 0; i < items.length; i++) {
-        console.log(items[i]._id);
         GearItem.findOneAndUpdate({ _id: items[i]._id }, { completed: false });
       }
       callback();

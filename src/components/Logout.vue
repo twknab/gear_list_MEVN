@@ -7,10 +7,8 @@ import UserService from "@/services/UserService.js";
 export default {
   name: "Logout",
   created() {
-    console.log("Logging out");
     UserService.logoffUser()
-      .then(message => {
-        console.log(message.data.success);
+      .then(() => {
         this.$router.push({ name: "home" });
       })
       .catch(error => {

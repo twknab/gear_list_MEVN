@@ -28,18 +28,6 @@ const GearItemSchema = new Schema(
   }
 );
 
-// These functions run prior to document validation
-GearItemSchema.pre("validate", function(next) {
-  console.log("Do something before validation here..");
-  next();
-});
-
-// These functions run prior to document save()
-GearItemSchema.pre("save", function(next) {
-  console.log("Do something before save here...");
-  next();
-});
-
 // Invoke our model using our schema and export
 const GearItem = mongoose.model("GearItem", GearItemSchema);
 module.exports = GearItem;

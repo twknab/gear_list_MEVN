@@ -175,7 +175,6 @@ export default {
   created() {},
   methods: {
     submit() {
-      console.log("...submitting registration...");
       this.$refs.newUserRegistration.validate().then(result => {
         if (result) {
           // Register new user:

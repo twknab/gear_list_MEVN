@@ -210,7 +210,6 @@ export default {
       this.$emit("getGlobalUser");
     },
     updateGearListsForUser(gearLists) {
-      console.log("updating gear lists");
       this.gearLists = Object.values(gearLists);
     },
     updateSuccessMessage(message) {

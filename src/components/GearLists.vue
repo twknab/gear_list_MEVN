@@ -6,12 +6,12 @@
           <mu-list
             textline="three-line"
             class="dashboard-list"
-            v-if="Object.keys(this.userGearLists).length > 0"
+            v-if="this.userGearLists.length > 0"
           >
             <mu-list-item
               avatar
               button
-              v-for="(gearList, key, index) in userGearLists"
+              v-for="(gearList, index) in userGearLists.slice(0, this.limit)"
               :key="index"
               @click="viewGearList(gearList._id)"
             >
@@ -69,7 +69,11 @@
       </mu-col>
       <mu-col span="12" sm="12" md="12" lg="6" xl="6">
         <mu-flex justify-content="center">
-          <SeeMoreButton :buttonText="'See All Lists'" />
+          <SeeMoreButton
+            :buttonText="'See All Lists'"
+            :currentLimit="this.limit"
+            @updateLimit="updateGearListsLimit"
+          />
         </mu-flex>
       </mu-col>
     </mu-row>
@@ -94,9 +98,9 @@ export default {
   },
   data() {
     return {
-      current: 1,
+      limit: 4,
       open: false,
-      userGearLists: {},
+      userGearLists: [],
       isJustAFewLists: true,
       FILE_BUG: "Kindly file a bug report."
     };
@@ -119,11 +123,19 @@ export default {
       // redirect to gear list view page passing in gearListId as a parameter
       this.$router.push({ name: "viewGearList", params: { id: gearListId } });
     },
+    updateGearListsLimit(newLimit) {
+      this.limit = newLimit;
+      // get all gear lists now with new limit
+      this.getAllUserGearLists();
+    },
     getAllUserGearLists() {
       GearListService.getAllGearListsForUser()
         .then(response => {
-          this.userGearLists = response.data.gearLists;
-          this.isJustAFewLists = Object.keys(this.userGearLists).length <= 3;
+          this.userGearLists = Object.values(response.data.gearLists);
+          if (this.userGearLists.length < this.limit) {
+            this.limit = this.userGearLists.length;
+          }
+          this.isJustAFewLists = this.userGearLists.length <= this.limit;
           this.$emit("updateAllGearLists", this.userGearLists);
         })
         .catch(err => {

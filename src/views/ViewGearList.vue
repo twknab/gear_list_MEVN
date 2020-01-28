@@ -66,12 +66,9 @@ export default {
     getGearListAndItemCompletions(listId) {
       GearListService.getListAndItemCompletions({ gearListId: listId })
         .then(listAndItems => {
-          console.log("$$$");
-          console.log(listAndItems.data.listId);
           this.itemCompletionData = listAndItems.data.itemCompletions;
           this.listTitle = listAndItems.data.listName;
           this.listId = listAndItems.data.listId;
-          console.log(this.listId);
         })
         .catch(err => {
           console.log("Fetching item completion data failed: ", err);
@@ -79,11 +76,7 @@ export default {
     },
     updateCompleteStatus(item, listId, complete) {
       GearItemService.changeCompleteStatus(item._id, listId, complete)
-        .then(completionUpdateData => {
-          console.log("This is the completion datas");
-
-          console.log(completionUpdateData);
-
+        .then(() => {
           // refresh gear items
           this.getGearListAndItemCompletions(this.$route.params.id);
         })

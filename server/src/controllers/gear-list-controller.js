@@ -42,7 +42,7 @@ module.exports = {
       .populate({
         path: "gearLists",
         options: {
-          sort: "-createdAt"
+          sort: "-updatedAt"
         }
       })
       .exec()

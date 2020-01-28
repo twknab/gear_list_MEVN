@@ -105,9 +105,6 @@ module.exports = {
     const gearItemId = req.query.gearItemId;
     const gearListId = req.query.gearListId;
     const gearCompletedStatus = req.query.gearCompletedStatus;
-
-    console.log("COMPLETED STATUS", gearCompletedStatus);
-
     GearItemCompletion.findOneAndUpdate(
       {
         gearList: gearListId,
@@ -118,7 +115,6 @@ module.exports = {
       }
     )
       .then(updatedCompletionData => {
-        console.log("HERE IS COMPLETION OBJECT:", updatedCompletionData);
         res.status(200).json(updatedCompletionData);
       })
       .catch(error => {

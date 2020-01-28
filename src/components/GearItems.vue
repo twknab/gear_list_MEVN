@@ -5,12 +5,12 @@
         <mu-list
           textline="three-line"
           class="dashboard-list"
-          v-if="Object.keys(this.userGearItems).length > 0"
+          v-if="this.userGearItems.length > 0"
         >
           <mu-list-item
             avatar
             button
-            v-for="(gearItem, key, index) in userGearItems"
+            v-for="(gearItem, index) in userGearItems.slice(0, this.limit)"
             :key="index"
           >
             <mu-list-item-content>
@@ -58,7 +58,11 @@
       </mu-col>
       <mu-col span="12" sm="12" md="12" lg="6" xl="6">
         <mu-flex justify-content="center">
-          <SeeMoreButton :buttonText="'See All Items'" />
+          <SeeMoreButton
+            :buttonText="'See All Items'"
+            :currentLimit="this.limit"
+            @updateLimit="updateGearItemsLimit"
+          />
         </mu-flex>
       </mu-col>
     </mu-row>
@@ -89,8 +93,9 @@ export default {
   },
   data() {
     return {
+      limit: 4,
       errors: {},
-      userGearItems: {},
+      userGearItems: [],
       isJustAFewItems: true,
       FILE_BUG: "Kindly file a bug report."
     };
@@ -109,13 +114,19 @@ export default {
     getAllUserGearItems() {
       GearItemService.getAllGearItemsForUser()
         .then(response => {
-          this.userGearItems = response.data.gearItems;
-          this.isJustAFewItems = Object.keys(this.userGearItems).length <= 3;
+          this.userGearItems = Object.values(response.data.gearItems);
+          if (this.userGearItems.length < this.limit) {
+            this.limit = this.userGearItems.length;
+          }
+          this.isJustAFewItems = this.userGearItems.length <= this.limit;
         })
         .catch(err => {
-          console.log(err);
           this.errors = err;
         });
+    },
+    updateGearItemsLimit(newLimit) {
+      this.limit = newLimit;
+      this.getAllUserGearItems();
     },
     confirmDeleteItem(itemId) {
       // trigger dialogue, run below if confirmed
