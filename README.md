@@ -35,10 +35,14 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Delete a Gear List (but not any Items within)
 - ✅ Confirmation on Gear List Deletion
 - ⭕️ Edit Gear Item Name [SMALL]
-- ⭕️ View All Gear Items (pagination) [MEDIUM]
-- ⭕️ View All Gear Lists (pagination) [MEDIUM]
+- ✅ View All Gear Items (pagination) [MEDIUM]
+- ✅ View All Gear Lists (pagination) [MEDIUM]
 - ✅ Front & Backend Validation on All Forms
 - ⭕️ Deploy [LARGE]
+
+## Most Important TODO
+
+- Fix deletion of Lists to delete itemCompletionData -- needs to be cleaned up since last refactor
 
 ## Technologies
 
@@ -71,6 +75,3 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 - [LARGE] Make "Gear List" View prettier (this is the prime thing here), and include back button or nav back to Dashboard
 - [MEDIUM] User session seems to time out. What's going on?
   - If no valid session, can re-direct to dashboard?
-- ~[MEDIUM] Ticking an item complete seems to re-arrange list (can we prevent this re-arrangement?)~
-- [MEDIUM] Navigation flakes out at times -- does this need to be fetched again every time?
-- ~[SMALL] Make clicking header logo redirect to dashboard if logged in, otherwise goto login page~
