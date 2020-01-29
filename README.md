@@ -26,6 +26,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Gear Item Creation
 - ✅ Gear List Creation
 - ✅ Add/Remove a Gear Item to a Gear List via Attach
+- ✅ Edit Gear Item
 - ✅ Remove a Gear Item from a Gear List Via Gear Item Attach Icon
 - ✅ View a Gear List and All Items
 - ✅ Mark items as completed/incomplete
@@ -34,15 +35,19 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Confirmation on Gear Item Deletion
 - ✅ Delete a Gear List (but not any Items within)
 - ✅ Confirmation on Gear List Deletion
-- ✅ Edit Gear Item Name
 - ✅ View All Gear Items (pagination)
 - ✅ View All Gear Lists (pagination)
 - ✅ Front & Backend Validation on All Forms
+- ⭕️ Contact Page (bug report?)
+- ⭕️ TOS modal on registration?
 - ⭕️ Deploy [LARGE]
 
-## Most Important TODO
+## Most Important TODO Before Deployment
 
-- Fix deletion of Lists to delete itemCompletionData -- needs to be cleaned up since last refactor
+- !!! Style View Gear List page to Wow
+- !!! Fix refresh issue bug - wtf
+- !!  Contact Page
+- !   TOS modal popup
 
 ## Technologies
 
@@ -57,6 +62,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - User
 - Gear List
 - Gear Item
+- Gear Item Completion
 
 ### Note About Gear Items/Gear List Deletion
 
@@ -65,7 +71,6 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 ### Wishlist Features (may require addt'l creation of models)
 
 - Remove a Gear Item from a Gear List Via Gear List View
-- Edit Gear Item (Name, Description, Weight)
 - Public Share Link
 - Sharing of Gear Lists (Add a Friend)
 - Password Reset
