@@ -82,17 +82,10 @@ module.exports = {
       });
   },
   deleteGearList: (req, res) => {
-    // TODO: Refacator Gear List completion to:
-    // A) Delete gearItemCompletion data for that List
-    //   - you can prbably delete or rework the `unmarkListItemsAsComplete`
-    // B) Delete the list itself
-    GearList.schema.methods.unmarkListItemsAsComplete(
-      req.query.gearListId,
-      (err = null) => {
-        if (err !== null) {
-          const errors = ["Could not unmark all items"];
-          return res.status(500).json(errors);
-        }
+    GearItemCompletion.find({ gearList: req.query.gearListId })
+      .remove()
+      .exec()
+      .then(() => {
         GearList.findOneAndDelete({
           _id: req.query.gearListId
         })
@@ -105,8 +98,11 @@ module.exports = {
             const errors = ["Could not delete list"];
             return res.status(500).json(errors);
           });
-      }
-    );
+      })
+      .catch(err => {
+        console.log("Something went wrong finding completion data");
+        console.log(err);
+      });
   },
   attachItem: (req, res) => {
     GearList.schema.methods.attachToLists(
