@@ -19,13 +19,20 @@
                 >Weight: {{ gearItem.weight }} oz</mu-list-item-sub-title
               >
             </mu-list-item-content>
-            <!-- Paperclip Attach Gear Item to Gear List Button -->
+            <!-- Paperclip Attach Button -->
             <AttachGearItemToGearList
               :gearItem="gearItem"
               :gearLists="gearLists"
               @successMessage="updateSuccessMessage"
               @failureMessage="updateFailureMessage"
             />
+            <!-- Edit Button -->
+            <mu-list-item-action>
+              <mu-button icon @click="editGearItem(gearItem._id)">
+                <mu-icon color="purpleA400" value="edit" size="36"></mu-icon>
+              </mu-button>
+            </mu-list-item-action>
+            <!-- Delete Button -->
             <mu-list-item-action>
               <mu-button icon @click="confirmDeleteItem(gearItem._id)">
                 <mu-icon color="purpleA700" value="delete" size="36"></mu-icon>
@@ -111,6 +118,9 @@ export default {
     this.getAllUserGearItems();
   },
   methods: {
+    editGearItem(gearItemId) {
+      this.$router.push({ name: "editGearItem", params: { id: gearItemId } });
+    },
     getAllUserGearItems() {
       GearItemService.getAllGearItemsForUser()
         .then(response => {
@@ -158,4 +168,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.mu-item-action {
+  min-width: 48px;
+}
+</style>

@@ -3,12 +3,11 @@
     <mu-container>
       <mu-row gutter>
         <mu-col span="12">
-          <h1>Edit Gear List</h1>
+          <h1>Edit Gear Item</h1>
         </mu-col>
       </mu-row>
       <mu-row span="12">
-        <!-- Login Form -->
-        <mu-form ref="editGearList" :model="gearList">
+        <mu-form ref="editGearItem" :model="gearItem">
           <!-- Backend Errors Display -->
           <div v-if="Object.keys(errors).length >= 1" class="server-errors">
             <h2>Whoops, there's a few issues...</h2>
@@ -18,7 +17,7 @@
               </li>
             </ul>
           </div>
-          <!-- Gear List Title -->
+          <!-- Gear Item Title -->
           <mu-form-item
             label="Title"
             prop="title"
@@ -26,8 +25,21 @@
             :rules="titleRules"
           >
             <mu-text-field
-              v-model="gearList.title"
+              v-model="gearItem.title"
               prop="title"
+              color="primary"
+            ></mu-text-field>
+          </mu-form-item>
+          <!-- Gear Item Weight -->
+          <mu-form-item
+            label="Weight (in Ounces)"
+            prop="weight"
+            :rules="weightRules"
+          >
+            <mu-text-field
+              type="number"
+              v-model="gearItem.weight"
+              prop="weight"
               color="primary"
             ></mu-text-field>
           </mu-form-item>
@@ -55,9 +67,9 @@
 </template>
 
 <script>
-import GearListService from "@/services/GearListService.js";
+import GearItemService from "@/services/GearItemService.js";
 export default {
-  name: "EditGearList",
+  name: "EditGearItem",
   props: {
     user: {
       type: Object,
@@ -75,21 +87,29 @@ export default {
           message: "Title must be 2-50 characters"
         }
       ],
-      gearList: {
+      weightRules: [
+        { validate: val => !!val, message: "Weight is required" },
+        {
+          validate: val => Number(val) >= 0 && Number(val) <= 16000,
+          message: "Weight must be 0-16000 ounces"
+        }
+      ],
+      gearItem: {
         title: "",
-        gearListOwner: ""
+        weight: "",
+        gearItemOwner: ""
       }
     };
   },
   created() {
-    this.getGearListAndItems(this.$route.params.id);
+    this.getGearItem(this.$route.params.id);
   },
   methods: {
     submit() {
-      this.$refs.editGearList.validate().then(result => {
+      this.$refs.editGearItem.validate().then(result => {
         if (result) {
-          // Attempt to update gear list:
-          GearListService.updateGearList(this.gearList)
+          // Attempt to update gear item:
+          GearItemService.updateGearItem(this.gearItem)
             .then(() => {
               // Redirect to dashboard view
               this.$router.push({ name: "dashboard" });
@@ -100,10 +120,10 @@ export default {
         }
       });
     },
-    getGearListAndItems(listId) {
-      GearListService.getListAndItems(listId)
-        .then(listAndItems => {
-          this.gearList = listAndItems.data;
+    getGearItem(itemId) {
+      GearItemService.getItem(itemId)
+        .then(gearItem => {
+          this.gearItem = gearItem.data;
         })
         .catch(err => {
           console.log("Something's gone wrong: ", err);

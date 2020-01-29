@@ -64,6 +64,36 @@ module.exports = {
         return res.status(500).json(error.errors);
       });
   },
+  getGearItem: (req, res) => {
+    GearItem.findOne({ _id: req.query.gearItemId })
+      .then(gearItem => {
+        res.status(200).json(gearItem);
+      })
+      .catch(err => {
+        res.status(500).json(err);
+      });
+  },
+  updateGearItem: (req, res) => {
+    GearItem.findOneAndUpdate(
+      {
+        _id: req.body._id
+      },
+      { title: req.body.title, weight: req.body.weight }
+    )
+      .then(() => {
+        return res.status(201).json({ success: "success" });
+      })
+      .catch(error => {
+        error = {
+          errors: {
+            invalid: {
+              message: "Error updating User's gear item, contact the admin."
+            }
+          }
+        };
+        return res.status(500).json(error.errors);
+      });
+  },
   deleteGearItem: (req, res) => {
     GearList.update(
       {},

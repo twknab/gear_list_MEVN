@@ -87,7 +87,7 @@ export default {
         if (result) {
           // Attempt to create new gear list:
           GearListService.createNewGearList(this.newGearList)
-            .then(response => {
+            .then(() => {
               // Redirect to dashboard view
               this.$router.push({ name: "dashboard" });
             })

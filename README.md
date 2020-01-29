@@ -34,9 +34,9 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Confirmation on Gear Item Deletion
 - ✅ Delete a Gear List (but not any Items within)
 - ✅ Confirmation on Gear List Deletion
-- ⭕️ Edit Gear Item Name [SMALL]
-- ✅ View All Gear Items (pagination) [MEDIUM]
-- ✅ View All Gear Lists (pagination) [MEDIUM]
+- ✅ Edit Gear Item Name
+- ✅ View All Gear Items (pagination)
+- ✅ View All Gear Lists (pagination)
 - ✅ Front & Backend Validation on All Forms
 - ⭕️ Deploy [LARGE]
 

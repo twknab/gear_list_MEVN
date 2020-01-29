@@ -47,6 +47,12 @@ export default new Router({
         import(/* webpackChunkName: "addNewGearItem" */ "./views/AddGearItem.vue")
     },
     {
+      path: "/gear/item/edit/:id",
+      name: "editGearItem",
+      component: () =>
+        import(/* webpackChunkName: "editGearItem" */ "./views/EditGearItem.vue")
+    },
+    {
       path: "/gear/list",
       name: "addGearList",
       component: () =>
@@ -62,7 +68,7 @@ export default new Router({
       path: "/gear/list/edit/:id",
       name: "editGearList",
       component: () =>
-        import(/* webpackChunkName: "viewGearList" */ "./views/EditGearList.vue")
+        import(/* webpackChunkName: "editGearList" */ "./views/EditGearList.vue")
     },
     {
       path: "/logout",
