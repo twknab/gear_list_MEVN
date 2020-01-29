@@ -1,6 +1,6 @@
 # Gear List
 
-This is a gear list application, designed to help you in outdoor adventures to better prepare and not forget those important (sometimes live-saving) items at home.
+This is a gear list application, designed to help you in outdoor adventures to better prepare and not forget those important (sometimes life-saving) items at home.
 
 In regards to technology, this is a MEVN application and uses:
 
