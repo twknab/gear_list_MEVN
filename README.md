@@ -4,9 +4,10 @@ This is a gear list application, designed to help you in outdoor adventures to b
 
 In regards to technology, this is a MEVN application and uses:
 
-1. (M)ongoDB for the database.
-2. (E)xpress.js and (N)ode.js for back-end server functionality.
+1. (M)ongoDB for the database (and Mongoose.js to help).
+2. (E)xpress.js framework for speedy backend functionality.
 3. (V)ue.js for the front-end framework and client-side routing.
+4. (N)ode.js to power back-end.
 
 [Vue Router](https://github.com/vuejs/vue-router) is used to handle SPA routing, and [Axios](https://github.com/axios/axios) is used for AJAX requests to the backend. [Muse-UI](https://muse-ui.org/#/en-US) is used for the CSS framwork, using [Material.io](https://material.io/)'s design principles.
 
