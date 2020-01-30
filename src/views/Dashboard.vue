@@ -128,7 +128,7 @@
                 large
                 full-width
                 round
-                color="error"
+                color="#FA0D3F"
                 class="margin-top-md margin-bottom-md confirm-delete"
                 @click="confirmDelete"
               >

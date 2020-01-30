@@ -62,5 +62,6 @@ export default {
 <style>
 .logo-link {
   color: unset !important;
+  cursor: pointer;
 }
 </style>

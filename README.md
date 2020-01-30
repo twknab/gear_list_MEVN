@@ -21,7 +21,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - (1) Make sure `mongod` is running. (2) from `~/` run `npm run serve` and (3) from `~/server` run `npm start`.
 - Load [localhost:8080](https://localhost:8080) to see the application running locally.
 
-## Features
+## Features 
 
 - ✅ User Login and Registration (Password Hashing/Decryption)
 - ✅ Gear Item Creation

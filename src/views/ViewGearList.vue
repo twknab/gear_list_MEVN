@@ -1,12 +1,18 @@
 <template>
   <div>
-    <mu-container>
-      <mu-row gutter>
-        <mu-col span="12">
-          <h1>{{ listTitle }}</h1>
-        </mu-col>
-      </mu-row>
-      <mu-row gutter>
+    <mu-container class="padding-all-md">
+      <mu-flex justify-content="center" class="margin-top margin-left-sm">
+        <mu-icon
+          color="purpleA700"
+          value="terrain"
+          size="73"
+          justify-content="before"
+          class="margin-right-md margin-top-sm"
+        ></mu-icon>
+        <h1>{{ listTitle }}</h1>
+      </mu-flex>
+      <mu-divider></mu-divider>
+      <mu-row gutter class="margin-top-md padding-top-lg padding-bottom-lg">
         <mu-col span="12">
           <div v-if="Object.keys(this.itemCompletionData).length > 0">
             <mu-flex :key="itemData._id" v-for="itemData in itemCompletionData">
@@ -38,6 +44,19 @@
           </div>
         </mu-col>
       </mu-row>
+      <mu-divider></mu-divider>
+      <mu-flex justify-content="center" class="margin-top margin-left-sm">
+        <mu-button
+          large
+          flat
+          color="primary"
+          @click="$router.push({ name: 'dashboard' })"
+          class="margin-left-sm"
+        >
+          <mu-icon left value="arrow_back"></mu-icon>
+          Back to Dashboard
+        </mu-button>
+      </mu-flex>
     </mu-container>
   </div>
 </template>
