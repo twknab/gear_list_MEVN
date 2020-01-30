@@ -44,7 +44,9 @@
           </div>
         </mu-col>
       </mu-row>
-      <mu-divider></mu-divider>
+      <mu-divider
+        v-if="Object.keys(this.itemCompletionData).length > 0"
+      ></mu-divider>
       <mu-flex justify-content="center" class="margin-top margin-left-sm">
         <mu-button
           large

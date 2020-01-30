@@ -3,7 +3,7 @@
     <mu-container>
       <mu-row gutter>
         <mu-col span="12">
-          <h1>Add New Gear Item</h1>
+          <h1>New Gear Item</h1>
         </mu-col>
       </mu-row>
       <mu-row span="12">

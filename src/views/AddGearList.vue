@@ -3,7 +3,7 @@
     <mu-container>
       <mu-row gutter>
         <mu-col span="12">
-          <h1>Add Gear List</h1>
+          <h1>New Gear List</h1>
         </mu-col>
       </mu-row>
       <mu-row span="12">
@@ -34,7 +34,7 @@
           <!-- Submit Button -->
           <mu-button full-width round color="purpleA400" @click="submit" large>
             <mu-icon value="add"></mu-icon>
-            <span class="button-icon">Add New List</span>
+            <span class="button-icon">New List</span>
           </mu-button>
           <div class="margin-top-md">
             <mu-button
