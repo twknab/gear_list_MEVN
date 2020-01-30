@@ -265,7 +265,7 @@ img {
 }
 
 .mu-checkbox {
-  transform: scale(1.3) !important;
+  /* transform: scale(1.3) !important; */
 }
 
 /* Reduces margin on small mobile */

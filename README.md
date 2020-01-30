@@ -39,6 +39,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ View All Gear Items (pagination)
 - ✅ View All Gear Lists (pagination)
 - ✅ Front & Backend Validation on All Forms
+- ⭕️ Add sum of Oz weight (and in Lbs) to Gear List View (add kg?)
 - ⭕️ Contact Page (bug report?)
 - ⭕️ TOS modal on registration?
 - ⭕️ Deploy [LARGE]
@@ -75,6 +76,9 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 - Public Share Link
 - Sharing of Gear Lists (Add a Friend)
 - Password Reset
+- User Profile & Edit Profile
+- Mark List Complete, when All Items are Completed for that List
+- Import REI items (do they have an open API? Get item name & weight)
 
 ### Known Bugs / ISSUES
 
