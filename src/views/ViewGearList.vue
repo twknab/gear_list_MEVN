@@ -111,10 +111,21 @@ export default {
           this.itemCompletionData = listAndItems.data.itemCompletions;
           this.listTitle = listAndItems.data.listName;
           this.listId = listAndItems.data.listId;
+          this.getTotalPackedOz();
         })
         .catch(err => {
           console.log("Fetching item completion data failed: ", err);
         });
+    },
+    getTotalPackedOz: function() {
+      let totalOz = 0;
+      this.itemCompletionData.forEach(data => {
+        console.log(data);
+        if (data.completed) {
+          totalOz = totalOz + data.gearItem.weight;
+        }
+      });
+      this.totalPackedOz = totalOz;
     },
     updateCompleteStatus(item, listId, complete) {
       if (complete) {
