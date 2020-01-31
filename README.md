@@ -41,13 +41,14 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Front & Backend Validation on All Forms
 - ✅ Add sum of Oz weight to Gear List View
   - ⭕️ When click on Weight cycle between Oz -> Lbs -> Kg
+- ⭕️ Fix Attach Item margin issue
 - ⭕️ Contact Page (bug report?)
 - ⭕️ TOS modal on registration?
 - ⭕️ Deploy [LARGE]
 
 ## Most Important TODO Before Deployment
 
-- !!! Style View Gear List page to Wow
+- !!!! Attach Item Dropdown Margin issue
 - !!! Fix refresh issue bug - wtf
 - !!  Contact Page
 - !   TOS modal popup
