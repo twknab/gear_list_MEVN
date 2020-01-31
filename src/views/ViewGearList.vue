@@ -120,7 +120,6 @@ export default {
     getTotalPackedOz: function() {
       let totalOz = 0;
       this.itemCompletionData.forEach(data => {
-        console.log(data);
         if (data.completed) {
           totalOz = totalOz + data.gearItem.weight;
         }
