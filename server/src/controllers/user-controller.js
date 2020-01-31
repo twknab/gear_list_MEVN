@@ -57,6 +57,9 @@ module.exports = {
     User.findOne({ _id: req.session.userId })
       .then(user => {
         user = user.hidePasswordSalt();
+        console.log("This is the user");
+        console.log(user);
+
         return res.status(200).json(user);
       })
       .catch(error => {

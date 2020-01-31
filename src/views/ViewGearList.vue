@@ -29,6 +29,18 @@
                 "
               ></mu-checkbox>
             </mu-flex>
+            <div>
+              <h2>
+                Weight Packed:
+                <mu-chip
+                  color="purpleA700"
+                  text-color="white"
+                  class="margin-left-sm total-weight"
+                  >{{ totalPackedOz }}</mu-chip
+                >
+                <span class="margin-left-sm">of {{ totalGrossOz }} oz.</span>
+              </h2>
+            </div>
           </div>
           <div v-else>
             <mu-flex justify-content="center" class="margin-top">
@@ -55,8 +67,7 @@
           @click="$router.push({ name: 'dashboard' })"
           class="margin-left-sm"
         >
-          <mu-icon left value="arrow_back"></mu-icon>
-          Back to Dashboard
+          <mu-icon left value="arrow_back"></mu-icon>Back to Dashboard
         </mu-button>
       </mu-flex>
     </mu-container>
@@ -73,8 +84,18 @@ export default {
       errors: {},
       listTitle: "",
       listId: null,
+      totalPackedOz: 0,
       itemCompletionData: [{ completed: false, gearItem: {} }]
     };
+  },
+  computed: {
+    totalGrossOz: function() {
+      let totalOz = 0;
+      this.itemCompletionData.forEach(data => {
+        totalOz = totalOz + data.gearItem.weight;
+      });
+      return totalOz;
+    }
   },
   created() {
     this.updatePrimaryNav();
@@ -96,6 +117,12 @@ export default {
         });
     },
     updateCompleteStatus(item, listId, complete) {
+      if (complete) {
+        this.totalPackedOz += item.weight;
+      } else {
+        let decrementedWeight = (this.totalPackedOz -= item.weight);
+        this.totalPackedOz = decrementedWeight > 0 ? decrementedWeight : 0;
+      }
       GearItemService.changeCompleteStatus(item._id, listId, complete)
         .then(() => {
           // refresh gear items
@@ -139,6 +166,11 @@ export default {
   /* -webkit-transform: scale(1.3); */
   transform: scale(1.2);
   color: rgb(170, 0, 255);
+}
+.total-weight {
+  font-size: 18px;
+  margin: auto 5px auto 5px;
+  text-shadow: 1px 1px 1px black;
 }
 /* .mu-checkbox-icon-uncheck {
     position: absolute;

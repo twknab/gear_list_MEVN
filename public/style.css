@@ -264,10 +264,6 @@ img {
   box-shadow: 2px 1px 1px #3b3b3b !important;
 }
 
-.mu-checkbox {
-  /* transform: scale(1.3) !important; */
-}
-
 /* Reduces margin on small mobile */
 @media only screen and (max-width: 375px) {
   .mu-text-field-input {

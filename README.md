@@ -39,7 +39,8 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ View All Gear Items (pagination)
 - ✅ View All Gear Lists (pagination)
 - ✅ Front & Backend Validation on All Forms
-- ⭕️ Add sum of Oz weight (and in Lbs) to Gear List View (add kg?)
+- ✅ Add sum of Oz weight to Gear List View
+  - ⭕️ When click on Weight cycle between Oz -> Lbs -> Kg
 - ⭕️ Contact Page (bug report?)
 - ⭕️ TOS modal on registration?
 - ⭕️ Deploy [LARGE]
@@ -82,6 +83,5 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 
 ### Known Bugs / ISSUES
 
-- [LARGE] Make "Gear List" View prettier (this is the prime thing here), and include back button or nav back to Dashboard
 - [MEDIUM] User session seems to time out. What's going on?
   - If no valid session, can re-direct to dashboard?
