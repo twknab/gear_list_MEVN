@@ -66,7 +66,7 @@
       <mu-col span="12" sm="12" md="12" lg="6" xl="6">
         <mu-flex justify-content="center">
           <SeeMoreButton
-            :buttonText="'See All Items'"
+            :buttonText="'See More Items'"
             :currentLimit="this.limit"
             @updateLimit="updateGearItemsLimit"
           />
