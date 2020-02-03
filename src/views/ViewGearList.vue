@@ -124,13 +124,13 @@ export default {
           this.itemCompletionData = listAndItems.data.itemCompletions;
           this.listTitle = listAndItems.data.listName;
           this.listId = listAndItems.data.listId;
-          this.getTotalPackedOz();
+          this.getTotalPackedWeight();
         })
         .catch(err => {
           console.log("Fetching item completion data failed: ", err);
         });
     },
-    getTotalPackedOz: function() {
+    getTotalPackedWeight: function() {
       let totalOz = 0;
       let totalLbs = 0;
       this.itemCompletionData.forEach(data => {
@@ -138,6 +138,7 @@ export default {
           totalOz = totalOz + data.gearItem.weight;
         }
       });
+      // Developer Note: now that you have the gross total in OZ, you could convert to other units. You could also expand your gear item model to allow for different unit inputs,  but all this busisness logic here would have to be updated to reflect the new pattern
       totalLbs = totalOz / 16;
       this.totalPackedLbs = this.roundToAtMostTwoDecimalPlaces(totalLbs);
       this.totalPackedOz = totalOz;

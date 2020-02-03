@@ -46,7 +46,7 @@
           <!-- Submit Button -->
           <mu-button full-width round color="purpleA400" @click="submit" large>
             <mu-icon value="update"></mu-icon>
-            <span class="button-icon">Update List</span>
+            <span class="button-icon">Update Item</span>
           </mu-button>
           <div class="margin-top-md">
             <mu-button
