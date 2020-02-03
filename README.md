@@ -39,7 +39,9 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ View All Gear Items (load more feature)
 - ✅ View All Gear Lists (load more feature)
 - ✅ Front & Backend Validation on All Forms
+- ⭕️ Lockdown your backend Controller APIs -- make sure user has a req.session else redirect back home
 - ⭕️ Contact Page (bug report?)
+- ⭕️ About Page (how about just combined with Contact page above?)
 - ⭕️ TOS modal on registration?
 - ⭕️ Deploy [LARGE]
 
@@ -81,3 +83,4 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - [MEDIUM] User session seems to time out. What's going on?
   - If no valid session, can re-direct to dashboard?
   - consider using router.beforeEach to remedy this
+  - UPDATE: We might have a solution here..invoked using beforeEach to check if user was logged in..we'll see..

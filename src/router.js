@@ -5,7 +5,13 @@ import UserService from "./services/UserService";
 
 Vue.use(Router);
 
-const routesThatAreSafe = ["/", "/about", "/register", "/login", "/contact"];
+const routesThatDoNotRequireAuthentication = [
+  "/",
+  "/about",
+  "/register",
+  "/login",
+  "/contact"
+];
 const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
@@ -84,25 +90,25 @@ const router = new Router({
   }
 });
 
+/*
+  Read more about `router.beforeEach` here: 
+  https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards
+*/
 router.beforeEach((to, from, next) => {
-  console.log("GOING TO: ===> ", to.path);
-  console.log("COMING FROM: <==== ", from.path);
-  if (routesThatAreSafe.includes(to.path) === false) {
+  if (routesThatDoNotRequireAuthentication.includes(to.path) === false) {
     // user must be authenticaed, check now:
     UserService.getLoggedInUser()
       .then(() => {
         next();
       })
       .catch(err => {
-        next(err); // if no user retreived will fail here abd run `router.onError()`
+        // if no user retreived will fail here abd run `router.onError()`
+        next(err);
       });
   } else {
     // safe and no authentication needed
     next();
   }
-  /*
-    Read more here: https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards
-  */
 });
 
 router.onError(() => {
