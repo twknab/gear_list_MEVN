@@ -40,7 +40,6 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ View All Gear Lists (pagination)
 - ✅ Front & Backend Validation on All Forms
 - ✅ Add sum of Oz weight to Gear List View
-  - ⭕️ When click on Weight cycle between Oz -> Lbs -> Kg
 - ⭕️ Fix Attach Item margin issue
 - ⭕️ Contact Page (bug report?)
 - ⭕️ TOS modal on registration?
@@ -79,6 +78,7 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 - Sharing of Gear Lists (Add a Friend)
 - Password Reset
 - User Profile & Edit Profile
+- Unit conversion options for Gear Item and Gear List Weight (currently Oz but could support g/Kg)
 - Mark List Complete, when All Items are Completed for that List
 - Import REI items (do they have an open API? Get item name & weight)
 

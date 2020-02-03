@@ -35,10 +35,13 @@
                 <mu-chip
                   color="purpleA700"
                   text-color="white"
-                  class="margin-left-sm total-weight"
-                  >{{ totalPackedOz }}</mu-chip
+                  class="margin-left-sm total-weight-chip"
+                  >{{ totalPackedLbs }}</mu-chip
                 >
-                <span class="margin-left-sm">of {{ totalGrossOz }} oz.</span>
+                <span class="margin-left-sm">of {{ totalGrossLbs }} lbs.</span>
+                <span class="list-weight-larger-units margin-left-sm">
+                  ({{ totalPackedOz }} of {{ totalGrossOz }} oz.)</span
+                >
               </h2>
             </div>
           </div>
@@ -85,6 +88,7 @@ export default {
       listTitle: "",
       listId: null,
       totalPackedOz: 0,
+      totalPackedLbs: 0,
       itemCompletionData: [{ completed: false, gearItem: {} }]
     };
   },
@@ -95,6 +99,15 @@ export default {
         totalOz = totalOz + data.gearItem.weight;
       });
       return totalOz;
+    },
+    totalGrossLbs: function() {
+      let totalOz = 0;
+      this.itemCompletionData.forEach(data => {
+        totalOz = totalOz + data.gearItem.weight;
+      });
+      let totalOzInLbs = totalOz / 16;
+      totalOzInLbs = this.roundToAtMostTwoDecimalPlaces(totalOzInLbs);
+      return totalOzInLbs;
     }
   },
   created() {
@@ -119,11 +132,14 @@ export default {
     },
     getTotalPackedOz: function() {
       let totalOz = 0;
+      let totalLbs = 0;
       this.itemCompletionData.forEach(data => {
         if (data.completed) {
           totalOz = totalOz + data.gearItem.weight;
         }
       });
+      totalLbs = totalOz / 16;
+      this.totalPackedLbs = this.roundToAtMostTwoDecimalPlaces(totalLbs);
       this.totalPackedOz = totalOz;
     },
     updateCompleteStatus(item, listId, complete) {
@@ -141,6 +157,9 @@ export default {
         .catch(err => {
           console.log("Marking complete failed...", err);
         });
+    },
+    roundToAtMostTwoDecimalPlaces(floatValue) {
+      return Math.round(floatValue * 100 + Number.EPSILON) / 100;
     }
   }
 };
@@ -177,10 +196,16 @@ export default {
   transform: scale(1.2);
   color: rgb(170, 0, 255);
 }
-.total-weight {
+.total-weight-chip {
   font-size: 18px;
   margin: auto 5px auto 5px;
   text-shadow: 1px 1px 1px black;
+  cursor: default !important;
+}
+.list-weight-larger-units {
+  font-weight: 300;
+  font-size: 18px;
+  font-style: italic;
 }
 /* .mu-checkbox-icon-uncheck {
     position: absolute;
