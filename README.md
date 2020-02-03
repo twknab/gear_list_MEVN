@@ -26,28 +26,25 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ User Login and Registration (Password Hashing/Decryption)
 - ✅ Gear Item Creation
 - ✅ Gear List Creation
-- ✅ Add/Remove a Gear Item to a Gear List via Attach
-- ✅ Edit Gear Item
-- ✅ Remove a Gear Item from a Gear List Via Gear Item Attach Icon
+- ✅ Attach or Detach (+/-) Gear Items to a Gear Lists
+- ✅ Edit a Gear Item
+- ✅ Edit a Gear List
 - ✅ View a Gear List and All Items
-- ✅ Mark items as completed/incomplete
-- ✅ Edit Gear List (Name)
+- ✅ View Gear List and Packed vs Total Gear Item Weight
+- ✅ Mark Gear Items as completed/incomplete
 - ✅ Delete a Gear Item
+- ✅ Delete a Gear List
 - ✅ Confirmation on Gear Item Deletion
-- ✅ Delete a Gear List (but not any Items within)
 - ✅ Confirmation on Gear List Deletion
-- ✅ View All Gear Items (pagination)
-- ✅ View All Gear Lists (pagination)
+- ✅ View All Gear Items (load more feature)
+- ✅ View All Gear Lists (load more feature)
 - ✅ Front & Backend Validation on All Forms
-- ✅ Add sum of Oz weight to Gear List View
-- ⭕️ Fix Attach Item margin issue
 - ⭕️ Contact Page (bug report?)
 - ⭕️ TOS modal on registration?
 - ⭕️ Deploy [LARGE]
 
 ## Most Important TODO Before Deployment
 
-- !!!! Attach Item Dropdown Margin issue
 - !!! Fix refresh issue bug - wtf
 - !!  Contact Page
 - !   TOS modal popup
@@ -86,3 +83,4 @@ If we add a friends feature, it's important that Friends cannot delete one anoth
 
 - [MEDIUM] User session seems to time out. What's going on?
   - If no valid session, can re-direct to dashboard?
+  - consider using router.beforeEach to remedy this

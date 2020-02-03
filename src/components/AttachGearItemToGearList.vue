@@ -34,6 +34,7 @@
                 :label="gearList.title"
                 :value="gearList._id"
                 prop="selections"
+                class="gear-list-dropdown-attach-selections"
               ></mu-option>
             </mu-select>
           </mu-form-item>
@@ -191,5 +192,8 @@ export default {
 .mu-alert {
   margin-bottom: 10px !important;
   color: rgb(189, 159, 48) !important;
+}
+.gear-list-dropdown-attach-selections .mu-item-title {
+  line-height: 25px;
 }
 </style>

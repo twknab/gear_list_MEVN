@@ -20,6 +20,7 @@
                 :value="itemData.gearItem.title"
                 v-model="itemData.completed"
                 :label="itemData.gearItem.title"
+                class="gear-item-checkbox"
                 @change="
                   updateCompleteStatus(
                     itemData.gearItem,
@@ -182,19 +183,21 @@ export default {
   color: lightgray;
   font-weight: lighter;
 }
-/* input[type="checkbox"] {
-  transform: scale(2, 2);
-} */
-.mu-checkbox {
+.gear-item-checkbox {
   margin-left: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.gear-item-checkbox .mu-checkbox-icon {
+  margin-right: 14px;
 }
 
 .mu-checkbox-checked .mu-checkbox-icon-checked,
 .mu-checkbox-icon-uncheck {
   opacity: 1;
-  /* -webkit-transform: scale(1.3); */
-  transform: scale(1.2);
+  -webkit-transform: scale(1.3);
+  -moz-transform: scale(1.3);
+  transform: scale(1.3);
   color: rgb(170, 0, 255);
 }
 .total-weight-chip {
@@ -208,13 +211,4 @@ export default {
   font-size: 18px;
   font-style: italic;
 }
-/* .mu-checkbox-icon-uncheck {
-    position: absolute;
-    left: 0;
-    top: 0;
-    transform: scale(1.3);
-    opacity: 1;
-    -webkit-transition: opacity 1s cubic-bezier(.23,1,.32,1) .2s;
-    transition: opacity 1s cubic-bezier(.23,1,.32,1) .2s;
-} */
 </style>
