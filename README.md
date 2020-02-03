@@ -21,7 +21,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - (1) Make sure `mongod` is running. (2) from `~/` run `npm run serve` and (3) from `~/server` run `npm start`.
 - Load [localhost:8080](https://localhost:8080) to see the application running locally.
 
-## Features 
+## Features
 
 - ✅ User Login and Registration (Password Hashing/Decryption)
 - ✅ Gear Item Creation
@@ -64,15 +64,12 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - Gear Item
 - Gear Item Completion
 
-### Note About Gear Items/Gear List Deletion
-
-If we add a friends feature, it's important that Friends cannot delete one another's gear items or gear lists if being shared. A friend should be able to delete a gear item, or delete a shared list from their view. But this should not delete the owner's (creator's) list or gear item.
-
 ### Wishlist Features (may require addt'l creation of models)
 
 - Remove a Gear Item from a Gear List Via Gear List View
 - Public Share Link
 - Sharing of Gear Lists (Add a Friend)
+  - > NOTE: If we add a friends feature, it's important that Friends cannot delete one another's gear items or gear lists if being shared. A friend should be able to delete a gear item, or delete a shared list from their view. But this should not delete the owner's (creator's) list or gear item.
 - Password Reset
 - User Profile & Edit Profile
 - Unit conversion options for Gear Item and Gear List Weight (currently Oz but could support g/Kg)
