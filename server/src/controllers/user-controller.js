@@ -54,18 +54,28 @@ module.exports = {
       });
   },
   getLoggedInById: (req, res) => {
-    User.findOne({ _id: req.session.userId })
-      .then(user => {
-        user = user.hidePasswordSalt();
-        console.log("This is the user");
-        console.log(user);
+    console.log("here is session id");
+    console.log(req.session.userId);
+    if (req.session.userId === undefined) {
+      return res
+        .status(403)
+        .json({ notAuthenticated: "You must be authenticated." });
+    } else {
+      User.findOne({ _id: req.session.userId })
+        .then(user => {
+          console.log("HERE IS WHAT WE FOUND");
+          console.log(user);
+          user = user.hidePasswordSalt();
+          console.log("This is the user");
+          console.log(user);
 
-        return res.status(200).json(user);
-      })
-      .catch(error => {
-        console.log(error);
-        return res.status(403).json(error.errors);
-      });
+          return res.status(200).json(user);
+        })
+        .catch(error => {
+          console.log(error);
+          return res.status(403).json(error.errors);
+        });
+    }
   },
   logout: (req, res) => {
     req.session.destroy(function(err) {

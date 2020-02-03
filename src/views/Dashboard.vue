@@ -198,17 +198,11 @@ export default {
       return greeting;
     }
   },
-  created() {
-    this.updatePrimaryNav(this.navItems);
-    this.getLoggedInUser();
+  beforeCreate() {
+    this.$emit("updateNavigation", navItems);
+    this.$emit("getGloballyLoggedInUser");
   },
   methods: {
-    updatePrimaryNav(navItems) {
-      this.$emit("updateNavigation", navItems);
-    },
-    getLoggedInUser() {
-      this.$emit("getGlobalUser");
-    },
     updateGearListsForUser(gearLists) {
       this.gearLists = Object.values(gearLists);
     },

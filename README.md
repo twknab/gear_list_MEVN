@@ -45,7 +45,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 ## Most Important TODO Before Deployment
 
-- !!! Fix refresh issue bug - wtf
+- !!! [Fix refresh issue bug - wtf](https://stackoverflow.com/questions/35411773/laravel-5-1-vue-js-vue-router-beforeeach-authservice)
 - !!  Contact Page
 - !   TOS modal popup
 

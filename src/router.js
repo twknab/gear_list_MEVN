@@ -1,10 +1,12 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import UserService from "./services/UserService";
 
 Vue.use(Router);
 
-export default new Router({
+const routesThatAreSafe = ["/", "/about", "/register", "/login", "/contact"];
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -81,3 +83,31 @@ export default new Router({
     return { x: 0, y: 0 };
   }
 });
+
+router.beforeEach((to, from, next) => {
+  console.log("GOING TO: ===> ", to.path);
+  console.log("COMING FROM: <==== ", from.path);
+  if (routesThatAreSafe.includes(to.path) === false) {
+    // user must be authenticaed, check now:
+    UserService.getLoggedInUser()
+      .then(() => {
+        next();
+      })
+      .catch(err => {
+        next(err); // if no user retreived will fail here abd run `router.onError()`
+      });
+  } else {
+    // safe and no authentication needed
+    next();
+  }
+  /*
+    Read more here: https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards
+  */
+});
+
+router.onError(() => {
+  // this will run if `next(err)` is called
+  router.push({ name: "home" });
+});
+
+export default router;

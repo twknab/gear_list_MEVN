@@ -3,7 +3,7 @@
     <Navigation :navigationItems="nav" />
     <router-view
       @updateNavigation="updateNav"
-      @getGlobalUser="getGlobalUser"
+      @getGloballyLoggedInUser="getGloballyLoggedInUser"
       :user="loggedInUser"
     />
   </div>
@@ -32,7 +32,7 @@ export default {
       }
       this.nav = navItems;
     },
-    getGlobalUser() {
+    getGloballyLoggedInUser() {
       UserService.getLoggedInUser()
         .then(response => {
           this.loggedInUser = response.data;
