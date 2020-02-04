@@ -177,7 +177,7 @@ export default {
   position: relative;
   top: 10px;
 }
-.mu-checkbox-checked .mu-checkbox-label {
+.mu-checkbox.gear-item-checkbox.mu-checkbox-checked {
   text-decoration: line-through;
   font-style: italic;
   color: lightgray;
@@ -187,11 +187,9 @@ export default {
   margin-left: 20px;
   margin-bottom: 25px;
 }
-
 .gear-item-checkbox .mu-checkbox-icon {
   margin-right: 14px;
 }
-
 .mu-checkbox-checked .mu-checkbox-icon-checked,
 .mu-checkbox-icon-uncheck {
   opacity: 1;

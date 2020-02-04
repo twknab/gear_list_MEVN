@@ -1,6 +1,6 @@
 const User = require("mongoose").model("User");
 
-module.exports = {
+let UserController = {
   createUser: (req, res) => {
     User.create(req.body)
       .then(newUser => {
@@ -54,21 +54,12 @@ module.exports = {
       });
   },
   getLoggedInById: (req, res) => {
-    console.log("here is session id");
-    console.log(req.session.userId);
-    if (req.session.userId === undefined) {
-      return res
-        .status(403)
-        .json({ notAuthenticated: "You must be authenticated." });
+    if (req.session.hasOwnProperty("userId") === false) {
+      return res.status(403).json({ error: "You must be authenticated." });
     } else {
       User.findOne({ _id: req.session.userId })
         .then(user => {
-          console.log("HERE IS WHAT WE FOUND");
-          console.log(user);
           user = user.hidePasswordSalt();
-          console.log("This is the user");
-          console.log(user);
-
           return res.status(200).json(user);
         })
         .catch(error => {
@@ -78,13 +69,28 @@ module.exports = {
     }
   },
   logout: (req, res) => {
-    req.session.destroy(function(err) {
-      if (err) {
-        console.log(err);
-        return res.status(403).json(err);
-      } else {
-        return res.status(200).json({ success: "User has been logged out." });
+    if (UserController.isAuthenticated(req, res)) {
+      req.session.destroy(function(err) {
+        if (err) {
+          console.log(err);
+          return res.status(403).json(err);
+        } else {
+          return res.status(200).json({ success: "User has been logged out." });
+        }
+      });
+    }
+  },
+  isAuthenticated: (req, res) => {
+    const hasSession = req.hasOwnProperty("session");
+    if (hasSession) {
+      const hasSessionUserId = req.session.hasOwnProperty("userId");
+      if (hasSessionUserId) {
+        return true;
       }
-    });
+    }
+    res.status(403).json({ error: "Not allowed." });
+    return false;
   }
 };
+
+module.exports = UserController;
