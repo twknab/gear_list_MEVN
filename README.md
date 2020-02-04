@@ -39,7 +39,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ View All Gear Items (load more feature)
 - ✅ View All Gear Lists (load more feature)
 - ✅ Front & Backend Validation on All Forms
-- ⭕️ Lockdown your backend Controller APIs -- make sure user has a req.session else redirect back home
+- ✅ API not publically accessible (must have valid logged in session to CRUD)
 - ⭕️ Contact Page (bug report?)
 - ⭕️ About Page (how about just combined with Contact page above?)
 - ⭕️ TOS modal on registration?
