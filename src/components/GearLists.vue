@@ -27,16 +27,25 @@
                     <mu-icon value="more_vert" size="36"></mu-icon>
                   </mu-button>
                   <mu-list slot="content">
+                    <!-- Quick Attach Items -->
+                    <mu-list-item
+                      button
+                      @click="attachItemsToList(gearList._id)"
+                      >Quick Attach</mu-list-item
+                    >
+                    <!-- View -->
                     <mu-list-item button @click="viewGearList(gearList._id)"
-                      >View</mu-list-item
+                      >View List</mu-list-item
                     >
+                    <!-- Edit -->
                     <mu-list-item button @click="editGearList(gearList._id)"
-                      >Edit</mu-list-item
+                      >Edit List</mu-list-item
                     >
+                    <!-- Delete -->
                     <mu-list-item
                       button
                       @click="confirmDeleteList(gearList._id)"
-                      >Delete</mu-list-item
+                      >Delete List</mu-list-item
                     >
                   </mu-list>
                 </mu-menu>
@@ -101,6 +110,8 @@ export default {
       limit: 4,
       open: false,
       userGearLists: [],
+      showAttachItemsDialog: false,
+      gearListToQuickAttach: "",
       isJustAFewLists: true,
       FILE_BUG: "Kindly file a bug report."
     };
@@ -118,6 +129,18 @@ export default {
   methods: {
     editGearList(gearListId) {
       this.$router.push({ name: "editGearList", params: { id: gearListId } });
+    },
+    attachItemsToList(gearListId) {
+      // TODO: Show dialog that holds all items
+      // you'll want to load this component
+      // src/components/AttachManyItemsToSingleList.vue
+      // and pass in `showAttachItemsDialog` and `gearListToQuickAttach`...
+      // ... this solution may have to be modified ...
+      // Item selections are added to said list
+      this.gearListToQuickAttach = gearListId;
+      this.showAttachItemsDialog = true;
+      console.log("here's the list you'll want to add to:");
+      console.log(gearListId);
     },
     viewGearList(gearListId) {
       // redirect to gear list view page passing in gearListId as a parameter

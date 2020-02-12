@@ -61,7 +61,7 @@
 <script>
 import GearListService from "@/services/GearListService.js";
 export default {
-  name: "AttachGearItemToGearList",
+  name: "AttachSingleItemToManyLists",
   props: {
     gearItem: {
       type: Object

@@ -20,7 +20,7 @@
               >
             </mu-list-item-content>
             <!-- Paperclip Attach Button -->
-            <AttachGearItemToGearList
+            <AttachSingleItemToManyLists
               :gearItem="gearItem"
               :gearLists="gearLists"
               @successMessage="updateSuccessMessage"
@@ -77,8 +77,7 @@
 </template>
 
 <script>
-// import userGearItems from "@/dummy_data/gearItemsDummyData.js";
-import AttachGearItemToGearList from "@/components/AttachGearItemToGearList.vue";
+import AttachSingleItemToManyLists from "@/components/AttachSingleItemToManyLists.vue";
 import GearItemService from "@/services/GearItemService.js";
 import AddGearItemButton from "@/components/buttons/AddGearItemButton";
 import SeeMoreButton from "@/components/buttons/SeeMoreButton";
@@ -94,7 +93,7 @@ export default {
     }
   },
   components: {
-    AttachGearItemToGearList,
+    AttachSingleItemToManyLists,
     AddGearItemButton,
     SeeMoreButton
   },

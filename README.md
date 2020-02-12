@@ -26,7 +26,8 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ User Login and Registration (Password Hashing/Decryption)
 - ✅ Gear Item Creation
 - ✅ Gear List Creation
-- ✅ Attach or Detach (+/-) Gear Items to a Gear Lists
+- ✅ Attach or Detach (+/-) Gear Lists to An Item (Paperclip Icon)
+- ⭕️ Attach or Detach (+/-) Gear Items to a Gear List (Quick Attach)
 - ✅ Edit a Gear Item
 - ✅ Edit a Gear List
 - ✅ View a Gear List and All Items
@@ -47,7 +48,6 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 ## Most Important TODO Before Deployment
 
-- !!! [Fix refresh issue bug - wtf](https://stackoverflow.com/questions/35411773/laravel-5-1-vue-js-vue-router-beforeeach-authservice)
 - !!  Contact Page
 - !   TOS modal popup
 
@@ -77,10 +77,3 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - Unit conversion options for Gear Item and Gear List Weight (currently Oz but could support g/Kg)
 - Mark List Complete, when All Items are Completed for that List
 - Import REI items (do they have an open API? Get item name & weight)
-
-### Known Bugs / ISSUES
-
-- [MEDIUM] User session seems to time out. What's going on?
-  - If no valid session, can re-direct to dashboard?
-  - consider using router.beforeEach to remedy this
-  - UPDATE: We might have a solution here..invoked using beforeEach to check if user was logged in..we'll see..
