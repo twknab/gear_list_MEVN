@@ -45,6 +45,11 @@ module.exports = function(app) {
     "/gear-list/find-list",
     GearListController.getGearListAndAllItemCompletions
   );
+  // Get all gear items that are NOT on a given list
+  app.post(
+    "/gear-list/find-list/diff-items",
+    GearListController.getGearListItemsNotAlreadyOnList
+  );
   // Update gear list
   app.post("/gear-list/update", GearListController.updateGearList);
   // Delete gear list

@@ -1,4 +1,5 @@
 const GearList = require("mongoose").model("GearList"),
+  GearItem = require("mongoose").model("GearItem"),
   GearItemCompletion = require("mongoose").model("GearItemCompletion"),
   UserController = require("./user-controller"),
   User = require("mongoose").model("User");
@@ -144,12 +145,30 @@ module.exports = {
   },
   getGearListAndAllItems: (req, res) => {
     if (UserController.isAuthenticated(req, res)) {
-      GearList.findOne({ _id: req.query.gearListId })
+      let gearListId = req.query.gearListId;
+      GearList.findOne({ _id: gearListId })
         .populate({
           path: "items"
         })
         .exec()
         .then(listAndItems => {
+          res.status(200).json(listAndItems);
+        })
+        .catch(err => {
+          res.status(500).json(err);
+        });
+    }
+  },
+  getGearListItemsNotAlreadyOnList: (req, res) => {
+    if (UserController.isAuthenticated(req, res)) {
+      let gearListId = req.body.gearListId;
+      GearList.findOne({ _id: gearListId })
+        .populate({
+          path: "items"
+        })
+        .exec()
+        .then(listAndItems => {
+          console.log("I GOT THE ITEMS");
           res.status(200).json(listAndItems);
         })
         .catch(err => {

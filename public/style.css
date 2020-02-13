@@ -265,6 +265,10 @@ img {
   box-shadow: 2px 1px 1px #3b3b3b !important;
 }
 
+.mu-select-no-data {
+  color: #ffffff !important;
+}
+
 /* Reduces margin on small mobile */
 @media only screen and (max-width: 375px) {
   .mu-text-field-input {

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <mu-list-item button @click="openAlertDialog">Attach Items</mu-list-item>
     <mu-form ref="attachGearItemForm" :model="gearItemSelections">
       <mu-dialog
         title="Attach Items"
@@ -12,6 +11,7 @@
         :overlay-close="false"
         :open.sync="openAlert"
         transition="slide-bottom"
+        class="itemAttachDialog"
       >
         <mu-col span="12" lg="12" sm="12">
           <mu-form-item prop="selections">
@@ -31,7 +31,7 @@
                 :value="gearList._id"
                 prop="selections"
                 class="gear-list-dropdown-attach-selections"
-              ></mu-option> -->
+              ></mu-option>-->
             </mu-select>
           </mu-form-item>
         </mu-col>
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import GearItemService from "@/services/GearItemService.js";
+import GearListService from "@/services/GearListService.js";
 export default {
   name: "AttachManyItemsToSingleList",
   props: {
@@ -64,6 +64,9 @@ export default {
     },
     openAlert: {
       type: Boolean
+    },
+    gearListToAttach: {
+      type: String
     }
   },
   data() {
@@ -71,28 +74,31 @@ export default {
       gearItemSelections: {
         values: []
       },
+      listItemsCanAdd: {},
       errors: {}
     };
   },
+  beforeMount() {
+    // console.log("BEFORE MOUNT");
+    // console.log(this.gearListToAttach);
+    // this.getListItemsNotOnAlreadyAdded();
+  },
   methods: {
-    openAlertDialog() {
-      this.openAlert = true;
-      this.getListItems();
-    },
     closeAlertDialog() {
-      this.openAlert = false;
+      this.$emit("closeAttachItemsDialog");
     },
-    getListItems() {
+    getListItemsNotOnAlreadyAdded() {
       // TODO: GET GEAR LIST ITEMS
       // GearItemService ...
-      //
-      // GearListService.findListsWithItem(this.gearItem._id)
-      //   .then(result => {
-      //     this.gearItemSelections.values = result.data.map(list => list._id);
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
+      console.log("Fetching items for...");
+      console.log(this.gearListToAttach);
+      GearListService.getItemsNotOnList(this.gearListToAttach)
+        .then(listItems => {
+          this.listItemsCanAdd = listItems.data;
+        })
+        .catch(err => {
+          console.log("Something's gone wrong: ", err);
+        });
     },
     attachItemsToGearList() {
       // TODO: ATTACH ITEMS TO GEAR LISTS

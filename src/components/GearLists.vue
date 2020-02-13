@@ -30,7 +30,7 @@
                     <!-- Quick Attach Items -->
                     <mu-list-item
                       button
-                      @click="attachItemsToList(gearList._id)"
+                      @click="showAttachItemsToListDialog(gearList._id)"
                       >Quick Attach</mu-list-item
                     >
                     <!-- View -->
@@ -65,6 +65,12 @@
             </mu-flex>
           </div>
         </div>
+        <!-- This dialog opens when quick attach is triggered -->
+        <AttachManyItemsToSingleList
+          :openAlert="this.showAttachItemsDialog"
+          :gearListToAttach="this.gearListToQuickAttach"
+          @closeAttachItemsDialog="closeAttachItemsDialog"
+        />
       </mu-col>
     </mu-row>
     <mu-row v-if="isJustAFewLists" gutter>
@@ -92,6 +98,7 @@
 <script>
 import GearListService from "@/services/GearListService.js";
 import AddGearListButton from "@/components/buttons/AddGearListButton";
+import AttachManyItemsToSingleList from "@/components/AttachManyItemsToSingleList";
 import SeeMoreButton from "@/components/buttons/SeeMoreButton";
 import ModelConstants from "@/constants/modelConstants";
 export default {
@@ -103,6 +110,7 @@ export default {
   },
   components: {
     AddGearListButton,
+    AttachManyItemsToSingleList,
     SeeMoreButton
   },
   data() {
@@ -130,17 +138,11 @@ export default {
     editGearList(gearListId) {
       this.$router.push({ name: "editGearList", params: { id: gearListId } });
     },
-    attachItemsToList(gearListId) {
-      // TODO: Show dialog that holds all items
-      // you'll want to load this component
-      // src/components/AttachManyItemsToSingleList.vue
-      // and pass in `showAttachItemsDialog` and `gearListToQuickAttach`...
-      // ... this solution may have to be modified ...
-      // Item selections are added to said list
+    showAttachItemsToListDialog(gearListId) {
       this.gearListToQuickAttach = gearListId;
       this.showAttachItemsDialog = true;
-      console.log("here's the list you'll want to add to:");
-      console.log(gearListId);
+      console.log("this is the gear list id from front gear lists component");
+      console.log(this.gearListToQuickAttach);
     },
     viewGearList(gearListId) {
       // redirect to gear list view page passing in gearListId as a parameter
@@ -165,6 +167,9 @@ export default {
           console.log(err);
           this.errors = err;
         });
+    },
+    closeAttachItemsDialog() {
+      this.showAttachItemsDialog = false;
     },
     confirmDeleteList(listId) {
       // trigger dialogue, run below if confirmed
