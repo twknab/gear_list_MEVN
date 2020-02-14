@@ -120,7 +120,7 @@ module.exports = {
         req.body.gearItemId,
         req.body.itemSavedListsIds,
         req.body.itemSelectedListIds,
-        // this is callback being passed into attachToLists
+        // callback function as argument
         function(result) {
           if (result.success) {
             result.successMessage = `Successfully updated all Gear Item attachments!`;
