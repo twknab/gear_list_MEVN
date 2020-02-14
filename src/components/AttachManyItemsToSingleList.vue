@@ -2,7 +2,7 @@
   <div>
     <mu-form ref="attachGearItemForm" :model="gearItemSelections">
       <mu-dialog
-        title="Attach Items"
+        v-bind:title="`Attach to ${this.gearListTitle}`"
         width="600"
         max-width="80%"
         overlay-color="#000"
@@ -65,7 +65,7 @@ export default {
     openAlert: {
       type: Boolean
     },
-    gearListToAttach: {
+    gearListToAttachDashboard: {
       type: String
     }
   },
@@ -74,27 +74,31 @@ export default {
       gearItemSelections: {
         values: []
       },
+      gearListTitle: "",
       listItemsCanAdd: {},
       errors: {}
     };
   },
-  beforeMount() {
-    // console.log("BEFORE MOUNT");
-    // console.log(this.gearListToAttach);
-    // this.getListItemsNotOnAlreadyAdded();
+  watch: {
+    gearListToAttachDashboard: function(listId) {
+      console.log("WATCHER HERE GOING TO GET LISTID");
+      console.log(listId);
+      this.getListItemsNotOnAlreadyAdded(listId);
+    }
   },
   methods: {
     closeAlertDialog() {
       this.$emit("closeAttachItemsDialog");
     },
-    getListItemsNotOnAlreadyAdded() {
-      // TODO: GET GEAR LIST ITEMS
-      // GearItemService ...
+    getListItemsNotOnAlreadyAdded(listId) {
       console.log("Fetching items for...");
-      console.log(this.gearListToAttach);
-      GearListService.getItemsNotOnList(this.gearListToAttach)
+      console.log(listId);
+      GearListService.getItemsNotOnList({ gearListId: listId })
         .then(listItems => {
-          this.listItemsCanAdd = listItems.data;
+          console.log("here's what is returned");
+          console.log(listItems.data);
+          this.gearListTitle = listItems.data.title;
+          this.listItemsCanAdd = listItems.data.items;
         })
         .catch(err => {
           console.log("Something's gone wrong: ", err);

@@ -162,6 +162,7 @@ module.exports = {
   getGearListItemsNotAlreadyOnList: (req, res) => {
     if (UserController.isAuthenticated(req, res)) {
       let gearListId = req.body.gearListId;
+      console.log("hello");
       GearList.findOne({ _id: gearListId })
         .populate({
           path: "items"
@@ -169,6 +170,9 @@ module.exports = {
         .exec()
         .then(listAndItems => {
           console.log("I GOT THE ITEMS");
+          // TODO: Finish diffing out items after fetching all.
+          // TODO: Remove the excess commenting.
+          console.log(listAndItems);
           res.status(200).json(listAndItems);
         })
         .catch(err => {

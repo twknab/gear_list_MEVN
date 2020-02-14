@@ -2,10 +2,10 @@
   <div>
     <mu-list-item-action>
       <mu-button icon @click="openAlertDialog">
-        <mu-icon color="purpleA400" value="attach_file" size="36"></mu-icon>
+        <mu-icon color="purpleA400" value="_file" size="36"></mu-icon>
       </mu-button>
     </mu-list-item-action>
-    <mu-form ref="attachGearItemForm" :model="gearListSelections">
+    <mu-form ref="GearItemForm" :model="gearListSelections">
       <mu-dialog
         v-bind:title="`${gearItem.title}`"
         width="600"
@@ -34,7 +34,7 @@
                 :label="gearList.title"
                 :value="gearList._id"
                 prop="selections"
-                class="gear-list-dropdown-attach-selections"
+                class="gear-list-dropdown--selections"
               ></mu-option>
             </mu-select>
           </mu-form-item>
@@ -50,7 +50,7 @@
           slot="actions"
           flat
           color="primary"
-          @click="attachItemToGearLists"
+          @click="ItemToGearLists"
           >Update</mu-button
         >
       </mu-dialog>
@@ -61,7 +61,7 @@
 <script>
 import GearListService from "@/services/GearListService.js";
 export default {
-  name: "AttachSingleItemToManyLists",
+  name: "SingleItemToManyLists",
   props: {
     gearItem: {
       type: Object
@@ -96,10 +96,10 @@ export default {
           console.log(err);
         });
     },
-    attachItemToGearLists() {
+    ItemToGearLists() {
       GearListService.findListsWithItem(this.gearItem._id)
         .then(itemSavedLists => {
-          GearListService.attachItemToLists({
+          GearListService.ItemToLists({
             gearItemId: this.gearItem._id,
             itemSavedListsIds: itemSavedLists.data.map(list => list._id),
             itemSelectedListIds: this.gearListSelections.values
@@ -193,7 +193,7 @@ export default {
   margin-bottom: 10px !important;
   color: rgb(189, 159, 48) !important;
 }
-.gear-list-dropdown-attach-selections .mu-item-title {
+.gear-list-dropdown--selections .mu-item-title {
   line-height: 25px;
 }
 </style>

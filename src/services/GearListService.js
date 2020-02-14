@@ -26,6 +26,7 @@ export default {
     return api.get(`/gear-list/find-list?gearListId=${gearListId}`);
   },
   getItemsNotOnList(gearListId) {
+    console.log("hellooo");
     return api.post("/gear-list/find-list/diff-items", gearListId);
   },
   getListAndItemCompletions(gearListId) {

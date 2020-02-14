@@ -68,7 +68,7 @@
         <!-- This dialog opens when quick attach is triggered -->
         <AttachManyItemsToSingleList
           :openAlert="this.showAttachItemsDialog"
-          :gearListToAttach="this.gearListToQuickAttach"
+          :gearListToAttachDashboard="this.gearListToQuickAttachDashboard"
           @closeAttachItemsDialog="closeAttachItemsDialog"
         />
       </mu-col>
@@ -119,7 +119,7 @@ export default {
       open: false,
       userGearLists: [],
       showAttachItemsDialog: false,
-      gearListToQuickAttach: "",
+      gearListToQuickAttachDashboard: "",
       isJustAFewLists: true,
       FILE_BUG: "Kindly file a bug report."
     };
@@ -139,10 +139,10 @@ export default {
       this.$router.push({ name: "editGearList", params: { id: gearListId } });
     },
     showAttachItemsToListDialog(gearListId) {
-      this.gearListToQuickAttach = gearListId;
+      this.gearListToQuickAttachDashboard = gearListId;
       this.showAttachItemsDialog = true;
       console.log("this is the gear list id from front gear lists component");
-      console.log(this.gearListToQuickAttach);
+      console.log(this.gearListToQuickAttachDashboard);
     },
     viewGearList(gearListId) {
       // redirect to gear list view page passing in gearListId as a parameter
