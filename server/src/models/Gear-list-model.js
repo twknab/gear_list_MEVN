@@ -30,22 +30,6 @@ const GearListSchema = new Schema(
   }
 );
 
-//////////////////////////
-//
-//  UNCOMMENT FOR PRE VALIDATE & SAVE METHODS
-//
-//////////////////////////
-
-// GearListSchema.pre("validate", function(next) {
-//   console.log("Do something before validation here..");
-//   next();
-// });
-
-// GearListSchema.pre("save", function(next) {
-//   console.log("Saving...");
-//   next();
-// });
-
 GearListSchema.methods.attachToLists = function(
   itemId,
   savedListIds,
