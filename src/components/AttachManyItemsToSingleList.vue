@@ -24,14 +24,14 @@
               v-model="gearItemSelections.values"
               prop="selections"
             >
-              <!-- <mu-option
-                v-for="(gearList, key) in gearLists"
+              <mu-option
+                v-for="(gearItem, key) in this.listItemsCanAdd"
                 :key="key"
-                :label="gearList.title"
-                :value="gearList._id"
+                :label="gearItem.title"
+                :value="gearItem._id"
                 prop="selections"
                 class="gear-list-dropdown-attach-selections"
-              ></mu-option>-->
+              ></mu-option>
             </mu-select>
           </mu-form-item>
         </mu-col>
@@ -93,7 +93,7 @@ export default {
     getListItemsNotOnAlreadyAdded(listId) {
       console.log("Fetching items for...");
       console.log(listId);
-      GearListService.getItemsNotOnList({ gearListId: listId })
+      GearListService.attachManyItemsToOneList({ gearListId: listId })
         .then(listItems => {
           console.log("here's what is returned");
           console.log(listItems.data);
@@ -103,34 +103,6 @@ export default {
         .catch(err => {
           console.log("Something's gone wrong: ", err);
         });
-    },
-    attachItemsToGearList() {
-      // TODO: ATTACH ITEMS TO GEAR LISTS
-      // GearItemService ...
-      //
-      // GearListService.findListsWithItem(this.gearItem._id)
-      //   .then(itemSavedLists => {
-      //     GearListService.attachItemToLists({
-      //       gearItemId: this.gearItem._id,
-      //       itemSavedListsIds: itemSavedLists.data.map(list => list._id),
-      //       itemSelectedListIds: this.gearItemSelections.values
-      //     })
-      //       .then(response => {
-      //         if (response.data.success) {
-      //           this.$emit("successMessage", response.data.successMessage);
-      //           this.closeAlertGotoDashboard();
-      //         } else {
-      //           this.$emit("failureMessage", response.data.errors);
-      //           this.closeAlertGotoDashboard();
-      //         }
-      //       })
-      //       .catch(err => {
-      //         console.log(err);
-      //       });
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
     },
     closeAlertGotoDashboard() {
       this.openAlert = false;

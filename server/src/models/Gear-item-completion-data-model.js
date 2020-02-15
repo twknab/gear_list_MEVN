@@ -2,7 +2,7 @@ const mongoose = require("mongoose"),
   Schema = mongoose.Schema;
 
 // Setup a schema:
-const GearItemCompletionSchema = new Schema(
+const GearItemCompletionDataSchema = new Schema(
   {
     gearItem: {
       type: Schema.Types.ObjectId,
@@ -26,7 +26,7 @@ const GearItemCompletionSchema = new Schema(
   }
 );
 
-GearItemCompletionSchema.methods.getOrCreateItemCompletionData = function(
+GearItemCompletionDataSchema.methods.getOrCreateItemCompletionData = function(
   listAndItems,
   gearListId,
   callback
@@ -35,7 +35,10 @@ GearItemCompletionSchema.methods.getOrCreateItemCompletionData = function(
   let items = listAndItems.items;
   let itemIds = items.map(item => item._id);
   // get gear completion data for existing items:
-  GearItemCompletion.find({ gearItem: { $in: itemIds }, gearList: gearListId })
+  GearItemCompletionData.find({
+    gearItem: { $in: itemIds },
+    gearList: gearListId
+  })
     .then(itemCompletionData => {
       // map item ids with completion data into array
       let itemsWithData = itemCompletionData.map(completionData =>
@@ -56,9 +59,9 @@ GearItemCompletionSchema.methods.getOrCreateItemCompletionData = function(
         })
       );
       // create item completion data
-      GearItemCompletion.create(itemCompletionDataNeedingCreating)
+      GearItemCompletionData.create(itemCompletionDataNeedingCreating)
         .then(() => {
-          GearItemCompletionSchema.methods.getCompletionDataAndItems(
+          GearItemCompletionDataSchema.methods.getCompletionDataAndItems(
             itemIds,
             gearListId,
             callback
@@ -74,12 +77,12 @@ GearItemCompletionSchema.methods.getOrCreateItemCompletionData = function(
     });
 };
 
-GearItemCompletionSchema.methods.getCompletionDataAndItems = function(
+GearItemCompletionDataSchema.methods.getCompletionDataAndItems = function(
   itemIds,
   gearListId,
   callback
 ) {
-  GearItemCompletion.find({
+  GearItemCompletionData.find({
     gearItem: { $in: itemIds },
     gearList: gearListId
   })
@@ -97,8 +100,8 @@ GearItemCompletionSchema.methods.getCompletionDataAndItems = function(
 };
 
 // Invoke our model using our schema and export
-const GearItemCompletion = mongoose.model(
-  "GearItemCompletion",
-  GearItemCompletionSchema
+const GearItemCompletionData = mongoose.model(
+  "GearItemCompletionData",
+  GearItemCompletionDataSchema
 );
-module.exports = GearItemCompletion;
+module.exports = GearItemCompletionData;

@@ -1,6 +1,5 @@
 const GearList = require("mongoose").model("GearList"),
-  GearItem = require("mongoose").model("GearItem"),
-  GearItemCompletion = require("mongoose").model("GearItemCompletion"),
+  GearItemCompletionData = require("mongoose").model("GearItemCompletionData"),
   UserController = require("./user-controller"),
   User = require("mongoose").model("User");
 
@@ -91,7 +90,7 @@ module.exports = {
   },
   deleteGearList: (req, res) => {
     if (UserController.isAuthenticated(req, res)) {
-      GearItemCompletion.find({ gearList: req.query.gearListId })
+      GearItemCompletionData.find({ gearList: req.query.gearListId })
         .remove()
         .exec()
         .then(() => {
@@ -114,9 +113,9 @@ module.exports = {
         });
     }
   },
-  attachItem: (req, res) => {
+  attachOneItemToManyLists: (req, res) => {
     if (UserController.isAuthenticated(req, res)) {
-      GearList.schema.methods.attachToLists(
+      GearList.schema.methods.attachOneItemToManyLists(
         req.body.gearItemId,
         req.body.itemSavedListsIds,
         req.body.itemSelectedListIds,
@@ -130,6 +129,29 @@ module.exports = {
           return res.json(result);
         }
       );
+    }
+  },
+  attachManyItemsToSingleList: (req, res) => {
+    if (UserController.isAuthenticated(req, res)) {
+      let gearListId = req.body.gearListId;
+      console.log("hello");
+      GearList.findOne({ _id: gearListId })
+        .populate({
+          path: "items"
+        })
+        .exec()
+        .then(listAndItems => {
+          console.log("I GOT THE ITEMS");
+          // TODO: Map existing item ids into array
+          // TODO: Pass into model method you built
+          // TODO: Pass back the resuluts
+          // TODO: Bonus points -- refactor your other "diff" feature, right now it uses 2 gearlist services (see if the first one being used is necessary for existing features)
+          console.log(listAndItems);
+          res.status(200).json(listAndItems);
+        })
+        .catch(err => {
+          res.status(500).json(err);
+        });
     }
   },
   getGearListsBelongingToItem: (req, res) => {
@@ -159,27 +181,6 @@ module.exports = {
         });
     }
   },
-  getGearListItemsNotAlreadyOnList: (req, res) => {
-    if (UserController.isAuthenticated(req, res)) {
-      let gearListId = req.body.gearListId;
-      console.log("hello");
-      GearList.findOne({ _id: gearListId })
-        .populate({
-          path: "items"
-        })
-        .exec()
-        .then(listAndItems => {
-          console.log("I GOT THE ITEMS");
-          // TODO: Finish diffing out items after fetching all.
-          // TODO: Remove the excess commenting.
-          console.log(listAndItems);
-          res.status(200).json(listAndItems);
-        })
-        .catch(err => {
-          res.status(500).json(err);
-        });
-    }
-  },
   getGearListAndAllItemCompletions: (req, res) => {
     if (UserController.isAuthenticated(req, res)) {
       GearList.findOne({ _id: req.body.gearListId })
@@ -188,7 +189,7 @@ module.exports = {
         })
         .exec()
         .then(listAndItems => {
-          GearItemCompletion.schema.methods.getOrCreateItemCompletionData(
+          GearItemCompletionData.schema.methods.getOrCreateItemCompletionData(
             listAndItems,
             req.body.gearListId,
             // callback function

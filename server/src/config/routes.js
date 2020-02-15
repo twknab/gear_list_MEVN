@@ -31,8 +31,13 @@ module.exports = function(app) {
   app.post("/gear-list", GearListController.createGearList);
   // Get all user's gear lists
   app.get("/gear-list", GearListController.getUserGearLists);
-  // Add/remove gear item to gear lists
-  app.post("/gear-list/attach", GearListController.attachItem);
+  // Add/remove one gear item to many gear lists
+  app.post("/gear-list/attach", GearListController.attachOneItemToManyLists);
+  // Add/remove many gear items from one gear list
+  app.post(
+    "/gear-list/attach/many-items",
+    GearListController.attachManyItemsToSingleList
+  );
   // Get gear lists belonging to gear item
   app.get(
     "/gear-list/find-item",
@@ -44,11 +49,6 @@ module.exports = function(app) {
   app.post(
     "/gear-list/find-list",
     GearListController.getGearListAndAllItemCompletions
-  );
-  // Get all gear items that are NOT on a given list
-  app.post(
-    "/gear-list/find-list/diff-items",
-    GearListController.getGearListItemsNotAlreadyOnList
   );
   // Update gear list
   app.post("/gear-list/update", GearListController.updateGearList);

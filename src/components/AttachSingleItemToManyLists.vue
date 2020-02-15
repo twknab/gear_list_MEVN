@@ -2,7 +2,7 @@
   <div>
     <mu-list-item-action>
       <mu-button icon @click="openAlertDialog">
-        <mu-icon color="purpleA400" value="_file" size="36"></mu-icon>
+        <mu-icon color="purpleA400" value="attach_file" size="36"></mu-icon>
       </mu-button>
     </mu-list-item-action>
     <mu-form ref="GearItemForm" :model="gearListSelections">
@@ -50,7 +50,7 @@
           slot="actions"
           flat
           color="primary"
-          @click="ItemToGearLists"
+          @click="AttachItemToGearLists"
           >Update</mu-button
         >
       </mu-dialog>
@@ -61,7 +61,7 @@
 <script>
 import GearListService from "@/services/GearListService.js";
 export default {
-  name: "SingleItemToManyLists",
+  name: "AttachSingleItemToManyLists",
   props: {
     gearItem: {
       type: Object
@@ -96,10 +96,10 @@ export default {
           console.log(err);
         });
     },
-    ItemToGearLists() {
+    AttachItemToGearLists() {
       GearListService.findListsWithItem(this.gearItem._id)
         .then(itemSavedLists => {
-          GearListService.ItemToLists({
+          GearListService.attachOneItemToManyLists({
             gearItemId: this.gearItem._id,
             itemSavedListsIds: itemSavedLists.data.map(list => list._id),
             itemSelectedListIds: this.gearListSelections.values

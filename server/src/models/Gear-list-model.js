@@ -30,34 +30,51 @@ const GearListSchema = new Schema(
   }
 );
 
-GearListSchema.methods.attachToLists = function(
+GearListSchema.methods.attachOneItemToManyLists = function(
   itemId,
   savedListIds,
   selectedListIds,
   callback
 ) {
-  const listsAddItem = [];
-  const listsRemoveItem = [];
+  const listsToAddItemTo = [];
+  const listsToRemoveItemFrom = [];
 
   // Find any lists that were removed during selection
   savedListIds.forEach(savedListId => {
     if (!selectedListIds.includes(savedListId)) {
-      listsRemoveItem.push(savedListId);
+      listsToRemoveItemFrom.push(savedListId);
     }
   });
 
   // Find any lists that were added during selection
   selectedListIds.forEach(selectedListId => {
     if (!savedListIds.includes(selectedListId)) {
-      listsAddItem.push(selectedListId);
+      listsToAddItemTo.push(selectedListId);
     }
   });
 
   // Remove item from any lists:
-  if (listsRemoveItem.length > 0) {
-    listsRemoveItem.forEach(listId => {
+  if (listsToRemoveItemFrom.length > 0) {
+    listsToRemoveItemFrom.forEach(listId => {
       GearList.findOneAndUpdate({ _id: listId }, { $pull: { items: itemId } })
-        .then()
+        .then(() => {
+          GearItemCompletionData.findOneAndDelete({
+            gearItem: itemId,
+            gearList: listId
+          })
+            .then()
+            .catch(err => {
+              console.log("Error removing completion data for item...");
+              console.log(err);
+              callback({
+                success: false,
+                errors: [
+                  "Something went wrong removing completion data for item...",
+                  FILE_BUG
+                ]
+              });
+            });
+        })
         .catch(err => {
           console.log("Error removing item from list...");
           console.log(err);
@@ -73,15 +90,99 @@ GearListSchema.methods.attachToLists = function(
   }
 
   // Add item to any lists:
-  if (listsAddItem.length > 0) {
-    listsAddItem.forEach(listId => {
+  if (listsToAddItemTo.length > 0) {
+    listsToAddItemTo.forEach(listId => {
       GearList.findOneAndUpdate(
         { _id: listId },
         { $addToSet: { items: itemId } }
       )
         .then()
         .catch(err => {
-          console.log("Error adding item from list...");
+          console.log("Error adding item to list...");
+          console.log(err);
+          callback({
+            success: false,
+            errors: ["Something went wrong adding item to list...", FILE_BUG]
+          });
+        });
+    });
+  }
+
+  callback({ success: true });
+};
+
+GearListSchema.methods.attachManyItemsToOneList = function(
+  listId,
+  existingItemIds,
+  selectedItemIds,
+  callback
+) {
+  const itemsToAddToList = [];
+  const itemsToRemoveFromList = [];
+
+  // Find any items that were removed during selection
+  existingItemIds.forEach(existingItemId => {
+    if (!selectedItemIds.includes(existingItemId)) {
+      itemsToRemoveFromList.push(existingItemId);
+    }
+  });
+
+  // Find any items that were added during selection
+  selectedItemIds.forEach(selectedItemId => {
+    if (!existingItemIds.includes(selectedItemId)) {
+      itemsToAddToList.push(selectedItemId);
+    }
+  });
+
+  // ---------------------------
+  // TODO: Figure out this logic
+  // ---------------------------
+  // Remove items from list:
+  if (itemsToRemoveFromList.length > 0) {
+    itemsToRemoveFromList.forEach(itemId => {
+      GearList.findOneAndUpdate({ _id: listId }, { $pull: { items: itemId } })
+        .then(() => {
+          GearItemCompletionData.findOneAndDelete({
+            gearItem: itemId,
+            gearList: listId
+          })
+            .then()
+            .catch(err => {
+              console.log("Error removing completion data for item...");
+              console.log(err);
+              callback({
+                success: false,
+                errors: [
+                  "Something went wrong removing completion data for item...",
+                  FILE_BUG
+                ]
+              });
+            });
+        })
+        .catch(err => {
+          console.log("Error removing item from list...");
+          console.log(err);
+          callback({
+            success: false,
+            errors: [
+              "Something went wrong removing item from list...",
+              FILE_BUG
+            ]
+          });
+        });
+    });
+  }
+
+  // Add items to any list:
+  if (itemsToAddToList.length > 0) {
+    itemsToAddToList.forEach(itemId => {
+      GearList.findOneAndUpdate(
+        { _id: listId },
+        { $addToSet: { items: itemId } }
+      )
+        .then()
+        .catch(err => {
+          console.log("Error adding item to list...");
           console.log(err);
           callback({
             success: false,
@@ -96,5 +197,5 @@ GearListSchema.methods.attachToLists = function(
 
 // Invoke our model using our schema and export
 const GearList = mongoose.model("GearList", GearListSchema);
-const GearItem = mongoose.model("GearItem");
+const GearItemCompletionData = mongoose.model("GearItemCompletionData");
 module.exports = GearList;

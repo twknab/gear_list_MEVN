@@ -16,18 +16,18 @@ export default {
   getAllGearListsForUser() {
     return api.get("/gear-list");
   },
-  attachItemToLists(gearItemAndGearLists) {
+  attachOneItemToManyLists(gearItemAndGearLists) {
     return api.post("/gear-list/attach", gearItemAndGearLists);
+  },
+  attachManyItemsToOneList(gearListId) {
+    console.log("hellooo");
+    return api.post("/gear-list/find-list/many-items", gearListId);
   },
   findListsWithItem(gearItemId) {
     return api.get(`/gear-list/find-item?gearItemId=${gearItemId}`);
   },
   getListAndItems(gearListId) {
     return api.get(`/gear-list/find-list?gearListId=${gearListId}`);
-  },
-  getItemsNotOnList(gearListId) {
-    console.log("hellooo");
-    return api.post("/gear-list/find-list/diff-items", gearListId);
   },
   getListAndItemCompletions(gearListId) {
     return api.post("/gear-list/find-list", gearListId);

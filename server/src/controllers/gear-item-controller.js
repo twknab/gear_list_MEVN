@@ -1,7 +1,7 @@
 const mongoose = require("mongoose"),
   GearItem = mongoose.model("GearItem"),
   GearList = mongoose.model("GearList"),
-  GearItemCompletion = mongoose.model("GearItemCompletion"),
+  GearItemCompletionData = mongoose.model("GearItemCompletionData"),
   UserController = require("./user-controller"),
   User = mongoose.model("User");
 
@@ -119,7 +119,7 @@ module.exports = {
             _id: req.query.gearItemId
           })
             .then(() => {
-              GearItemCompletion.deleteMany({
+              GearItemCompletionData.deleteMany({
                 gearItem: req.query.gearItemId
               })
                 .then(() => {
@@ -147,7 +147,7 @@ module.exports = {
       const gearItemId = req.query.gearItemId;
       const gearListId = req.query.gearListId;
       const gearCompletedStatus = req.query.gearCompletedStatus;
-      GearItemCompletion.findOneAndUpdate(
+      GearItemCompletionData.findOneAndUpdate(
         {
           gearList: gearListId,
           gearItem: gearItemId
