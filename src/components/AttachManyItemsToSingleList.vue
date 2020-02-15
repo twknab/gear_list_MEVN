@@ -25,7 +25,7 @@
               prop="selections"
             >
               <mu-option
-                v-for="(gearItem, key) in this.listItemsCanAdd"
+                v-for="(gearItem, key) in this.allUserItems"
                 :key="key"
                 :label="gearItem.title"
                 :value="gearItem._id"
@@ -75,17 +75,23 @@ export default {
       gearItemSelections: {
         values: []
       },
+      gearListId: "",
       gearListTitle: "",
-      listItemsCanAdd: {},
+      allUserItems: {},
       errors: {}
     };
+  },
+  updated() {
+    // this.getAllItemsBelongingToUser(this.gearListId);
+    console.log("%%%");
   },
   watch: {
     gearListToAttachDashboard: function(listId) {
       console.log("WATCHER HERE GOING TO GET LISTID");
       console.log(listId);
       // this.attachItemsToGearList(listId);
-      this.getAllItemsBelongingToUser();
+      this.gearListId = listId;
+      this.getAllItemsBelongingToUser(listId);
       // TODO: Get gear list for listId
       // also get all items
       // belonging to user...
@@ -96,12 +102,27 @@ export default {
     closeAlertDialog() {
       this.$emit("closeAttachItemsDialog");
     },
-    getAllItemsBelongingToUser() {
+    getAllItemsBelongingToUser(listId) {
+      // get all user items and update UI for current list items
       GearItemService.getAllGearItemsForUser()
         .then(userItems => {
-          // now get LIST (gearListTitle) and ITEMS
+          this.allUserItems = Object.values(userItems.data.gearItems);
           // add existing item IDs to "gearItemSelections.values"
-          this.listItemsCanAdd = Object.values(userItems.data.gearItems);
+          GearListService.getListAndItems(listId)
+            .then(userListAndListItems => {
+              this.gearListTitle = userListAndListItems.data.title;
+              let existingListItems = userListAndListItems.data.items.map(
+                item => item._id
+              );
+              console.log("%%%% EXISTING ITEMS %%%%%%");
+              console.log(existingListItems);
+              console.log(this.gearItemSelections);
+              console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%");
+              // this.gearItemSelections.values.concat(existingListItems);
+              this.gearItemSelections.values = existingListItems;
+              // console.log(this.gearItemSelections.values);
+            })
+            .catch();
         })
         .catch(err => {
           console.log(
@@ -121,7 +142,7 @@ export default {
           console.log("SERVER SIDE ROUTING COMPLETE: Here's what is returned:");
           console.log(listItems.data);
           this.gearListTitle = listItems.data.title;
-          this.listItemsCanAdd = listItems.data.items;
+          this.allUserItems = listItems.data.items;
         })
         .catch(err => {
           console.log(
