@@ -90,18 +90,20 @@ export default {
     closeAlertDialog() {
       this.$emit("closeAttachItemsDialog");
     },
-    getListItemsNotOnAlreadyAdded(listId) {
-      console.log("Fetching items for...");
-      console.log(listId);
+    attachItemsToGearList(listId) {
+      console.log(`Attaching items to gear list ${listId}.`);
       GearListService.attachManyItemsToOneList({ gearListId: listId })
         .then(listItems => {
-          console.log("here's what is returned");
+          console.log("SERVER SIDE ROUTING COMPLETE: Here's what is returned:");
           console.log(listItems.data);
           this.gearListTitle = listItems.data.title;
           this.listItemsCanAdd = listItems.data.items;
         })
         .catch(err => {
-          console.log("Something's gone wrong: ", err);
+          console.log(
+            "Something's gone wrong with server side routing.: ",
+            err
+          );
         });
     },
     closeAlertGotoDashboard() {
