@@ -56,6 +56,7 @@
 
 <script>
 import GearListService from "@/services/GearListService.js";
+import GearItemService from "@/services/GearItemService.js";
 export default {
   name: "AttachManyItemsToSingleList",
   props: {
@@ -83,16 +84,39 @@ export default {
     gearListToAttachDashboard: function(listId) {
       console.log("WATCHER HERE GOING TO GET LISTID");
       console.log(listId);
-      this.attachItemsToGearList(listId);
+      // this.attachItemsToGearList(listId);
+      this.getAllItemsBelongingToUser();
+      // TODO: Get gear list for listId
+      // also get all items
+      // belonging to user...
+      // then uncomment the method above
     }
   },
   methods: {
     closeAlertDialog() {
       this.$emit("closeAttachItemsDialog");
     },
+    getAllItemsBelongingToUser() {
+      GearItemService.getAllGearItemsForUser()
+        .then(userItems => {
+          // now get LIST (gearListTitle) and ITEMS
+          // add existing item IDs to "gearItemSelections.values"
+          this.listItemsCanAdd = Object.values(userItems.data.gearItems);
+        })
+        .catch(err => {
+          console.log(
+            "Something's gone wrong with server side routing.: ",
+            err
+          );
+        });
+    },
     attachItemsToGearList(listId) {
       console.log(`Attaching items to gear list ${listId}.`);
-      GearListService.attachManyItemsToOneList({ gearListId: listId })
+      // Get all items belonging to this user
+      GearListService.attachManyItemsToOneList({
+        gearListId: listId,
+        selectedListIds: this.gearItemSelections.values
+      })
         .then(listItems => {
           console.log("SERVER SIDE ROUTING COMPLETE: Here's what is returned:");
           console.log(listItems.data);

@@ -141,13 +141,24 @@ module.exports = {
         })
         .exec()
         .then(listAndItems => {
-          console.log("I GOT THE ITEMS");
-          // TODO: Map existing item ids into array
-          // TODO: Pass into model method you built
-          // TODO: Pass back the resuluts
-          // TODO: Bonus points -- refactor your other "diff" feature, right now it uses 2 gearlist services (see if the first one being used is necessary for existing features)
-          console.log(listAndItems);
-          res.status(200).json(listAndItems);
+          // Map existing item ids for diff'ing
+          let existingItems = listAndItems.items;
+          let existingItemsIds = existingItems.map(item => item._id);
+          GearList.schema.methods.attachManyItemsToOneList(
+            gearListId,
+            existingItemsIds,
+            req.body.selectedListIds,
+            // callback function as argument
+            function(result) {
+              if (result.success) {
+                result.successMessage = `Successfully attached all Gear Items!`;
+                // return res.status(201).json(result);
+                return res.status(200).json(listAndItems);
+              }
+              // error
+              return res.json(result);
+            }
+          );
         })
         .catch(err => {
           res.status(500).json(err);
