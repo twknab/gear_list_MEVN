@@ -83,7 +83,7 @@ export default {
     gearListToAttachDashboard: function(listId) {
       console.log("WATCHER HERE GOING TO GET LISTID");
       console.log(listId);
-      this.getListItemsNotOnAlreadyAdded(listId);
+      this.attachItemsToGearList(listId);
     }
   },
   methods: {
