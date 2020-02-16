@@ -72,7 +72,8 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 ### Wishlist Features (may require addt'l creation of models)
 
-- Remove a Gear Item from a Gear List Via Gear List View
+- Clicking Gear Item on dashboard displays dialog showing all Lists to which it is associated -- and a "delete" or "X" button to remove item from said list
+- ✅ ~~Remove a Gear Item from a Gear List Via Gear List View~~
 - Public Share Link
 - Sharing of Gear Lists (Add a Friend)
   - > NOTE: If we add a friends feature, it's important that Friends cannot delete one another's gear items or gear lists if being shared. A friend should be able to delete a gear item, or delete a shared list from their view. But this should not delete the owner's (creator's) list or gear item.

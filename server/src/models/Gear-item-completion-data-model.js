@@ -15,6 +15,11 @@ const GearItemCompletionDataSchema = new Schema(
       unique: true,
       required: true
     },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    },
     completed: {
       type: Boolean,
       required: true,
@@ -29,6 +34,7 @@ const GearItemCompletionDataSchema = new Schema(
 GearItemCompletionDataSchema.methods.getOrCreateItemCompletionData = function(
   listAndItems,
   gearListId,
+  userId,
   callback
 ) {
   // map list items id to eval for completion
@@ -55,7 +61,8 @@ GearItemCompletionDataSchema.methods.getOrCreateItemCompletionData = function(
       const itemCompletionDataNeedingCreating = itemsNeedingUpdate.map(
         itemMissingData => ({
           gearItem: mongoose.Types.ObjectId(itemMissingData),
-          gearList: mongoose.Types.ObjectId(gearListId)
+          gearList: mongoose.Types.ObjectId(gearListId),
+          user: mongoose.Types.ObjectId(userId)
         })
       );
       // create item completion data
@@ -64,6 +71,7 @@ GearItemCompletionDataSchema.methods.getOrCreateItemCompletionData = function(
           GearItemCompletionDataSchema.methods.getCompletionDataAndItems(
             itemIds,
             gearListId,
+            userId,
             callback
           );
         })
@@ -80,11 +88,13 @@ GearItemCompletionDataSchema.methods.getOrCreateItemCompletionData = function(
 GearItemCompletionDataSchema.methods.getCompletionDataAndItems = function(
   itemIds,
   gearListId,
+  userId,
   callback
 ) {
   GearItemCompletionData.find({
     gearItem: { $in: itemIds },
-    gearList: gearListId
+    gearList: gearListId,
+    user: userId
   })
     .populate("gearItem")
     .exec()

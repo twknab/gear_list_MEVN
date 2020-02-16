@@ -235,6 +235,7 @@ module.exports = {
           GearItemCompletionData.schema.methods.getOrCreateItemCompletionData(
             listAndItems,
             req.body.gearListId,
+            req.session.userId,
             // callback function
             resultData => {
               if (resultData.success === false) {
