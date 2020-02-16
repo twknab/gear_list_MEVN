@@ -68,7 +68,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - User
 - Gear List
 - Gear Item
-- Gear Item Completion
+- Gear Item Completion Data
 
 ### Wishlist Features (may require addt'l creation of models)
 
