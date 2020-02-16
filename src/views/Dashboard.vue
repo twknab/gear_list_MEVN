@@ -191,7 +191,9 @@ export default {
     timeGreeting: function() {
       const currentHour = new Date().getHours();
       let greeting = "";
-      if (0 <= currentHour && currentHour <= 11) {
+      if (0 <= currentHour && currentHour <= 5) {
+        greeting = "You must be up late or up early";
+      } else if (6 >= currentHour && currentHour <= 11) {
         greeting = "Good morning";
       } else if (12 >= currentHour && currentHour <= 16) {
         greeting = "Good afternoon";
