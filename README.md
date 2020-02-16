@@ -27,14 +27,13 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Gear Item Creation
 - ✅ Gear List Creation
 - ✅ Attach or Detach (+/-) Gear Lists to An Item (Paperclip Icon)
-- ⭕️ Attach or Detach (+/-) Gear Items to a Gear List (Quick Attach)
-  - TODO: Fix so lists update if new attachments are made through item-to-many-lists feature
-  - TODO: Have "update" actually run the mutation and attach/detach the list items
+- ✅ Attach or Detach (+/-) Gear Items to a Gear List (Quick Attach)
   - TODO: Can you refactor or clean up your logic at all?
 - ✅ Edit a Gear Item
 - ✅ Edit a Gear List
 - ✅ View a Gear List and All Items
 - ✅ View Gear List and Packed vs Total Gear Item Weight
+- ⭕️ View Gear List and Add/Remove Items
 - ✅ Mark Gear Items as completed/incomplete
 - ✅ Delete a Gear Item
 - ✅ Delete a Gear List
@@ -51,6 +50,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 ## Most Important TODO Before Deployment
 
+- !!! About
 - !!  Contact Page
 - !   TOS modal popup
 

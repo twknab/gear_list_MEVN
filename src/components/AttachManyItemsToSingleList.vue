@@ -92,11 +92,11 @@ export default {
       this.$emit("closeAttachItemsDialog");
     },
     getAllItemsBelongingToUser(listId) {
-      // get all user items and update UI for current list items
+      // get all items for user and update UI to reflect list items
       GearItemService.getAllGearItemsForUser()
         .then(userItems => {
           this.allUserItems = Object.values(userItems.data.gearItems);
-          // add existing item IDs to "gearItemSelections.values"
+          // add existing list items as chips
           GearListService.getListAndItems(listId)
             .then(userListAndListItems => {
               this.gearListTitle = userListAndListItems.data.title;
