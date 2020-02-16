@@ -134,6 +134,10 @@ img {
   padding: 15px !important;
 }
 
+.margin-top-xsm {
+  margin-top: 3px !important;
+}
+
 .margin-top-sm {
   margin-top: 5px !important;
 }
@@ -168,6 +172,10 @@ img {
 
 .margin-left-md {
   margin-left: 15px !important;
+}
+
+.margin-right-sm {
+  margin-right: 5px !important;
 }
 
 .margin-right-md {

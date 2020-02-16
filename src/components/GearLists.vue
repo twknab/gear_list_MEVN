@@ -18,7 +18,7 @@
               <mu-list-item-content>
                 <mu-list-item-title>{{ gearList.title }}</mu-list-item-title>
                 <mu-list-item-sub-title>
-                  {{ gearList.date }}
+                  Total Weight: {{ gearList.totalWeightInLbs }} lbs.
                 </mu-list-item-sub-title>
               </mu-list-item-content>
               <mu-list-item-action>
@@ -31,20 +31,44 @@
                     <mu-list-item
                       button
                       @click="showAttachItemsToListDialog(gearList._id)"
-                      >Quick Attach</mu-list-item
+                      ><mu-icon
+                        size="20"
+                        value="attach_file"
+                        color="#aa00ff"
+                        class="margin-right-sm margin-top-xsm"
+                      ></mu-icon>
+                      Quick Attach</mu-list-item
                     >
                     <!-- View -->
                     <mu-list-item button @click="viewGearList(gearList._id)"
+                      ><mu-icon
+                        size="20"
+                        value="search"
+                        color="#aa00ff"
+                        class="margin-right-sm margin-top-xsm"
+                      ></mu-icon
                       >View List</mu-list-item
                     >
                     <!-- Edit -->
                     <mu-list-item button @click="editGearList(gearList._id)"
+                      ><mu-icon
+                        size="20"
+                        value="edit"
+                        color="#aa00ff"
+                        class="margin-right-sm margin-top-xsm"
+                      ></mu-icon
                       >Edit List</mu-list-item
                     >
                     <!-- Delete -->
                     <mu-list-item
                       button
                       @click="confirmDeleteList(gearList._id)"
+                      ><mu-icon
+                        size="20"
+                        value="delete"
+                        color="#aa00ff"
+                        class="margin-right-sm margin-top-xsm"
+                      ></mu-icon
                       >Delete List</mu-list-item
                     >
                   </mu-list>
@@ -103,6 +127,7 @@ import AddGearListButton from "@/components/buttons/AddGearListButton";
 import AttachManyItemsToSingleList from "@/components/AttachManyItemsToSingleList";
 import SeeMoreButton from "@/components/buttons/SeeMoreButton";
 import ModelConstants from "@/constants/modelConstants";
+import UnitConversionUtils from "@/helpers/UnitConversionUtils.js";
 export default {
   name: "GearLists",
   props: {
@@ -128,6 +153,15 @@ export default {
       isJustAFewLists: true,
       FILE_BUG: "Kindly file a bug report."
     };
+  },
+  computed: {
+    getEachGearListTotalWeight: function() {
+      this.userGearLists.forEach(list => {
+        const itemWeights = list.items.map(item => item.weight);
+        list.totalWeightInLbs = UnitConversionUtils.totalGrossLbs(itemWeights);
+      });
+      return this.userGearLists;
+    }
   },
   watch: {
     watchDeleteListConfirmation: function(confirmation) {
@@ -165,6 +199,7 @@ export default {
       GearListService.getAllGearListsForUser()
         .then(response => {
           this.userGearLists = Object.values(response.data.gearLists);
+          this.userGearLists = this.getEachGearListTotalWeight();
           if (this.userGearLists.length < this.limit) {
             this.limit = this.userGearLists.length;
           }

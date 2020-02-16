@@ -47,10 +47,14 @@ module.exports = {
           path: "gearLists",
           options: {
             sort: "-updatedAt"
+          },
+          populate: {
+            path: "items"
           }
         })
         .exec()
         .then(userAndGearLists => {
+          console.log(userAndGearLists);
           return res.status(201).json(userAndGearLists);
         })
         .catch(error => {

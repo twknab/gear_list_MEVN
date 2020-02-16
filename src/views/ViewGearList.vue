@@ -137,6 +137,7 @@
 import AttachManyItemsToSingleList from "@/components/AttachManyItemsToSingleList";
 import GearListService from "@/services/GearListService.js";
 import GearItemService from "@/services/GearItemService.js";
+import UnitConversionUtils from "@/helpers/UnitConversionUtils.js";
 export default {
   name: "ViewGearList",
   components: {
@@ -164,20 +165,16 @@ export default {
   },
   computed: {
     totalGrossOz: function() {
-      let totalOz = 0;
-      this.itemCompletionData.forEach(data => {
-        totalOz = totalOz + data.gearItem.weight;
-      });
-      return totalOz;
+      let itemWeights = this.itemCompletionData.map(
+        data => data.gearItem.weight
+      );
+      return UnitConversionUtils.totalGrossOz(itemWeights);
     },
     totalGrossLbs: function() {
-      let totalOz = 0;
-      this.itemCompletionData.forEach(data => {
-        totalOz = totalOz + data.gearItem.weight;
-      });
-      let totalOzInLbs = totalOz / 16;
-      totalOzInLbs = this.roundToAtMostTwoDecimalPlaces(totalOzInLbs);
-      return totalOzInLbs;
+      let itemWeights = this.itemCompletionData.map(
+        data => data.gearItem.weight
+      );
+      return UnitConversionUtils.totalGrossLbs(itemWeights);
     }
   },
   created() {
