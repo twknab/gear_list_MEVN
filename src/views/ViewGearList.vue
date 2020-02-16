@@ -76,7 +76,9 @@
                   >{{ totalPackedLbs }}</mu-chip
                 >
                 <span class="margin-left-sm">of {{ totalGrossLbs }} lbs.</span>
-                <span class="list-weight-sub-units margin-left-sm">
+                <span
+                  class="list-weight-sub-units margin-left-sm margin-top-md"
+                >
                   {{ totalPackedOz }} of {{ totalGrossOz }} oz.</span
                 >
               </h2>
@@ -303,6 +305,7 @@ export default {
   display: block;
   font-weight: 300;
   font-size: 14px;
+  text-align: center;
 }
 .gear-list-total-weight-header {
   font-weight: 300;

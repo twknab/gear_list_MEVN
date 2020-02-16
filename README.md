@@ -26,23 +26,24 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ User Login and Registration (Password Hashing/Decryption)
 - ✅ Gear Item Creation
 - ✅ Gear List Creation
-- ✅ Attach or Detach (+/-) Gear Lists to An Item (Paperclip Icon)
-- ✅ Attach or Detach (+/-) Gear Items to a Gear List (Quick Attach)
-  - TODO: Can you refactor or clean up your logic at all?
+- ✅ Attach or Detach (+/-) Multiple Lists to an Item (One Item, Many Lists Attach)
+- ✅ Attach or Detach (+/-) Multiple Items to a List (Many Items, One List Attach)
 - ✅ Edit a Gear Item
 - ✅ Edit a Gear List
-- ✅ View a Gear List and All Items
-- ✅ View Gear List and Packed vs Total Gear Item Weight
-- ⭕️ View Gear List and Add/Remove Items
-- ✅ Mark Gear Items as completed/incomplete
-- ✅ Delete a Gear Item
-- ✅ Delete a Gear List
-- ✅ Confirmation on Gear Item Deletion
-- ✅ Confirmation on Gear List Deletion
-- ✅ View All Gear Items (load more feature)
-- ✅ View All Gear Lists (load more feature)
+- ✅ View a Gear List and All Items and Completion Status
+- ✅ View Gear List and Packed vs Total Items Weight
+- ✅ View Gear List and Add/Remove Items via Quick Attach Dialog
+- ✅ View Gear List and Remove Items via Quick Removal Button
+- ✅ Toggle Gear Items as Completed / Incomplete
+- ✅ Delete a Gear Item and associated Completion Data
+- ✅ Delete a Gear List and associated Completion Data
+- ✅ User Confirmation on Gear Item Deletion
+- ✅ User Confirmation on Gear List Deletion
+- ✅ View All Gear Items
+- ✅ View All Gear Lists
+- ✅ "Load More" feature for Lists and Items on Dashboard (4 is default limit)
 - ✅ Front & Backend Validation on All Forms
-- ✅ API not publically accessible (must have valid logged in session to CRUD)
+- ✅ API not publically accessible (must valid session to CRUD via API)
 - ⭕️ Contact Page (bug report?)
 - ⭕️ About Page (how about just combined with Contact page above?)
 - ⭕️ TOS modal on registration?
