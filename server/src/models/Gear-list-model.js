@@ -134,9 +134,6 @@ GearListSchema.methods.attachManyItemsToOneList = function(
     }
   });
 
-  // ---------------------------
-  // TODO: Figure out this logic
-  // ---------------------------
   // Remove items from list:
   if (itemsToRemoveFromList.length > 0) {
     itemsToRemoveFromList.forEach(itemId => {

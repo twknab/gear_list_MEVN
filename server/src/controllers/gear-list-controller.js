@@ -122,7 +122,7 @@ module.exports = {
         // callback function as argument
         function(result) {
           if (result.success) {
-            result.successMessage = `Successfully updated all Gear Item attachments!`;
+            result.successMessage = `Item successfully added to all lists!`;
             return res.status(201).json(result);
           }
           // error
@@ -134,7 +134,6 @@ module.exports = {
   attachManyItemsToSingleList: (req, res) => {
     if (UserController.isAuthenticated(req, res)) {
       let gearListId = req.body.gearListId;
-      console.log("hello");
       GearList.findOne({ _id: gearListId })
         .populate({
           path: "items"
@@ -151,9 +150,8 @@ module.exports = {
             // callback function as argument
             function(result) {
               if (result.success) {
-                result.successMessage = `Successfully attached all Gear Items!`;
-                // return res.status(201).json(result);
-                return res.status(200).json(listAndItems);
+                result.successMessage = `Items successfully added!`;
+                return res.status(200).json(result);
               }
               // error
               return res.json(result);
@@ -161,6 +159,7 @@ module.exports = {
           );
         })
         .catch(err => {
+          console.log(err);
           res.status(500).json(err);
         });
     }

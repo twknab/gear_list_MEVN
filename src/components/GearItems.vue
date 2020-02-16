@@ -23,6 +23,7 @@
             <AttachSingleItemToManyLists
               :gearItem="gearItem"
               :gearLists="gearLists"
+              @refreshGearLists="refreshDashboardGearLists"
               @successMessage="updateSuccessMessage"
               @failureMessage="updateFailureMessage"
             />
@@ -88,7 +89,7 @@ export default {
     gearLists: {
       type: Array
     },
-    deleteItemConfirmation: {
+    watchDeleteConfirmation: {
       type: Object
     }
   },
@@ -107,7 +108,7 @@ export default {
     };
   },
   watch: {
-    deleteItemConfirmation: function(confirmation) {
+    watchDeleteConfirmation: function(confirmation) {
       if (confirmation.success) {
         this.actuallyForeverDeleteGearItem(confirmation.id);
       }
@@ -156,6 +157,9 @@ export default {
           console.log(err);
           this.updateFailureMessage(["Problem deleting item.", this.FILE_BUG]);
         });
+    },
+    refreshDashboardGearLists() {
+      this.$emit("updateDashboardGearLists");
     },
     updateSuccessMessage(messageText) {
       this.$emit("updateDashboardSuccessMessage", messageText);

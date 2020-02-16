@@ -68,7 +68,9 @@
         <!-- This dialog opens when quick attach is triggered -->
         <AttachManyItemsToSingleList
           :openAlert="this.showAttachItemsDialog"
-          :gearListToAttachDashboard="this.gearListToQuickAttachDashboard"
+          :watchGearListToAttachDashboard="this.gearListToQuickAttachDashboard"
+          @successMessage="updateSuccessMessage"
+          @failureMessage="updateFailureMessage"
           @closeAttachItemsDialog="closeAttachItemsDialog"
         />
       </mu-col>
@@ -104,8 +106,11 @@ import ModelConstants from "@/constants/modelConstants";
 export default {
   name: "GearLists",
   props: {
-    deleteListConfirmation: {
+    watchDeleteListConfirmation: {
       type: Object
+    },
+    watchUpdateGearListsAfterAttach: {
+      type: Boolean
     }
   },
   components: {
@@ -125,9 +130,15 @@ export default {
     };
   },
   watch: {
-    deleteListConfirmation: function(confirmation) {
+    watchDeleteListConfirmation: function(confirmation) {
       if (confirmation.success) {
         this.actuallyForeverDeleteGearList(confirmation.id);
+      }
+    },
+    watchUpdateGearListsAfterAttach: function(status) {
+      console.log("4. Watcher is running here in gear lists component");
+      if (status === true) {
+        this.getAllUserGearLists();
       }
     }
   },
@@ -154,6 +165,7 @@ export default {
       this.getAllUserGearLists();
     },
     getAllUserGearLists() {
+      console.log("5. getting all gear lists now...");
       GearListService.getAllGearListsForUser()
         .then(response => {
           this.userGearLists = Object.values(response.data.gearLists);

@@ -17,7 +17,8 @@
       <h1>Gear Lists</h1>
       <!-- Gear Lists Component -->
       <GearLists
-        :deleteListConfirmation="deleteListConfirmation"
+        :watchDeleteListConfirmation="watchDeleteListConfirmation"
+        :watchUpdateGearListsAfterAttach="triggerGlobalGearListUpdate"
         @updateAllGearLists="updateGearListsForUser"
         @updateDashboardSuccessMessage="updateSuccessMessage"
         @updateDashboardFailureMessage="updateFailureMessages"
@@ -141,7 +142,8 @@
         <!-- Gear Items Component -->
         <GearItems
           :gearLists="gearLists"
-          :deleteItemConfirmation="deleteItemConfirmation"
+          :watchDeleteConfirmation="watchDeleteConfirmation"
+          @updateDashboardGearLists="updateDashboardGearLists"
           @updateDashboardSuccessMessage="updateSuccessMessage"
           @updateDashboardFailureMessage="updateFailureMessages"
           @updateDashboardDeleteConfirmation="updateConfimDeleteMessage"
@@ -177,11 +179,12 @@ export default {
       successMessage: "",
       failureMessages: [],
       deleteMessage: "",
+      triggerGlobalGearListUpdate: false,
       openDeleteDialogue: false,
       idToDelete: null,
       whatToDelete: null,
-      deleteItemConfirmation: { success: false, id: null },
-      deleteListConfirmation: { success: false, id: null }
+      watchDeleteConfirmation: { success: false, id: null },
+      watchDeleteListConfirmation: { success: false, id: null }
     };
   },
   computed: {
@@ -203,8 +206,14 @@ export default {
     this.$emit("getGloballyLoggedInUser");
   },
   methods: {
+    updateDashboardGearLists() {
+      console.log("3. dashboard talking...setting global update to true..");
+      this.triggerGlobalGearListUpdate = true;
+    },
     updateGearListsForUser(gearLists) {
       this.gearLists = Object.values(gearLists);
+      // reset global update status
+      this.triggerGlobalGearListUpdate = false;
     },
     updateSuccessMessage(message) {
       this.successMessage = message;
@@ -223,9 +232,12 @@ export default {
     confirmDelete() {
       // Actually delete the thing
       if (this.whatToDelete === ModelConstants.gearItem) {
-        this.deleteItemConfirmation = { success: true, id: this.idToDelete };
+        this.watchDeleteConfirmation = { success: true, id: this.idToDelete };
       } else if (this.whatToDelete === ModelConstants.gearList) {
-        this.deleteListConfirmation = { success: true, id: this.idToDelete };
+        this.watchDeleteListConfirmation = {
+          success: true,
+          id: this.idToDelete
+        };
       }
       this.openDeleteDialogue = false;
     },

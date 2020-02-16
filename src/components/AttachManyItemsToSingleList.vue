@@ -2,7 +2,7 @@
   <div>
     <mu-form ref="attachGearItemForm" :model="gearItemSelections">
       <mu-dialog
-        v-bind:title="`Attach to ${this.gearListTitle}`"
+        v-bind:title="`Attach Items to ${this.gearListTitle}`"
         width="600"
         max-width="80%"
         overlay-color="#000"
@@ -66,7 +66,7 @@ export default {
     openAlert: {
       type: Boolean
     },
-    gearListToAttachDashboard: {
+    watchGearListToAttachDashboard: {
       type: String
     }
   },
@@ -81,21 +81,10 @@ export default {
       errors: {}
     };
   },
-  updated() {
-    // this.getAllItemsBelongingToUser(this.gearListId);
-    console.log("%%%");
-  },
   watch: {
-    gearListToAttachDashboard: function(listId) {
-      console.log("WATCHER HERE GOING TO GET LISTID");
-      console.log(listId);
-      // this.attachItemsToGearList(listId);
+    watchGearListToAttachDashboard: function(listId) {
       this.gearListId = listId;
       this.getAllItemsBelongingToUser(listId);
-      // TODO: Get gear list for listId
-      // also get all items
-      // belonging to user...
-      // then uncomment the method above
     }
   },
   methods: {
@@ -114,15 +103,14 @@ export default {
               let existingListItems = userListAndListItems.data.items.map(
                 item => item._id
               );
-              console.log("%%%% EXISTING ITEMS %%%%%%");
-              console.log(existingListItems);
-              console.log(this.gearItemSelections);
-              console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%");
-              // this.gearItemSelections.values.concat(existingListItems);
               this.gearItemSelections.values = existingListItems;
-              // console.log(this.gearItemSelections.values);
             })
-            .catch();
+            .catch(err => {
+              console.log(
+                "Something's gone wrong with server side routing.: ",
+                err
+              );
+            });
         })
         .catch(err => {
           console.log(
@@ -131,29 +119,24 @@ export default {
           );
         });
     },
-    attachItemsToGearList(listId) {
-      console.log(`Attaching items to gear list ${listId}.`);
+    attachItemsToGearList() {
       // Get all items belonging to this user
       GearListService.attachManyItemsToOneList({
-        gearListId: listId,
+        gearListId: this.gearListId,
         selectedListIds: this.gearItemSelections.values
       })
-        .then(listItems => {
-          console.log("SERVER SIDE ROUTING COMPLETE: Here's what is returned:");
-          console.log(listItems.data);
-          this.gearListTitle = listItems.data.title;
-          this.allUserItems = listItems.data.items;
+        .then(response => {
+          if (response.data.success) {
+            this.$emit("successMessage", response.data.successMessage);
+            this.closeAlertDialog();
+          } else {
+            this.$emit("updateFailureMessage", response.data.errors);
+            this.closeAlertDialog();
+          }
         })
         .catch(err => {
-          console.log(
-            "Something's gone wrong with server side routing.: ",
-            err
-          );
+          console.log(err);
         });
-    },
-    closeAlertGotoDashboard() {
-      this.openAlert = false;
-      this.$router.push({ name: "dashboard" });
     }
   }
 };

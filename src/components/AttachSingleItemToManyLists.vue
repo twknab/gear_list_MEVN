@@ -7,7 +7,7 @@
     </mu-list-item-action>
     <mu-form ref="GearItemForm" :model="gearListSelections">
       <mu-dialog
-        v-bind:title="`${gearItem.title}`"
+        v-bind:title="`Attach ${gearItem.title} to Gear Lists`"
         width="600"
         max-width="80%"
         overlay-color="#000"
@@ -107,6 +107,8 @@ export default {
             .then(response => {
               if (response.data.success) {
                 this.$emit("successMessage", response.data.successMessage);
+                console.log("1. going to refresh list now");
+                this.$emit("refreshGearLists");
                 this.closeAlertGotoDashboard();
               } else {
                 this.$emit("failureMessage", response.data.errors);

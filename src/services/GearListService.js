@@ -19,9 +19,9 @@ export default {
   attachOneItemToManyLists(gearItemAndGearLists) {
     return api.post("/gear-list/attach", gearItemAndGearLists);
   },
-  attachManyItemsToOneList(gearListId) {
-    console.log("hellooo");
-    return api.post("/gear-list/attach/many-items", gearListId);
+  attachManyItemsToOneList(listIdAndItemSelections) {
+    console.log("hello");
+    return api.post("/gear-list/attach/many-items", listIdAndItemSelections);
   },
   findListsWithItem(gearItemId) {
     return api.get(`/gear-list/find-item?gearItemId=${gearItemId}`);
