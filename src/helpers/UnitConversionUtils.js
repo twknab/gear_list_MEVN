@@ -5,6 +5,11 @@ const unitConversion = {
     );
   },
   totalGrossLbs: function(itemWeights) {
+    console.log(itemWeights);
+    console.log("TOTAL");
+    if (itemWeights.length < 1) {
+      return 0;
+    }
     const totalWeightOz = this.totalGrossOz(itemWeights);
     let totalOzInLbs = totalWeightOz / 16;
     totalOzInLbs = this.roundToAtMostTwoDecimalPlaces(totalOzInLbs);

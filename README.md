@@ -73,6 +73,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 ### Wishlist Features (may require addt'l creation of models)
 
 - Clicking Gear Item on dashboard displays dialog showing all Lists to which it is associated -- and a "delete" or "X" button to remove item from said list
+- "Reset All Items" button list view that will reset completion data for all items on that list and then refresh the list to show all unchecked items
 - ✅ ~~Remove a Gear Item from a Gear List Via Gear List View~~
 - Public Share Link
 - Sharing of Gear Lists (Add a Friend)

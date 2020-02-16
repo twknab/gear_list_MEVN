@@ -209,7 +209,6 @@ export default {
   },
   methods: {
     updateDashboardGearLists() {
-      console.log("3. dashboard talking...setting global update to true..");
       this.triggerGlobalGearListUpdate = true;
     },
     updateGearListsForUser(gearLists) {

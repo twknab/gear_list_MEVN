@@ -154,15 +154,6 @@ export default {
       FILE_BUG: "Kindly file a bug report."
     };
   },
-  computed: {
-    getEachGearListTotalWeight: function() {
-      this.userGearLists.forEach(list => {
-        const itemWeights = list.items.map(item => item.weight);
-        list.totalWeightInLbs = UnitConversionUtils.totalGrossLbs(itemWeights);
-      });
-      return this.userGearLists;
-    }
-  },
   watch: {
     watchDeleteListConfirmation: function(confirmation) {
       if (confirmation.success) {
@@ -199,7 +190,12 @@ export default {
       GearListService.getAllGearListsForUser()
         .then(response => {
           this.userGearLists = Object.values(response.data.gearLists);
-          this.userGearLists = this.getEachGearListTotalWeight();
+          this.userGearLists.forEach(list => {
+            const itemWeights = list.items.map(item => item.weight);
+            list.totalWeightInLbs = UnitConversionUtils.totalGrossLbs(
+              itemWeights
+            );
+          });
           if (this.userGearLists.length < this.limit) {
             this.limit = this.userGearLists.length;
           }

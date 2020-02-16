@@ -30,7 +30,8 @@
               >
                 <mu-list-item-action>
                   <mu-icon
-                    size="36"
+                    size="42"
+                    class="margin-right-md"
                     :value="
                       itemData.completed
                         ? 'check_box'
