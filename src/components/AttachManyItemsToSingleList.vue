@@ -2,7 +2,7 @@
   <div>
     <mu-form ref="attachGearItemForm" :model="gearItemSelections">
       <mu-dialog
-        v-bind:title="`Attach Items to ${this.gearListTitle}`"
+        v-bind:title="`${this.gearListTitle} Items`"
         width="600"
         max-width="80%"
         overlay-color="#000"
@@ -68,6 +68,12 @@ export default {
     },
     watchGearListToAttachDashboard: {
       type: String
+    },
+    watchGearListToAttachListView: {
+      type: String
+    },
+    watchRefreshListItems: {
+      type: Boolean
     }
   },
   data() {
@@ -85,6 +91,14 @@ export default {
     watchGearListToAttachDashboard: function(listId) {
       this.gearListId = listId;
       this.getAllItemsBelongingToUser(listId);
+    },
+    watchGearListToAttachListView: function(listId) {
+      this.gearListId = listId;
+      this.getAllItemsBelongingToUser(listId);
+    },
+    watchRefreshListItems: function() {
+      console.log("Refresh detected");
+      this.getAllItemsBelongingToUser(this.gearListId);
     }
   },
   methods: {

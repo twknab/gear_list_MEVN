@@ -20,8 +20,10 @@ export default {
     return api.post("/gear-list/attach", gearItemAndGearLists);
   },
   attachManyItemsToOneList(listIdAndItemSelections) {
-    console.log("hello");
     return api.post("/gear-list/attach/many-items", listIdAndItemSelections);
+  },
+  removeGearItemFromList(gearListIdAndItemId) {
+    return api.post("/gear-list/remove/item", gearListIdAndItemId);
   },
   findListsWithItem(gearItemId) {
     return api.get(`/gear-list/find-item?gearItemId=${gearItemId}`);

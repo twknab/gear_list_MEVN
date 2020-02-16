@@ -7,7 +7,7 @@
     </mu-list-item-action>
     <mu-form ref="GearItemForm" :model="gearListSelections">
       <mu-dialog
-        v-bind:title="`Attach ${gearItem.title} to Gear Lists`"
+        v-bind:title="`Attach ${gearItem.title}`"
         width="600"
         max-width="80%"
         overlay-color="#000"

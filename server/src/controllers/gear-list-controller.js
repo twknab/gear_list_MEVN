@@ -164,6 +164,35 @@ module.exports = {
         });
     }
   },
+  removeGearItemFromList: (req, res) => {
+    if (UserController.isAuthenticated(req, res)) {
+      const gearListId = req.body.listId;
+      const gearItemId = req.body.itemId;
+      // Lookup list and pull item from items array
+      GearList.findOneAndUpdate(
+        { _id: gearListId },
+        {
+          $pull: { items: gearItemId }
+        }
+      )
+        .then(() => {
+          // delete compltion data
+          GearItemCompletionData.findOneAndDelete({
+            gearItem: gearItemId,
+            gearList: gearListId
+          })
+            .then(() => {
+              return res.status(200).json({ success: true });
+            })
+            .catch(err => {
+              return res.status(500).json(err);
+            });
+        })
+        .catch(err => {
+          return res.status(500).json(err);
+        });
+    }
+  },
   getGearListsBelongingToItem: (req, res) => {
     if (UserController.isAuthenticated(req, res)) {
       GearList.find({ items: { $all: [req.query.gearItemId] } })

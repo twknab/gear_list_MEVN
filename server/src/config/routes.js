@@ -52,6 +52,8 @@ module.exports = function(app) {
   );
   // Update gear list
   app.post("/gear-list/update", GearListController.updateGearList);
+  // Remove item from gear list
+  app.post("/gear-list/remove/item", GearListController.removeGearItemFromList);
   // Delete gear list
   app.get("/gear-list/delete", GearListController.deleteGearList);
 };

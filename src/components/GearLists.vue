@@ -136,7 +136,6 @@ export default {
       }
     },
     watchUpdateGearListsAfterAttach: function(status) {
-      console.log("4. Watcher is running here in gear lists component");
       if (status === true) {
         this.getAllUserGearLists();
       }
@@ -152,8 +151,6 @@ export default {
     showAttachItemsToListDialog(gearListId) {
       this.gearListToQuickAttachDashboard = gearListId;
       this.showAttachItemsDialog = true;
-      console.log("this is the gear list id from front gear lists component");
-      console.log(this.gearListToQuickAttachDashboard);
     },
     viewGearList(gearListId) {
       // redirect to gear list view page passing in gearListId as a parameter
@@ -165,7 +162,6 @@ export default {
       this.getAllUserGearLists();
     },
     getAllUserGearLists() {
-      console.log("5. getting all gear lists now...");
       GearListService.getAllGearListsForUser()
         .then(response => {
           this.userGearLists = Object.values(response.data.gearLists);

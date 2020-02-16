@@ -15,23 +15,59 @@
       <mu-row gutter class="margin-top-md padding-top-lg padding-bottom-lg">
         <mu-col span="12">
           <div v-if="Object.keys(this.itemCompletionData).length > 0">
-            <mu-flex :key="itemData._id" v-for="itemData in itemCompletionData">
-              <mu-checkbox
-                :value="itemData.gearItem.title"
-                v-model="itemData.completed"
-                :label="itemData.gearItem.title"
-                class="gear-item-checkbox"
-                @change="
+            <mu-list textline="three-line" class="dashboard-list">
+              <mu-list-item
+                button
+                :key="itemData._id"
+                v-for="itemData in itemCompletionData"
+                @click="
                   updateCompleteStatus(
                     itemData.gearItem,
                     listId,
-                    itemData.completed
+                    !itemData.completed
                   )
                 "
-              ></mu-checkbox>
-            </mu-flex>
-            <div>
-              <h2>
+              >
+                <mu-list-item-action>
+                  <mu-icon
+                    size="36"
+                    :value="
+                      itemData.completed
+                        ? 'check_box'
+                        : 'check_box_outline_blank'
+                    "
+                    :color="itemData.completed ? '#494949' : 'purpleA700'"
+                  ></mu-icon>
+                </mu-list-item-action>
+                <mu-list-item-content
+                  :class="
+                    itemData.completed
+                      ? 'gear-item-list-item completed-gear-item'
+                      : 'gear-item-list-item'
+                  "
+                >
+                  <mu-list-item-title>
+                    {{ itemData.gearItem.title }}
+                  </mu-list-item-title>
+                  <mu-list-item-sub-title>
+                    {{ itemData.gearItem.weight }} oz.
+                  </mu-list-item-sub-title>
+                </mu-list-item-content>
+                <mu-list-item-action>
+                  <mu-button
+                    icon
+                    color="purpleA400"
+                    placement="bottom-end"
+                    @click="removeItemFromList(itemData.gearItem._id)"
+                  >
+                    <mu-icon value="clear" size="36"></mu-icon>
+                  </mu-button>
+                </mu-list-item-action>
+              </mu-list-item>
+            </mu-list>
+            <mu-divider class="margin-bottom"></mu-divider>
+            <mu-flex justify-content="center" fill>
+              <h2 class="gear-list-total-weight-header">
                 Weight Packed:
                 <mu-chip
                   color="purpleA700"
@@ -40,11 +76,11 @@
                   >{{ totalPackedLbs }}</mu-chip
                 >
                 <span class="margin-left-sm">of {{ totalGrossLbs }} lbs.</span>
-                <span class="list-weight-larger-units margin-left-sm">
-                  ({{ totalPackedOz }} of {{ totalGrossOz }} oz.)</span
+                <span class="list-weight-sub-units margin-left-sm">
+                  {{ totalPackedOz }} of {{ totalGrossOz }} oz.</span
                 >
               </h2>
-            </div>
+            </mu-flex>
           </div>
           <div v-else>
             <mu-flex justify-content="center" class="margin-top">
@@ -58,12 +94,29 @@
               ></mu-icon>
             </mu-flex>
           </div>
+          <AttachManyItemsToSingleList
+            :openAlert="this.showAttachItemsDialog"
+            :watchGearListToAttachListView="this.gearListToQuickAttachListView"
+            :watchRefreshListItems="this.refreshListItems"
+            @successMessage="updateSuccessMessage"
+            @failureMessage="updateFailureMessage"
+            @closeAttachItemsDialog="closeAttachItemsDialog"
+          />
         </mu-col>
       </mu-row>
       <mu-divider
         v-if="Object.keys(this.itemCompletionData).length > 0"
       ></mu-divider>
       <mu-flex justify-content="center" class="margin-top margin-left-sm">
+        <mu-button
+          large
+          round
+          color="purpleA700"
+          @click="this.showAttachItemsToListDialog"
+          class="margin-left-sm"
+        >
+          <mu-icon left value="attach_file"></mu-icon>Attach Items
+        </mu-button>
         <mu-button
           large
           flat
@@ -79,19 +132,33 @@
 </template>
 
 <script>
+import AttachManyItemsToSingleList from "@/components/AttachManyItemsToSingleList";
 import GearListService from "@/services/GearListService.js";
 import GearItemService from "@/services/GearItemService.js";
 export default {
   name: "ViewGearList",
+  components: {
+    AttachManyItemsToSingleList
+  },
   data() {
     return {
       errors: {},
       listTitle: "",
+      showAttachItemsDialog: false,
+      gearListToQuickAttachListView: "",
       listId: null,
+      refreshListItems: false,
       totalPackedOz: 0,
       totalPackedLbs: 0,
       itemCompletionData: [{ completed: false, gearItem: {} }]
     };
+  },
+  watch: {
+    watchUpdateGearListsAfterAttach: function(status) {
+      if (status === true) {
+        this.getGearListAndItemCompletions(this.listId);
+      }
+    }
   },
   computed: {
     totalGrossOz: function() {
@@ -126,6 +193,7 @@ export default {
           this.listTitle = listAndItems.data.listName;
           this.listId = listAndItems.data.listId;
           this.getTotalPackedWeight();
+          this.resetRefreshItems();
         })
         .catch(err => {
           console.log("Fetching item completion data failed: ", err);
@@ -143,6 +211,10 @@ export default {
       totalLbs = totalOz / 16;
       this.totalPackedLbs = this.roundToAtMostTwoDecimalPlaces(totalLbs);
       this.totalPackedOz = totalOz;
+    },
+    showAttachItemsToListDialog() {
+      this.gearListToQuickAttachListView = this.listId;
+      this.showAttachItemsDialog = true;
     },
     updateCompleteStatus(item, listId, complete) {
       if (complete) {
@@ -162,51 +234,77 @@ export default {
     },
     roundToAtMostTwoDecimalPlaces(floatValue) {
       return Math.round(floatValue * 100 + Number.EPSILON) / 100;
+    },
+    closeAttachItemsDialog() {
+      this.showAttachItemsDialog = false;
+    },
+    removeItemFromList(itemId) {
+      let listAndItemId = {
+        listId: this.listId,
+        itemId: itemId
+      };
+      GearListService.removeGearItemFromList(listAndItemId)
+        .then(() => {
+          // Refresh list
+          this.refreshItems();
+          this.getGearListAndItemCompletions(listAndItemId.listId);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    refreshItems() {
+      this.refreshListItems = true;
+    },
+    resetRefreshItems() {
+      this.refreshListItems = false;
+    },
+    updateSuccessMessage(message) {
+      // TODO: Turn messaging into a component
+      // Get updated list after
+      console.log(message);
+      this.closeAttachItemsDialog();
+      this.getGearListAndItemCompletions(this.listId);
+    },
+    updateFailureMessage(messages) {
+      // TODO: Turn messaging into its own component
+      console.log(messages);
+      this.closeAttachItemsDialog();
     }
   }
 };
 </script>
 
 <style>
-.mu-checkbox-label {
-  color: #fff;
-  /* font-weight: bolder; */
+.gear-item-list-item .mu-item-title {
   font-size: 20px;
+}
+.gear-item-list-item .mu-item-sub-title {
+  font-size: 16px;
+}
+.completed-gear-item {
+  text-decoration: line-through;
+  font-style: italic;
+  color: white;
+  font-weight: lighter;
 }
 .empty-list {
   position: relative;
   top: 10px;
-}
-.mu-checkbox.gear-item-checkbox.mu-checkbox-checked {
-  text-decoration: line-through;
-  font-style: italic;
-  color: lightgray;
-  font-weight: lighter;
-}
-.gear-item-checkbox {
-  margin-left: 20px;
-  margin-bottom: 25px;
-}
-.gear-item-checkbox .mu-checkbox-icon {
-  margin-right: 14px;
-}
-.mu-checkbox-checked .mu-checkbox-icon-checked,
-.mu-checkbox-icon-uncheck {
-  opacity: 1;
-  -webkit-transform: scale(1.3);
-  -moz-transform: scale(1.3);
-  transform: scale(1.3);
-  color: rgb(170, 0, 255);
 }
 .total-weight-chip {
   font-size: 18px;
   margin: auto 5px auto 5px;
   text-shadow: 1px 1px 1px black;
   cursor: default !important;
+  font-weight: 600;
 }
-.list-weight-larger-units {
+.list-weight-sub-units {
+  display: block;
   font-weight: 300;
-  font-size: 18px;
-  font-style: italic;
+  font-size: 14px;
+}
+.gear-list-total-weight-header {
+  font-weight: 300;
 }
 </style>
