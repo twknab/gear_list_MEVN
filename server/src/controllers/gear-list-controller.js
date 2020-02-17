@@ -54,7 +54,6 @@ module.exports = {
         })
         .exec()
         .then(userAndGearLists => {
-          console.log(userAndGearLists);
           return res.status(201).json(userAndGearLists);
         })
         .catch(error => {
@@ -102,9 +101,7 @@ module.exports = {
             _id: req.query.gearListId
           })
             .then(() => {
-              return res
-                .status(201)
-                .json({ successMessage: "List successfully deleted!" });
+              return res.status(201).json({ successMessage: "Done!" });
             })
             .catch(() => {
               const errors = ["Could not delete list"];
@@ -126,7 +123,7 @@ module.exports = {
         // callback function as argument
         function(result) {
           if (result.success) {
-            result.successMessage = `Item successfully added to all lists!`;
+            result.successMessage = `Done!`;
             return res.status(201).json(result);
           }
           // error
@@ -154,7 +151,7 @@ module.exports = {
             // callback function as argument
             function(result) {
               if (result.success) {
-                result.successMessage = `Items successfully added!`;
+                result.successMessage = `Done!`;
                 return res.status(200).json(result);
               }
               // error

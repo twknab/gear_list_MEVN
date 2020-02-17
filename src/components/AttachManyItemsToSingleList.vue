@@ -19,7 +19,7 @@
               filterable
               multiple
               chips
-              full-width
+              :full-width="true"
               class="add-to-gear-list-drop-down"
               v-model="gearItemSelections.values"
               prop="selections"

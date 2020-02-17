@@ -12,7 +12,7 @@
         <h1>{{ listTitle }}</h1>
       </mu-flex>
       <mu-divider></mu-divider>
-      <mu-row gutter class="margin-top-md padding-top-lg padding-bottom-lg">
+      <mu-row gutter class="margin-top-md padding-bottom-lg">
         <mu-col span="12">
           <div v-if="Object.keys(this.itemCompletionData).length > 0">
             <mu-list textline="three-line" class="dashboard-list">
@@ -110,7 +110,36 @@
       <mu-divider
         v-if="Object.keys(this.itemCompletionData).length > 0"
       ></mu-divider>
-      <mu-flex justify-content="center" class="margin-top margin-left-sm">
+      <mu-row gutter>
+        <mu-col span="12" sm="12" md="12" lg="6" xl="6">
+          <mu-flex justify-content="center" class="margin-top">
+            <mu-button
+              large
+              round
+              full-width
+              color="purpleA700"
+              @click="this.showAttachItemsToListDialog"
+              class="margin-left-sm"
+            >
+              <mu-icon left value="attach_file"></mu-icon>Attach Items
+            </mu-button>
+          </mu-flex>
+        </mu-col>
+        <mu-col span="12" sm="12" md="12" lg="6" xl="6">
+          <mu-flex justify-content="center" class="margin-top margin-left-sm">
+            <mu-button
+              large
+              full-width
+              flat
+              color="primary"
+              @click="$router.push({ name: 'dashboard' })"
+            >
+              <mu-icon left value="arrow_back"></mu-icon>Back to Dashboard
+            </mu-button>
+          </mu-flex>
+        </mu-col>
+      </mu-row>
+      <!-- <mu-flex justify-content="center" class="margin-top margin-left-sm">
         <mu-button
           large
           round
@@ -129,7 +158,7 @@
         >
           <mu-icon left value="arrow_back"></mu-icon>Back to Dashboard
         </mu-button>
-      </mu-flex>
+      </mu-flex> -->
     </mu-container>
   </div>
 </template>

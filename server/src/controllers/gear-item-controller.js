@@ -123,9 +123,7 @@ module.exports = {
                 gearItem: req.query.gearItemId
               })
                 .then(() => {
-                  return res
-                    .status(201)
-                    .json({ successMessage: "Item successfully deleted!" });
+                  return res.status(201).json({ successMessage: "Done!" });
                 })
                 .catch(() => {
                   const errors = ["Could not delete item"];

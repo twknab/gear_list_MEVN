@@ -17,7 +17,7 @@
             >
               <mu-list-item-content>
                 <mu-list-item-title>{{ gearList.title }}</mu-list-item-title>
-                <mu-list-item-sub-title>
+                <mu-list-item-sub-title v-if="gearList.totalWeightInLbs > 0">
                   Total Weight: {{ gearList.totalWeightInLbs }} lbs.
                 </mu-list-item-sub-title>
               </mu-list-item-content>
