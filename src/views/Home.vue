@@ -2,7 +2,7 @@
   <div class="home">
     <mu-container>
       <mu-row gutter>
-        <mu-col span="12" sm="12" md="12" lg="12" xl="6" class="margin-top-xl">
+        <mu-col span="12" sm="12" md="12" lg="12" xl="6" class="margin-top-md">
           <div class="grid-cell">
             <!-- Welcome Component -->
             <WelcomeImage />

@@ -13,7 +13,6 @@
               button
               v-for="(gearList, index) in userGearLists.slice(0, this.limit)"
               :key="index"
-              @click="viewGearList(gearList._id)"
             >
               <mu-list-item-content>
                 <mu-list-item-title>{{ gearList.title }}</mu-list-item-title>

@@ -16,8 +16,8 @@
           </div>-->
           <h1>Create a New Account</h1>
           <p>
-            Register and create a new account with GearList below. Your
-            information is not shared with anyone.
+            Register an account with GearList below. Your information is not
+            shared with anyone.
           </p>
           <!-- Registration Form -->
           <mu-form
@@ -110,7 +110,7 @@
               flat
               color="purple50"
               @click="goHome"
-              class="flat-full-width margin-top-md"
+              class="flat-full-width margin-top-md margin-bottom-xl"
             >
               <mu-icon value="close"></mu-icon>
               <span class="button-icon">Nevermind</span>

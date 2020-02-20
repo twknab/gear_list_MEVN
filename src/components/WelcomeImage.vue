@@ -6,7 +6,7 @@
         <img
           alt="Welcome to GearList"
           src="../assets/tent.png"
-          class="welcome-image image-center"
+          class="image-center"
         />
       </mu-col>
     </mu-container>

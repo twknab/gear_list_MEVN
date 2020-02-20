@@ -8,7 +8,11 @@
       </mu-row>
       <mu-row span="12">
         <!-- Login Form -->
-        <mu-form ref="existingUserLogin" :model="existingUser">
+        <mu-form
+          ref="existingUserLogin"
+          :model="existingUser"
+          class="margin-bottom-xl"
+        >
           <!-- Backend Errors Display -->
           <div v-if="Object.keys(errors).length >= 1" class="server-errors">
             <h2>Whoops, there's a few issues...</h2>

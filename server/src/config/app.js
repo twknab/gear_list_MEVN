@@ -25,7 +25,7 @@ module.exports = app => {
   };
 
   const corsOptions = {
-    origin: "http://localhost:8080",
+    origin: "http://10.0.0.130:8080",
     credentials: true
   };
 

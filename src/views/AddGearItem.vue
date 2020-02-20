@@ -45,7 +45,7 @@
             ></mu-text-field>
           </mu-form-item>
           <!-- Submit Button -->
-          <mu-button full-width round color="purpleA400" @click="submit" large>
+          <mu-button full-width round color="purpleA700" @click="submit" large>
             <mu-icon value="add"></mu-icon>
             <span class="button-icon">Add New Item</span>
           </mu-button>

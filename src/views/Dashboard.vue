@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mu-container class="margin-top margin-bottom">
+    <mu-container class="margin-top dashboard-wrapper">
       <mu-flex justify-content="end">
         <p>
           {{ timeGreeting }}, {{ user.firstName }}.
@@ -24,6 +24,8 @@
         @updateDashboardFailureMessage="updateFailureMessages"
         @updateDashboardDeleteConfirmation="updateConfimDeleteMessage"
       />
+
+      <mu-divider class="margin-top-xl"></mu-divider>
       <!-- Gear Items -->
       <div class="margin-top-xl">
         <h1>Gear Items</h1>
@@ -298,5 +300,8 @@ export default {
 }
 .error-dialogue .mu-dialog-body {
   background-color: #1a1a1a;
+}
+.dashboard-wrapper {
+  padding-bottom: 30px;
 }
 </style>
