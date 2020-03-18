@@ -70,6 +70,10 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - Gear Item
 - Gear Item Completion Data
 
+### Bugs Backlog
+
+- When attaching one item to many lists, selecing "Update" without any list selections pops up a "Done" message. Instead, should say no changes detected or not show a success message at all.
+
 ### Wishlist Features (may require addt'l creation of models)
 
 - Clicking Gear Item on dashboard displays dialog showing all Lists to which it is associated -- and a "delete" or "X" button to remove item from said list
