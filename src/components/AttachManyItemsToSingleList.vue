@@ -4,14 +4,16 @@
       <mu-dialog
         v-bind:title="`${this.gearListTitle} Items`"
         width="600"
-        max-width="80%"
+        max-width="100%"
         overlay-color="#000"
-        :lock-scroll="false"
+        :lock-scroll="true"
         :esc-press-close="true"
         :overlay-close="false"
         :open.sync="openAlert"
         transition="slide-bottom"
         class="itemAttachDialog"
+        fullscreen
+        scrollable
       >
         <mu-col span="12" lg="12" sm="12">
           <mu-form-item prop="selections">
@@ -19,10 +21,11 @@
               filterable
               multiple
               chips
-              :full-width="true"
               class="add-to-gear-list-drop-down"
               v-model="gearItemSelections.values"
               prop="selections"
+              max-height="60%"
+              textline="two-line"
             >
               <mu-option
                 v-for="(gearItem, key) in this.allUserItems"
@@ -222,5 +225,6 @@ export default {
 }
 .gear-list-dropdown-attach-selections .mu-item-title {
   line-height: 25px;
+  font-size: 1.4rem;
 }
 </style>

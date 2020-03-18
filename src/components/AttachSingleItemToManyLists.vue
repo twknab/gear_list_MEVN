@@ -9,13 +9,15 @@
       <mu-dialog
         v-bind:title="`Attach ${gearItem.title} to Lists`"
         width="600"
-        max-width="80%"
+        max-width="100%"
         overlay-color="#000"
-        :lock-scroll="false"
+        :lock-scroll="true"
         :esc-press-close="true"
         :overlay-close="false"
         :open.sync="openAlert"
         transition="slide-bottom"
+        fullscreen
+        scrollable
       >
         <mu-col span="12" lg="12" sm="12">
           <mu-form-item prop="selections">
@@ -27,6 +29,8 @@
               class="add-to-gear-list-drop-down"
               v-model="gearListSelections.values"
               prop="selections"
+              max-height="60%"
+              textline="two-line"
             >
               <mu-option
                 v-for="(gearList, key) in gearLists"
