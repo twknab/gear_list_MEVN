@@ -16,7 +16,6 @@
         :overlay-close="false"
         :open.sync="openAlert"
         transition="slide-bottom"
-        fullscreen
         scrollable
       >
         <mu-col span="12" lg="12" sm="12">

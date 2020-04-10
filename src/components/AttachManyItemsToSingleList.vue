@@ -12,7 +12,6 @@
         :open.sync="openAlert"
         transition="slide-bottom"
         class="itemAttachDialog"
-        fullscreen
         scrollable
       >
         <mu-col span="12" lg="12" sm="12">

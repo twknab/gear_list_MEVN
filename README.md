@@ -72,7 +72,9 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 ### Bugs Backlog
 
-- When attaching one item to many lists, selecing "Update" without any list selections pops up a "Done" message. Instead, should say no changes detected or not show a success message at all.
+- [HIGH PRI] When deleting a **gear item**, when removing from list, *gross list weight is not updated until page refresh*. Have the component re-render/refresh.
+- [HIGH PRI] 
+- [LOW PRI] When attaching one item to many lists, selecing "Update" without any list selections pops up a "Done" message. Instead, should say no changes detected or not show a success message at all.
 
 ### Wishlist Features (may require addt'l creation of models)
 
