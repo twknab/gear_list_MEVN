@@ -25,12 +25,12 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 - ✅ User Login and Registration (Password Hashing/Decryption)
 
-###### Things you can create:
+### Things you can create
 
 - ✅ Gear Items
 - ✅ Gear Lists
 
-###### Things you can do:
+### Things you can do
 
 - ✅ View all of your Gear Items.
 - ✅ View all of your Gear Lists.
@@ -46,7 +46,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ Delete a Gear Item including all List association and completion data.
 - ✅ Delete a Gear List including Item association data and ompletion data.
 
-###### Other features that are cool and good for users:
+### Other features that are cool and good for users
 
 - ✅ User Confirmation when deleting a Gear Item (no accidental deletions)
 - ✅ User Confirmation when deleting a Gear List (no accidental deletions)
