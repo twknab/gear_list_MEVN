@@ -50,7 +50,9 @@ Other features that are cool and good for users:
 
 - ✅ User Confirmation when deleting a Gear Item (no accidental deletions)
 - ✅ User Confirmation when deleting a Gear List (no accidental deletions)
-  - NOTE: All data is hard deleted, no soft deletions, no saving of data. It's gone when user says so.
+
+> NOTE: All data is hard deleted, no soft deletions, no saving of data. It's gone when user says so.
+
 - ✅ "Load More" button Dashboard beneath Lists and Items push more into user's view.
 - ✅ Front & Backend strong validation on all forms.
 - ✅ API locked down (must valid session to hit any any API endpoint)
