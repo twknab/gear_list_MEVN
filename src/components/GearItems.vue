@@ -12,6 +12,7 @@
             button
             v-for="(gearItem, index) in userGearItems.slice(0, this.limit)"
             :key="index"
+            :ripple="false"
           >
             <mu-list-item-content>
               <mu-list-item-title>{{ gearItem.title }}</mu-list-item-title>

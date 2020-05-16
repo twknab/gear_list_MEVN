@@ -5,8 +5,6 @@ const unitConversion = {
     );
   },
   totalGrossLbs: function(itemWeights) {
-    console.log(itemWeights);
-    console.log("TOTAL");
     if (itemWeights.length < 1) {
       return 0;
     }

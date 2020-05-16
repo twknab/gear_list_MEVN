@@ -221,6 +221,7 @@ export default {
     updateSuccessMessage(message) {
       this.successMessage = message;
       this.showSuccessAlert = true;
+      this.updateDashboardGearLists();
     },
     updateFailureMessages(messages) {
       this.failureMessages = messages;

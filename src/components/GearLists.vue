@@ -13,6 +13,7 @@
               button
               v-for="(gearList, index) in userGearLists.slice(0, this.limit)"
               :key="index"
+              :ripple="false"
             >
               <mu-list-item-content>
                 <mu-list-item-title>{{ gearList.title }}</mu-list-item-title>
@@ -20,6 +21,21 @@
                   Total Weight: {{ gearList.totalWeightInLbs }} lbs.
                 </mu-list-item-sub-title>
               </mu-list-item-content>
+              <mu-list-item-action>
+                <!-- View -->
+                <mu-button
+                  color="purpleA400"
+                  @click="viewGearList(gearList._id)"
+                  class="margin-right-md"
+                >
+                  <mu-icon
+                    value="list"
+                    size="36"
+                    class="margin-right-sm"
+                  ></mu-icon>
+                  View List
+                </mu-button>
+              </mu-list-item-action>
               <mu-list-item-action>
                 <mu-menu cover placement="bottom-end" :open-on-hover="true">
                   <mu-button icon color="purpleA400">
@@ -31,27 +47,17 @@
                       button
                       @click="showAttachItemsToListDialog(gearList._id)"
                       ><mu-icon
-                        size="20"
+                        size="26"
                         value="attach_file"
                         color="#aa00ff"
                         class="margin-right-sm margin-top-xsm"
                       ></mu-icon>
                       Quick Attach</mu-list-item
                     >
-                    <!-- View -->
-                    <mu-list-item button @click="viewGearList(gearList._id)"
-                      ><mu-icon
-                        size="20"
-                        value="search"
-                        color="#aa00ff"
-                        class="margin-right-sm margin-top-xsm"
-                      ></mu-icon
-                      >View List</mu-list-item
-                    >
                     <!-- Edit -->
                     <mu-list-item button @click="editGearList(gearList._id)"
                       ><mu-icon
-                        size="20"
+                        size="26"
                         value="edit"
                         color="#aa00ff"
                         class="margin-right-sm margin-top-xsm"
@@ -63,7 +69,7 @@
                       button
                       @click="confirmDeleteList(gearList._id)"
                       ><mu-icon
-                        size="20"
+                        size="26"
                         value="delete"
                         color="#aa00ff"
                         class="margin-right-sm margin-top-xsm"

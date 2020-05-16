@@ -24,28 +24,40 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 ## Features
 
 - ✅ User Login and Registration (Password Hashing/Decryption)
-- ✅ Gear Item Creation
-- ✅ Gear List Creation
-- ✅ Attach or Detach (+/-) Multiple Lists to an Item (One Item, Many Lists Attach)
-- ✅ Attach or Detach (+/-) Multiple Items to a List (Many Items, One List Attach)
-- ✅ Edit a Gear Item
-- ✅ Edit a Gear List
-- ✅ View a Gear List and All Items and Completion Status
-- ✅ View Gear List and Packed vs Total Items Weight
-- ✅ View Gear List and Add/Remove Items via Quick Attach Dialog
-- ✅ View Gear List and Remove Items via Quick Removal Button
-- ✅ Toggle Gear Items as Completed / Incomplete
-- ✅ Delete a Gear Item and associated Completion Data
-- ✅ Delete a Gear List and associated Completion Data
-- ✅ User Confirmation on Gear Item Deletion
-- ✅ User Confirmation on Gear List Deletion
-- ✅ View All Gear Items
-- ✅ View All Gear Lists
-- ✅ "Load More" feature for Lists and Items on Dashboard (4 is default limit)
-- ✅ Front & Backend Validation on All Forms
-- ✅ API not publically accessible (must valid session to CRUD via API)
-- ⭕️ Contact Page (bug report?)
-- ⭕️ About Page (how about just combined with Contact page above?)
+
+Things you can create:
+
+- ✅ Gear Items
+- ✅ Gear Lists
+
+Things you can do:
+
+- ✅ View all of your Gear Items.
+- ✅ View all of your Gear Lists.
+- ✅ Quick Attach or Detach (+/-) a Gear Item to many of your Gear Lists.
+- ✅ Quick Attach or Detach (+/-) many Gear Items from a single Gear List.
+  - If this sounds confusing, give it a try and you'll see why it's handy :)
+- ✅ Edit your Gear Item
+- ✅ Edit your Gear List
+- ✅ View your Gear List and All Items and Item Completions (packed)
+- ✅ View your Gear List's "Packed" weight vs "Total" weight
+- ✅ Remove or attach items from Dashboard or Gear List view.
+- ✅ Toggle Gear Items as Packed / Unpacked
+- ✅ Delete a Gear Item including all List association and completion data.
+- ✅ Delete a Gear List including Item association data and ompletion data.
+
+Other features that are cool and good for users:
+
+- ✅ User Confirmation when deleting a Gear Item (no accidental deletions)
+- ✅ User Confirmation when deleting a Gear List (no accidental deletions)
+  - NOTE: All data is hard deleted, no soft deletions, no saving of data. It's gone when user says so.
+- ✅ "Load More" button Dashboard beneath Lists and Items push more into user's view.
+- ✅ Front & Backend strong validation on all forms.
+- ✅ API locked down (must valid session to hit any any API endpoint)
+
+## Remaining TODOs
+
+- ⭕️ Contact & About Page (bug report?)
 - ⭕️ TOS modal on registration?
 - ⭕️ Deploy [LARGE]
 
@@ -72,15 +84,13 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 ### Bugs Backlog
 
-- [HIGH PRI] When deleting a **gear item**, when removing from list, *gross list weight is not updated until page refresh*. Have the component re-render/refresh.
-- [HIGH PRI] 
 - [LOW PRI] When attaching one item to many lists, selecing "Update" without any list selections pops up a "Done" message. Instead, should say no changes detected or not show a success message at all.
 
-### Wishlist Features (may require addt'l creation of models)
+### Wishlist / Next Features (may require addt'l creation of models)
 
+- Add confirmation when removing item from a list (user may accidentally remove an item and not know what it was -- either having a history (bigger eng task) or a confirmation (smaller) may be helpful to prevent accidentally removing items.
 - Clicking Gear Item on dashboard displays dialog showing all Lists to which it is associated -- and a "delete" or "X" button to remove item from said list
 - "Reset All Items" button list view that will reset completion data for all items on that list and then refresh the list to show all unchecked items
-- ✅ ~~Remove a Gear Item from a Gear List Via Gear List View~~
 - Public Share Link
 - Sharing of Gear Lists (Add a Friend)
   - > NOTE: If we add a friends feature, it's important that Friends cannot delete one another's gear items or gear lists if being shared. A friend should be able to delete a gear item, or delete a shared list from their view. But this should not delete the owner's (creator's) list or gear item.

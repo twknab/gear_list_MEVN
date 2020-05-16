@@ -199,6 +199,6 @@ export default {
   color: rgb(189, 159, 48) !important;
 }
 .gear-list-dropdown--selections .mu-item-title {
-  line-height: 25px;
+  /* line-height: 25px; */
 }
 </style>
