@@ -222,8 +222,4 @@ export default {
   margin-bottom: 10px !important;
   color: rgb(189, 159, 48) !important;
 }
-.gear-list-dropdown-attach-selections .mu-item-title {
-  /* line-height: 25px; */
-  /* font-size: 1.4rem; */
-}
 </style>
