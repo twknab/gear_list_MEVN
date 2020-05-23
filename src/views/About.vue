@@ -28,55 +28,48 @@
             weight)
           </p> </mu-col
         ><mu-col span="12" sm="12" md="12" lg="6" xl="6">
-          <mu-flex
-            align-items="center"
-            justify-content="center"
-            align-content="center"
-            align-self="center"
-          >
-            <mu-list color="white">
-              <mu-list-item :ripple="false">
-                <mu-list-item-action>
-                  <mu-icon value="list" color="green"></mu-icon>
-                </mu-list-item-action>
-                <mu-list-item-title
-                  >Create Gear Lists for different needs</mu-list-item-title
-                >
-              </mu-list-item>
-              <mu-list-item :ripple="false">
-                <mu-list-item-action>
-                  <mu-icon value="thumb_up" color="green"></mu-icon>
-                </mu-list-item-action>
-                <mu-list-item-title
-                  >Create Gear Items with their weight</mu-list-item-title
-                >
-              </mu-list-item>
-              <mu-list-item :ripple="false">
-                <mu-list-item-action>
-                  <mu-icon value="link" color="green"></mu-icon>
-                </mu-list-item-action>
-                <mu-list-item-title
-                  >Quickly link Gear Items & Gear Lists</mu-list-item-title
-                >
-              </mu-list-item>
-              <mu-list-item :ripple="false">
-                <mu-list-item-action>
-                  <mu-icon value="favorite" color="green"></mu-icon>
-                </mu-list-item-action>
-                <mu-list-item-title
-                  >Know the total weight of your Gear List
-                </mu-list-item-title>
-              </mu-list-item>
-              <mu-list-item :ripple="false">
-                <mu-list-item-action>
-                  <mu-icon value="work" color="green"></mu-icon>
-                </mu-list-item-action>
-                <mu-list-item-title
-                  >Know your total pack weight real-time
-                </mu-list-item-title>
-              </mu-list-item>
-            </mu-list>
-          </mu-flex>
+          <mu-list color="white">
+            <mu-list-item :ripple="false">
+              <mu-list-item-action>
+                <mu-icon value="list" color="green"></mu-icon>
+              </mu-list-item-action>
+              <mu-list-item-title
+                >Create Gear Lists for different needs</mu-list-item-title
+              >
+            </mu-list-item>
+            <mu-list-item :ripple="false">
+              <mu-list-item-action>
+                <mu-icon value="thumb_up" color="green"></mu-icon>
+              </mu-list-item-action>
+              <mu-list-item-title
+                >Create Gear Items with their weight</mu-list-item-title
+              >
+            </mu-list-item>
+            <mu-list-item :ripple="false">
+              <mu-list-item-action>
+                <mu-icon value="link" color="green"></mu-icon>
+              </mu-list-item-action>
+              <mu-list-item-title
+                >Quickly link Gear Items & Gear Lists</mu-list-item-title
+              >
+            </mu-list-item>
+            <mu-list-item :ripple="false">
+              <mu-list-item-action>
+                <mu-icon value="favorite" color="green"></mu-icon>
+              </mu-list-item-action>
+              <mu-list-item-title
+                >Know the total weight of your Gear List
+              </mu-list-item-title>
+            </mu-list-item>
+            <mu-list-item :ripple="false">
+              <mu-list-item-action>
+                <mu-icon value="work" color="green"></mu-icon>
+              </mu-list-item-action>
+              <mu-list-item-title
+                >Know your total pack weight real-time
+              </mu-list-item-title>
+            </mu-list-item>
+          </mu-list>
         </mu-col>
       </mu-row>
       <mu-divider class="margin-top-xl"></mu-divider>
@@ -358,5 +351,11 @@ export default {
 }
 .mu-select-icon {
   fill: white;
+}
+.mu-list,
+.mu-list > li {
+  margin-left: auto;
+  margin-right: auto;
+  width: 370px;
 }
 </style>
