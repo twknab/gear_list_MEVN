@@ -1,20 +1,14 @@
 module.exports = {
-  dashboard: {
+  home: {
     icon: "face",
     color: "purpleA700",
     title: "Login / Sign Up",
     route: "home"
   },
-  addGearItem: {
-    icon: "code",
-    color: "purpleA400",
-    title: "About Gear List",
-    route: "about"
-  },
-  addGearList: {
+  about: {
     icon: "chat",
-    color: "purpleA200",
-    title: "Reach Out",
-    route: "contact"
+    color: "purpleA400",
+    title: "About / Reach Out",
+    route: "about"
   }
 };

@@ -23,6 +23,16 @@ p {
   font-size: 16px !important;
 }
 
+a:link {
+  color: #d500f9;
+}
+a:visited, a:active{
+  color: #00aeff;
+}
+a:hover {
+  color: #00ffb3;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -59,7 +69,7 @@ img {
 
 .mu-form-item-label {
   font-size: 22px !important;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 .mu-text-field-input {
@@ -186,6 +196,10 @@ img {
   margin: 15px !important;
 }
 
+.no-margin-top {
+  margin-top: 0px !important;
+}
+
 .server-errors {
   text-align: center;
 }
@@ -216,6 +230,10 @@ img {
 
 .dashboard-list .mu-item-sub-title {
   color: #9e9e9e !important;
+}
+
+.mu-item {
+  color: #aa00ff;
 }
 
 .mu-pagination-item.mu-button.is-current {
