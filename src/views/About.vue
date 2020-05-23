@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <mu-container class="margin-top dashboard-wrapper">
-      <mu-row gutter class="margin-bottom">
+      <mu-row gutter>
         <mu-col span="12" sm="12" md="12" lg="6" xl="6">
           <h1>About GearList</h1>
         </mu-col>
@@ -28,7 +28,7 @@
             weight)
           </p> </mu-col
         ><mu-col span="12" sm="12" md="12" lg="6" xl="6">
-          <mu-list color="white">
+          <mu-list color="white" class="reason-list">
             <mu-list-item :ripple="false">
               <mu-list-item-action>
                 <mu-icon value="list" color="green"></mu-icon>
@@ -75,6 +75,11 @@
       <mu-divider class="margin-top-xl"></mu-divider>
       <mu-row>
         <mu-col span="12" sm="12" md="6" lg="6" xl="6" class="margin-top-xl">
+          <mu-flex justify-content="center">
+            <img src="../assets/tk.png" />
+          </mu-flex>
+        </mu-col>
+        <mu-col span="12" sm="12" md="6" lg="6" xl="6" class="margin-top-xl">
           <h1>About Me</h1>
           <p>
             My name is Tim. I like to come up with ideas around something I
@@ -88,44 +93,18 @@
             >
           </mu-flex>
         </mu-col>
-        <mu-col span="12" sm="12" md="6" lg="6" xl="6" class="margin-top-xl">
-          <mu-flex justify-content="center">
-            <img src="../assets/tk.png" />
-          </mu-flex>
-        </mu-col>
       </mu-row>
       <mu-divider class="margin-top-xl"></mu-divider>
-      <mu-row gutter class="margin-bottom">
-        <mu-col span="12" sm="12" md="12" lg="6" xl="6">
-          <h1>Contact Inquiry</h1>
-          <p>
-            If you'd like to contact me, go ahead and reach out using the form
-            below. I'm not a huge social media guy, but do check my email :)
-            Feel free to write if you'd like to connect. You can also find me on
-            <a href="https://github.com/twknab" target="_blank"> 🔗 GitHub</a>,
-            or hit me up directly on
-            <a href="https://t.me/twknab"> 🔗 Telegram</a>.
-          </p>
-        </mu-col>
-        <mu-col span="12" sm="12" md="12" lg="6" xl="6">
-          <h1>Feature Request</h1>
-          <p>
-            If you have a feature you'd like to see in <a href="/">GearList</a>,
-            please fill out the form below. I do have a running
-            <a href="#">wishlist</a> [link coming soon] I'm working on, so
-            please be sure to check there first. This app's intentions is to
-            serve your needs!
-          </p>
-        </mu-col>
-      </mu-row>
       <!-- <mu-divider class="margin-top-xl"></mu-divider> -->
-      <mu-row gutter class="margin-bottom">
+      <mu-row gutter class="margin-bottom margin-top">
         <mu-col span="12" sm="12" md="12" lg="12" xl="12">
+          <h1>Inquiries, Bug Reports & Feature Requests</h1>
+
           <!-- Contact Form -->
           <mu-form
             ref="contact"
             :model="contactForm"
-            class="margin-top contact-form margin-bottom-xl"
+            class="margin-top contact-form"
           >
             <!-- Backend Errors Display -->
             <div v-if="Object.keys(errors).length >= 1" class="server-errors">
@@ -235,6 +214,14 @@
               <span class="button-icon">Nevermind</span>
             </mu-button>
           </mu-form>
+        </mu-col>
+        <mu-col span="12" class="margin-bottom-lg">
+          <p>
+            You can also find me on
+            <a href="https://github.com/twknab" target="_blank"> 🔗 GitHub</a>,
+            or hit me up directly on
+            <a href="https://t.me/twknab"> 🔗 Telegram</a>.
+          </p>
         </mu-col>
       </mu-row>
     </mu-container>
@@ -352,8 +339,7 @@ export default {
 .mu-select-icon {
   fill: white;
 }
-.mu-list,
-.mu-list > li {
+ul.mu-list.reason-list {
   margin-left: auto;
   margin-right: auto;
   width: 370px;
