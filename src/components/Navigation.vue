@@ -12,7 +12,6 @@
         <!-- <pre style="color: black;">{{navigationItems}}</pre> -->
         <mu-list @item-click="closeBottomSheet">
           <mu-sub-header>Where To Boss?</mu-sub-header>
-
           <mu-list-item
             button
             v-for="(navItem, key, index) in navigationItems"

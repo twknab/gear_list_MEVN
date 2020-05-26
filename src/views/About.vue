@@ -28,10 +28,10 @@
             weight)
           </p> </mu-col
         ><mu-col span="12" sm="12" md="12" lg="6" xl="6">
-          <mu-list color="white" class="reason-list">
+          <mu-list color="white" class="reason-list inquiry-form">
             <mu-list-item :ripple="false">
               <mu-list-item-action>
-                <mu-icon value="list" color="green"></mu-icon>
+                <mu-icon value="list" color="rgb(171, 255, 7)"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
                 >Create Gear Lists for different needs</mu-list-item-title
@@ -39,7 +39,7 @@
             </mu-list-item>
             <mu-list-item :ripple="false">
               <mu-list-item-action>
-                <mu-icon value="thumb_up" color="green"></mu-icon>
+                <mu-icon value="thumb_up" color="rgb(171, 255, 7)"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
                 >Create Gear Items with their weight</mu-list-item-title
@@ -47,7 +47,7 @@
             </mu-list-item>
             <mu-list-item :ripple="false">
               <mu-list-item-action>
-                <mu-icon value="link" color="green"></mu-icon>
+                <mu-icon value="link" color="rgb(171, 255, 7)"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
                 >Quickly link Gear Items & Gear Lists</mu-list-item-title
@@ -55,7 +55,7 @@
             </mu-list-item>
             <mu-list-item :ripple="false">
               <mu-list-item-action>
-                <mu-icon value="favorite" color="green"></mu-icon>
+                <mu-icon value="favorite" color="rgb(171, 255, 7)"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
                 >Know the total weight of your Gear List
@@ -63,7 +63,7 @@
             </mu-list-item>
             <mu-list-item :ripple="false">
               <mu-list-item-action>
-                <mu-icon value="work" color="green"></mu-icon>
+                <mu-icon value="work" color="rgb(171, 255, 7)"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
                 >Know your total pack weight real-time
@@ -177,6 +177,7 @@
                       :key="index"
                       :label="option"
                       :value="option"
+                      class="inquiry-form"
                     ></mu-option>
                   </mu-select>
                 </mu-form-item>
@@ -229,6 +230,7 @@
 </template>
 
 <script>
+import HomepageService from "@/services/HomepageService.js";
 export default {
   name: "About",
   data() {
@@ -256,13 +258,6 @@ export default {
           message: "Email must be 5-50 characters"
         }
       ],
-      // reasonRules: [
-      //   { validate: val => !!val, message: "Reason is required" },
-      //   {
-      //     validate: val => val.length >= 5 && val.length <= 50,
-      //     message: "Email must be 5-50 characters"
-      //   }
-      // ],
       messageRules: [
         { validate: val => !!val, message: "Message is required" },
         {
@@ -282,20 +277,19 @@ export default {
   created() {},
   methods: {
     submit() {
-      console.log("Submitting form");
-      // this.$refs.newUserRegistration.validate().then(result => {
-      //   if (result) {
-      //     // Register new user:
-      //     UserService.registerNewUser(this.newUser)
-      //       .then(() => {
-      //         // Redirect to dashboard view
-      //         this.$router.push({ name: "dashboard" });
-      //       })
-      //       .catch(error => {
-      //         this.errors = error.response.data;
-      //       });
-      //   }
-      // });
+      this.$refs.contact.validate().then(result => {
+        if (result) {
+          // Send form:
+          HomepageService.sendContactForm(this.contactForm)
+            .then(() => {
+              // Redirect to home view
+              this.$router.push({ name: "home" });
+            })
+            .catch(error => {
+              this.errors = error.response.data;
+            });
+        }
+      });
     },
     goHome() {
       this.$router.push({ name: "home" });
@@ -318,12 +312,12 @@ export default {
   border-radius: 15px;
   border: 5px solid #8500ff;
 }
-.mu-item-title {
+.inquiry-form .mu-item-title {
   color: white;
   font-style: italic;
 }
-.mu-item-title {
-  color: #aa00ff;
+.inquiry-form .mu-item-title {
+  color: white;
   font-weight: bolder;
   font-style: unset;
 }
