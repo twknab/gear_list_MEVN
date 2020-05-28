@@ -28,14 +28,15 @@ module.exports = {
     // TODO: ADD CAPTCHA
     const HTMLString = `
     <h1>💬 New Message!</h1>
-    <p>A pigeon from the woods 🌲 of the sasquat.ch has delivered you a message from <b>GearList</b>:</p>
+    <p>A pigeon from the woods 🌲 of the sasquat.ch has delivered you a message from <b>GearList</b>. Here are some details:</p>
     <ul>
       <li><b>First Name:</b> ${req.body.firstName}</li>
       <li><b>Last Name:</b> ${req.body.lastName}</li>
       <li><b>Email:</b> ${req.body.email} </li>
       <li><b>Reason for Contact:</b> ${req.body.reason}</li>
-      <li><b>Message:</b> ${req.body.message}</li>
     </ul>
+    <h2>✉️ Message From ${req.body.firstName}:</h2>
+    <blockquote>${req.body.message}</blockquote>
     `;
 
     var mailOptions = {

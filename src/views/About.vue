@@ -193,17 +193,25 @@
                 :rules="messageRules"
               ></mu-text-field>
             </mu-form-item>
-            <!-- Submit Button / Cancel -->
-            <mu-button
-              round
-              full-width
-              color="purpleA700"
-              @click="submit"
-              large
+            <!-- reCaptcha around Submit Button / Cancel-->
+            <vue-recaptcha
+              :sitekey="siteKey"
+              size="invisible"
+              :loadRecaptchaScript="true"
+              @verify="onVerify"
+              @expired="onExpired"
             >
-              <mu-icon value="check"></mu-icon>
-              <span class="button-icon">Send</span>
-            </mu-button>
+              <mu-button
+                round
+                full-width
+                color="purpleA700"
+                @click="submit"
+                large
+              >
+                <mu-icon value="check"></mu-icon>
+                <span class="button-icon">Send</span>
+              </mu-button>
+            </vue-recaptcha>
             <mu-button
               large
               flat
@@ -231,11 +239,15 @@
 
 <script>
 import HomepageService from "@/services/HomepageService.js";
+import VueRecaptcha from "vue-recaptcha";
+// import envVariables from "@/variables";
 export default {
   name: "About",
+  components: { VueRecaptcha },
   data() {
     return {
       errors: {},
+      siteKey: "6LfMFv0UAAAAAKFUUFf6s1hR76B6rBtvJamjHtBw",
       reasonOptions: ["Bug Report", "Feature Request", "General Message"],
       firstNameRules: [
         { validate: val => !!val, message: "First name is required" },
@@ -274,7 +286,9 @@ export default {
       }
     };
   },
-  created() {},
+  created() {
+    console.log(this.siteKey);
+  },
   methods: {
     submit() {
       this.$refs.contact.validate().then(result => {
@@ -290,6 +304,12 @@ export default {
             });
         }
       });
+    },
+    onVerify: function(response) {
+      console.log("Verify: " + response);
+    },
+    onExpired: function() {
+      console.log("Expired");
     },
     goHome() {
       this.$router.push({ name: "home" });

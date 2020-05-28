@@ -101,3 +101,6 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - Unit conversion options for Gear Item and Gear List Weight (currently Oz but could support g/Kg)
 - Mark List Complete, when All Items are Completed for that List
 - Import REI items (do they have an open API? Get item name & weight)
+
+Things to add to TOS:
+"You agree to explicitly inform visitors to your site that you have implemented reCAPTCHA v3 on your site and that their use of reCAPTCHA v3 is subject to the [Google Privacy Policy](https://policies.google.com/privacy) and [Terms of Use](https://policies.google.com/terms)."
