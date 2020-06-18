@@ -16,24 +16,21 @@
               :ripple="false"
             >
               <mu-list-item-content>
-                <mu-list-item-title>{{ gearList.title }}</mu-list-item-title>
+                <mu-list-item-title @click="viewGearList(gearList._id)">{{
+                  gearList.title
+                }}</mu-list-item-title>
                 <mu-list-item-sub-title v-if="gearList.totalWeightInLbs > 0">
                   Total Weight: {{ gearList.totalWeightInLbs }} lbs.
                 </mu-list-item-sub-title>
               </mu-list-item-content>
               <mu-list-item-action>
                 <!-- View -->
-                <mu-button
-                  color="purpleA400"
-                  @click="viewGearList(gearList._id)"
-                  class="margin-right-md"
-                >
+                <mu-button icon @click="viewGearList(gearList._id)">
                   <mu-icon
-                    value="list"
-                    size="36"
-                    class="margin-right-sm"
+                    color="purpleA400"
+                    value="pageview"
+                    size="40"
                   ></mu-icon>
-                  View List
                 </mu-button>
               </mu-list-item-action>
               <mu-list-item-action>
