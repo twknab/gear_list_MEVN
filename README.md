@@ -50,6 +50,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 - ✅ User Confirmation when deleting a Gear Item (no accidental deletions)
 - ✅ User Confirmation when deleting a Gear List (no accidental deletions)
+- ✅ About Page with Contact form for Feature Requests/Bug Reports/Etc
 
 > NOTE: All data is hard deleted, no soft deletions, no saving of data. It's gone when user says so.
 
@@ -59,15 +60,8 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 ## Remaining TODOs
 
-- ⭕️ Contact & About Page (bug report?)
-- ⭕️ TOS modal on registration?
+- ⭕️ TOS modal on registration? [MEDIUM]
 - ⭕️ Deploy [LARGE]
-
-## Most Important TODO Before Deployment
-
-- !!! About
-- !!  Contact Page
-- !   TOS modal popup
 
 ## Technologies
 
