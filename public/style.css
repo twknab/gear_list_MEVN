@@ -236,6 +236,10 @@ img {
   color: #aa00ff;
 }
 
+.mu-list-two-line .mu-item {
+  height: 52px !important;
+}
+
 .mu-pagination-item.mu-button.is-current {
   background-color: #aa00ff !important;
 }
