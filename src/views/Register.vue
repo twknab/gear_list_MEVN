@@ -89,11 +89,33 @@
             </mu-form-item>
             <!-- TOS Is Agree -->
             <mu-form-item prop="isAgree" :rules="agreeRules" class="TOS">
-              <mu-checkbox
-                label="Accept TOS & Privacy Policy"
-                v-model="newUser.isAgree"
-              ></mu-checkbox>
+              <mu-checkbox v-model="newUser.isAgree"></mu-checkbox>
+              <p>
+                By registering with GearList, you accept our
+                <a @click="openTOS">TOS</a> &
+                <a @click="openPP">Privacy Policy</a>
+              </p>
             </mu-form-item>
+            <mu-dialog
+              title="Terms of Service"
+              width="360"
+              :open.sync="openTOSDialog"
+            >
+              TOS Dialog
+              <mu-button slot="actions" flat color="primary" @click="closeTOS"
+                >Close</mu-button
+              >
+            </mu-dialog>
+            <mu-dialog
+              title="Privacy Policy"
+              width="360"
+              :open.sync="openPPDialog"
+            >
+              PP Dialog
+              <mu-button slot="actions" flat color="primary" @click="closePP"
+                >Close</mu-button
+              >
+            </mu-dialog>
             <!-- Submit Button / Cancel -->
             <mu-button
               round
@@ -169,7 +191,9 @@ export default {
         email: "",
         password: "",
         isAgree: false
-      }
+      },
+      openTOSDialog: false,
+      openPPDialog: false
     };
   },
   created() {},
@@ -191,6 +215,18 @@ export default {
     },
     goHome() {
       this.$router.push({ name: "home" });
+    },
+    openTOS() {
+      this.openTOSDialog = true;
+    },
+    closeTOS() {
+      this.openTOSDialog = false;
+    },
+    openPP() {
+      this.openPPDialog = true;
+    },
+    closePP() {
+      this.openPPDialog = false;
     }
   }
 };
