@@ -1,7 +1,14 @@
 <template>
   <div>
     <mu-dialog title="GearList Privacy Policy" width="360" :open.sync="isOpen">
-      Privacy Policy Dialog
+      <h3>What We Collect</h3>
+      <p>Lorem ipsum</p>
+      <h3>What We do with Your Data</h3>
+      <p>Lorem ipsum</p>
+      <h3>Third Party Services</h3>
+      <p>Lorem ipsum</p>
+      <h3>Request Data Deletion</h3>
+      <p>Lorem ipsum</p>
       <mu-button slot="actions" flat color="primary" @click="closePP"
         >Close</mu-button
       >

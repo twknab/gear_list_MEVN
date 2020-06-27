@@ -5,7 +5,16 @@
       width="360"
       :open.sync="isOpen"
     >
-      TOS Dialog
+      <p>
+        By registering with GearList and using this tool, you agree to the
+        following:
+      </p>
+      <h3>Thing 1</h3>
+      <p>Lorem ipsum</p>
+      <h3>Thing 2</h3>
+      <p>Lorem ipsum</p>
+      <h3>Personal Data</h3>
+      <p>Lorem ipsum</p>
       <mu-button slot="actions" flat color="primary" @click="closeTOS"
         >Close</mu-button
       >
