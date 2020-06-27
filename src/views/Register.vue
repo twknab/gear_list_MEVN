@@ -4,16 +4,6 @@
       <mu-container>
         <!-- Registration Full Screen Dialogue -->
         <mu-container>
-          <!-- <p
-            class="text-center margin-top"
-          >Use an account from another service, or create one below!</p>
-          <div class="passport-icons">
-            <mu-flex justify-content="center" align-items="center">
-              <mu-button color="red" class="round-left">Google</mu-button>
-              <mu-button color="blue">LinkedIn</mu-button>
-              <mu-button color="indigo" class="round-right">Facebook</mu-button>
-            </mu-flex>
-          </div>-->
           <h1>Create a New Account</h1>
           <p>
             Register an account with GearList below. Your information is not
@@ -96,26 +86,16 @@
                 <a @click="openPP">Privacy Policy</a>
               </p>
             </mu-form-item>
-            <mu-dialog
-              title="Terms of Service"
-              width="360"
-              :open.sync="openTOSDialog"
-            >
-              TOS Dialog
-              <mu-button slot="actions" flat color="primary" @click="closeTOS"
-                >Close</mu-button
-              >
-            </mu-dialog>
-            <mu-dialog
-              title="Privacy Policy"
-              width="360"
-              :open.sync="openPPDialog"
-            >
-              PP Dialog
-              <mu-button slot="actions" flat color="primary" @click="closePP"
-                >Close</mu-button
-              >
-            </mu-dialog>
+            <!-- TOS -->
+            <DialogTOS
+              :isOpen="this.openTOSDialog"
+              @closeTOSDialog="closeTOS"
+            />
+            <!-- Privacy Policy -->
+            <DialogPrivacyPolicy
+              :isOpen="this.openPPDialog"
+              @closePPDialog="closePP"
+            />
             <!-- Submit Button / Cancel -->
             <mu-button
               round
@@ -146,8 +126,14 @@
 
 <script>
 import UserService from "@/services/UserService.js";
+import DialogTOS from "@/components/DialogTOS.vue";
+import DialogPrivacyPolicy from "@/components/DialogPrivacyPolicy.vue";
 export default {
   name: "Register",
+  components: {
+    DialogTOS,
+    DialogPrivacyPolicy
+  },
   data() {
     return {
       errors: {},
@@ -196,7 +182,6 @@ export default {
       openPPDialog: false
     };
   },
-  created() {},
   methods: {
     submit() {
       this.$refs.newUserRegistration.validate().then(result => {
@@ -239,5 +224,9 @@ export default {
 
 .mu-checkbox {
   color: rgba(255, 255, 255, 0.678) !important;
+}
+
+a {
+  color: #d500f9 !important;
 }
 </style>
