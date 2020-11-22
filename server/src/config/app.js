@@ -18,7 +18,7 @@ module.exports = app => {
     saveUninitialized: true,
     name: "gearListCookie",
     cookie: {
-      secure: false, // change to true for production
+      secure: false, // TODO: Fix this -- change to true for production -- breaks things right now
       httpOnly: false,
       maxAge: 3600000
     }
@@ -29,11 +29,21 @@ module.exports = app => {
     credentials: true
   };
 
+  // Set as production
+  // NOTE: Comment this out if working on dev server
+  process.env.NODE_ENV = "production";
+
+  const isProduction = process.env.NODE_ENV === "production" || false;
+  if (isProduction) {
+    // Load prod environment
+    app.use(express.static(path.join(__dirname, "../../public")));
+  } else {
+    // Load dev environment
+    app.use(express.static(path.join(__dirname, "../../../src")));
+  }
+
   // Setup our express and nodejs application:
   app
-    // gives server access to src folder where Vue.js application lives
-    .use(express.static(path.join(__dirname, "../../public")))
-
     // run morgan to help with routing console logging
     .use(morgan("dev"))
 
