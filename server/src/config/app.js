@@ -8,6 +8,7 @@ const express = require("express"),
   morgan = require("morgan"),
   session = require("express-session"),
   creds = require("./credentials/credentials"),
+  helmet = require("helmet"),
   cors = require("cors");
 
 module.exports = app => {
@@ -49,6 +50,9 @@ module.exports = app => {
 
     // load up express-session
     .use(session(sess))
+
+    // helmet for extra prod security for requests https://helmetjs.github.io/
+    .use(helmet())
 
     // run cors
     .use(cors(corsOptions))
