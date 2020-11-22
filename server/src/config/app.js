@@ -18,7 +18,7 @@ module.exports = app => {
     saveUninitialized: true,
     name: "gearListCookie",
     cookie: {
-      secure: false, // change this for production
+      secure: false, // change to true for production
       httpOnly: false,
       maxAge: 3600000
     }
@@ -32,7 +32,7 @@ module.exports = app => {
   // Setup our express and nodejs application:
   app
     // gives server access to src folder where Vue.js application lives
-    .use(express.static(path.join(__dirname, "../../../src")))
+    .use(express.static(path.join(__dirname, "../../public")))
 
     // run morgan to help with routing console logging
     .use(morgan("dev"))

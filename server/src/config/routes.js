@@ -10,53 +10,62 @@ const UserController = require("./../controllers/user-controller"),
 module.exports = function(app) {
   console.log("⚙️  Server side routes loaded...");
   // Contact form (Homepage, not logged-in)
-  app.post("/contact", HomepageController.sendContactFormDataByEmail);
+  app.post("/api/contact", HomepageController.sendContactFormDataByEmail);
   // Create a new user
-  app.post("/user", UserController.createUser);
+  app.post("/api/user", UserController.createUser);
   // Get existing user:
-  app.get("/user", UserController.getLoggedInById);
+  app.get("/api/user", UserController.getLoggedInById);
   // Login a user
-  app.post("/user/login", UserController.loginUser);
-  app.get("/user/logout", UserController.logout);
+  app.post("/api/user/login", UserController.loginUser);
+  app.get("/api/user/logout", UserController.logout);
   // Create a new gear item
-  app.post("/gear-item", GearItemController.createGearItem);
+  app.post("/api/gear-item", GearItemController.createGearItem);
   // Get gear item
-  app.get("/gear-item/find-item", GearItemController.getGearItem);
+  app.get("/api/gear-item/find-item", GearItemController.getGearItem);
   // Get all user's gear items
-  app.get("/gear-item", GearItemController.getUserGearItems);
+  app.get("/api/gear-item", GearItemController.getUserGearItems);
   // Delete gear item
-  app.get("/gear-item/delete", GearItemController.deleteGearItem);
+  app.get("/api/gear-item/delete", GearItemController.deleteGearItem);
   // Mark item as complete or incomplete
-  app.get("/gear-item/complete", GearItemController.changeCompleteStatus);
+  app.get("/api/gear-item/complete", GearItemController.changeCompleteStatus);
   // Update gear item
-  app.post("/gear-item/update", GearItemController.updateGearItem);
+  app.post("/api/gear-item/update", GearItemController.updateGearItem);
   // Create a new gear list
-  app.post("/gear-list", GearListController.createGearList);
+  app.post("/api/gear-list", GearListController.createGearList);
   // Get all user's gear lists
-  app.get("/gear-list", GearListController.getUserGearLists);
+  app.get("/api/gear-list", GearListController.getUserGearLists);
   // Add/remove one gear item to many gear lists
-  app.post("/gear-list/attach", GearListController.attachOneItemToManyLists);
+  app.post(
+    "/api/gear-list/attach",
+    GearListController.attachOneItemToManyLists
+  );
   // Add/remove many gear items from one gear list
   app.post(
-    "/gear-list/attach/many-items",
+    "/api/gear-list/attach/many-items",
     GearListController.attachManyItemsToSingleList
   );
   // Get gear lists belonging to gear item
   app.get(
-    "/gear-list/find-item",
+    "/api/gear-list/find-item",
     GearListController.getGearListsBelongingToItem
   );
   // Get gear list and all items
-  app.get("/gear-list/find-list", GearListController.getGearListAndAllItems);
+  app.get(
+    "/api/gear-list/find-list",
+    GearListController.getGearListAndAllItems
+  );
   // Get all gear item completions and item information
   app.post(
-    "/gear-list/find-list",
+    "/api/gear-list/find-list",
     GearListController.getGearListAndAllItemCompletions
   );
   // Update gear list
-  app.post("/gear-list/update", GearListController.updateGearList);
+  app.post("/api/gear-list/update", GearListController.updateGearList);
   // Remove item from gear list
-  app.post("/gear-list/remove/item", GearListController.removeGearItemFromList);
+  app.post(
+    "/api/gear-list/remove/item",
+    GearListController.removeGearItemFromList
+  );
   // Delete gear list
-  app.get("/gear-list/delete", GearListController.deleteGearList);
+  app.get("/api/gear-list/delete", GearListController.deleteGearList);
 };

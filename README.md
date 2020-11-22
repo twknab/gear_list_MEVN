@@ -57,11 +57,8 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ "Load More" button Dashboard beneath Lists and Items push more into user's view.
 - ✅ Front & Backend strong validation on all forms.
 - ✅ API locked down (must valid session to hit any any API endpoint)
+- ✅ TOS modal on registration?
 
-## Remaining TODOs
-
-- ⭕️ TOS modal on registration? [MEDIUM]
-- ⭕️ Deploy [LARGE]
 
 ## Technologies
 
@@ -80,7 +77,13 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 ### Bugs Backlog
 
+- [HIGH] Validation errors not properly displaying registration page (try signing up with duplicate email, will see validation message print in server log but not displaying in UI. Might be improperly reading objects.)
 - [LOW PRI] When attaching one item to many lists, selecing "Update" without any list selections pops up a "Done" message. Instead, should say no changes detected or not show a success message at all.
+
+### TODO
+
+- Add a "Congratulations message" when all itmes are completed and visually change a bit to look more "done"
+- Add reset button to easily reset a list -- maybe add a confirmation modal as a "blocker" to confirm and prevent accidental reset
 
 ### Wishlist / Next Features (may require addt'l creation of models)
 
