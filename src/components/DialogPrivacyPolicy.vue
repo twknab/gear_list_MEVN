@@ -3,7 +3,7 @@
     <mu-dialog
       title="GearList Privacy Policy"
       width="50%"
-      scrollable="true"
+      :scrollable="true"
       :open.sync="isOpen"
     >
       <h5>Effective June 27, 2020</h5>

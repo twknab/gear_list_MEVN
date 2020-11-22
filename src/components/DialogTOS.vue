@@ -3,7 +3,7 @@
     <mu-dialog
       title="GearList Terms of Service & Use"
       width="50%"
-      scrollable="true"
+      :scrollable="true"
       :open.sync="isOpen"
     >
       <h5>Effective June 26, 2020</h5>
