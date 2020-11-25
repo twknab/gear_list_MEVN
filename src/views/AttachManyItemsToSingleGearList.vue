@@ -128,7 +128,7 @@ export default {
           // mark items already on list as complete
           GearListService.getListAndItems(listId)
             .then(userListAndListItems => {
-              this.gearListTitle = userListAndListItems.data.title;
+              this.gearListTitle = userListAndListItems.data.title; // if this takes too long to load, consider breaking into unique query that runs on created or even before create using a new service method...
               let existingListItems = userListAndListItems.data.items.map(
                 item => item._id
               );
