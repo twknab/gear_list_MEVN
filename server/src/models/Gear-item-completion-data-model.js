@@ -12,7 +12,6 @@ const GearItemCompletionDataSchema = new Schema(
     gearList: {
       type: Schema.Types.ObjectId,
       ref: "GearList",
-      unique: true,
       required: true
     },
     user: {
