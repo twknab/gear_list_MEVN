@@ -120,7 +120,7 @@ GearListSchema.methods.attachManyItemsToOneList = function(
   const itemsToAddToList = [];
   const itemsToRemoveFromList = [];
 
-  // Find any items that were removed during selection
+  // Find any items removed during selections
   existingItemIds.forEach(existingItemId => {
     if (!selectedItemIds.includes(existingItemId)) {
       itemsToRemoveFromList.push(existingItemId);

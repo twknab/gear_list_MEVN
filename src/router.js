@@ -72,6 +72,12 @@ const router = new Router({
         import(/* webpackChunkName: "editGearList" */ "./views/EditGearList.vue")
     },
     {
+      path: "/gear/list/attach/:id",
+      name: "attachItemsToGearList",
+      component: () =>
+        import(/* webpackChunkName: "attachItemsToGearList" */ "./views/AttachManyItemsToSingleGearList.vue")
+    },
+    {
       path: "/logout",
       name: "logout",
       component: () =>
@@ -95,7 +101,7 @@ router.beforeEach((to, from, next) => {
         next();
       })
       .catch(err => {
-        // if no user retreived will fail here abd run `router.onError()`
+        // if no user retreived will fail here and run `router.onError()`
         next(err);
       });
   } else {

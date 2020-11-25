@@ -97,14 +97,6 @@
               ></mu-icon>
             </mu-flex>
           </div>
-          <AttachManyItemsToSingleList
-            :openAlert="this.showAttachItemsDialog"
-            :watchGearListToAttachListView="this.gearListToQuickAttachListView"
-            :watchRefreshListItems="this.refreshListItems"
-            @successMessage="updateSuccessMessage"
-            @failureMessage="updateFailureMessage"
-            @closeAttachItemsDialog="closeAttachItemsDialog"
-          />
         </mu-col>
       </mu-row>
       <mu-divider
@@ -113,12 +105,13 @@
       <mu-row gutter>
         <mu-col span="12" sm="12" md="12" lg="6" xl="6">
           <mu-flex justify-content="center" class="margin-top">
+            <!-- Attach Items -->
             <mu-button
               large
               round
               full-width
               color="purpleA700"
-              @click="this.showAttachItemsToListDialog"
+              @click="this.attachManyItemsToList"
               class="margin-left-sm"
             >
               <mu-icon left value="attach_file"></mu-icon>Attach Items
@@ -127,6 +120,7 @@
         </mu-col>
         <mu-col span="12" sm="12" md="12" lg="6" xl="6">
           <mu-flex justify-content="center" class="margin-top margin-left-sm">
+            <!-- Back to Dashboard -->
             <mu-button
               large
               full-width
@@ -139,40 +133,16 @@
           </mu-flex>
         </mu-col>
       </mu-row>
-      <!-- <mu-flex justify-content="center" class="margin-top margin-left-sm">
-        <mu-button
-          large
-          round
-          color="purpleA700"
-          @click="this.showAttachItemsToListDialog"
-          class="margin-left-sm"
-        >
-          <mu-icon left value="attach_file"></mu-icon>Attach Items
-        </mu-button>
-        <mu-button
-          large
-          flat
-          color="primary"
-          @click="$router.push({ name: 'dashboard' })"
-          class="margin-left-sm"
-        >
-          <mu-icon left value="arrow_back"></mu-icon>Back to Dashboard
-        </mu-button>
-      </mu-flex> -->
     </mu-container>
   </div>
 </template>
 
 <script>
-import AttachManyItemsToSingleList from "@/components/AttachManyItemsToSingleList";
 import GearListService from "@/services/GearListService.js";
 import GearItemService from "@/services/GearItemService.js";
 import UnitConversionUtils from "@/helpers/UnitConversionUtils.js";
 export default {
   name: "ViewGearList",
-  components: {
-    AttachManyItemsToSingleList
-  },
   data() {
     return {
       errors: {},
@@ -185,13 +155,6 @@ export default {
       totalPackedLbs: 0,
       itemCompletionData: [{ completed: false, gearItem: {} }]
     };
-  },
-  watch: {
-    watchUpdateGearListsAfterAttach: function(status) {
-      if (status === true) {
-        this.getGearListAndItemCompletions(this.listId);
-      }
-    }
   },
   computed: {
     totalGrossOz: function() {
@@ -241,9 +204,11 @@ export default {
       this.totalPackedLbs = this.roundToAtMostTwoDecimalPlaces(totalLbs);
       this.totalPackedOz = totalOz;
     },
-    showAttachItemsToListDialog() {
-      this.gearListToQuickAttachListView = this.listId;
-      this.showAttachItemsDialog = true;
+    attachManyItemsToList() {
+      this.$router.push({
+        name: "attachItemsToGearList",
+        params: { id: this.listId }
+      });
     },
     updateCompleteStatus(item, listId, complete) {
       if (complete) {
@@ -274,7 +239,6 @@ export default {
       };
       GearListService.removeGearItemFromList(listAndItemId)
         .then(() => {
-          // Refresh list
           this.refreshItems();
           this.getGearListAndItemCompletions(listAndItemId.listId);
         })
@@ -287,18 +251,6 @@ export default {
     },
     resetRefreshItems() {
       this.refreshListItems = false;
-    },
-    updateSuccessMessage(message) {
-      // TODO: Turn messaging into a component
-      // Get updated list after
-      console.log(message);
-      this.closeAttachItemsDialog();
-      this.getGearListAndItemCompletions(this.listId);
-    },
-    updateFailureMessage(messages) {
-      // TODO: Turn messaging into its own component
-      console.log(messages);
-      this.closeAttachItemsDialog();
     }
   }
 };

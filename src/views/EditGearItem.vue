@@ -48,6 +48,7 @@
             <mu-icon value="update"></mu-icon>
             <span class="button-icon">Update Item</span>
           </mu-button>
+          <!-- Cancel Button -->
           <div class="margin-top-md">
             <mu-button
               class="flat-full-width"

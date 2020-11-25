@@ -39,17 +39,17 @@
                     <mu-icon value="more_vert" size="36"></mu-icon>
                   </mu-button>
                   <mu-list slot="content">
-                    <!-- Quick Attach Items -->
+                    <!--  Attach Items -->
                     <mu-list-item
                       button
-                      @click="showAttachItemsToListDialog(gearList._id)"
+                      @click="attachManyItemsToList(gearList._id)"
                       ><mu-icon
                         size="26"
                         value="attach_file"
                         color="#aa00ff"
                         class="margin-right-sm margin-top-xsm"
                       ></mu-icon>
-                      Quick Attach</mu-list-item
+                      Attach Items</mu-list-item
                     >
                     <!-- Edit -->
                     <mu-list-item button @click="editGearList(gearList._id)"
@@ -91,14 +91,6 @@
             </mu-flex>
           </div>
         </div>
-        <!-- This dialog opens when quick attach is triggered -->
-        <AttachManyItemsToSingleList
-          :openAlert="this.showAttachItemsDialog"
-          :watchGearListToAttachDashboard="this.gearListToQuickAttachDashboard"
-          @successMessage="updateSuccessMessage"
-          @failureMessage="updateFailureMessage"
-          @closeAttachItemsDialog="closeAttachItemsDialog"
-        />
       </mu-col>
     </mu-row>
     <mu-row v-if="isJustAFewLists" gutter>
@@ -126,7 +118,6 @@
 <script>
 import GearListService from "@/services/GearListService.js";
 import AddGearListButton from "@/components/buttons/AddGearListButton";
-import AttachManyItemsToSingleList from "@/components/AttachManyItemsToSingleList";
 import SeeMoreButton from "@/components/buttons/SeeMoreButton";
 import ModelConstants from "@/constants/modelConstants";
 import UnitConversionUtils from "@/helpers/UnitConversionUtils.js";
@@ -142,7 +133,6 @@ export default {
   },
   components: {
     AddGearListButton,
-    AttachManyItemsToSingleList,
     SeeMoreButton
   },
   data() {
@@ -151,7 +141,6 @@ export default {
       open: false,
       userGearLists: [],
       showAttachItemsDialog: false,
-      gearListToQuickAttachDashboard: "",
       isJustAFewLists: true,
       FILE_BUG: "Kindly file a bug report."
     };
@@ -160,11 +149,6 @@ export default {
     watchDeleteListConfirmation: function(confirmation) {
       if (confirmation.success) {
         this.actuallyForeverDeleteGearList(confirmation.id);
-      }
-    },
-    watchUpdateGearListsAfterAttach: function(status) {
-      if (status === true) {
-        this.getAllUserGearLists();
       }
     }
   },
@@ -175,9 +159,11 @@ export default {
     editGearList(gearListId) {
       this.$router.push({ name: "editGearList", params: { id: gearListId } });
     },
-    showAttachItemsToListDialog(gearListId) {
-      this.gearListToQuickAttachDashboard = gearListId;
-      this.showAttachItemsDialog = true;
+    attachManyItemsToList(gearListId) {
+      this.$router.push({
+        name: "attachItemsToGearList",
+        params: { id: gearListId }
+      });
     },
     viewGearList(gearListId) {
       // redirect to gear list view page passing in gearListId as a parameter
@@ -209,9 +195,6 @@ export default {
           this.errors = err;
         });
     },
-    closeAttachItemsDialog() {
-      this.showAttachItemsDialog = false;
-    },
     confirmDeleteList(listId) {
       // trigger dialogue, run below if confirmed
       this.$emit(
@@ -231,12 +214,6 @@ export default {
           console.log(err);
           this.updateFailureMessage(["Problem deleting list.", this.FILE_BUG]);
         });
-    },
-    updateSuccessMessage(messageText) {
-      this.$emit("updateDashboardSuccessMessage", messageText);
-    },
-    updateFailureMessage(messages) {
-      this.$emit("updateDashboardFailureMessage", messages);
     }
   }
 };

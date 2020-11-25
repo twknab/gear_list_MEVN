@@ -82,6 +82,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 ### TODO
 
+- [HIGH] Replace other success dialog and failure dialogs with new components (DialogSuccess and DialogFailure)
 - Add a "Congratulations message" when all itmes are completed and visually change a bit to look more "done"
 - Add reset button to easily reset a list -- maybe add a confirmation modal as a "blocker" to confirm and prevent accidental reset
 
@@ -101,22 +102,3 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 
 Things to add to TOS:
 "You agree to explicitly inform visitors to your site that you have implemented reCAPTCHA v3 on your site and that their use of reCAPTCHA v3 is subject to the [Google Privacy Policy](https://policies.google.com/privacy) and [Terms of Use](https://policies.google.com/terms)."
-
-
-
-# COMPLETION DATA BUG
-
-MongoError: E11000 duplicate key error collection: gearListDB.gearitemcompletiondatas index: gearList_1 dup key: { gearList: ObjectId('5fbd951cf2629d3c56cf79f9') }
-    at Function.create (/var/www/gear_list_MEVN/server/node_modules/mongodb/lib/core/error.js:43:12)
-    at toError (/var/www/gear_list_MEVN/server/node_modules/mongodb/lib/utils.js:149:22)
-    at /var/www/gear_list_MEVN/server/node_modules/mongodb/lib/operations/common_functions.js:265:39
-    at /var/www/gear_list_MEVN/server/node_modules/mongodb/lib/core/connection/pool.js:404:18
-    at processTicksAndRejections (internal/process/task_queues.js:75:11) {
-  driver: true,
-  index: 0,
-  code: 11000,
-  keyPattern: { gearList: 1 },
-  keyValue: { gearList: 5fbd951cf2629d3c56cf79f9 },
-  errmsg: "E11000 duplicate key error collection: gearListDB.gearitemcompletiondatas index: gearList_1 dup key: { gearList: ObjectId('5fbd951cf2629d3c56cf79f9') }",
-  [Symbol(mongoErrorContextSymbol)]: {}
-}
