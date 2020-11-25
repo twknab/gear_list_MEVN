@@ -17,10 +17,10 @@ fs.readdirSync(modelsPath).forEach(file => {
 });
 
 // Setup Mongoose and MongoDB connection:
-mongoose.connect(
-  "mongodb://localhost/" + databaseName,
-  { useNewUrlParser: true }
-);
+mongoose.connect("mongodb://localhost/" + databaseName, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 // Mongoose/Mongo/Node connection events:
 mongoose.connection
