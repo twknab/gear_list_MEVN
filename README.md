@@ -78,6 +78,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 ### Bugs Backlog
 
 - [HIGH] Validation errors not properly displaying registration page (try signing up with duplicate email, will see validation message print in server log but not displaying in UI. Might be improperly reading objects.)
+- [HIGH] Add logging on basic CRUD actions (how many items being created, how many lists, how many completions and how many incomplete items)
 - [LOW PRI] When attaching one item to many lists, selecing "Update" without any list selections pops up a "Done" message. Instead, should say no changes detected or not show a success message at all.
 
 ### TODO

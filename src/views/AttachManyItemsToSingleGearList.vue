@@ -118,7 +118,6 @@ export default {
       } else {
         this.gearItemSelections.values.push(itemId);
       }
-      console.log(this.gearItemSelections.values);
     },
     getAllItemsBelongingToUser(listId) {
       // get all items for user
