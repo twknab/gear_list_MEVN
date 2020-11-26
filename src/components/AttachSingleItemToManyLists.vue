@@ -53,7 +53,7 @@
           slot="actions"
           flat
           color="primary"
-          @click="AttachItemToGearLists"
+          @click="attachItemToGearLists"
           >Update</mu-button
         >
       </mu-dialog>
@@ -99,7 +99,7 @@ export default {
           console.log(err);
         });
     },
-    AttachItemToGearLists() {
+    attachItemToGearLists() {
       GearListService.findListsWithItem(this.gearItem._id)
         .then(itemSavedLists => {
           GearListService.attachOneItemToManyLists({

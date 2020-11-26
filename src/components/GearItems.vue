@@ -150,13 +150,11 @@ export default {
     },
     actuallyForeverDeleteGearItem(itemId) {
       GearItemService.deleteGearItem(itemId)
-        .then(response => {
-          this.updateSuccessMessage(response.data.successMessage);
+        .then(() => {
           this.getAllUserGearItems();
         })
         .catch(err => {
           console.log(err);
-          this.updateFailureMessage(["Problem deleting item.", this.FILE_BUG]);
         });
     },
     refreshDashboardGearLists() {

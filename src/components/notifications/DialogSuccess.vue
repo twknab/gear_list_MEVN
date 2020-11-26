@@ -46,4 +46,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.success-alert p {
+  color: white !important;
+}
+</style>

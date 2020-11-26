@@ -206,13 +206,11 @@ export default {
     },
     actuallyForeverDeleteGearList(gearListId) {
       GearListService.deleteGearList(gearListId)
-        .then(response => {
-          this.updateSuccessMessage(response.data.successMessage);
+        .then(() => {
           this.getAllUserGearLists();
         })
         .catch(err => {
           console.log(err);
-          this.updateFailureMessage(["Problem deleting list.", this.FILE_BUG]);
         });
     }
   }

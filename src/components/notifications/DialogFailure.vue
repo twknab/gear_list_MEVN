@@ -68,4 +68,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.failure-alert p {
+  color: rgb(34, 34, 34) !important;
+}
+</style>

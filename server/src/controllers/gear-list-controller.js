@@ -134,7 +134,7 @@ module.exports = {
   },
   attachManyItemsToSingleList: (req, res) => {
     if (UserController.isAuthenticated(req, res)) {
-      let gearListId = req.body.gearListId;
+      const gearListId = req.body.gearListId;
       GearList.findOne({ _id: gearListId })
         .populate({
           path: "items"
@@ -143,11 +143,11 @@ module.exports = {
         .then(listAndItems => {
           // Map existing item ids for diff'ing
           let existingItems = listAndItems.items;
-          let existingItemsIds = existingItems.map(item => item._id);
+          let existingItemsIds = existingItems.map(item => String(item._id));
           GearList.schema.methods.attachManyItemsToOneList(
             gearListId,
             existingItemsIds,
-            req.body.selectedListIds,
+            req.body.selectedItemIds,
             // callback function as argument
             function(result) {
               if (result.success) {

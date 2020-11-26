@@ -65,7 +65,7 @@
     </mu-container>
     <DialogSuccess
       :isOpen="this.showSuccessDialog"
-      :message="'Updated list items!'"
+      :message="this.successMessage"
       @closeSuccessDialog="successDialogClose"
     />
     <DialogFailure
@@ -99,7 +99,9 @@ export default {
       },
       gearListId: "",
       gearListTitle: "",
+      existingItems: null,
       allUserItems: {},
+      successMessage: "Successfully updated list items! 🕺",
       showSuccessDialog: false,
       showFailureDialog: false,
       errors: {}
@@ -132,6 +134,7 @@ export default {
                 item => item._id
               );
               this.gearItemSelections.values = existingListItems;
+              this.existingItems = existingListItems.map(id => id);
             })
             .catch(err => {
               console.log(
@@ -148,29 +151,36 @@ export default {
         });
     },
     attachItemsToGearList() {
-      GearListService.attachManyItemsToOneList({
-        gearListId: this.gearListId,
-        selectedListIds: this.gearItemSelections.values
-      })
-        .then(response => {
-          if (response.data.success) {
-            this.showSuccessDialog = true;
-          } else {
-            this.errors = response.data.errors;
-            this.showFailureDialog = true;
-          }
+      if (
+        JSON.stringify(this.existingItems) ===
+        JSON.stringify(this.gearItemSelections.values)
+      ) {
+        this.successMessage = "No list item changes detected! 🤙";
+        this.showSuccessDialog = true;
+      } else {
+        GearListService.attachManyItemsToOneList({
+          gearListId: this.gearListId,
+          selectedItemIds: this.gearItemSelections.values
         })
-        .catch(err => {
-          this.errors = err;
-          this.showFailureDialog = true;
-        });
+          .then(response => {
+            if (response.data.success) {
+              this.showSuccessDialog = true;
+            } else {
+              this.errors = response.data.errors;
+              this.showFailureDialog = true;
+            }
+          })
+          .catch(err => {
+            this.errors = err;
+            this.showFailureDialog = true;
+          });
+      }
     },
     successDialogClose() {
       this.showSuccessDialog = false;
       this.goBack();
     },
     failureDialogClose() {
-      console.log("Closed@!@@");
       this.showFailureDialog = false;
       this.goBack();
     }
