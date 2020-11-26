@@ -54,6 +54,12 @@ const router = new Router({
         import(/* webpackChunkName: "editGearItem" */ "./views/EditGearItem.vue")
     },
     {
+      path: "/gear/item/attach/:id",
+      name: "attachItemToGearLists",
+      component: () =>
+        import(/* webpackChunkName: "attachItemToGearLists" */ "./views/AttachSingleItemToManyGearLists.vue")
+    },
+    {
       path: "/gear/list",
       name: "addGearList",
       component: () =>

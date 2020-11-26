@@ -49,7 +49,7 @@
           large
         >
           <mu-icon value="attach_file"></mu-icon>
-          <span class="button-icon">Attach Items</span>
+          <span class="button-icon">Update Items</span>
         </mu-button>
         <mu-button
           large
@@ -97,8 +97,8 @@ export default {
       gearItemSelections: {
         values: []
       },
-      gearListId: "",
-      gearListTitle: "",
+      gearListId: null,
+      gearListTitle: null,
       existingItems: null,
       allUserItems: {},
       successMessage: "Successfully updated list items! 🕺",
@@ -138,16 +138,13 @@ export default {
             })
             .catch(err => {
               console.log(
-                "Something's gone wrong with server side routing.: ",
+                "Something's gone wrong getting list and items: ",
                 err
               );
             });
         })
         .catch(err => {
-          console.log(
-            "Something's gone wrong with server side routing.: ",
-            err
-          );
+          console.log("Something's gone wrong getting all items: ", err);
         });
     },
     attachItemsToGearList() {
@@ -231,13 +228,5 @@ export default {
 
 .mu-dialog-actions {
   margin-bottom: 10px;
-}
-
-.server-errors {
-  width: 100% !important;
-}
-.mu-alert {
-  margin-bottom: 10px !important;
-  color: rgb(189, 159, 48) !important;
 }
 </style>

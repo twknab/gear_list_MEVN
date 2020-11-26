@@ -21,13 +21,18 @@
               >
             </mu-list-item-content>
             <!-- Paperclip Attach Button -->
-            <AttachSingleItemToManyLists
-              :gearItem="gearItem"
-              :gearLists="gearLists"
-              @refreshGearLists="refreshDashboardGearLists"
-              @successMessage="updateSuccessMessage"
-              @failureMessage="updateFailureMessage"
-            />
+            <mu-list-item-action>
+              <mu-button
+                icon
+                @click="attachSingleItemToManyLists(gearItem._id)"
+              >
+                <mu-icon
+                  color="purpleA400"
+                  value="attach_file"
+                  size="36"
+                ></mu-icon>
+              </mu-button>
+            </mu-list-item-action>
             <!-- Edit Button -->
             <mu-list-item-action>
               <mu-button icon @click="editGearItem(gearItem._id)">
@@ -79,7 +84,6 @@
 </template>
 
 <script>
-import AttachSingleItemToManyLists from "@/components/AttachSingleItemToManyLists.vue";
 import GearItemService from "@/services/GearItemService.js";
 import AddGearItemButton from "@/components/buttons/AddGearItemButton";
 import SeeMoreButton from "@/components/buttons/SeeMoreButton";
@@ -95,7 +99,6 @@ export default {
     }
   },
   components: {
-    AttachSingleItemToManyLists,
     AddGearItemButton,
     SeeMoreButton
   },
@@ -121,6 +124,12 @@ export default {
   methods: {
     editGearItem(gearItemId) {
       this.$router.push({ name: "editGearItem", params: { id: gearItemId } });
+    },
+    attachSingleItemToManyLists(gearItemId) {
+      this.$router.push({
+        name: "attachItemToGearLists",
+        params: { id: gearItemId }
+      });
     },
     getAllUserGearItems() {
       GearItemService.getAllGearItemsForUser()
