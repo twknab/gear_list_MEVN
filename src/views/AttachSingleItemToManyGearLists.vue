@@ -1,7 +1,4 @@
 <template>
-  <!-- TODO: -->
-  <!-- Sent attach method (use same logic pattern as component above) -->
-  <!-- use success failure dialogs -->
   <div>
     <mu-container>
       <mu-row gutter>
