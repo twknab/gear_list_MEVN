@@ -19,6 +19,24 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - `npm install` from `~/server` to get server-side packages.
 - Update `~/src/services/UserService` baseURL to reflect your localhost or local network IP.
 - (1) Make sure `mongod` is running. (2) from `~/` run `npm run serve` and (3) from `~/server` run `npm start`.
+  - If you're having trouble running mongod do this:
+  - 1. Download the Community Edition of MongoDB from here: [Community edition download page](https://www.mongodb.com/download-center/community). *NOTE*: Do not use Enterprise as license isn't for personal prod deployments.
+  - 2. `cd ~/Downloads`
+  - 3. `tar -zxvf {{tar-name}}`
+  - 4. `cd /usr/local/mongodb`
+  - 5. Make data folder (this is where all your local system dev db stuff will be stored), no longer an use `/data/db` in Catalina and above. Instead do: `sudo mkdir -p /System/Volumes/Data/data/db` && ```sudo chown -R `id -un` /System/Volumes/Data/data/dbsudo chown -R `id -un` /System/Volumes/Data/data/db```.
+  - 6. Then added to `cd ~` && `open .bash_profile`: `alias mongod="sudo mongod --dbpath /System/Volumes/Data/data/db"`
+  - 7. Also add to bash profile
+
+    ```bash
+    export MONGO_PATH=/usr/local/mongodb
+    export PATH=$PATH:$MONGO_PATH/bin
+    ```
+
+  - 8. Check mongo version: `mongo --version`
+  - 9. Run mongo as background process: `mongod --config /usr/local/etc/mongod.conf --fork` (or run `sudo mongod --dbpath /System/Volumes/Data/data/db` manually). **NOTE**: If you run as a process you can later `kill {{ID}}` after listing them via: `launchctl list | grep mongo`.
+
+- Once server & mongo is running, and VueJS dev sever is running. Load app in next step.
 - Load [localhost:8080](https://localhost:8080) to see the application running locally.
 
 ## Features

@@ -227,9 +227,8 @@
         <mu-col span="12" class="margin-bottom-lg">
           <p>
             You can also find me on
-            <a href="https://github.com/twknab" target="_blank"> 🔗 GitHub</a>,
-            or hit me up directly on
-            <a href="https://t.me/twknab"> 🔗 Telegram</a>.
+            <a href="https://github.com/twknab" target="_blank"> 🔗 GitHub</a>
+            or <a href="https://t.me/twknab"> 🔗 Telegram</a>.
           </p>
         </mu-col>
       </mu-row>
@@ -285,9 +284,6 @@ export default {
         message: ""
       }
     };
-  },
-  created() {
-    console.log(this.siteKey);
   },
   methods: {
     submit() {

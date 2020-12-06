@@ -9,6 +9,7 @@ const express = require("express"),
   session = require("express-session"),
   creds = require("./credentials/credentials"),
   helmet = require("helmet"),
+  history = require("connect-history-api-fallback"),
   cors = require("cors");
 
 module.exports = app => {
@@ -37,9 +38,15 @@ module.exports = app => {
   const isProduction = process.env.NODE_ENV === "production" || false;
   if (isProduction) {
     // Load prod environment
+    app.use(history());
     app.use(express.static(path.join(__dirname, "../../public")));
   } else {
     // Load dev environment
+    app.use(
+      history({
+        verbose: true
+      })
+    );
     app.use(express.static(path.join(__dirname, "../../../src")));
   }
 
@@ -56,6 +63,14 @@ module.exports = app => {
 
     // run cors
     .use(cors(corsOptions))
+
+    // // use history for our SPA
+    // .use(
+    //   history({
+    //     verbose: true,
+    //     index: path.join(__dirname, "../../public/index.html")
+    //   })
+    // )
 
     // run bodyParser to parse form data
     .use(bodyParser.json());

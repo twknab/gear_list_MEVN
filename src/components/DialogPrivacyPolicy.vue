@@ -1,12 +1,12 @@
 <template>
   <div>
     <mu-dialog
-      title="GearList Privacy Policy"
-      width="50%"
+      title="Privacy Policy"
+      width="100%"
       :scrollable="true"
       :open.sync="isOpen"
     >
-      <h5>Effective June 27, 2020</h5>
+      <i>Effective June 27, 2020</i>
       <p>
         GearList is operated by Sasquat.ch (“us”, “we”, or “our”) also known as,
         <a href="http://sasquat.ch" target="_blank">http://sasquat.ch</a>

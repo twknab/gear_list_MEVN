@@ -36,7 +36,7 @@ module.exports = {
       <li><b>Reason for Contact:</b> ${req.body.reason}</li>
     </ul>
     <h2>✉️ Message From ${req.body.firstName}:</h2>
-    <blockquote>${req.body.message}</blockquote>
+    <div>${req.body.message}</div>
     `;
 
     var mailOptions = {

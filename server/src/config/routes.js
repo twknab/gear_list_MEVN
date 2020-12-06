@@ -5,10 +5,10 @@ const UserController = require("./../controllers/user-controller"),
   HomepageController = require("./../controllers/homepage-controller"),
   GearItemController = require("./../controllers/gear-item-controller"),
   GearListController = require("./../controllers/gear-list-controller");
-
 // Server-Side Routes:
 module.exports = function(app) {
   console.log("⚙️  Server side routes loaded...");
+
   // Contact form (Homepage, not logged-in)
   app.post("/api/contact", HomepageController.sendContactFormDataByEmail);
   // Create a new user

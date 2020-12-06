@@ -1,12 +1,12 @@
 <template>
   <div>
     <mu-dialog
-      title="GearList Terms of Service & Use"
-      width="50%"
+      title="Terms of Service and Use"
+      width="100%"
       :scrollable="true"
       :open.sync="isOpen"
     >
-      <h5>Effective June 26, 2020</h5>
+      <i>Effective June 26, 2020</i>
       <p>
         By registering with GearList and using this tool, you agree to the
         following:
@@ -79,9 +79,7 @@
         aware of misuse of our Service, please contact us support@sasquat.ch.
       </p>
 
-      <h4>
-        Links to Other Sites and/or Materials
-      </h4>
+      <h4>Links to Other Sites and/or Materials</h4>
       <p>
         As part of the Service, the Company may provide you with convenient
         links to third party website(s) (“Third Party Sites”) as well as content
