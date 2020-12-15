@@ -94,8 +94,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - Gear Item Completion Data
 
 ### Bugs Backlog
-- [HIGH] update attach single item to many lists to mimic remake of the other one ... have errors be the same too
-- [HIGH] (Can you reproduce??) Validation errors not properly displaying registration page (try signing up with duplicate email, will see validation message print in server log but not displaying in UI. Might be improperly reading objects.)
+- [HIGH] Contact page and env variables -- make sure nodemailer is working right with the recaptcha
 - [HIGH] Add logging on basic CRUD actions (how many items being created, how many lists, how many completions and how many incomplete items)
 
 ### TODO
