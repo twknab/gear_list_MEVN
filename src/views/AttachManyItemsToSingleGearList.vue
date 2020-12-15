@@ -101,7 +101,7 @@ export default {
       gearListTitle: null,
       existingItems: null,
       allUserItems: {},
-      successMessage: "Successfully updated list items! 🕺",
+      successMessage: "Success! 🕺",
       showSuccessDialog: false,
       showFailureDialog: false,
       errors: {}
