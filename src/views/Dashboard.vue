@@ -103,6 +103,7 @@
         <!-- Confirm deletion dialogue -->
         <mu-dialog
           width="700"
+          class="delete-dialog"
           max-width="100%"
           class="error-dialogue"
           :esc-press-close="true"
