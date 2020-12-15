@@ -240,6 +240,10 @@ img {
   color: #aa00ff;
 }
 
+.mu-item-title {
+  color: white;
+}
+
 .mu-list-two-line .mu-item {
   height: 52px !important;
 }
