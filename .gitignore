@@ -12,7 +12,7 @@ server/src/config/credentials/*.js
 .env.local
 .env.*.local
 server/*.env
-server/src/*.env
+./server/src/variables.env
 src/*.env
 
 # Log files
