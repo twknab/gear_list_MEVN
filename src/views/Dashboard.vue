@@ -104,7 +104,7 @@
         <mu-dialog
           width="700"
           max-width="100%"
-          class="error-dialogue delete-dialog"
+          class="error-dialogue"
           :esc-press-close="true"
           :overlay-close="true"
           :open.sync="openDeleteDialogue"
@@ -305,6 +305,7 @@ export default {
 }
 .error-dialogue .mu-dialog-body {
   background-color: #1a1a1a;
+  color: white;
 }
 .dashboard-wrapper {
   padding-bottom: 30px;
