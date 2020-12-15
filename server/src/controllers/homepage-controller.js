@@ -3,6 +3,7 @@ require("dotenv").config({ path: "variables.env" });
 
 module.exports = {
   sendContactFormDataByEmail: (req, res) => {
+    console.log("SENDING");
     var transporter = nodemailer.createTransport({
       host: process.env.EMAIL_SMTP_HOST_SERVER,
       port: process.env.EMAIL_SMTP_HOST_PORT,
@@ -48,8 +49,9 @@ module.exports = {
     };
 
     transporter.sendMail(mailOptions, function(error, info) {
+      console.log(info);
+      console.log(error);
       if (error) {
-        console.log(error);
         const error = {
           errors: {
             invalid: {
