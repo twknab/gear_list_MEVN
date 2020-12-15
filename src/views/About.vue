@@ -198,6 +198,7 @@
               :sitekey="siteKey"
               size="invisible"
               :loadRecaptchaScript="true"
+              @verify="onVerify"
               @expired="onExpired"
             >
               <mu-button
@@ -300,9 +301,9 @@ export default {
         }
       });
     },
-    // onVerify: function(_response) {
-    //   // console.log("Verify: " + response);
-    // },
+    onVerify: function() {
+      console.log("Verified");
+    },
     onExpired: function() {
       console.log("Expired");
     },
