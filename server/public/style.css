@@ -33,6 +33,10 @@ a:hover {
   color: #00ffb3 !important;
 }
 
+a.logo-link:hover {
+  color: rgb(251 189 237) !important;
+}
+
 img {
   max-width: 100%;
   height: auto;
