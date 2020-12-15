@@ -111,7 +111,7 @@
               <h2>Whoops, there's a few issues...</h2>
               <ul>
                 <li v-for="(error, key, index) in errors" :key="index">
-                  {{ error.message }}
+                  {{ error[key].message }}
                 </li>
               </ul>
             </div>
