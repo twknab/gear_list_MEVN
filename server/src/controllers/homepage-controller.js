@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-require("dotenv").config({ path: "variables.env" });
+require("dotenv").config({ path: "../../variables.env" });
 
 module.exports = {
   sendContactFormDataByEmail: (req, res) => {
