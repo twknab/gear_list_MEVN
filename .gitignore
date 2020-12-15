@@ -6,13 +6,13 @@ src/dummy_data
 
 # Hide any development credentials
 server/src/config/credentials/*.js
+server/src/variables.env
+./server/src/variables.env
 
 
 # local env files
 .env.local
 .env.*.local
-server/*.env
-server/src/variables.env
 src/*.env
 
 # Log files
