@@ -303,6 +303,8 @@ export default {
     },
     onVerify: function() {
       console.log("Verified");
+      // Redirect to home view
+      this.goHome();
     },
     onExpired: function() {
       console.log("Expired");
