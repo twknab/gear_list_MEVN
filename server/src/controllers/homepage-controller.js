@@ -14,6 +14,8 @@ module.exports = {
       }
     });
 
+    console.log(transporter.options.host);
+
     if (!req.body) {
       const error = {
         errors: {
