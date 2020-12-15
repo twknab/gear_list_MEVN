@@ -240,8 +240,8 @@ img {
   color: #aa00ff;
 }
 
-.mu-item-title {
-  color: white;
+.dashboard-list .mu-item {
+  color: #fff;
 }
 
 .mu-dialog-body.delete-dialog {
