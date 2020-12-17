@@ -27,8 +27,8 @@ module.exports = {
       };
       return res.status(500).json(error.errors);
     }
-    // console.log(path.resolve(__dirname, "./../variables.env"));
-    // console.log(req.body.reCaptchaToken);
+    console.log(path.resolve(__dirname, "./../variables.env"));
+    console.log(req.body.reCaptchaToken);
     // Verify reCaptcha
     const verifyReCaptchaOptions = {
       uri: "https://www.google.com/recaptcha/api/siteverify",
