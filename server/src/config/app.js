@@ -27,7 +27,11 @@ module.exports = app => {
   };
 
   const corsOptions = {
-    origin: "http://localhost:8080",
+    origin: [
+      "http://localhost:8080",
+      "https://localhost:8080",
+      "https://www.google.com"
+    ],
     credentials: true
   };
 

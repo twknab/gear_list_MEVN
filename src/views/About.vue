@@ -111,7 +111,7 @@
               <h2>Whoops, there's a few issues...</h2>
               <ul>
                 <li v-for="(error, key, index) in errors" :key="index">
-                  {{ error[key].message }}
+                  {{ error.message }}
                 </li>
               </ul>
             </div>
@@ -195,6 +195,7 @@
             </mu-form-item>
             <!-- reCaptcha around Submit Button / Cancel-->
             <vue-recaptcha
+              ref="recaptcha"
               :sitekey="siteKey"
               size="invisible"
               :loadRecaptchaScript="true"
@@ -281,7 +282,8 @@ export default {
         lastName: "",
         email: "",
         reason: "General Message",
-        message: ""
+        message: "",
+        reCaptchaToken: ""
       }
     };
   },
@@ -289,25 +291,29 @@ export default {
     submit() {
       this.$refs.contact.validate().then(result => {
         if (result) {
-          // Send form:
-          HomepageService.sendContactForm(this.contactForm)
-            .then(() => {
-              // Redirect to home view
-              this.$router.push({ name: "home" });
-            })
-            .catch(error => {
-              this.errors = error.response.data;
-            });
+          // Begin recaptcha validation
+          this.$refs.recaptcha.execute();
         }
       });
     },
-    onVerify: function() {
+    onVerify: function(reCaptchaToken) {
       console.log("Verified");
-      // Redirect to home view
-      this.goHome();
+      this.$refs.recaptcha.reset();
+      this.contactForm.reCaptchaToken = reCaptchaToken;
+      // console.log(this.contactForm);
+      // Send form:
+      HomepageService.sendContactForm(this.contactForm)
+        .then(() => {
+          // Redirect to home view
+          this.goHome();
+        })
+        .catch(error => {
+          this.errors = error.response.data;
+        });
     },
     onExpired: function() {
       console.log("Expired");
+      this.$refs.recaptcha.reset();
     },
     goHome() {
       this.$router.push({ name: "home" });

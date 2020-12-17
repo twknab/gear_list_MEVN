@@ -1,5 +1,9 @@
 const nodemailer = require("nodemailer");
-require("dotenv").config({ path: "variables.env" });
+const request = require("request");
+const path = require("path");
+require("dotenv").config({
+  path: path.resolve(__dirname, "./../variables.env")
+});
 
 module.exports = {
   sendContactFormDataByEmail: (req, res) => {
@@ -23,10 +27,33 @@ module.exports = {
       };
       return res.status(500).json(error.errors);
     }
+    // console.log(path.resolve(__dirname, "./../variables.env"));
+    // console.log(req.body.reCaptchaToken);
+    // Verify reCaptcha
+    const verifyReCaptchaOptions = {
+      uri: "https://www.google.com/recaptcha/api/siteverify",
+      json: true,
+      form: {
+        secret: process.env.RECAPTCHA_SECRET,
+        response: req.body.reCaptchaToken
+      }
+    };
 
-    // Format email and send
-    // TODO: ADD CAPTCHA
-    const HTMLString = `
+    request.post(verifyReCaptchaOptions, function(err, response, body) {
+      if (err || !body.success) {
+        console.log(err);
+        console.log(body);
+        const error = {
+          errors: {
+            invalid: {
+              message: "There's been an error validating recaptcha."
+            }
+          }
+        };
+        res.status(500).json(error.errors);
+      } else {
+        // Format email and send
+        const HTMLString = `
     <h1>💬 New Message!</h1>
     <p>A pigeon from the woods 🌲 of the sasquat.ch has delivered you a message from <b>GearList</b>. Here are some details:</p>
     <ul>
@@ -39,27 +66,29 @@ module.exports = {
     <div>${req.body.message}</div>
     `;
 
-    var mailOptions = {
-      from: process.env.EMAIL_FROM_FIELD,
-      to: process.env.EMAIL_TO_FIELD,
-      replyTo: req.body.email,
-      subject: "Coo Coo 🕊 New Message!",
-      html: HTMLString
-    };
-
-    transporter.sendMail(mailOptions, function(error, info) {
-      if (error) {
-        const error = {
-          errors: {
-            invalid: {
-              message: "There's been an error with the mailer."
-            }
-          }
+        var mailOptions = {
+          from: process.env.EMAIL_FROM_FIELD,
+          to: process.env.EMAIL_TO_FIELD,
+          replyTo: req.body.email,
+          subject: "Coo Coo 🕊 New Message!",
+          html: HTMLString
         };
-        return res.status(500).json(error.errors);
-      } else {
-        console.log("Email sent: " + info.response);
-        return res.status(200).json({ success: "Success" });
+
+        transporter.sendMail(mailOptions, function(error, info) {
+          if (error) {
+            const error = {
+              errors: {
+                invalid: {
+                  message: "There's been an error with the mailer."
+                }
+              }
+            };
+            return res.status(500).json(error.errors);
+          } else {
+            console.log("Email sent: " + info.response);
+            return res.status(200).json({ success: "Success" });
+          }
+        });
       }
     });
   }
