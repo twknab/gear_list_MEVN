@@ -39,7 +39,9 @@ module.exports = {
     };
 
     console.log("$$$$$$$$");
+    console.log(path.resolve(__dirname, "./../variables.env"));
     console.log(process.env.RECAPTCHA_SECRET);
+    console.log(process.env.EMAIL_USERNAME);
     console.log(req.body.reCaptchaToken);
     console.log("$$$$$$$$");
 
