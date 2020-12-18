@@ -9,23 +9,21 @@
       <mu-row gutter class="margin-bottom">
         <mu-col span="12" sm="12" md="12" lg="6" xl="6">
           <p>
-            <b><em>"Necessity is the Mother of Invention"</em></b> is a phrase
-            as old as modern society. GearList is a tool to help us be less
-            forgetful -- it's too easy to forget important gear, even if we've
-            done it a million times.
+            <b>GearList is a tool to help us be less forgetful</b> -- it's too
+            easy to forget important gear, even if we've done it a million
+            times.
           </p>
 
           <p>
-            GearList aims to solve this problem by keeping you organized. Create
-            lists and items. You can see how heavy your total gear list will be,
-            and even see the total weight of what you've packed so far by
-            checking off each item as it's placed into your pack, vehicle or
-            tote. No guessing or weighing involved!
+            GearList strives to help keep you organized. Create lists and items.
+            See how heavy your total gear list weight will be. Check off items
+            as you place them into your bag, vehicle or tote to see real-time
+            weight. No guessing or weighing involved!
           </p>
           <p>
             <b>Note</b>: When adding items, it's suggested to use the
-            manufacturer's specifications, or a postal scale, to get the right
-            weight)
+            manufacturer's specifications, or a postal scale, to get the most
+            accurate weight)
           </p> </mu-col
         ><mu-col span="12" sm="12" md="12" lg="6" xl="6">
           <mu-list color="white" class="reason-list inquiry-form">
@@ -34,7 +32,7 @@
                 <mu-icon value="list" color="#A926FB"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
-                >Create Gear Lists for different needs</mu-list-item-title
+                >Create gear lists for different needs</mu-list-item-title
               >
             </mu-list-item>
             <mu-list-item :ripple="false">
@@ -42,7 +40,7 @@
                 <mu-icon value="thumb_up" color="#A926FB"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
-                >Create Gear Items with their weight</mu-list-item-title
+                >Create gear items with their weight</mu-list-item-title
               >
             </mu-list-item>
             <mu-list-item :ripple="false">
@@ -50,7 +48,7 @@
                 <mu-icon value="link" color="#A926FB"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
-                >Quickly link Gear Items & Gear Lists</mu-list-item-title
+                >Quickly link gear items & gear lists</mu-list-item-title
               >
             </mu-list-item>
             <mu-list-item :ripple="false">
@@ -58,7 +56,7 @@
                 <mu-icon value="favorite" color="#A926FB"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
-                >Know the total weight of your Gear List
+                >Know the total weight of your gear list
               </mu-list-item-title>
             </mu-list-item>
             <mu-list-item :ripple="false">
