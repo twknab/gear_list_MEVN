@@ -85,9 +85,8 @@
         <mu-col span="12" sm="12" md="12" lg="12" xl="12" class="margin-top-xl">
           <h1>About Me</h1>
           <p>
-            My name is Tim. I like to come up with ideas around something I
-            might need, and try to make it using different technologies. You can
-            learn more about me at my personal website if you'd like.
+            My name is Tim and I like to learn new things, spend time in nature
+            and be creative.
           </p>
           <mu-flex justify-content="center" class="margin-top-xl">
             <mu-button href="http://sasquat.ch" target="_blank"
