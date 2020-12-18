@@ -23,7 +23,7 @@
           <p>
             <b>Note</b>: When adding items, it's suggested to use the
             manufacturer's specifications, or a postal scale, to get the most
-            accurate weight)
+            accurate weight.
           </p> </mu-col
         ><mu-col span="12" sm="12" md="12" lg="6" xl="6">
           <mu-list color="white" class="reason-list inquiry-form">
