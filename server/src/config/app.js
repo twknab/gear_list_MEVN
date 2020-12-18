@@ -29,14 +29,16 @@ module.exports = app => {
   const corsOptions = {
     origin: [
       "http://localhost:8080",
+      "http://10.0.0130:8080",
       "https://localhost:8080",
-      "https://www.google.com"
+      "http://www.google.com",
+      "http://54.245.71.245/"
     ],
     credentials: true
   };
 
   // Set as production
-  // NOTE: Comment this out if working on dev server
+  // NOTE: Comment this out if working on dev server otherwise will read from built files
   process.env.NODE_ENV = "production";
 
   const isProduction = process.env.NODE_ENV === "production" || false;
@@ -67,14 +69,6 @@ module.exports = app => {
 
     // run cors
     .use(cors(corsOptions))
-
-    // // use history for our SPA
-    // .use(
-    //   history({
-    //     verbose: true,
-    //     index: path.join(__dirname, "../../public/index.html")
-    //   })
-    // )
 
     // run bodyParser to parse form data
     .use(bodyParser.json());

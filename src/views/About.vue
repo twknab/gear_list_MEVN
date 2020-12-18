@@ -297,7 +297,7 @@ export default {
       });
     },
     onVerify: function(reCaptchaToken) {
-      console.log("Verified");
+      console.log("Verified!");
       this.$refs.recaptcha.reset();
       this.contactForm.reCaptchaToken = reCaptchaToken;
       // console.log(this.contactForm);

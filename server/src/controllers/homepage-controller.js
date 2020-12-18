@@ -27,8 +27,7 @@ module.exports = {
       };
       return res.status(500).json(error.errors);
     }
-    console.log(path.resolve(__dirname, "./../variables.env"));
-    console.log(req.body.reCaptchaToken);
+
     // Verify reCaptcha
     const verifyReCaptchaOptions = {
       uri: "https://www.google.com/recaptcha/api/siteverify",
@@ -41,8 +40,7 @@ module.exports = {
 
     request.post(verifyReCaptchaOptions, function(err, response, body) {
       if (err || !body.success) {
-        console.log(err);
-        console.log(body);
+        console.log("Error!");
         const error = {
           errors: {
             invalid: {
