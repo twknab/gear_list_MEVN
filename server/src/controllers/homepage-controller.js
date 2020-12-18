@@ -38,9 +38,18 @@ module.exports = {
       }
     };
 
+    console.log("$$$$$$$$");
+    console.log(process.env.RECAPTCHA_SECRET);
+    console.log(req.body.reCaptchaToken);
+    console.log("$$$$$$$$");
+
     request.post(verifyReCaptchaOptions, function(err, response, body) {
       if (err || !body.success) {
         console.log("Error!");
+        console.log("ERROR");
+        console.log(err);
+        console.log("BODY");
+        console.log(body);
         const error = {
           errors: {
             invalid: {
