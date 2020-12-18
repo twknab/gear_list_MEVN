@@ -89,7 +89,7 @@
             and be creative.
           </p>
           <mu-flex justify-content="center" class="margin-top-xl">
-            <mu-button href="http://sasquat.ch" target="_blank"
+            <mu-button href="http://sasquat.ch/resume" target="_blank"
               ><mu-icon value="open_in_new" class="margin-right-sm"></mu-icon>
               Visit My Website</mu-button
             >
