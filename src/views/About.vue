@@ -74,7 +74,7 @@
       </mu-row>
       <mu-divider class="margin-top-xl"></mu-divider>
       <mu-row>
-        <mu-col span="12" sm="12" md="12" lg="12" xl="12" class="margin-top-xl">
+        <mu-col span="12" sm="12" md="12" lg="12" xl="12">
           <mu-flex justify-content="center">
             <img src="../assets/gear-list-purple.png" />
           </mu-flex>
