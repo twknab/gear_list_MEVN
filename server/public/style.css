@@ -24,13 +24,13 @@ p {
 }
 
 a:link {
-  color: #d500f9 !important;
+  color: #e369f8 !important;
 }
 a:visited, a:active{
   color: #00aeff !important;
 }
 a:hover {
-  color: #00ffb3 !important;
+  color: rgb(242 16 255) !important;
 }
 
 a.logo-link:hover {

@@ -31,7 +31,7 @@
           <mu-list color="white" class="reason-list inquiry-form">
             <mu-list-item :ripple="false">
               <mu-list-item-action>
-                <mu-icon value="list" color="rgb(171, 255, 7)"></mu-icon>
+                <mu-icon value="list" color="#A926FB"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
                 >Create Gear Lists for different needs</mu-list-item-title
@@ -39,7 +39,7 @@
             </mu-list-item>
             <mu-list-item :ripple="false">
               <mu-list-item-action>
-                <mu-icon value="thumb_up" color="rgb(171, 255, 7)"></mu-icon>
+                <mu-icon value="thumb_up" color="#A926FB"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
                 >Create Gear Items with their weight</mu-list-item-title
@@ -47,7 +47,7 @@
             </mu-list-item>
             <mu-list-item :ripple="false">
               <mu-list-item-action>
-                <mu-icon value="link" color="rgb(171, 255, 7)"></mu-icon>
+                <mu-icon value="link" color="#A926FB"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
                 >Quickly link Gear Items & Gear Lists</mu-list-item-title
@@ -55,7 +55,7 @@
             </mu-list-item>
             <mu-list-item :ripple="false">
               <mu-list-item-action>
-                <mu-icon value="favorite" color="rgb(171, 255, 7)"></mu-icon>
+                <mu-icon value="favorite" color="#A926FB"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
                 >Know the total weight of your Gear List
@@ -63,7 +63,7 @@
             </mu-list-item>
             <mu-list-item :ripple="false">
               <mu-list-item-action>
-                <mu-icon value="work" color="rgb(171, 255, 7)"></mu-icon>
+                <mu-icon value="work" color="#A926FB"></mu-icon>
               </mu-list-item-action>
               <mu-list-item-title
                 >Know your total pack weight real-time
@@ -74,12 +74,15 @@
       </mu-row>
       <mu-divider class="margin-top-xl"></mu-divider>
       <mu-row>
-        <mu-col span="12" sm="12" md="6" lg="6" xl="6" class="margin-top-xl">
+        <mu-col span="12" sm="12" md="12" lg="12" xl="12" class="margin-top-xl">
           <mu-flex justify-content="center">
-            <img src="../assets/tk.png" />
+            <img src="../assets/gear-list-purple.png" />
           </mu-flex>
         </mu-col>
-        <mu-col span="12" sm="12" md="6" lg="6" xl="6" class="margin-top-xl">
+      </mu-row>
+      <mu-divider class="margin-top-xl"></mu-divider>
+      <mu-row>
+        <mu-col span="12" sm="12" md="12" lg="12" xl="12" class="margin-top-xl">
           <h1>About Me</h1>
           <p>
             My name is Tim. I like to come up with ideas around something I
@@ -228,8 +231,8 @@
         <mu-col span="12" class="margin-bottom-lg">
           <p>
             You can also find me on
-            <a href="https://github.com/twknab" target="_blank"> 🔗 GitHub</a>
-            or <a href="https://t.me/twknab"> 🔗 Telegram</a>.
+            <a href="https://github.com/twknab" target="_blank"> 🔗GitHub</a>
+            or <a href="https://t.me/twknab"> 🔗Telegram</a>.
           </p>
         </mu-col>
       </mu-row>
