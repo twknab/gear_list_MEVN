@@ -37,8 +37,9 @@ module.exports = {
         response: req.body.reCaptchaToken
       }
     };
-
+    console.log(process.env.RECAPTCHA_SECRET, req.body.reCaptchaToken);
     request.post(verifyReCaptchaOptions, function(err, response, body) {
+      console.log("this is err:", err);
       if (err || !body.success) {
         const error = {
           errors: {
