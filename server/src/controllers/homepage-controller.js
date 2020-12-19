@@ -1,5 +1,4 @@
 const nodemailer = require("nodemailer");
-const request = require("request");
 const path = require("path");
 require("dotenv").config({
   path: path.resolve(__dirname, "./../variables.env")
@@ -27,31 +26,8 @@ module.exports = {
       };
       return res.status(500).json(error.errors);
     }
-
-    // Verify reCaptcha
-    const verifyReCaptchaOptions = {
-      uri: "https://www.google.com/recaptcha/api/siteverify",
-      json: true,
-      form: {
-        secret: process.env.RECAPTCHA_SECRET,
-        response: req.body.reCaptchaToken
-      }
-    };
-    console.log(process.env.RECAPTCHA_SECRET, req.body.reCaptchaToken);
-    request.post(verifyReCaptchaOptions, function(err, response, body) {
-      console.log("this is err:", err);
-      if (err || !body.success) {
-        const error = {
-          errors: {
-            invalid: {
-              message: "There's been an error validating recaptcha."
-            }
-          }
-        };
-        res.status(500).json(error.errors);
-      } else {
-        // Format email and send
-        const HTMLString = `
+    // Format email and send
+    const HTMLString = `
     <h1>💬 New Message!</h1>
     <p>A pigeon from the woods 🌲 of the sasquat.ch has delivered you a message from <b>GearList</b>. Here are some details:</p>
     <ul>
@@ -64,28 +40,28 @@ module.exports = {
     <div>${req.body.message}</div>
     `;
 
-        var mailOptions = {
-          from: process.env.EMAIL_FROM_FIELD,
-          to: process.env.EMAIL_TO_FIELD,
-          replyTo: req.body.email,
-          subject: "Coo Coo 🕊 New Message!",
-          html: HTMLString
-        };
+    var mailOptions = {
+      from: process.env.EMAIL_FROM_FIELD,
+      to: process.env.EMAIL_TO_FIELD,
+      replyTo: req.body.email,
+      subject: "Coo Coo 🕊 New Message!",
+      html: HTMLString
+    };
 
-        transporter.sendMail(mailOptions, function(error, info) {
-          if (error) {
-            const error = {
-              errors: {
-                invalid: {
-                  message: "There's been an error with the mailer."
-                }
-              }
-            };
-            return res.status(500).json(error.errors);
-          } else {
-            console.log("Email sent: " + info.response);
-            return res.status(200).json({ success: "Success" });
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        const error = {
+          errors: {
+            invalid: {
+              message: "There's been an error with the mailer."
+            }
           }
+        };
+        return res.status(500).json(error.errors);
+      } else {
+        console.log("Email sent: " + info.response);
+        return res.status(200).json({
+          success: "Success"
         });
       }
     });

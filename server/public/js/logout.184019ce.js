@@ -1,2 +1,2 @@
 (window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["logout"],{9527:function(n,e,o){"use strict";o.r(e);var t=function(){var n=this,e=n.$createElement,o=n._self._c||e;return o("div")},u=[],a=o("35ca"),c={name:"Logout",created:function(){var n=this;a["a"].logoffUser().then((function(){n.$router.push({name:"home"})})).catch((function(e){console.log(e),n.$router.push({name:"dashboard"})}))}},r=c,s=o("2877"),l=Object(s["a"])(r,t,u,!1,null,null,null);e["default"]=l.exports}}]);
-//# sourceMappingURL=logout.e2498f9d.js.map
+//# sourceMappingURL=logout.184019ce.js.map

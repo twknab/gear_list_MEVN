@@ -193,26 +193,16 @@
                 :rules="messageRules"
               ></mu-text-field>
             </mu-form-item>
-            <!-- reCaptcha around Submit Button / Cancel-->
-            <vue-recaptcha
-              ref="recaptcha"
-              :sitekey="siteKey"
-              size="invisible"
-              :loadRecaptchaScript="true"
-              @verify="onVerify"
-              @expired="onExpired"
+            <mu-button
+              round
+              full-width
+              color="purpleA700"
+              @click="submit"
+              large
             >
-              <mu-button
-                round
-                full-width
-                color="purpleA700"
-                @click="submit"
-                large
-              >
-                <mu-icon value="check"></mu-icon>
-                <span class="button-icon">Send</span>
-              </mu-button>
-            </vue-recaptcha>
+              <mu-icon value="check"></mu-icon>
+              <span class="button-icon">Send</span>
+            </mu-button>
             <mu-button
               large
               flat
@@ -239,11 +229,8 @@
 
 <script>
 import HomepageService from "@/services/HomepageService.js";
-import VueRecaptcha from "vue-recaptcha";
-// import envVariables from "@/variables";
 export default {
   name: "About",
-  components: { VueRecaptcha },
   data() {
     return {
       errors: {},
@@ -282,8 +269,7 @@ export default {
         lastName: "",
         email: "",
         reason: "General Message",
-        message: "",
-        reCaptchaToken: ""
+        message: ""
       }
     };
   },
@@ -291,29 +277,17 @@ export default {
     submit() {
       this.$refs.contact.validate().then(result => {
         if (result) {
-          // Begin recaptcha validation
-          this.$refs.recaptcha.execute();
+          // Send form:
+          HomepageService.sendContactForm(this.contactForm)
+            .then(() => {
+              // Redirect to home view
+              this.goHome();
+            })
+            .catch(error => {
+              this.errors = error.response.data;
+            });
         }
       });
-    },
-    onVerify: function(reCaptchaToken) {
-      console.log("Verified!");
-      this.$refs.recaptcha.reset();
-      this.contactForm.reCaptchaToken = reCaptchaToken;
-      // console.log(this.contactForm);
-      // Send form:
-      HomepageService.sendContactForm(this.contactForm)
-        .then(() => {
-          // Redirect to home view
-          this.goHome();
-        })
-        .catch(error => {
-          this.errors = error.response.data;
-        });
-    },
-    onExpired: function() {
-      console.log("Expired");
-      this.$refs.recaptcha.reset();
     },
     goHome() {
       this.$router.push({ name: "home" });

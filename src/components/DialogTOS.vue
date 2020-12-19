@@ -45,21 +45,10 @@
         to register for and use the Service. If you are a user who signs up for
         the Service, will create a personalized account which includes a unique
         user email and a password to access the Service and to receive messages
-        from the Company. We use
-        <a href="https://www.google.com/recaptcha/intro/v3.html" target="_blank"
-          >Google reCAPTCHA</a
-        >
-        to prevent spam user registrations. By registering with our site, you
-        also agree to Google's
-        <a href="https://policies.google.com/privacy?hl=en" target="_blank"
-          >Privacy Policy</a
-        >
-        and
-        <a href="https://policies.google.com/terms?hl=en" target="_blank">TOS</a
-        >. You agree to notify us immediately of any unauthorized use of your
-        password and/or account. The Company will not be responsible for any
-        liabilities, losses, or damages arising out of the unauthorized use of
-        your user account, password and/or account.
+        from the Company. You agree to notify us immediately of any unauthorized
+        use of your password and/or account. The Company will not be responsible
+        for any liabilities, losses, or damages arising out of the unauthorized
+        use of your user account, password and/or account.
       </p>
       <h4>Restrictions</h4>
       <p>

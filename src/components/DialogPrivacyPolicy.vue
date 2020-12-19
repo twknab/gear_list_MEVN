@@ -57,23 +57,11 @@
       </p>
       <h3>Third Party Services</h3>
       <p>
-        We may use third party services such as Google Analytics that collect,
-        monitor and analyze site usage data. We use
-        <a href="https://www.google.com/recaptcha/intro/v3.html" target="_blank"
-          >Google reCAPTCHA</a
-        >
-        to prevent spam user registrations.
+        At this time there are no third party services, beyond CDNs which
+        provide scripts for fonts or stylings. No third party services are
+        monitoring or collecting any of your information.
       </p>
 
-      <p>
-        By registering with our site, you also agree to Google's
-        <a href="https://policies.google.com/privacy?hl=en" target="_blank"
-          >Privacy Policy</a
-        >
-        and
-        <a href="https://policies.google.com/terms?hl=en" target="_blank">TOS</a
-        >.
-      </p>
       <h3>Request Data Deletion</h3>
       <p>
         You may request data deletion by emailing us at support@sasqut.ch.
