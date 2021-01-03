@@ -94,14 +94,13 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - Gear Item Completion Data
 
 ### Bugs Backlog
-- [HIGH] Contact page and env variables -- make sure nodemailer is working right with the recaptcha
-- [HIGH] Add logging on basic CRUD actions (how many items being created, how many lists, how many completions and how many incomplete items)
+- [HIGH] Add logging on basic CRUD actions (how many items being created, how many lists, how many completions and how many incomplete items) -- may need to update TOS.
 
 ### TODO
 
 - [HIGH] Replace other success dialog and failure dialogs with new components (DialogSuccess and DialogFailure)
-- Add a "Congratulations message" when all itmes are completed and visually change a bit to look more "done"
-- Add reset button to easily reset a list -- maybe add a confirmation modal as a "blocker" to confirm and prevent accidental reset
+- Add a "Congratulations message" when all items are completed and visually change a bit to look more "done"
+- Add quick reset button to easily reset a list -- maybe add a confirmation modal as a "blocker" to confirm and prevent accidental reset
 
 ### Wishlist / Next Features (may require addt'l creation of models)
 
