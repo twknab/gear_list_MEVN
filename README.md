@@ -1,17 +1,69 @@
-# Gear List
+# About GearList
 
-This is a gear list application, designed to help you in outdoor adventures to better prepare and not forget those important (sometimes life-saving) items at home.
+GearList is a JavaScript-based application designed to help you better prepare for outdoor adventures and not forget those important (sometimes life-saving) items at home.
 
-In regards to technology, this is a MEVN application and uses:
+Technology stack (MEVN):
 
 1. (M)ongoDB for the database (and Mongoose.js to help).
 2. (E)xpress.js framework for speedy backend functionality.
 3. (V)ue.js for the front-end framework and client-side routing.
 4. (N)ode.js to power back-end.
 
+### More Details
+
 [Vue Router](https://github.com/vuejs/vue-router) is used to handle SPA routing, and [Axios](https://github.com/axios/axios) is used for AJAX requests to the backend. [Muse-UI](https://muse-ui.org/#/en-US) is used for the CSS framwork, using [Material.io](https://material.io/)'s design principles.
 
 This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
+
+## Deployment
+
+You can view GearList live here:
+
+- [https://gearlist.rocks](https://gearlist.rocks)
+
+## Screenshots
+
+_Register a New User_
+![register](https://user-images.githubusercontent.com/20636750/108611783-d756a300-7396-11eb-9c84-37c72f10bfc6.png)
+
+_Login Exisiting User_
+![login](https://user-images.githubusercontent.com/20636750/108611786-e63d5580-7396-11eb-987d-2cbf83a43aa7.png)
+
+_Home Navigation_
+![homenav](https://user-images.githubusercontent.com/20636750/108611789-ee959080-7396-11eb-8cfe-a7a8a9988ff2.png)
+
+_About Page_
+![about](https://user-images.githubusercontent.com/20636750/108611798-04a35100-7397-11eb-9a4e-36f3cee25233.png)
+
+_Dashboard - View All Lists & Items_
+![dash](https://user-images.githubusercontent.com/20636750/108611800-0f5de600-7397-11eb-8178-51d3a9ca40a8.png)
+
+_Dashboard Navigation_
+![dashnav](https://user-images.githubusercontent.com/20636750/108611802-1684f400-7397-11eb-91d7-cc7db627de80.png)
+
+_Add New List_
+![newlist](https://user-images.githubusercontent.com/20636750/108611804-1b49a800-7397-11eb-9fc8-edcab02d571d.png)
+
+_Add New Item_
+![newitem](https://user-images.githubusercontent.com/20636750/108611805-1edd2f00-7397-11eb-8077-c3ad0dfe495e.png)
+
+_Attach Item to Many Lists_
+![attachitem](https://user-images.githubusercontent.com/20636750/108611807-21d81f80-7397-11eb-919a-d09450ae882d.png)
+
+_Attach List to Many Items_
+![attachlist](https://user-images.githubusercontent.com/20636750/108611809-24d31000-7397-11eb-8bbb-2ed230821e5a.png)
+
+_View List_
+![viewlist](https://user-images.githubusercontent.com/20636750/108611810-27ce0080-7397-11eb-8676-673c9cea39ab.png)
+
+_Confirm Delete_
+![confirmdelete](https://user-images.githubusercontent.com/20636750/108611812-2ac8f100-7397-11eb-9213-a586ea9f3671.png)
+
+_Edit Gear Item_
+![edititem](https://user-images.githubusercontent.com/20636750/108611813-2d2b4b00-7397-11eb-910d-9a925fbb8fa0.png)
+
+_Edit Gear List_
+![editlist](https://user-images.githubusercontent.com/20636750/108611814-30263b80-7397-11eb-80b3-5f5943b7d18a.png)
 
 ## Dev Setup & Install
 
@@ -19,12 +71,13 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - `npm install` from `~/server` to get server-side packages.
 - Update `~/src/services/UserService` baseURL to reflect your localhost or local network IP.
 - (1) Make sure `mongod` is running. (2) from `~/` run `npm run serve` and (3) from `~/server` run `npm start`.
+
   - If you're having trouble running mongod do this:
-  - 1. Download the Community Edition of MongoDB from here: [Community edition download page](https://www.mongodb.com/download-center/community). *NOTE*: Do not use Enterprise as license isn't for personal prod deployments.
+  - 1. Download the Community Edition of MongoDB from here: [Community edition download page](https://www.mongodb.com/download-center/community). _NOTE_: Do not use Enterprise as license isn't for personal prod deployments.
   - 2. `cd ~/Downloads`
   - 3. `tar -zxvf {{tar-name}}`
   - 4. `cd /usr/local/mongodb`
-  - 5. Make data folder (this is where all your local system dev db stuff will be stored), no longer an use `/data/db` in Catalina and above. Instead do: `sudo mkdir -p /System/Volumes/Data/data/db` && ```sudo chown -R `id -un` /System/Volumes/Data/data/dbsudo chown -R `id -un` /System/Volumes/Data/data/db```.
+  - 5. Make data folder (this is where all your local system dev db stuff will be stored), no longer an use `/data/db` in Catalina and above. Instead do: `sudo mkdir -p /System/Volumes/Data/data/db` && `` sudo chown -R `id -un` /System/Volumes/Data/data/dbsudo chown -R `id -un` /System/Volumes/Data/data/db ``.
   - 6. Then added to `cd ~` && `open .bash_profile`: `alias mongod="sudo mongod --dbpath /System/Volumes/Data/data/db"`
   - 7. Also add to bash profile
 
@@ -77,7 +130,6 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - ✅ API locked down (must valid session to hit any any API endpoint)
 - ✅ TOS modal on registration?
 
-
 ## Technologies
 
 - Node.js & Express.js (Backend Framework)
@@ -94,6 +146,7 @@ This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
 - Gear Item Completion Data
 
 ### Bugs Backlog
+
 - [HIGH] Add logging on basic CRUD actions (how many items being created, how many lists, how many completions and how many incomplete items) -- may need to update TOS.
 
 ### TODO
