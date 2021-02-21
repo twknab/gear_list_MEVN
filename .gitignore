@@ -3,6 +3,7 @@ node_modules
 /dist
 .dev-resources
 src/dummy_data
+gear-list-screenshots
 
 # Hide any development credentials
 server/src/config/credentials/*.js
