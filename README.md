@@ -1,5 +1,19 @@
 # About GearList
 
+- [About GearList](#about-gearlist)
+  - [More Details](#more-details)
+    - [Models](#models)
+  - [Deployment](#deployment)
+  - [Screenshots](#screenshots)
+  - [Dev Setup & Install](#dev-setup--install)
+  - [Features](#features)
+    - [Things you can create](#things-you-can-create)
+    - [Things you can do](#things-you-can-do)
+    - [Other features that are good for users](#other-features-that-are-good-for-users)
+    - [Bugs Backlog](#bugs-backlog)
+    - [TODO](#todo)
+    - [Wishlist / Next Features (may require addt'l creation of models)](#wishlist--next-features-may-require-addtl-creation-of-models)
+
 GearList is a JavaScript-based application designed to help you better prepare for outdoor adventures and not forget those important (sometimes life-saving) items at home.
 
 Technology stack (MEVN):
