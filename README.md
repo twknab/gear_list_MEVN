@@ -23,46 +23,46 @@ You can view GearList live here:
 
 ## Screenshots
 
-_Register a New User_
+_1. Register a New User_
 ![register](https://user-images.githubusercontent.com/20636750/108611783-d756a300-7396-11eb-9c84-37c72f10bfc6.png)
 
-_Login Exisiting User_
+_2. Login Exisiting User_
 ![login](https://user-images.githubusercontent.com/20636750/108611786-e63d5580-7396-11eb-987d-2cbf83a43aa7.png)
 
-_Home Navigation_
+_3. Home Navigation_
 ![homenav](https://user-images.githubusercontent.com/20636750/108611789-ee959080-7396-11eb-8cfe-a7a8a9988ff2.png)
 
-_About Page_
+_4. About Page_
 ![about](https://user-images.githubusercontent.com/20636750/108611798-04a35100-7397-11eb-9a4e-36f3cee25233.png)
 
-_Dashboard - View All Lists & Items_
+_5. Dashboard - View All Lists & Items_
 ![dash](https://user-images.githubusercontent.com/20636750/108611800-0f5de600-7397-11eb-8178-51d3a9ca40a8.png)
 
-_Dashboard Navigation_
+_6. Dashboard Navigation_
 ![dashnav](https://user-images.githubusercontent.com/20636750/108611802-1684f400-7397-11eb-91d7-cc7db627de80.png)
 
-_Add New List_
+_7. Add New List_
 ![newlist](https://user-images.githubusercontent.com/20636750/108611804-1b49a800-7397-11eb-9fc8-edcab02d571d.png)
 
-_Add New Item_
+_8. Add New Item_
 ![newitem](https://user-images.githubusercontent.com/20636750/108611805-1edd2f00-7397-11eb-8077-c3ad0dfe495e.png)
 
-_Attach Item to Many Lists_
+_9. Attach Item to Many Lists_
 ![attachitem](https://user-images.githubusercontent.com/20636750/108611807-21d81f80-7397-11eb-919a-d09450ae882d.png)
 
-_Attach List to Many Items_
+_10. Attach List to Many Items_
 ![attachlist](https://user-images.githubusercontent.com/20636750/108611809-24d31000-7397-11eb-8bbb-2ed230821e5a.png)
 
-_View List_
+_11. View List_
 ![viewlist](https://user-images.githubusercontent.com/20636750/108611810-27ce0080-7397-11eb-8676-673c9cea39ab.png)
 
-_Confirm Delete_
+_12. Confirm Delete_
 ![confirmdelete](https://user-images.githubusercontent.com/20636750/108611812-2ac8f100-7397-11eb-9213-a586ea9f3671.png)
 
-_Edit Gear Item_
+_13. Edit Gear Item_
 ![edititem](https://user-images.githubusercontent.com/20636750/108611813-2d2b4b00-7397-11eb-910d-9a925fbb8fa0.png)
 
-_Edit Gear List_
+_14. Edit Gear List_
 ![editlist](https://user-images.githubusercontent.com/20636750/108611814-30263b80-7397-11eb-80b3-5f5943b7d18a.png)
 
 ## Dev Setup & Install
