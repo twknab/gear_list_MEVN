@@ -9,11 +9,18 @@ Technology stack (MEVN):
 3. (V)ue.js for the front-end framework and client-side routing.
 4. (N)ode.js to power back-end.
 
-### More Details
+## More Details
 
 [Vue Router](https://github.com/vuejs/vue-router) is used to handle SPA routing, and [Axios](https://github.com/axios/axios) is used for AJAX requests to the backend. [Muse-UI](https://muse-ui.org/#/en-US) is used for the CSS framwork, using [Material.io](https://material.io/)'s design principles.
 
 This project generated using [Vue CLI](https://github.com/vuejs/vue-cli).
+
+### Models
+
+- User
+- Gear List
+- Gear Item
+- Gear Item Completion Data
 
 ## Deployment
 
@@ -117,7 +124,7 @@ _14. Edit Gear List_
 - ✅ Delete a Gear Item including all List association and completion data.
 - ✅ Delete a Gear List including Item association data and ompletion data.
 
-### Other features that are cool and good for users
+### Other features that are good for users
 
 - ✅ User Confirmation when deleting a Gear Item (no accidental deletions)
 - ✅ User Confirmation when deleting a Gear List (no accidental deletions)
@@ -129,21 +136,6 @@ _14. Edit Gear List_
 - ✅ Front & Backend strong validation on all forms.
 - ✅ API locked down (must valid session to hit any any API endpoint)
 - ✅ TOS modal on registration?
-
-## Technologies
-
-- Node.js & Express.js (Backend Framework)
-- MongoDB & Mongoose.js (Database)
-- Muse.ui w/ Material.io (CSS Framework)
-- Vue.js (JS Frontend Framework)
-- Vue Router & Axios (Client-Side Routing)
-
-## Models
-
-- User
-- Gear List
-- Gear Item
-- Gear Item Completion Data
 
 ### Bugs Backlog
 
