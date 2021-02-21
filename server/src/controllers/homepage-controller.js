@@ -29,7 +29,7 @@ module.exports = {
     // Format email and send
     const HTMLString = `
     <h1>💬 New Message!</h1>
-    <p>A pigeon from the woods 🌲 of the sasquat.ch has delivered you a message from <b>GearList</b>. Here are some details:</p>
+    <p>A pigeon from the woods has delivered you a message from <b>GearList</b>! 🕊 ✉️ Here are some details:</p>
     <ul>
       <li><b>First Name:</b> ${req.body.firstName}</li>
       <li><b>Last Name:</b> ${req.body.lastName}</li>
