@@ -1,7 +1,6 @@
 const mongoose = require("mongoose"),
   Schema = mongoose.Schema;
 
-// Setup a schema:
 const GearItemSchema = new Schema(
   {
     title: {
@@ -21,6 +20,10 @@ const GearItemSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true
+    },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: "GearItemCategory"
     }
   },
   {
@@ -28,6 +31,5 @@ const GearItemSchema = new Schema(
   }
 );
 
-// Invoke our model using our schema and export
 const GearItem = mongoose.model("GearItem", GearItemSchema);
 module.exports = GearItem;
