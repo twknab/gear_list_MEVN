@@ -16,7 +16,7 @@ const GearItemCategorySchema = new Schema(
         ref: "GearItem"
       }
     ],
-    owner: {
+    gearItemCategoryOwner: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true

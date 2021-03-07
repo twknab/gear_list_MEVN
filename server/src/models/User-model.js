@@ -57,6 +57,13 @@ const UserSchema = new Schema(
         ref: "GearItem"
       }
     ],
+    gearItemCategories: [
+      {
+        // holds gear items User owns
+        type: Schema.Types.ObjectId,
+        ref: "GearItemCategory"
+      }
+    ],
     // sharedLists: [
     //   {
     //     // holds lists shared by friends

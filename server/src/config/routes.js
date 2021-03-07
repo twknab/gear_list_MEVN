@@ -4,6 +4,7 @@
 const UserController = require("./../controllers/user-controller"),
   HomepageController = require("./../controllers/homepage-controller"),
   GearItemController = require("./../controllers/gear-item-controller"),
+  GearItemCategoryController = require("./../controllers/gear-item-category-controller"),
   GearListController = require("./../controllers/gear-list-controller");
 // Server-Side Routes:
 module.exports = function(app) {
@@ -11,6 +12,10 @@ module.exports = function(app) {
 
   // Contact form (Homepage, not logged-in)
   app.post("/api/contact", HomepageController.sendContactFormDataByEmail);
+
+  /*****
+  USER
+  *****/
   // Create a new user
   app.post("/api/user", UserController.createUser);
   // Get existing user:
@@ -18,6 +23,10 @@ module.exports = function(app) {
   // Login a user
   app.post("/api/user/login", UserController.loginUser);
   app.get("/api/user/logout", UserController.logout);
+
+  /*****
+  GEAR ITEM
+  *****/
   // Create a new gear item
   app.post("/api/gear-item", GearItemController.createGearItem);
   // Get gear item
@@ -30,6 +39,39 @@ module.exports = function(app) {
   app.get("/api/gear-item/complete", GearItemController.changeCompleteStatus);
   // Update gear item
   app.post("/api/gear-item/update", GearItemController.updateGearItem);
+
+  /*****
+  GEAR ITEM CATEGORY
+  *****/
+  // Create a new gear item category
+  app.post(
+    "/api/gear-item-category",
+    GearItemCategoryController.createGearItemCategory
+  );
+  // Get gear item category
+  app.get(
+    "/api/gear-item-category/find-item-category",
+    GearItemCategoryController.getGearItemCategory
+  );
+  // Get all user's gear item categories
+  app.get(
+    "/api/gear-item-category",
+    GearItemCategoryController.getUserGearItemCategories
+  );
+  // Delete gear item category
+  app.get(
+    "/api/gear-item-category/delete",
+    GearItemCategoryController.deleteGearItemCategory
+  );
+  // Update gear item category
+  app.post(
+    "/api/gear-item-category/update",
+    GearItemCategoryController.updateGearItemCategory
+  );
+
+  /*****
+  GEAR LIST
+  *****/
   // Create a new gear list
   app.post("/api/gear-list", GearListController.createGearList);
   // Get all user's gear lists
