@@ -27,3 +27,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+# Ignore mongo migration stuff
+migrate-mongo-config.js
+/migrations
