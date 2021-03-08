@@ -64,6 +64,12 @@ const router = new Router({
         import(/* webpackChunkName: "addNewGearItemCategory" */ "./views/AddGearItemCategory.vue")
     },
     {
+      path: "/gear/item-category/edit/:id",
+      name: "editGearItemCategory",
+      component: () =>
+        import(/* webpackChunkName: "editGearItemCategory" */ "./views/EditGearItemCategory.vue")
+    },
+    {
       path: "/gear/list",
       name: "addGearList",
       component: () =>
