@@ -29,6 +29,10 @@
       <!-- Gear Items -->
       <div class="margin-top-xl">
         <h1>Gear Items</h1>
+        <!-- 
+          DEVELOPER NOTE: 
+          - TODO: Move warning and success codes into their own components
+        -->
         <!-- Success Notification -->
         <mu-dialog
           width="600"
@@ -52,10 +56,6 @@
             <p>{{ successMessage }}</p>
           </mu-alert>
         </mu-dialog>
-        <!-- 
-          DEVELOPER NOTE: 
-          - TODO: Move warning and success codes into their own components
-        -->
         <!-- Warning Notification -->
         <mu-dialog
           width="600"
@@ -117,7 +117,7 @@
           <mu-row gutter>
             <mu-col span="12" sm="12" md="12" lg="12" xl="12">
               <mu-button
-                color="rgba(79, 78, 78, 0.55)"
+                color="grey800"
                 :full-width="true"
                 class="margin-top"
                 large
@@ -145,6 +145,12 @@
             </mu-col>
           </mu-row>
         </mu-dialog>
+        <mu-flex justify-content="end">
+          <!-- Add Gear Item Category Button -->
+          <AddGearItemCategoryButton />
+          <!-- Manage Gear Item Categories Button -->
+          <ManageGearItemCategoriesButton />
+        </mu-flex>
         <!-- Gear Items Component -->
         <GearItems
           :gearLists="gearLists"
@@ -163,6 +169,8 @@
 import navItems from "@/components/navigation/dashboardNavItems.js";
 import GearLists from "@/components/GearLists.vue";
 import GearItems from "@/components/GearItems.vue";
+import AddGearItemCategoryButton from "@/components/buttons/AddGearItemCategoryButton.vue";
+import ManageGearItemCategoriesButton from "@/components/buttons/ManageGearItemCategoriesButton.vue";
 import ModelConstants from "@/constants/modelConstants";
 export default {
   name: "Dashboard",
@@ -174,7 +182,9 @@ export default {
   },
   components: {
     GearLists,
-    GearItems
+    GearItems,
+    AddGearItemCategoryButton,
+    ManageGearItemCategoriesButton
   },
   data() {
     return {

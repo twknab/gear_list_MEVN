@@ -58,6 +58,12 @@ const router = new Router({
         import(/* webpackChunkName: "attachItemToGearLists" */ "./views/AttachSingleItemToManyGearLists.vue")
     },
     {
+      path: "/gear/item-category",
+      name: "addGearItemCategory",
+      component: () =>
+        import(/* webpackChunkName: "addNewGearItemCategory" */ "./views/AddGearItemCategory.vue")
+    },
+    {
       path: "/gear/list",
       name: "addGearList",
       component: () =>

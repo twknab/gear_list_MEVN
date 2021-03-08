@@ -39,7 +39,8 @@ module.exports = app => {
 
   // Set as production
   // NOTE: Comment this out if working on dev server otherwise will read from built files
-  process.env.NODE_ENV = "production";
+  // NOTE: KNOWN bug where refreshing in dev will break view. Needs client side routing fix -- you fixed this for prod but need to remember what you did :X cLowNTowN
+  // process.env.NODE_ENV = "production";
 
   const isProduction = process.env.NODE_ENV === "production" || false;
   if (isProduction) {

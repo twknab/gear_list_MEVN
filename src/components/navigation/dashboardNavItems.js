@@ -11,6 +11,12 @@ module.exports = {
     title: "New Gear Item",
     route: "addGearItem"
   },
+  addGearItemCategory: {
+    icon: "category",
+    color: "purpleA100",
+    title: "New Item Category",
+    route: "addGearItemCategory"
+  },
   addGearList: {
     icon: "library_add",
     color: "purpleA200",

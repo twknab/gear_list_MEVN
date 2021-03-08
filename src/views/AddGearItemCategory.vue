@@ -34,7 +34,7 @@
           <!-- Submit Button -->
           <mu-button full-width round color="purpleA700" @click="submit" large>
             <mu-icon value="add"></mu-icon>
-            <span class="button-icon">Add New Item</span>
+            <span class="button-icon">Add New Item Category</span>
           </mu-button>
           <div class="margin-top-md">
             <mu-button
