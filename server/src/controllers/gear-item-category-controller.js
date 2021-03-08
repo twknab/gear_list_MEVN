@@ -96,13 +96,14 @@ module.exports = {
   },
   updateGearItemCategory: (req, res) => {
     if (UserController.isAuthenticated(req, res)) {
-      GearItemCategory.findOneAndUpdate(
+      GearItemCategory.updateOne(
         {
           _id: req.body._id
         },
         { title: req.body.title }
       )
-        .then(() => {
+        // eslint-disable-next-line no-unused-vars
+        .then(_updatedCategoryResult => {
           return res.status(201).json({ success: "success" });
         })
         .catch(error => {
