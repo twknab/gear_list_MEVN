@@ -6,42 +6,53 @@ const mongoose = require("mongoose"),
 module.exports = {
   createGearItemCategory: (req, res) => {
     if (UserController.isAuthenticated(req, res)) {
-      GearItemCategory.create(req.body)
-        // eslint-disable-next-line no-unused-vars
-        .then(newGearItemCategory => {
-          // Add Gear Item Category to User:
-          User.findByIdAndUpdate(
-            req.session.userId,
-            {
-              $push: {
-                gearItemCategories: newGearItemCategory._id
-              }
-            },
-            {
-              upsert: true,
-              new: true
-            }
-          )
-            .then(() => {
-              return res.status(201).json({
-                success: "success"
-              });
-            })
-            .catch(error => {
-              error = {
-                errors: {
-                  invalid: {
-                    message:
-                      "Error creating new Gear Item (gear-item-controller.createGearItem), contact the admin."
+      GearItemCategory.schema.methods.validateCategoryTitleDoesNotAlreadyExistForUser(
+        req.session.userId,
+        req.body.title,
+        result => {
+          if (result.success) {
+            GearItemCategory.create(req.body)
+              // eslint-disable-next-line no-unused-vars
+              .then(newGearItemCategory => {
+                // Add Gear Item Category to User:
+                User.findByIdAndUpdate(
+                  req.session.userId,
+                  {
+                    $push: {
+                      gearItemCategories: newGearItemCategory._id
+                    }
+                  },
+                  {
+                    upsert: true,
+                    new: true
                   }
-                }
-              };
-              return res.status(403).json(error.errors);
-            });
-        })
-        .catch(error => {
-          return res.status(500).json(error.errors);
-        });
+                )
+                  .then(() => {
+                    return res.status(201).json({
+                      success: "success"
+                    });
+                  })
+                  .catch(error => {
+                    error = {
+                      errors: {
+                        invalid: {
+                          message:
+                            "Error creating new Gear Item Category, contact the admin."
+                        }
+                      }
+                    };
+                    return res.status(403).json(error.errors);
+                  });
+              })
+              .catch(error => {
+                return res.status(500).json(error.errors);
+              });
+          } else {
+            console.log(result.error);
+            return res.status(500).json(result.error);
+          }
+        }
+      );
     }
   },
   getUserGearItemCategories: (req, res) => {
