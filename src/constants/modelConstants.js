@@ -1,6 +1,7 @@
 const modelConstants = {
   gearList: "list",
-  gearItem: "item"
+  gearItem: "item",
+  gearItemCategory: "category"
 };
 
 module.exports = modelConstants;
